@@ -1,0 +1,54 @@
+name: Daily ATP Stats Scraper
+
+on:
+  schedule:
+    # 6:00 AM UTC daily = 11:30 AM IST
+    - cron: '0 6 * * *'
+  # Manual trigger from GitHub Actions tab
+  workflow_dispatch:
+
+jobs:
+  scrape-and-deploy:
+    runs-on: ubuntu-latest  # Free on GitHub Actions
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Playwright + Chromium
+        run: |
+          pip install playwright
+          playwright install chromium
+          playwright install-deps chromium
+
+      - name: Run ATP scraper
+        run: python scrape_atp.py
+        # Continues even if scraper partially fails
+        continue-on-error: true
+
+      - name: Show scraped data (for debugging)
+        run: cat scraped_stats.json 2>/dev/null || echo "No JSON output"
+
+      - name: Commit changes if any
+        run: |
+          git config user.name  "sincaraz-bot"
+          git config user.email "bot@sincaraz.app"
+          git add index.html scraped_stats.json
+          git diff --staged --quiet || git commit -m "stats: daily update $(date -u +'%Y-%m-%d')"
+
+      - name: Push to main
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+
+      - name: Trigger Netlify redeploy
+        if: env.NETLIFY_DEPLOY_HOOK != ''
+        env:
+          NETLIFY_DEPLOY_HOOK: ${{ secrets.NETLIFY_DEPLOY_HOOK }}
+        run: curl -s -X POST "$NETLIFY_DEPLOY_HOOK"
