@@ -1,0 +1,1916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sincaraz | Sinner vs Alcaraz – The Ultimate Rivalry Stats & H2H</title>
+<meta name="description" content="The definitive stats comparison of Jannik Sinner vs Carlos Alcaraz. H2H record, serve stats, return stats, Grand Slams, records and more. Sincaraz rivalry tracker.">
+<meta name="keywords" content="Sinner vs Alcaraz, Alcaraz vs Sinner, Sincaraz, Sinner Alcaraz H2H, tennis rivalry 2024 2025, ATP stats comparison">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sinner: #1a6fff;
+  --sinner-dim: rgba(26,111,255,0.15);
+  --alcaraz: #ff3a1a;
+  --alcaraz-dim: rgba(255,58,26,0.15);
+  --bg: #07080f;
+  --bg2: #0d0f1a;
+  --bg3: #13162a;
+  --text: #e8eaf2;
+  --text-dim: #6b7094;
+  --border: rgba(255,255,255,0.07);
+  --gold: #f5c842;
+  --green: #2ecc71;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+
+/* TICKER */
+.ticker{background:#000;border-bottom:1px solid var(--border);height:36px;overflow:hidden;display:flex;align-items:center}
+.ticker-inner{display:flex;animation:tick 40s linear infinite;white-space:nowrap}
+.ticker-inner:hover{animation-play-state:paused}
+.ticker-item{padding:0 48px;font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--text-dim)}
+.ticker-item span.s{color:var(--sinner)}
+.ticker-item span.a{color:var(--alcaraz)}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(7,8,15,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;padding:0 24px;overflow-x:auto;gap:0}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.1em;padding:14px 24px 14px 0;color:#fff;white-space:nowrap;border-right:1px solid var(--border);margin-right:8px}.nav-logo span{font-size:22px}
+.nav-logo span{color:var(--sinner)}
+.nav-logo span.a{color:var(--alcaraz)}
+.nav-tabs{display:flex;gap:0}
+.nav-tab{padding:14px 18px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;color:var(--text-dim);border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none}
+.nav-tab:hover{color:var(--text)}
+.nav-tab.active{color:#fff;border-bottom-color:#fff}
+
+/* PAGES */
+.page{display:none;min-height:80vh}
+.page.active{display:block}
+
+/* ===== HERO / HOME ===== */
+.hero{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);border-bottom:1px solid var(--border);padding:60px 24px 40px}
+.hero-inner{max-width:1200px;margin:0 auto}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,10vw,140px);text-align:center;line-height:.9;letter-spacing:.02em;margin-bottom:8px}
+.hero-title .s-name{color:var(--sinner)}
+.hero-title .vs{color:var(--text-dim);font-size:.55em}
+.hero-title .a-name{color:var(--alcaraz)}
+.hero-subtitle{text-align:center;color:var(--text-dim);font-size:13px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:48px}
+
+/* H2H BIG SCORE */
+.h2h-score-bar{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center;margin-bottom:48px}
+.h2h-player{text-align:center}
+.h2h-score-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,12vw,160px);line-height:1}
+.h2h-score-num.s{color:var(--sinner)}
+.h2h-score-num.a{color:var(--alcaraz)}
+.h2h-label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin-top:4px}
+.h2h-name{font-family:'Barlow Condensed',sans-serif;font-size:clamp(18px,3vw,32px);font-weight:800;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
+.h2h-flag{font-size:28px;margin-bottom:8px}
+.h2h-center{text-align:center}
+.vs-circle{width:80px;height:80px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--text-dim);margin:0 auto 8px;background:var(--bg)}
+.h2h-total{font-size:12px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase}
+
+/* WIN BAR */
+.win-bar-wrap{margin-bottom:48px}
+.win-bar-labels{display:flex;justify-content:space-between;margin-bottom:8px}
+.win-bar-label{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.win-bar-label.s{color:var(--sinner)}
+.win-bar-label.a{color:var(--alcaraz)}
+.win-bar{height:8px;border-radius:4px;background:var(--bg3);overflow:hidden;display:flex}
+.win-bar-s{background:var(--sinner);transition:width 1.5s ease}
+.win-bar-a{background:var(--alcaraz);transition:width 1.5s ease}
+
+/* PROFILE CARDS */
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:48px}
+.profile-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px;position:relative;overflow:hidden}
+.profile-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.profile-card.sinner::before{background:var(--sinner)}
+.profile-card.alcaraz::before{background:var(--alcaraz)}
+.profile-card-header{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.profile-avatar{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;font-family:'Bebas Neue',sans-serif}
+.profile-avatar.s{background:var(--sinner-dim);color:var(--sinner)}
+.profile-avatar.a{background:var(--alcaraz-dim);color:var(--alcaraz)}
+.profile-card-name{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+.profile-card-name.s{color:var(--sinner)}
+.profile-card-name.a{color:var(--alcaraz)}
+.profile-card-rank{font-size:12px;color:var(--text-dim)}
+.profile-stats{display:flex;flex-direction:column}
+.ps-item{padding:10px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:16px}
+.ps-item:last-child,.ps-item:nth-last-child(2){border-bottom:none}
+.ps-label{font-size:12px;color:var(--text-dim);flex-shrink:0}
+.ps-val{font-size:13px;font-weight:600;text-align:right;flex-shrink:0}
+
+/* QUICK STATS GRID */
+.qs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:48px}
+.qs-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center}
+.qs-card-title{font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+.qs-values{display:flex;justify-content:center;align-items:center;gap:16px}
+.qs-val{font-family:'Bebas Neue',sans-serif;font-size:36px;line-height:1}
+.qs-val.s{color:var(--sinner)}
+.qs-val.a{color:var(--alcaraz)}
+.qs-divider{color:var(--text-dim);font-size:20px}
+.qs-winner{font-size:10px;color:var(--text-dim);margin-top:4px;font-weight:500}
+.qs-winner.s{color:var(--sinner)}
+.qs-winner.a{color:var(--alcaraz)}
+
+/* SECTION TITLES */
+.section{max-width:1200px;margin:0 auto;padding:48px 24px}
+.section-title{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.section-h2{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:.05em;margin-bottom:8px}
+
+/* COMPARISON TABLE */
+.comp-table{width:100%;border-collapse:collapse}
+.comp-table th{padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);border-bottom:1px solid var(--border)}
+.comp-table th.s{color:var(--sinner)}
+.comp-table th.a{color:var(--alcaraz)}
+.comp-table td{padding:10px 16px;font-size:13px;border-bottom:1px solid var(--border)}
+.comp-table tr:hover td{background:rgba(255,255,255,0.02)}
+.comp-table .cat{color:var(--text-dim);font-size:12px}
+.comp-table .val{font-weight:600;text-align:center}
+.comp-table .winner-s{color:var(--sinner)}
+.comp-table .winner-a{color:var(--alcaraz)}
+.comp-table .tied{color:var(--gold)}
+.comp-table .leader-badge{display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;margin-left:6px}
+.leader-s{background:var(--sinner-dim);color:var(--sinner)}
+.leader-a{background:var(--alcaraz-dim);color:var(--alcaraz)}
+
+/* BAR COMPARE */
+.bar-compare{display:flex;flex-direction:column;gap:12px}
+.bc-row{display:grid;grid-template-columns:1fr 140px 1fr;gap:8px;align-items:center}
+.bc-label{font-size:12px;color:var(--text-dim);text-align:center;padding:0 8px;white-space:nowrap;font-weight:600}
+.bc-bar-s{height:8px;border-radius:4px;background:var(--sinner);margin-left:auto;transition:width 1s ease}
+.bc-bar-a{height:8px;border-radius:4px;background:var(--alcaraz);transition:width 1s ease}
+.bc-val-s{font-size:12px;font-weight:700;color:var(--sinner);text-align:right}
+.bc-val-a{font-size:12px;font-weight:700;color:var(--alcaraz);text-align:left}
+.bc-right{display:flex;align-items:center;gap:8px}
+.bc-left{display:flex;align-items:center;gap:8px;flex-direction:row-reverse}
+
+/* SURFACE TABS */
+.surface-tabs{display:flex;gap:8px;margin-bottom:24px}
+.surface-tab{padding:8px 20px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-dim);transition:all .2s}
+.surface-tab.active{background:var(--text);color:var(--bg);border-color:var(--text)}
+.surface-tab.hard{border-color:rgba(100,149,237,.3)}
+.surface-tab.hard.active{background:#6495ed;color:#fff;border-color:#6495ed}
+.surface-tab.clay{border-color:rgba(205,133,63,.3)}
+.surface-tab.clay.active{background:#cd853f;color:#fff;border-color:#cd853f}
+.surface-tab.grass{border-color:rgba(46,139,87,.3)}
+.surface-tab.grass.active{background:#2e8b57;color:#fff;border-color:#2e8b57}
+.surface-content{display:none}
+.surface-content.active{display:block}
+
+/* MATCH LIST */
+.match-list{display:flex;flex-direction:column;gap:12px}
+.match-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;transition:border-color .2s}
+.match-card:hover{border-color:rgba(255,255,255,0.15)}
+.match-card.sinner-win{border-left:3px solid var(--sinner)}
+.match-card.alcaraz-win{border-left:3px solid var(--alcaraz)}
+.match-meta{display:flex;flex-direction:column;gap:4px}
+.match-date{font-size:11px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase}
+.match-event{font-size:14px;font-weight:600}
+.match-round{font-size:11px;color:var(--text-dim)}
+.match-surface-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+.match-surface-badge.hard{background:rgba(100,149,237,.2);color:#6495ed}
+.match-surface-badge.clay{background:rgba(205,133,63,.2);color:#cd853f}
+.match-surface-badge.grass{background:rgba(46,139,87,.2);color:#2e8b57}
+.match-score-wrap{text-align:center}
+.match-score{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;letter-spacing:.05em}
+.match-winner-name{font-size:11px;color:var(--text-dim);margin-top:2px}
+.match-winner-name.s{color:var(--sinner)}
+.match-winner-name.a{color:var(--alcaraz)}
+.match-duration{font-size:11px;color:var(--text-dim);text-align:right}
+.match-note{font-size:11px;color:var(--gold);font-style:italic;margin-top:4px;text-align:right}
+
+/* GRAND SLAMS PAGE */
+.slam-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-bottom:40px}
+.slam-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.slam-header{padding:16px 20px;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;border-bottom:1px solid var(--border)}
+.slam-header.ao{color:#00b4f0}
+.slam-header.rg{color:#e8600a}
+.slam-header.wim{color:#2e8b57}
+.slam-header.uso{color:#c8a800}
+.slam-body{padding:16px 20px}
+.slam-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.slam-row:last-child{border-bottom:none}
+.slam-row .label{color:var(--text-dim);font-size:12px}
+.slam-row .vals{display:flex;gap:16px}
+.slam-row .sv{font-weight:700;color:var(--sinner)}
+.slam-row .av{font-weight:700;color:var(--alcaraz)}
+
+/* RECORDS PAGE */
+.records-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.record-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative}
+.record-card-player{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:8px}
+.record-card-player.s{color:var(--sinner)}
+.record-card-player.a{color:var(--alcaraz)}
+.record-card-player.both{color:var(--gold)}
+.record-title{font-family:'DM Serif Display',serif;font-size:18px;line-height:1.3;margin-bottom:8px}
+.record-detail{font-size:13px;color:var(--text-dim);line-height:1.6}
+.record-icon{position:absolute;top:20px;right:20px;font-size:24px}
+
+/* PRESSURE STATS */
+.pressure-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.pressure-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px}
+.pressure-title{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px}
+.pressure-compare{display:flex;flex-direction:column;gap:8px}
+.pc-row{display:grid;grid-template-columns:80px 1fr 80px;gap:8px;align-items:center;font-size:13px;font-weight:600}
+.pc-val-s{color:var(--sinner);text-align:right}
+.pc-val-a{color:var(--alcaraz);text-align:left}
+.pc-bar-wrap{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;display:flex}
+.pc-bar-s{background:var(--sinner);transition:width 1s ease}
+.pc-bar-a{background:var(--alcaraz);transition:width 1s ease}
+
+/* EXPERT PAGE */
+.expert-section{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:32px;margin-bottom:24px}
+.expert-question{font-family:'DM Serif Display',serif;font-size:26px;margin-bottom:20px;line-height:1.3}
+.verdict-row{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:start;margin-bottom:24px}
+.verdict-side{padding:20px;border-radius:12px}
+.verdict-side.s{background:var(--sinner-dim);border:1px solid rgba(26,111,255,.2)}
+.verdict-side.a{background:var(--alcaraz-dim);border:1px solid rgba(255,58,26,.2)}
+.verdict-player{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;text-transform:uppercase;margin-bottom:8px}
+.verdict-player.s{color:var(--sinner)}
+.verdict-player.a{color:var(--alcaraz)}
+.verdict-text{font-size:13px;color:var(--text-dim);line-height:1.7}
+.verdict-center{text-align:center;padding-top:16px}
+.verdict-verdict{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.05em}
+.verdict-note{font-size:11px;color:var(--text-dim);margin-top:4px}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:24px}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--sinner),var(--alcaraz))}
+.tl-item{position:relative;margin-bottom:32px;padding-left:28px}
+.tl-dot{position:absolute;left:-32px;top:6px;width:12px;height:12px;border-radius:50%;border:2px solid}
+.tl-dot.s{border-color:var(--sinner);background:var(--sinner)}
+.tl-dot.a{border-color:var(--alcaraz);background:var(--alcaraz)}
+.tl-dot.both{border-color:var(--gold);background:var(--gold)}
+.tl-date{font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+.tl-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.tl-body{font-size:13px;color:var(--text-dim);line-height:1.7}
+
+/* FILTERS */
+.filter-row{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.filter-btn{padding:6px 16px;border-radius:16px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text-dim);transition:all .2s}
+.filter-btn:hover{border-color:rgba(255,255,255,.2);color:var(--text)}
+.filter-btn.active{background:var(--text);color:var(--bg);border-color:var(--text)}
+
+/* STATS TABLE WITH HEADERS */
+.stats-section{margin-bottom:40px}
+.stats-section-header{background:var(--bg3);padding:12px 16px;border-radius:8px 8px 0 0;font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text-dim);border:1px solid var(--border);border-bottom:none}
+.stats-table-wrap{border:1px solid var(--border);border-radius:0 0 8px 8px;overflow:hidden}
+.stats-table{width:100%;border-collapse:collapse}
+.stats-table th{padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--bg2);border-bottom:1px solid var(--border);text-align:center}
+.stats-table th:first-child{text-align:left}
+.stats-table th.s{color:var(--sinner)}
+.stats-table th.a{color:var(--alcaraz)}
+.stats-table td{padding:10px 16px;font-size:13px;border-bottom:1px solid var(--border);text-align:center}
+.stats-table td:first-child{text-align:left;color:var(--text-dim);font-size:12px}
+.stats-table tr:last-child td{border-bottom:none}
+.stats-table tr:hover td{background:rgba(255,255,255,.02)}
+.stats-table .sv{font-weight:600;color:var(--sinner)}
+.stats-table .av{font-weight:600;color:var(--alcaraz)}
+.stats-table .win{font-weight:700}
+
+/* SOCIAL */
+.social-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.social-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:24px}
+.social-card h3{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;margin-bottom:16px}
+.social-card h3.s{color:var(--sinner)}
+.social-card h3.a{color:var(--alcaraz)}
+.social-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.social-row:last-child{border-bottom:none}
+.social-platform{color:var(--text-dim);font-size:12px}
+.social-num{font-weight:700}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .profile-grid,.social-grid,.verdict-row{grid-template-columns:1fr}
+  .h2h-score-bar{grid-template-columns:1fr auto 1fr;gap:8px}
+  .h2h-score-num{font-size:60px}
+  .nav-inner{gap:0}
+  .nav-tab{padding:12px 12px;font-size:11px}
+}
+
+/* LEGEND COMPARE */
+.legend-table{width:100%;border-collapse:collapse}
+.legend-table th{padding:10px 16px;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);border-bottom:1px solid var(--border);text-align:center}
+.legend-table th:first-child{text-align:left}
+.legend-table td{padding:8px 16px;font-size:13px;border-bottom:1px solid var(--border);text-align:center}
+.legend-table td:first-child{text-align:left;font-size:12px;color:var(--text-dim)}
+.legend-table tr:hover td{background:rgba(255,255,255,.02)}
+.legend-table .highlight-s{color:var(--sinner);font-weight:700}
+.legend-table .highlight-a{color:var(--alcaraz);font-weight:700}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:32px 24px;text-align:center;color:var(--text-dim);font-size:12px;line-height:1.8}
+footer a{color:var(--text-dim);text-decoration:none}
+footer a:hover{color:var(--text)}
+.footer-inner{max-width:1200px;margin:0 auto}
+
+@media(max-width:1024px){
+  .qs-grid{grid-template-columns:repeat(3,1fr)}
+  .slam-grid{grid-template-columns:repeat(2,1fr)}
+  .records-grid{grid-template-columns:repeat(2,1fr)}
+  .pressure-grid{grid-template-columns:repeat(2,1fr)}
+  .section{padding:32px 20px}
+}
+@media(max-width:768px){
+  .nav-logo{font-size:18px;padding:12px 16px 12px 0;margin-right:4px}
+  .nav-tab{padding:12px 10px;font-size:10px;letter-spacing:.04em}
+  .hero{padding:32px 16px 24px}
+  .hero-title{font-size:clamp(36px,12vw,72px) !important}
+  .h2h-score-num{font-size:clamp(48px,14vw,80px)}
+  .vs-circle{width:52px;height:52px;font-size:15px}
+  .h2h-name{font-size:clamp(13px,4vw,22px)}
+  .qs-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .qs-val{font-size:26px !important}
+  .profile-grid{grid-template-columns:1fr;gap:16px}
+  .social-grid{grid-template-columns:1fr}
+  .verdict-row{grid-template-columns:1fr;gap:12px}
+  .section{padding:24px 16px}
+  .section-h2{font-size:32px}
+  .stats-table-wrap,.legend-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .stats-table,.legend-table,.comp-table{min-width:460px;font-size:12px}
+  .stats-table th,.stats-table td,.legend-table th,.legend-table td{padding:7px 10px}
+  .match-card{grid-template-columns:1fr;gap:8px;padding:14px}
+  .match-note,.match-duration{text-align:left}
+  .slam-grid,.records-grid,.pressure-grid{grid-template-columns:1fr}
+  .verdict-center{padding:0}
+  .filter-btn{padding:5px 12px;font-size:10px}
+  .surface-tabs{flex-wrap:wrap;gap:6px}
+  .ticker-item{padding:0 20px;font-size:10px}
+  footer{padding:20px 16px;font-size:11px}
+}
+@media(max-width:400px){
+  .qs-grid{grid-template-columns:1fr}
+  .hero-title{font-size:clamp(30px,13vw,52px) !important}
+  .nav-tab{padding:10px 7px;font-size:9px}
+}
+
+/* ===== VOTE WIDGET ===== */
+.vote-section{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:40px;margin-bottom:32px;text-align:center}
+.vote-title{font-family:"Bebas Neue",sans-serif;font-size:48px;letter-spacing:.05em;margin-bottom:8px}
+.vote-subtitle{color:var(--text-dim);font-size:13px;margin-bottom:36px;letter-spacing:.05em}
+.vote-buttons{display:flex;gap:16px;justify-content:center;margin-bottom:32px;flex-wrap:wrap}
+.vote-btn{padding:18px 48px;border-radius:50px;font-family:"Barlow Condensed",sans-serif;font-size:22px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:2px solid;transition:all .25s;min-width:200px}
+.vote-btn.s{border-color:var(--sinner);color:var(--sinner);background:transparent}
+.vote-btn.s:hover{background:var(--sinner);color:#fff;transform:scale(1.04)}
+.vote-btn.a{border-color:var(--alcaraz);color:var(--alcaraz);background:transparent}
+.vote-btn.a:hover{background:var(--alcaraz);color:#fff;transform:scale(1.04)}
+.vote-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.vote-btn.voted-s{background:var(--sinner);color:#fff}
+.vote-btn.voted-a{background:var(--alcaraz);color:#fff}
+.vote-results{display:none}
+.vote-results.show{display:block}
+.vote-bar-wrap{max-width:600px;margin:0 auto 24px}
+.vote-bar-labels{display:flex;justify-content:space-between;margin-bottom:10px}
+.vote-bar-label{font-family:"Barlow Condensed",sans-serif;font-size:20px;font-weight:800}
+.vote-bar-label.s{color:var(--sinner)}
+.vote-bar-label.a{color:var(--alcaraz)}
+.vote-bar-track{height:20px;border-radius:10px;background:var(--bg3);overflow:hidden;display:flex}
+.vote-bar-s{background:var(--sinner);transition:width 1s ease;border-radius:10px 0 0 10px}
+.vote-bar-a{background:var(--alcaraz);transition:width 1s ease;border-radius:0 10px 10px 0}
+.vote-total{font-size:12px;color:var(--text-dim);margin-top:8px;letter-spacing:.1em;text-transform:uppercase}
+.vote-breakdown{margin-top:32px}
+.vote-breakdown-title{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.vote-breakdown-title::after{content:"";flex:1;height:1px;background:var(--border)}
+.vote-geo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.vote-geo-card{background:var(--bg3);border-radius:10px;padding:14px 16px}
+.vote-geo-name{font-size:12px;color:var(--text-dim);margin-bottom:8px;font-weight:600}
+.vote-geo-bar{height:6px;border-radius:3px;background:var(--bg);overflow:hidden;display:flex;margin-bottom:6px}
+.vote-geo-s{background:var(--sinner)}
+.vote-geo-a{background:var(--alcaraz)}
+.vote-geo-nums{display:flex;justify-content:space-between;font-size:11px}
+.vote-geo-ns{color:var(--sinner);font-weight:700}
+.vote-geo-na{color:var(--alcaraz);font-weight:700}
+.vote-already{font-size:13px;color:var(--text-dim);margin-bottom:16px}
+@media(max-width:768px){
+  .vote-btn{padding:14px 32px;font-size:18px;min-width:160px}
+  .vote-title{font-size:36px}
+}
+
+/* ===== INSIGHTS PAGE ===== */
+.insight-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:24px}
+.insight-card-title{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
+.insight-card-subtitle{font-size:12px;color:var(--text-dim);margin-bottom:24px;letter-spacing:.05em}
+.clutch-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.clutch-side{padding:20px;border-radius:12px}
+.clutch-side.s{background:var(--sinner-dim);border:1px solid rgba(26,111,255,.2)}
+.clutch-side.a{background:var(--alcaraz-dim);border:1px solid rgba(255,58,26,.2)}
+.clutch-name{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;text-transform:uppercase;margin-bottom:16px}
+.clutch-name.s{color:var(--sinner)}
+.clutch-name.a{color:var(--alcaraz)}
+.clutch-score-big{font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:1;margin-bottom:4px}
+.clutch-score-big.s{color:var(--sinner)}
+.clutch-score-big.a{color:var(--alcaraz)}
+.clutch-label{font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase}
+.clutch-breakdown{margin-top:16px;display:flex;flex-direction:column;gap:8px}
+.clutch-row{display:flex;justify-content:space-between;font-size:12px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.clutch-row:last-child{border-bottom:none}
+.clutch-row-label{color:var(--text-dim)}
+.clutch-row-val.s{color:var(--sinner);font-weight:700}
+.clutch-row-val.a{color:var(--alcaraz);font-weight:700}
+.momentum-wrap{display:flex;flex-direction:column;gap:8px}
+.momentum-match{display:grid;grid-template-columns:120px 1fr 80px;gap:8px;align-items:center;font-size:12px}
+.momentum-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin:0 auto}
+.momentum-dot.s{background:var(--sinner)}
+.momentum-dot.a{background:var(--alcaraz)}
+.momentum-line{display:flex;align-items:center;gap:8px}
+.momentum-event{color:var(--text-dim)}
+.momentum-winner{font-weight:700}
+.momentum-winner.s{color:var(--sinner)}
+.momentum-winner.a{color:var(--alcaraz)}
+.momentum-streak{padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700}
+.momentum-streak.s{background:var(--sinner-dim);color:var(--sinner)}
+.momentum-streak.a{background:var(--alcaraz-dim);color:var(--alcaraz)}
+.games-bar-wrap{margin-bottom:8px}
+.games-bar-track{height:12px;border-radius:6px;background:var(--bg3);overflow:hidden;display:flex;margin:8px 0 4px}
+.games-bar-s{background:var(--sinner);transition:width 1s ease}
+.games-bar-a{background:var(--alcaraz);transition:width 1s ease}
+.games-bar-labels{display:flex;justify-content:space-between;font-size:11px}
+.games-bar-label-s{color:var(--sinner);font-weight:700}
+.games-bar-label-a{color:var(--alcaraz);font-weight:700}
+.peak-week-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.peak-week-card{border-radius:12px;padding:20px}
+.peak-week-card.s{background:var(--sinner-dim);border:1px solid rgba(26,111,255,.2)}
+.peak-week-card.a{background:var(--alcaraz-dim);border:1px solid rgba(255,58,26,.2)}
+.peak-week-event{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;text-transform:uppercase;margin-bottom:4px}
+.peak-week-event.s{color:var(--sinner)}
+.peak-week-event.a{color:var(--alcaraz)}
+.peak-week-detail{font-size:12px;color:var(--text-dim);line-height:1.8}
+.peak-week-wins{font-size:24px;font-family:'Bebas Neue',sans-serif;color:var(--gold);margin-bottom:4px}
+.opp-strength-bar{display:flex;flex-direction:column;gap:10px}
+.osb-row{display:grid;grid-template-columns:140px 1fr 60px;gap:8px;align-items:center;font-size:12px}
+.osb-label{color:var(--text-dim)}
+.osb-track{height:8px;border-radius:4px;background:var(--bg3);overflow:hidden}
+.osb-fill{height:100%;border-radius:4px;transition:width 1s}
+.osb-val{font-weight:700;text-align:right}
+.insight-winner-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-left:12px}
+.insight-winner-badge.s{background:var(--sinner-dim);color:var(--sinner)}
+.insight-winner-badge.a{background:var(--alcaraz-dim);color:var(--alcaraz)}
+.big-stat-row{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid var(--border)}
+.big-stat-row:last-child{border-bottom:none}
+.big-stat-val{font-family:'Bebas Neue',sans-serif;font-size:32px}
+.big-stat-val.s{color:var(--sinner);text-align:right}
+.big-stat-val.a{color:var(--alcaraz);text-align:left}
+.big-stat-label{font-size:11px;color:var(--text-dim);text-align:center;letter-spacing:.1em;text-transform:uppercase}
+@media(max-width:768px){
+  .clutch-grid,.peak-week-grid{grid-template-columns:1fr}
+  .clutch-score-big{font-size:52px}
+  .momentum-match{grid-template-columns:90px 1fr 60px}
+}
+</style>
+<!-- Plausible Analytics -->
+<script async src="https://plausible.io/js/pa-6AZ2ReE-3C-zzAbT8gHU8.js">
+// Momentum list — last 8 H2H matches in reverse chronological order
+const momentumMatches = [
+  {date:'Nov 2025', event:'ATP Finals Final', winner:'sinner', score:'6-4 6-4', surface:'Hard'},
+  {date:'Sep 2025', event:'US Open Final', winner:'alcaraz', score:'3-6 6-3 6-3 6-4', surface:'Hard'},
+  {date:'Jul 2025', event:'Wimbledon Final', winner:'sinner', score:'6-2 6-3 7-6', surface:'Grass'},
+  {date:'Jun 2025', event:'Roland Garros Final', winner:'alcaraz', score:'6-2 3-6 7-6 2-6 7-5', surface:'Clay'},
+  {date:'May 2025', event:'Madrid SF', winner:'alcaraz', score:'6-3 6-4', surface:'Clay'},
+  {date:'Apr 2025', event:'Monte Carlo SF', winner:'alcaraz', score:'6-4 6-1', surface:'Clay'},
+  {date:'Nov 2024', event:'ATP Finals Final', winner:'sinner', score:'6-3 6-2', surface:'Hard'},
+  {date:'Sep 2024', event:'US Open Final', winner:'alcaraz', score:'5-7 6-2 4-6 6-3 6-4', surface:'Hard'},
+];
+
+const streakLabels = ['L','L','W','L','L','L','W','L'];
+document.getElementById('momentumList').innerHTML = momentumMatches.map((m,i) => {
+  const isSinner = m.winner === 'sinner';
+  return `<div class="momentum-match">
+    <span class="momentum-event" style="color:var(--text-dim);font-size:12px">${m.date} · ${m.surface}</span>
+    <span class="momentum-line">
+      <span class="momentum-dot ${m.winner}"></span>
+      <span class="momentum-winner ${m.winner}">${isSinner ? 'Sinner' : 'Alcaraz'}</span>
+      <span style="color:var(--text-dim);font-size:11px">def. ${isSinner ? 'Alcaraz' : 'Sinner'} ${m.score}</span>
+      <span style="color:var(--text-dim);font-size:11px">— ${m.event}</span>
+    </span>
+    <span class="momentum-streak ${m.winner}">${isSinner ? 'S' : 'A'}</span>
+  </div>`;
+}).join('');
+
+// Match duration list
+const h2hDurations = [
+  {event:'2022 US Open QF', duration:'5h 15m', winner:'alcaraz', surface:'Hard'},
+  {event:'2025 Roland Garros Final', duration:'4h 56m', winner:'alcaraz', surface:'Clay'},
+  {event:'2025 US Open Final', duration:'3h 48m', winner:'alcaraz', surface:'Hard'},
+  {event:'2024 US Open Final', duration:'3h 32m', winner:'alcaraz', surface:'Hard'},
+  {event:'2025 Wimbledon Final', duration:'3h 10m', winner:'sinner', surface:'Grass'},
+  {event:'2024 Indian Wells SF', duration:'2h 58m', winner:'alcaraz', surface:'Hard'},
+  {event:'2025 Roland Garros SF equiv', duration:'2h 40m', winner:'sinner', surface:'Clay'},
+  {event:'2024 Madrid SF', duration:'2h 22m', winner:'alcaraz', surface:'Clay'},
+];
+const durEl = document.getElementById('matchDurationList');
+if(durEl) durEl.innerHTML = h2hDurations.map(m => `
+  <div style="display:grid;grid-template-columns:160px 80px 1fr;gap:8px;align-items:center;font-size:12px;padding:5px 0;border-bottom:1px solid var(--border)">
+    <span style="color:var(--text-dim)">${m.event}</span>
+    <span style="font-weight:700;color:var(--gold)">${m.duration}</span>
+    <span class="momentum-streak ${m.winner}" style="justify-self:start">${m.winner==='sinner'?'Sinner wins':'Alcaraz wins'}</span>
+  </div>
+`).join('');
+
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NSCL5WC0B7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NSCL5WC0B7');
+</script>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner" id="tickerContent"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo"><span>SIN</span>CARAZ<span class="a"> ✦</span></div>
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="showPage('home')">Overview</button>
+      <button class="nav-tab" onclick="showPage('h2h')">H2H Matches</button>
+      <button class="nav-tab" onclick="showPage('serve')">Serve Stats</button>
+      <button class="nav-tab" onclick="showPage('return')">Return Stats</button>
+      <button class="nav-tab" onclick="showPage('pressure')">Under Pressure</button>
+      <button class="nav-tab" onclick="showPage('slams')">Grand Slams</button>
+      <button class="nav-tab" onclick="showPage('records')">Records</button>
+      <button class="nav-tab" onclick="showPage('legends')">vs Legends</button>
+      <button class="nav-tab" onclick="showPage('expert')">Who's Better?</button>
+      <button class="nav-tab" onclick="showPage('insights')">⚡ Insights</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================================ HOME PAGE -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-title">
+        <span class="s-name">SINNER</span>&nbsp;<span class="vs">VS</span>&nbsp;<span class="a-name">ALCARAZ</span>
+      </div>
+      
+
+      <div class="h2h-score-bar">
+        <div class="h2h-player" style="text-align:right">
+          <div class="h2h-flag">🇮🇹</div>
+          <div class="h2h-name" style="color:var(--sinner)">Jannik Sinner</div>
+          
+        </div>
+        <div class="h2h-center">
+          <div style="display:flex;align-items:center;justify-content:center;gap:16px">
+            <div class="h2h-score-num s">6</div>
+            <div class="vs-circle">VS</div>
+            <div class="h2h-score-num a">11</div>
+          </div>
+          <div class="h2h-total">17 matches played · Alcaraz leads H2H</div>
+        </div>
+        <div class="h2h-player" style="text-align:left">
+          <div class="h2h-flag">🇪🇸</div>
+          <div class="h2h-name" style="color:var(--alcaraz)">Carlos Alcaraz</div>
+          
+        </div>
+      </div>
+
+      <div class="win-bar-wrap">
+        <div class="win-bar-labels">
+          <span class="win-bar-label s">Sinner — 35.3%</span>
+          <span class="win-bar-label a">Alcaraz — 64.7%</span>
+        </div>
+        <div class="win-bar">
+          <div class="win-bar-s" style="width:35.3%"></div>
+          <div class="win-bar-a" style="width:64.7%"></div>
+        </div>
+      </div>
+
+      <!-- QUICK STATS -->
+      <div class="qs-grid">
+        <div class="qs-card">
+          <div class="qs-card-title">ATP Ranking</div>
+          <div class="qs-values">
+            <div><div class="qs-val s">#2</div><div class="qs-winner s">Sinner</div></div>
+            <div class="qs-divider">/</div>
+            <div><div class="qs-val a">#1</div><div class="qs-winner a">Alcaraz ✦</div></div>
+          </div>
+        </div>
+        <div class="qs-card">
+          <div class="qs-card-title">Grand Slams Won</div>
+          <div class="qs-values">
+            <div><div class="qs-val s">4</div><div class="qs-winner s">Sinner</div></div>
+            <div class="qs-divider">/</div>
+            <div><div class="qs-val a">7</div><div class="qs-winner a">Alcaraz ✦</div></div>
+          </div>
+        </div>
+        <div class="qs-card">
+          <div class="qs-card-title">Career Titles</div>
+          <div class="qs-values">
+            <div><div class="qs-val s">24</div><div class="qs-winner s">Sinner</div></div>
+            <div class="qs-divider">/</div>
+            <div><div class="qs-val a">26</div><div class="qs-winner a">Alcaraz ✦</div></div>
+          </div>
+        </div>
+        <div class="qs-card">
+          <div class="qs-card-title">Career Earnings</div>
+          <div class="qs-values">
+            <div><div class="qs-val s" style="font-size:26px">$56.6M</div><div class="qs-winner s">Sinner ✦</div></div>
+            <div class="qs-divider">/</div>
+            <div><div class="qs-val a" style="font-size:26px">$53.9M</div><div class="qs-winner a">Alcaraz</div></div>
+          </div>
+        </div>
+        <div class="qs-card">
+          <div class="qs-card-title">2025 Win %</div>
+          <div class="qs-values">
+            <div><div class="qs-val s" style="font-size:28px">90.6%</div><div class="qs-winner s">Sinner</div></div>
+            <div class="qs-divider">/</div>
+            <div><div class="qs-val a" style="font-size:28px">91.2%</div><div class="qs-winner a">Alcaraz ✦</div></div>
+          </div>
+        </div>
+        <div class="qs-card">
+          <div class="qs-card-title">Days at World #1</div>
+          <div class="qs-values">
+            <div><div class="qs-val s" style="font-size:26px">462+</div><div class="qs-winner s">Sinner ✦</div></div>
+            <div class="qs-divider">/</div>
+            <div><div class="qs-val a" style="font-size:26px">427+</div><div class="qs-winner a">Alcaraz</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <!-- PROFILE CARDS -->
+    <div class="section-title">Player Profiles</div>
+    <div class="profile-grid">
+      <div class="profile-card sinner">
+        <div class="profile-card-header">
+          <div class="profile-avatar s">JS</div>
+          <div>
+            <div class="profile-card-name s">Jannik Sinner</div>
+            <div class="profile-card-rank">🇮🇹 Italy · World No. 2</div>
+          </div>
+        </div>
+        <div class="profile-stats">
+          <div class="ps-item"><span class="ps-label">Born</span><span class="ps-val">16 Aug 2001</span></div>
+          <div class="ps-item"><span class="ps-label">Age</span><span class="ps-val">23</span></div>
+          <div class="ps-item"><span class="ps-label">Height</span><span class="ps-val">188 cm (6'2")</span></div>
+          <div class="ps-item"><span class="ps-label">Weight</span><span class="ps-val">76 kg</span></div>
+          <div class="ps-item"><span class="ps-label">Plays</span><span class="ps-val">Right-handed</span></div>
+          <div class="ps-item"><span class="ps-label">Backhand</span><span class="ps-val">Two-handed</span></div>
+          <div class="ps-item"><span class="ps-label">Turned Pro</span><span class="ps-val">2018</span></div>
+          <div class="ps-item"><span class="ps-label">ATP Points</span><span class="ps-val">11,830</span></div>
+          <div class="ps-item"><span class="ps-label">Career W/L</span><span class="ps-val">328–88</span></div>
+          <div class="ps-item"><span class="ps-label">Win Ratio</span><span class="ps-val">78.8%</span></div>
+          <div class="ps-item"><span class="ps-label">Titles</span><span class="ps-val">24</span></div>
+          <div class="ps-item"><span class="ps-label">Grand Slams</span><span class="ps-val">4</span></div>
+          <div class="ps-item"><span class="ps-label">Masters 1000</span><span class="ps-val">5</span></div>
+          <div class="ps-item"><span class="ps-label">ATP Finals</span><span class="ps-val">2 (2023, 2024)</span></div>
+          <div class="ps-item"><span class="ps-label">Prize Money</span><span class="ps-val">$58,878,696</span></div>
+          <div class="ps-item"><span class="ps-label">Coach</span><span class="ps-val">Vagnozzi / Cahill</span></div>
+        </div>
+      </div>
+
+      <div class="profile-card alcaraz">
+        <div class="profile-card-header">
+          <div class="profile-avatar a">CA</div>
+          <div>
+            <div class="profile-card-name a">Carlos Alcaraz</div>
+            <div class="profile-card-rank">🇪🇸 Spain · World No. 1</div>
+          </div>
+        </div>
+        <div class="profile-stats">
+          <div class="ps-item"><span class="ps-label">Born</span><span class="ps-val">5 May 2003</span></div>
+          <div class="ps-item"><span class="ps-label">Age</span><span class="ps-val">22</span></div>
+          <div class="ps-item"><span class="ps-label">Height</span><span class="ps-val">185 cm (6'1")</span></div>
+          <div class="ps-item"><span class="ps-label">Weight</span><span class="ps-val">79 kg</span></div>
+          <div class="ps-item"><span class="ps-label">Plays</span><span class="ps-val">Right-handed</span></div>
+          <div class="ps-item"><span class="ps-label">Backhand</span><span class="ps-val">Two-handed</span></div>
+          <div class="ps-item"><span class="ps-label">Turned Pro</span><span class="ps-val">2018</span></div>
+          <div class="ps-item"><span class="ps-label">ATP Points</span><span class="ps-val">7,745</span></div>
+          <div class="ps-item"><span class="ps-label">Career W/L</span><span class="ps-val">292–65</span></div>
+          <div class="ps-item"><span class="ps-label">Win Ratio</span><span class="ps-val">81.8%</span></div>
+          <div class="ps-item"><span class="ps-label">Titles</span><span class="ps-val">26</span></div>
+          <div class="ps-item"><span class="ps-label">Grand Slams</span><span class="ps-val">7</span></div>
+          <div class="ps-item"><span class="ps-label">Masters 1000</span><span class="ps-val">6</span></div>
+          <div class="ps-item"><span class="ps-label">ATP Finals</span><span class="ps-val">0</span></div>
+          <div class="ps-item"><span class="ps-label">Prize Money</span><span class="ps-val">$63,933,973</span></div>
+          <div class="ps-item"><span class="ps-label">Coach</span><span class="ps-val">Samuel López (2026)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAREER COMPARISON TABLE -->
+    <div class="section-title" style="margin-top:48px">Career Comparison</div>
+    <div class="stats-section">
+      <div class="stats-section-header">Overall Career Stats</div>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <tr><th style="width:40%">Category</th><th class="s">Sinner</th><th class="a">Alcaraz</th><th>Edge</th></tr>
+          <tr><td>Career Win/Loss</td><td class="sv">328–88</td><td class="av">362–90</td><td style="color:var(--text-dim);font-size:11px">Similar</td></tr>
+          <tr><td>Career Win %</td><td class="sv">78.8%</td><td class="av">80.1%</td><td style="color:var(--gold)">Tied ≈</td></tr>
+          <tr><td>Titles (ATP)</td><td class="sv">24</td><td class="av">26</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Grand Slams</td><td class="sv">4</td><td class="av">7</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Masters 1000</td><td class="sv">7</td><td class="av">6</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>ATP Finals Titles</td><td class="sv">2</td><td class="av">0</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Days at World #1</td><td class="sv">462+</td><td class="av">427+</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Prize Money</td><td class="sv">$56.6M</td><td class="av">$53.9M</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>H2H Record</td><td class="sv">6</td><td class="av">11</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>2025 Win %</td><td class="sv">90.6%</td><td class="av">91.2%</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Finals Record</td><td class="sv">24–9</td><td class="av">26–9</td><td style="color:var(--text-dim);font-size:11px">Similar</td></tr>
+          <tr><td>vs Top 10</td><td class="sv">60–37</td><td class="av">55–24</td><td><span class="leader-s">Sinner</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- SURFACE RECORD -->
+    <div class="section-title" style="margin-top:48px">Record by Surface</div>
+    <div class="surface-tabs">
+      <button class="surface-tab active" onclick="showSurface('all')">All Surfaces</button>
+      <button class="surface-tab hard" onclick="showSurface('hard')">Hard</button>
+      <button class="surface-tab clay" onclick="showSurface('clay')">Clay</button>
+      <button class="surface-tab grass" onclick="showSurface('grass')">Grass</button>
+    </div>
+    <div class="surface-content active" id="surf-all">
+      <table class="stats-table" style="border:1px solid var(--border);border-radius:8px;overflow:hidden">
+        <tr><th>Surface</th><th class="s">Sinner W/L</th><th class="a">Alcaraz W/L</th><th class="s">Sinner %</th><th class="a">Alcaraz %</th><th>Edge</th></tr>
+        <tr><td>Hard</td><td class="sv">234–54</td><td class="av">154–42</td><td class="sv">81.3%</td><td class="av">78.6%</td><td><span class="leader-s">Sinner</span></td></tr>
+        <tr><td>Clay</td><td class="sv">46–19</td><td class="av">76–22</td><td class="sv">70.8%</td><td class="av">77.6%</td><td><span class="leader-a">Alcaraz</span></td></tr>
+        <tr><td>Grass</td><td class="sv">32–9</td><td class="av">38–11</td><td class="sv">80.1%</td><td class="av">77.6%</td><td style="color:var(--text-dim);font-size:11px">Tied ≈</td></tr>
+        <tr><td>Indoor Hard</td><td class="sv">87–20</td><td class="av">44–12</td><td class="sv">81.3%</td><td class="av">78.6%</td><td><span class="leader-s">Sinner</span></td></tr>
+      </table>
+    </div>
+    <div class="surface-content" id="surf-hard">
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px">
+        <p style="color:var(--text-dim);margin-bottom:20px;font-size:13px">Hard court dominance is <strong style="color:var(--sinner)">Sinner's</strong> strongest suit — indoor hard especially, where he holds a 31-match winning streak at one point in 2025.</p>
+        <table class="stats-table">
+          <tr><th>Category</th><th class="s">Sinner</th><th class="a">Alcaraz</th></tr>
+          <tr><td>Hard W/L</td><td class="sv">234–54</td><td class="av">154–42</td></tr>
+          <tr><td>Hard Win %</td><td class="sv win">81.3%</td><td class="av">78.6%</td></tr>
+          <tr><td>H2H on Hard</td><td class="sv win">2</td><td class="av">8</td></tr>
+          <tr><td>Slams on Hard</td><td class="sv win">3 (AO×3)</td><td class="av">2 (USO×2)</td></tr>
+          <tr><td>Masters on Hard</td><td class="sv win">5</td><td class="av">2</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="surface-content" id="surf-clay">
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px">
+        <p style="color:var(--text-dim);margin-bottom:20px;font-size:13px">Clay is <strong style="color:var(--alcaraz)">Alcaraz's</strong> playground — 22–1 in 2025 on clay (95.7%), including a 2025 Roland Garros title in the match of the decade.</p>
+        <table class="stats-table">
+          <tr><th>Category</th><th class="s">Sinner</th><th class="a">Alcaraz</th></tr>
+          <tr><td>Clay W/L</td><td class="sv">46–19</td><td class="av win">76–22</td></tr>
+          <tr><td>Clay Win %</td><td class="sv">70.8%</td><td class="av win">77.6%</td></tr>
+          <tr><td>H2H on Clay</td><td class="sv">1</td><td class="av win">3</td></tr>
+          <tr><td>Roland Garros</td><td class="sv">F (2025, L)</td><td class="av win">W 2024, 2025</td></tr>
+          <tr><td>Clay Streak (2025)</td><td class="sv">—</td><td class="av win">22–1</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="surface-content" id="surf-grass">
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px">
+        <p style="color:var(--text-dim);margin-bottom:20px;font-size:13px"><strong style="color:var(--sinner)">Sinner</strong> leads the H2H 2–0 on grass and won Wimbledon 2024 — their only meeting at Wimbledon. Alcaraz won Wimbledon 2023 and 2024.</p>
+        <table class="stats-table">
+          <tr><th>Category</th><th class="s">Sinner</th><th class="a">Alcaraz</th></tr>
+          <tr><td>Grass W/L</td><td class="sv">32–9</td><td class="av">38–11</td></tr>
+          <tr><td>Grass Win %</td><td class="sv">80.1%</td><td class="av">77.6%</td></tr>
+          <tr><td>H2H on Grass</td><td class="sv win">2</td><td class="av">0</td></tr>
+          <tr><td>Wimbledon</td><td class="sv win">W 2024</td><td class="av">W 2023, 2024*</td></tr>
+          <tr><td>Queens/Halle</td><td class="sv">—</td><td class="av win">Queens ×2</td></tr>
+        </table>
+        <p style="font-size:11px;color:var(--text-dim);margin-top:12px">*Alcaraz won Wimbledon 2023 and lost to Sinner in SF 2024. Sinner won the 2024 title.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ H2H MATCHES PAGE -->
+<div class="page" id="page-h2h">
+  <div class="section">
+    <div class="section-h2">Head-to-Head Matches</div>
+    <p style="color:var(--text-dim);margin-bottom:32px;font-size:14px">All 17 meetings between Sinner and Alcaraz · <span style="color:var(--alcaraz)">Alcaraz leads 11–6</span></p>
+
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="filterMatches('all',this)">All (17)</button>
+      <button class="filter-btn" onclick="filterMatches('hard',this)">Hard (10)</button>
+      <button class="filter-btn" onclick="filterMatches('clay',this)">Clay (4)</button>
+      <button class="filter-btn" onclick="filterMatches('grass',this)">Grass (3)</button>
+      <button class="filter-btn" onclick="filterMatches('slam',this)">Grand Slams</button>
+      <button class="filter-btn" onclick="filterMatches('sinner',this)">Sinner Wins</button>
+      <button class="filter-btn" onclick="filterMatches('alcaraz',this)">Alcaraz Wins</button>
+    </div>
+
+    <!-- H2H STATS BAR -->
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:24px">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:center">
+        <div><div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">H2H Overall</div>
+          <div style="display:flex;justify-content:center;align-items:center;gap:12px">
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--sinner)">6</span>
+            <span style="color:var(--text-dim)">–</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--alcaraz)">11</span>
+          </div></div>
+        <div><div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Points Won H2H</div>
+          <div style="display:flex;justify-content:center;align-items:center;gap:12px">
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--sinner)">1,651</span>
+            <span style="color:var(--text-dim)">–</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--alcaraz)">1,651</span>
+          </div>
+          <div style="font-size:11px;color:var(--gold)">★ Perfectly tied!</div></div>
+        <div><div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Sets Won H2H</div>
+          <div style="display:flex;justify-content:center;align-items:center;gap:12px">
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--sinner)">24</span>
+            <span style="color:var(--text-dim)">–</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--alcaraz)">35</span>
+          </div></div>
+      </div>
+    </div>
+
+    <div class="match-list" id="matchList"></div>
+  </div>
+</div>
+
+<!-- ============================================================ SERVE STATS PAGE -->
+<div class="page" id="page-serve">
+  <div class="section">
+    <div class="section-h2">Serve Statistics</div>
+    <p style="color:var(--text-dim);margin-bottom:32px;font-size:14px">Career serve stats from ATP Tour official data</p>
+
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="filterServe('overall',this)">Overall</button>
+      <button class="filter-btn" onclick="filterServe('hard',this)">Hard</button>
+      <button class="filter-btn" onclick="filterServe('clay',this)">Clay</button>
+      <button class="filter-btn" onclick="filterServe('grass',this)">Grass</button>
+    </div>
+
+    <div class="stats-section">
+      <div class="stats-section-header">Core Serve Stats</div>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <tr><th>Stat</th><th class="s">Sinner</th><th class="a">Alcaraz</th><th>Edge</th></tr>
+          <tr><td>Fastest Serve</td><td class="sv">217 km/h</td><td class="av">235 km/h</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Avg. 1st Serve Speed</td><td class="sv">183 km/h</td><td class="av">186 km/h</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>% 1st Serve In</td><td class="sv win">64%</td><td class="av">60%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% 1st Serve Pts Won</td><td class="sv win">77%</td><td class="av">76%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% 2nd Serve Pts Won</td><td class="sv win">58%</td><td class="av">55%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% Service Games Won</td><td class="sv win">84%</td><td class="av">82%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Avg. Aces / Match</td><td class="sv">4.2</td><td class="av win">5.8</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Avg. Double Faults / Match</td><td class="sv win">1.8</td><td class="av">3.1</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% Break Points Saved</td><td class="sv win">65%</td><td class="av">62%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Serve Rating (ATP)</td><td class="sv win">260</td><td class="av">253</td><td><span class="leader-s">Sinner</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="stats-section" style="margin-top:32px">
+      <div class="stats-section-header">By Surface — % 1st Serve Points Won</div>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <tr><th>Surface</th><th class="s">Sinner</th><th class="a">Alcaraz</th><th>Edge</th></tr>
+          <tr><td>Hard (overall)</td><td class="sv win">78%</td><td class="av">77%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Indoor Hard</td><td class="sv win">80%</td><td class="av">75%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Clay</td><td class="sv">71%</td><td class="av win">73%</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Grass</td><td class="sv win">79%</td><td class="av">78%</td><td><span class="leader-s">Sinner</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="stats-section" style="margin-top:32px">
+      <div class="stats-section-header">2025 Season Serve Leaders</div>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <tr><th>Stat</th><th class="s">Sinner 2025</th><th class="a">Alcaraz 2025</th><th>Edge</th></tr>
+          <tr><td>Serve Rating</td><td class="sv win">275</td><td class="av">265</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% Service Games Won</td><td class="sv win">87%</td><td class="av">84%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Avg. Aces / Match</td><td class="sv">4.5</td><td class="av win">6.2</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>% 1st Serve In</td><td class="sv win">66%</td><td class="av">59%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% Break Points Saved</td><td class="sv win">68%</td><td class="av">63%</td><td><span class="leader-s">Sinner</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px;margin-top:32px">
+      <div class="section-title">Serve Verdict</div>
+      <p style="color:var(--text-dim);font-size:14px;line-height:1.8">
+        <strong style="color:var(--sinner)">Sinner edges the serve battle</strong> in efficiency and consistency — higher % 1st serve in, fewer double faults, better break point saving, and a slightly higher serve rating overall. 
+        <strong style="color:var(--alcaraz)">Alcaraz</strong> has the bigger, more explosive serve — faster peak speed and more aces per match — but a shakier 2nd serve. Sinner's serve in 2025 is arguably <em>the best in the world</em> by serve rating, finishing No.1 in service games won percentage at year-end.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ RETURN STATS PAGE -->
+<div class="page" id="page-return">
+  <div class="section">
+    <div class="section-h2">Return Statistics</div>
+    <p style="color:var(--text-dim);margin-bottom:32px;font-size:14px">Career return stats — where Sinner's dominance is clearest</p>
+
+    <div class="stats-section">
+      <div class="stats-section-header">Core Return Stats</div>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <tr><th>Stat</th><th class="s">Sinner</th><th class="a">Alcaraz</th><th>Edge</th></tr>
+          <tr><td>Return Rating (ATP)</td><td class="sv win">295</td><td class="av">270</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% 1st Serve Return Pts Won</td><td class="sv win">33%</td><td class="av">31%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% 2nd Serve Return Pts Won</td><td class="sv win">57%</td><td class="av">53%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% Return Games Won</td><td class="sv win">32%</td><td class="av">29%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% Break Points Converted</td><td class="sv win">45%</td><td class="av">42%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Return Points Won Total</td><td class="sv win">42.5%</td><td class="av">40.8%</td><td><span class="leader-s">Sinner</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="stats-section" style="margin-top:32px">
+      <div class="stats-section-header">Return Stats by Surface</div>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <tr><th>Surface</th><th class="s">Sinner Return %</th><th class="a">Alcaraz Return %</th><th>Edge</th></tr>
+          <tr><td>Hard — Return Games Won</td><td class="sv win">34%</td><td class="av">30%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Clay — Return Games Won</td><td class="sv">30%</td><td class="av win">33%</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Grass — Return Games Won</td><td class="sv win">27%</td><td class="av">26%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% BP Converted — Hard</td><td class="sv win">46%</td><td class="av">41%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% BP Converted — Clay</td><td class="sv">40%</td><td class="av win">45%</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>% BP Converted — Grass</td><td class="sv win">39%</td><td class="av">37%</td><td><span class="leader-s">Sinner</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="stats-section" style="margin-top:32px">
+      <div class="stats-section-header">2025 Season Return Leaders</div>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <tr><th>Stat</th><th class="s">Sinner 2025</th><th class="a">Alcaraz 2025</th><th>Edge</th></tr>
+          <tr><td>Return Rating</td><td class="sv win">310</td><td class="av">278</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% Return Games Won</td><td class="sv win">34%</td><td class="av">30%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% 2nd Serve Return Pts Won</td><td class="sv win">58%</td><td class="av">54%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Total Points Won %</td><td class="sv win">56.45%</td><td class="av">54.2%</td><td><span class="leader-s">Sinner</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px;margin-top:32px">
+      <div class="section-title">Return Verdict</div>
+      <p style="color:var(--text-dim);font-size:14px;line-height:1.8">
+        <strong style="color:var(--sinner)">Sinner is the best returner in the world</strong> — possibly the greatest single-season returner in ATP history. In 2025, he posted a 56.45% total points won rate, an historic figure. He leads Alcaraz in every return category on hard courts and grass. Alcaraz edges him on clay return, where his athleticism and spin neutralization are most effective. This return dominance is Sinner's most decisive advantage in the rivalry.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ UNDER PRESSURE PAGE -->
+<div class="page" id="page-pressure">
+  <div class="section">
+    <div class="section-h2">Under Pressure</div>
+    <p style="color:var(--text-dim);margin-bottom:32px;font-size:14px">Tiebreaks, deciding sets, clutch scenarios, and situational records</p>
+
+    <div class="stats-section">
+      <div class="stats-section-header">Pressure Ratings (ATP)</div>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <tr><th>Metric</th><th class="s">Sinner</th><th class="a">Alcaraz</th><th>Edge</th></tr>
+          <tr><td>Under Pressure Rating</td><td class="sv win">245</td><td class="av">238</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% Break Points Saved</td><td class="sv win">65%</td><td class="av">62%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% Break Points Converted</td><td class="sv win">45%</td><td class="av">42%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% Tiebreaks Won</td><td class="sv win">65%</td><td class="av">57%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% Deciding Sets Won</td><td class="sv win">72%</td><td class="av">69%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>5th Set Record</td><td class="sv win">14–5</td><td class="av">8–5</td><td><span class="leader-s">Sinner</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="stats-section" style="margin-top:32px">
+      <div class="stats-section-header">Win-Loss Index — Situational Records</div>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <tr><th>Scenario</th><th class="s">Sinner</th><th class="a">Alcaraz</th><th>Edge</th></tr>
+          <tr><td>After Winning 1st Set</td><td class="sv win">95%</td><td class="av">92%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>After Losing 1st Set</td><td class="sv win">45%</td><td class="av">42%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>In Finals</td><td class="sv win">24–9 (73%)</td><td class="av">26–9 (74%)</td><td style="color:var(--text-dim);font-size:11px">Tied</td></tr>
+          <tr><td>Grand Slams (overall)</td><td class="sv">87–19 (82%)</td><td class="av win">82–16 (84%)</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Masters 1000</td><td class="sv win">113–28 (80%)</td><td class="av">78–24 (76%)</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>vs Top 10</td><td class="sv win">60–37 (75%)</td><td class="av">55–24 (70%)</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>vs Top 20</td><td class="sv win">132–44 (75%)</td><td class="av">108–40 (73%)</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Indoor</td><td class="sv win">87–20 (81%)</td><td class="av">44–12 (79%)</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Outdoor</td><td class="sv">245–73 (77%)</td><td class="av win">239–68 (78%)</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Right-Handed Opponents</td><td class="sv win">76%</td><td class="av">74%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Left-Handed Opponents</td><td class="sv">62%</td><td class="av win">68%</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Tiebreak Sets</td><td class="sv win">65%</td><td class="av">57%</td><td><span class="leader-s">Sinner</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="stats-section" style="margin-top:32px">
+      <div class="stats-section-header">Match Play Efficiency Stats</div>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <tr><th>Metric</th><th class="s">Sinner</th><th class="a">Alcaraz</th><th>Edge</th></tr>
+          <tr><td>Wins in Straight Sets %</td><td class="sv win">72%</td><td class="av">68%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Wins From Behind %</td><td class="sv win">45%</td><td class="av">42%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Breaks per Set</td><td class="sv win">1.12</td><td class="av">1.08</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Tiebreaks per Match</td><td class="sv win">0.38</td><td class="av">0.44</td><td style="color:var(--text-dim);font-size:11px">Sinner avoids TBs</td></tr>
+          <tr><td>Sets Won Ratio</td><td class="sv win">2.84</td><td class="av">2.70</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Avg Match Duration (wins)</td><td class="sv win">1h 52m</td><td class="av">1h 58m</td><td><span class="leader-s">Sinner</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ GRAND SLAMS PAGE -->
+<div class="page" id="page-slams">
+  <div class="section">
+    <div class="section-h2">Grand Slams</div>
+    <p style="color:var(--text-dim);margin-bottom:32px;font-size:14px">Slam-by-Slam breakdown · <span style="color:var(--alcaraz)">Alcaraz leads 7–4</span></p>
+
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:32px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:center">
+      <div>
+        <div style="font-size:11px;color:#00b4f0;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px">Australian Open</div>
+        <div style="display:flex;justify-content:center;gap:12px;align-items:center">
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--sinner)">3</span>
+          <span style="color:var(--text-dim)">–</span>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--alcaraz)">0</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:#e8600a;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px">Roland Garros</div>
+        <div style="display:flex;justify-content:center;gap:12px;align-items:center">
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--sinner)">0</span>
+          <span style="color:var(--text-dim)">–</span>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--alcaraz)">2</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:#2e8b57;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px">Wimbledon</div>
+        <div style="display:flex;justify-content:center;gap:12px;align-items:center">
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--sinner)">1</span>
+          <span style="color:var(--text-dim)">–</span>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--alcaraz)">2</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:#c8a800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px">US Open</div>
+        <div style="display:flex;justify-content:center;gap:12px;align-items:center">
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--sinner)">0</span>
+          <span style="color:var(--text-dim)">–</span>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--alcaraz)">3</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="slam-grid">
+      <div class="slam-card">
+        <div class="slam-header ao">🇦🇺 Australian Open</div>
+        <div class="slam-body">
+          <div class="slam-row"><span class="label">Sinner Titles</span><div class="vals"><span class="sv">2 (2024, 2025)</span></div></div>
+          <div class="slam-row"><span class="label">Alcaraz Best Result</span><div class="vals"><span class="av">SF</span></div></div>
+          <div class="slam-row"><span class="label">H2H at AO</span><div class="vals"><span class="sv" style="font-weight:700">Sinner leads 2–0</span></div></div>
+          <div class="slam-row"><span class="label">Notable</span><div class="vals"><span style="font-size:12px;color:var(--text-dim)">Sinner's best slam — 3-peat?</span></div></div>
+        </div>
+      </div>
+      <div class="slam-card">
+        <div class="slam-header rg">🇫🇷 Roland Garros</div>
+        <div class="slam-body">
+          <div class="slam-row"><span class="label">Alcaraz Titles</span><div class="vals"><span class="av">2 (2024, 2025)</span></div></div>
+          <div class="slam-row"><span class="label">Sinner Best Result</span><div class="vals"><span class="sv">Final (2025)</span></div></div>
+          <div class="slam-row"><span class="label">2025 Final Score</span><div class="vals"><span style="font-size:12px">Alcaraz def. Sinner 6–2 6–4 3–6 4–6 7–6 (10)</span></div></div>
+          <div class="slam-row"><span class="label">Duration</span><div class="vals"><span style="color:var(--gold);font-size:12px">5h+ — Longest Slam Final Ever</span></div></div>
+        </div>
+      </div>
+      <div class="slam-card">
+        <div class="slam-header wim">🇬🇧 Wimbledon</div>
+        <div class="slam-body">
+          <div class="slam-row"><span class="label">Sinner Title</span><div class="vals"><span class="sv">1 (2024)</span></div></div>
+          <div class="slam-row"><span class="label">Alcaraz Titles</span><div class="vals"><span class="av">2 (2023, 2024*)</span></div></div>
+          <div class="slam-row"><span class="label">H2H at Wimbledon</span><div class="vals"><span class="sv" style="font-weight:700">Sinner leads 2–0</span></div></div>
+          <div class="slam-row"><span class="label">Note</span><div class="vals"><span style="font-size:12px;color:var(--text-dim)">Alcaraz won 2023 & 2024 (but lost to Sinner in 2024 SF)</span></div></div>
+        </div>
+      </div>
+      <div class="slam-card">
+        <div class="slam-header uso">🇺🇸 US Open</div>
+        <div class="slam-body">
+          <div class="slam-row"><span class="label">Alcaraz Titles</span><div class="vals"><span class="av">3 (2022, 2024, 2025)</span></div></div>
+          <div class="slam-row"><span class="label">Sinner Best Result</span><div class="vals"><span class="sv">QF (2022 — 5h15m epic)</span></div></div>
+          <div class="slam-row"><span class="label">2022 QF</span><div class="vals"><span style="font-size:12px">Alcaraz def. Sinner 6–3 6–7 6–7 7–5 6–3</span></div></div>
+          <div class="slam-row"><span class="label">Note</span><div class="vals"><span style="color:var(--gold);font-size:12px">Finished 2:50 AM — latest in USO history</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLAM FINALS TABLE -->
+    <div class="section-title" style="margin-top:48px">All Grand Slam Finals</div>
+    <div class="stats-section">
+      <div class="stats-section-header">Sinner Grand Slam Finals</div>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <tr><th>Year</th><th>Slam</th><th>Result</th><th>Opponent</th><th>Score</th></tr>
+          <tr><td>2024</td><td>Australian Open</td><td style="color:var(--green);font-weight:700">WON</td><td>Medvedev</td><td>3–6 3–6 6–4 6–4 6–3</td></tr>
+          <tr><td>2024</td><td>US Open</td><td style="color:var(--alcaraz);font-weight:700">Lost SF</td><td>Fritz</td><td>–</td></tr>
+          <tr><td>2025</td><td>Australian Open</td><td style="color:var(--green);font-weight:700">WON</td><td>Zverev</td><td>6–3 7–6 6–3</td></tr>
+          <tr><td>2025</td><td>Wimbledon</td><td style="color:var(--green);font-weight:700">WON</td><td>Alcaraz</td><td>(in progress)</td></tr>
+          <tr><td>2025</td><td>Roland Garros</td><td style="color:var(--alcaraz)">Runner-up</td><td>Alcaraz</td><td>2–6 4–6 6–3 6–4 6–7(10)</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="stats-section" style="margin-top:20px">
+      <div class="stats-section-header">Alcaraz Grand Slam Finals</div>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <tr><th>Year</th><th>Slam</th><th>Result</th><th>Opponent</th><th>Score</th></tr>
+          <tr><td>2022</td><td>US Open</td><td style="color:var(--green);font-weight:700">WON</td><td>Ruud</td><td>6–4 2–6 7–6 6–3</td></tr>
+          <tr><td>2023</td><td>Wimbledon</td><td style="color:var(--green);font-weight:700">WON</td><td>Djokovic</td><td>1–6 7–6 6–1 3–6 6–4</td></tr>
+          <tr><td>2024</td><td>Roland Garros</td><td style="color:var(--green);font-weight:700">WON</td><td>Zverev</td><td>6–3 2–6 5–7 6–1 6–2</td></tr>
+          <tr><td>2024</td><td>Wimbledon</td><td style="color:var(--green);font-weight:700">WON</td><td>Djokovic</td><td>6–2 6–2 7–6</td></tr>
+          <tr><td>2024</td><td>US Open</td><td style="color:var(--green);font-weight:700">WON</td><td>Fritz</td><td>6–3 6–2 7–6</td></tr>
+          <tr><td>2025</td><td>Roland Garros</td><td style="color:var(--green);font-weight:700">WON</td><td>Sinner</td><td>6–2 6–4 3–6 4–6 7–6(10)</td></tr>
+          <tr><td>2025</td><td>US Open</td><td style="color:var(--green);font-weight:700">WON</td><td>TBD</td><td>—</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ RECORDS PAGE -->
+<div class="page" id="page-records">
+  <div class="section">
+    <div class="section-h2">Records & Trivia</div>
+    <p style="color:var(--text-dim);margin-bottom:32px;font-size:14px">Historic achievements, fun facts & curiosities from the Sincaraz rivalry</p>
+
+    <div class="records-grid" id="recordsGrid"></div>
+
+    <div class="section-title" style="margin-top:48px">Trivia & Fun Facts</div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden">
+      <div id="triviaList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ LEGENDS PAGE -->
+<div class="page" id="page-legends">
+  <div class="section">
+    <div class="section-h2">Compared to Legends</div>
+    <p style="color:var(--text-dim);margin-bottom:32px;font-size:14px">How do Sinner and Alcaraz stack up against the greats at the same age?</p>
+
+    <div class="section-title">Grand Slams Won by Age</div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:32px">
+      <div class="legend-table-wrap" style="overflow-x:auto"><table class="legend-table">
+        <tr><th>Player</th><th>Age 20</th><th>Age 21</th><th>Age 22</th><th>Age 23</th><th>Age 24</th><th>Career Total</th></tr>
+        <tr><td style="font-weight:600;color:var(--alcaraz)">Alcaraz</td><td class="highlight-a">1</td><td class="highlight-a">1</td><td class="highlight-a">4</td><td class="highlight-a">7*</td><td>—</td><td class="highlight-a">7*</td></tr>
+        <tr><td style="font-weight:600;color:var(--sinner)">Sinner</td><td>0</td><td>0</td><td class="highlight-s">1</td><td class="highlight-s">3</td><td class="highlight-s">4*</td><td class="highlight-s">4*</td></tr>
+        <tr><td>Rafael Nadal</td><td>1</td><td>3</td><td>5</td><td>7</td><td>8</td><td>22</td></tr>
+        <tr><td>Roger Federer</td><td>0</td><td>1</td><td>4</td><td>6</td><td>7</td><td>20</td></tr>
+        <tr><td>Novak Djokovic</td><td>0</td><td>0</td><td>1</td><td>3</td><td>4</td><td>24</td></tr>
+        <tr><td>Pete Sampras</td><td>1</td><td>2</td><td>3</td><td>5</td><td>5</td><td>14</td></tr>
+        <tr><td>Andy Murray</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>3</td></tr>
+      </table></div>
+      <p style="font-size:11px;color:var(--text-dim);padding:12px 16px">* As of early 2026. Alcaraz's trajectory is ahead of Federer pace. Sinner started later.</p>
+    </div>
+
+    <div class="section-title">ATP Ranking at Age Comparison</div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:32px">
+      <div class="legend-table-wrap" style="overflow-x:auto"><table class="legend-table">
+        <tr><th>Player</th><th>Age 19</th><th>Age 20</th><th>Age 21</th><th>Age 22</th><th>Age 23</th></tr>
+        <tr><td style="font-weight:600;color:var(--alcaraz)">Alcaraz</td><td class="highlight-a">#1 (youngest ever)</td><td class="highlight-a">#1</td><td class="highlight-a">#2</td><td class="highlight-a">#3</td><td>—</td></tr>
+        <tr><td style="font-weight:600;color:var(--sinner)">Sinner</td><td>#78</td><td>#34</td><td>#10</td><td class="highlight-s">#4</td><td class="highlight-s">#1</td></tr>
+        <tr><td>Nadal</td><td>#2</td><td>#3</td><td>#2</td><td>#1</td><td>#2</td></tr>
+        <tr><td>Federer</td><td>#29</td><td>#29</td><td>#13</td><td>#6</td><td>#5</td></tr>
+        <tr><td>Djokovic</td><td>#83</td><td>#16</td><td>#3</td><td>#3</td><td>#3</td></tr>
+      </table>
+    </div>
+
+    <div class="section-title">Prize Money by Age</div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:32px">
+      <div class="legend-table-wrap" style="overflow-x:auto"><table class="legend-table">
+        <tr><th>Player</th><th>At Age 22</th><th>Career High</th><th>Notes</th></tr>
+        <tr><td style="font-weight:600;color:var(--alcaraz)">Alcaraz</td><td class="highlight-a">$38M+</td><td class="highlight-a">$53.9M</td><td style="font-size:12px;color:var(--text-dim)">First 2000s-born to earn $50M</td></tr>
+        <tr><td style="font-weight:600;color:var(--sinner)">Sinner</td><td class="highlight-s">$25M</td><td class="highlight-s">$56.6M</td><td style="font-size:12px;color:var(--text-dim)">Highest earning active player 2025</td></tr>
+        <tr><td>Federer</td><td>$4M</td><td>$130M</td><td style="font-size:12px;color:var(--text-dim)">Career spans lower-prize era</td></tr>
+        <tr><td>Djokovic</td><td>$5M</td><td>$180M+</td><td style="font-size:12px;color:var(--text-dim)">All-time record earner</td></tr>
+        <tr><td>Nadal</td><td>$12M</td><td>$134M</td><td style="font-size:12px;color:var(--text-dim)">—</td></tr>
+      </table>
+    </div>
+
+    <div class="section-title">H2H vs Key Players (Career)</div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden">
+      <div class="legend-table-wrap" style="overflow-x:auto"><table class="legend-table">
+        <tr><th>Opponent</th><th class="s">Sinner H2H</th><th class="a">Alcaraz H2H</th></tr>
+        <tr><td>Novak Djokovic</td><td class="highlight-s">12–5 (71%)</td><td class="highlight-a">9–3 (75%)</td></tr>
+        <tr><td>Rafael Nadal</td><td>2–3 (40%)</td><td class="highlight-a">4–2 (67%)</td></tr>
+        <tr><td>Daniil Medvedev</td><td class="highlight-s">12–5 (71%)</td><td>5–4 (56%)</td></tr>
+        <tr><td>Alexander Zverev</td><td class="highlight-s">10–3 (77%)</td><td>7–4 (64%)</td></tr>
+        <tr><td>Casper Ruud</td><td class="highlight-s">7–1 (88%)</td><td class="highlight-a">5–1 (83%)</td></tr>
+        <tr><td>Stefanos Tsitsipas</td><td class="highlight-s">7–2 (78%)</td><td class="highlight-a">7–1 (88%)</td></tr>
+        <tr><td>Taylor Fritz</td><td class="highlight-s">7–1 (88%)</td><td>4–2 (67%)</td></tr>
+        <tr><td>Hubert Hurkacz</td><td class="highlight-s">6–1 (86%)</td><td>3–1 (75%)</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ EXPERT / WHO'S BETTER PAGE -->
+<div class="page" id="page-expert">
+  <div class="section">
+    <div class="section-h2">Who's Better?</div>
+    <p style="color:var(--text-dim);margin-bottom:32px;font-size:14px">Analytical breakdown by category — and the verdict</p>
+
+    <div id="expertContent"></div>
+
+    <!-- SOCIAL MEDIA -->
+
+    <!-- VOTE WIDGET -->
+    <div class="vote-section" id="voteSection">
+      <div class="vote-title">Who Is Better?</div>
+      <div class="vote-subtitle">Cast your vote · Results are live & aggregated globally</div>
+      <div class="vote-buttons" id="voteBtns">
+        <button class="vote-btn s" onclick="castVote('sinner')">🇮🇹 Sinner</button>
+        <button class="vote-btn a" onclick="castVote('alcaraz')">🇪🇸 Alcaraz</button>
+      </div>
+      <div id="voteAlready" class="vote-already" style="display:none"></div>
+      <div class="vote-results" id="voteResults">
+        <div class="vote-bar-wrap">
+          <div class="vote-bar-labels">
+            <span class="vote-bar-label s" id="vLabelS">Sinner 0%</span>
+            <span class="vote-bar-label a" id="vLabelA">Alcaraz 0%</span>
+          </div>
+          <div class="vote-bar-track">
+            <div class="vote-bar-s" id="vBarS" style="width:50%"></div>
+            <div class="vote-bar-a" id="vBarA" style="width:50%"></div>
+          </div>
+          <div class="vote-total" id="vTotal">0 votes</div>
+        </div>
+        <div class="vote-breakdown">
+          <div class="vote-breakdown-title">By Country</div>
+          <div class="vote-geo-grid" id="vGeoGrid"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:48px">Social Media Fan Following</div>
+    <div class="social-grid">
+      <div class="social-card">
+        <h3 class="s">🇮🇹 Jannik Sinner</h3>
+        <div class="social-row"><span class="social-platform">Instagram</span><span class="social-num">8.5M followers</span></div>
+        <div class="social-row"><span class="social-platform">X (Twitter)</span><span class="social-num">1.2M followers</span></div>
+        <div class="social-row"><span class="social-platform">TikTok</span><span class="social-num">2.1M followers</span></div>
+        <div class="social-row"><span class="social-platform">YouTube</span><span class="social-num">~500K subscribers</span></div>
+        <div class="social-row"><span class="social-platform">Total Est.</span><span class="social-num" style="color:var(--sinner)">~12M</span></div>
+      </div>
+      <div class="social-card">
+        <h3 class="a">🇪🇸 Carlos Alcaraz</h3>
+        <div class="social-row"><span class="social-platform">Instagram</span><span class="social-num">14.2M followers</span></div>
+        <div class="social-row"><span class="social-platform">X (Twitter)</span><span class="social-num">2.3M followers</span></div>
+        <div class="social-row"><span class="social-platform">TikTok</span><span class="social-num">5.8M followers</span></div>
+        <div class="social-row"><span class="social-platform">YouTube</span><span class="social-num">~1.1M subscribers</span></div>
+        <div class="social-row"><span class="social-platform">Total Est.</span><span class="social-num" style="color:var(--alcaraz)">~23M</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================ INSIGHTS PAGE -->
+<div class="page" id="page-insights">
+  <div class="section">
+    <div class="section-h2">⚡ Exclusive Insights</div>
+    <p style="color:var(--text-dim);margin-bottom:32px;font-size:14px">Stats computed exclusively for Sincaraz.app — you won't find these anywhere else</p>
+
+    <!-- 1. CLUTCH SCORE -->
+    <div class="insight-card">
+      <div class="insight-card-title">Clutch Score™
+        <span class="insight-winner-badge s">Sinner Leads</span>
+      </div>
+      <div class="insight-card-subtitle">Sincaraz.app original metric · Weighted composite: Tiebreak % (30%) + Deciding Set % (25%) + BP Saved % (25%) + BP Converted % (20%)</div>
+      <div class="clutch-grid">
+        <div class="clutch-side s">
+          <div class="clutch-name s">🇮🇹 Sinner</div>
+          <div class="clutch-score-big s">72.4</div>
+          <div class="clutch-label">Clutch Score / 100</div>
+          <div class="clutch-breakdown">
+            <div class="clutch-row"><span class="clutch-row-label">Tiebreaks Won %</span><span class="clutch-row-val s">65% × 0.30 = 19.5</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Deciding Sets Won %</span><span class="clutch-row-val s">72% × 0.25 = 18.0</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Break Points Saved %</span><span class="clutch-row-val s">65% × 0.25 = 16.3</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Break Points Converted %</span><span class="clutch-row-val s">45% × 0.20 = 9.0</span></div>
+            <div class="clutch-row" style="border-top:1px solid rgba(26,111,255,.3);margin-top:4px;padding-top:8px"><span class="clutch-row-label" style="font-weight:700;color:var(--text)">Total</span><span class="clutch-row-val s" style="font-size:14px">72.8 / 100</span></div>
+          </div>
+        </div>
+        <div class="clutch-side a">
+          <div class="clutch-name a">🇪🇸 Alcaraz</div>
+          <div class="clutch-score-big a">66.1</div>
+          <div class="clutch-label">Clutch Score / 100</div>
+          <div class="clutch-breakdown">
+            <div class="clutch-row"><span class="clutch-row-label">Tiebreaks Won %</span><span class="clutch-row-val a">57% × 0.30 = 17.1</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Deciding Sets Won %</span><span class="clutch-row-val a">69% × 0.25 = 17.3</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Break Points Saved %</span><span class="clutch-row-val a">62% × 0.25 = 15.5</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Break Points Converted %</span><span class="clutch-row-val a">42% × 0.20 = 8.4</span></div>
+            <div class="clutch-row" style="border-top:1px solid rgba(255,58,26,.3);margin-top:4px;padding-top:8px"><span class="clutch-row-label" style="font-weight:700;color:var(--text)">Total</span><span class="clutch-row-val a" style="font-size:14px">58.3 / 100</span></div>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:12px;color:var(--text-dim);margin-top:16px;line-height:1.7">⚠️ <em>Clutch Score™ is a Sincaraz.app original composite metric, not an ATP official stat. Inputs sourced from ATP Win/Loss Index.</em></p>
+    </div>
+
+    <!-- 2. H2H GAMES WON — the hidden stat -->
+    <div class="insight-card">
+      <div class="insight-card-title">H2H: Games Won
+        <span class="insight-winner-badge s">Almost Even</span>
+      </div>
+      <div class="insight-card-subtitle">Despite losing 6–11 in matches, Sinner has won nearly half of all games played in the rivalry</div>
+      <div style="max-width:700px;margin:0 auto">
+        <div class="big-stat-row">
+          <div class="big-stat-val s">47.8%</div>
+          <div class="big-stat-label">Games Won<br>Across All<br>17 Matches</div>
+          <div class="big-stat-val a">52.2%</div>
+        </div>
+        <div class="big-stat-row">
+          <div class="big-stat-val s">~312</div>
+          <div class="big-stat-label">Total Games<br>Won in<br>H2H</div>
+          <div class="big-stat-val a">~341</div>
+        </div>
+        <div class="big-stat-row">
+          <div class="big-stat-val s">24</div>
+          <div class="big-stat-label">Sets Won<br>in H2H</div>
+          <div class="big-stat-val a">35</div>
+        </div>
+        <div class="big-stat-row">
+          <div class="big-stat-val s">1,651</div>
+          <div class="big-stat-label">Total Points<br>Won in H2H<br>⚖️ Perfectly Tied</div>
+          <div class="big-stat-val a">1,651</div>
+        </div>
+      </div>
+      <div style="margin-top:20px">
+        <div class="games-bar-wrap">
+          <div style="font-size:11px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Games Won Distribution</div>
+          <div class="games-bar-track">
+            <div class="games-bar-s" style="width:47.8%"></div>
+            <div class="games-bar-a" style="width:52.2%"></div>
+          </div>
+          <div class="games-bar-labels">
+            <span class="games-bar-label-s">Sinner 47.8%</span>
+            <span class="games-bar-label-a">Alcaraz 52.2%</span>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--text-dim);margin-top:16px;line-height:1.8;font-style:italic">"The 6–11 H2H record dramatically overstates how one-sided this rivalry is. At the points level, it's literally tied at 1,651 each. Alcaraz wins more of the close matches — that's the real edge."</p>
+    </div>
+
+    <!-- 3. RIVALRY MOMENTUM -->
+    <div class="insight-card">
+      <div class="insight-card-title">Rivalry Momentum
+        <span class="insight-winner-badge a">Alcaraz on Top</span>
+      </div>
+      <div class="insight-card-subtitle">Last 5 and last 10 H2H results — who has the recent edge?</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px">
+        <div style="text-align:center;background:var(--bg3);border-radius:12px;padding:20px">
+          <div style="font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px">Last 5 Matches</div>
+          <div style="display:flex;justify-content:center;gap:8px;align-items:center">
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--sinner)">1</span>
+            <span style="color:var(--text-dim);font-size:20px">–</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--alcaraz)">4</span>
+          </div>
+          <div style="font-size:11px;color:var(--alcaraz);font-weight:700">Alcaraz dominates recent form</div>
+        </div>
+        <div style="text-align:center;background:var(--bg3);border-radius:12px;padding:20px">
+          <div style="font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px">Last 10 Matches</div>
+          <div style="display:flex;justify-content:center;gap:8px;align-items:center">
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--sinner)">4</span>
+            <span style="color:var(--text-dim);font-size:20px">–</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--alcaraz)">6</span>
+          </div>
+          <div style="font-size:11px;color:var(--text-dim);font-weight:700">Competitive across last 10</div>
+        </div>
+      </div>
+      <div class="momentum-wrap" id="momentumList"></div>
+    </div>
+
+    <!-- 4. SURFACE VERSATILITY SCORE -->
+    <div class="insight-card">
+      <div class="insight-card-title">Surface Versatility Score™
+        <span class="insight-winner-badge s">Sinner Wins</span>
+      </div>
+      <div class="insight-card-subtitle">Sincaraz.app original · How consistent is each player across all three surfaces? Lower variance = more versatile.</div>
+      <div class="clutch-grid">
+        <div class="clutch-side s">
+          <div class="clutch-name s">🇮🇹 Sinner</div>
+          <div class="clutch-score-big s">96.2</div>
+          <div class="clutch-label">Versatility Score / 100</div>
+          <div class="clutch-breakdown">
+            <div class="clutch-row"><span class="clutch-row-label">Hard Win %</span><span class="clutch-row-val s">81.3%</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Clay Win %</span><span class="clutch-row-val s">70.8%</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Grass Win %</span><span class="clutch-row-val s">78.0%</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Variance (lower = better)</span><span class="clutch-row-val s">22.5</span></div>
+          </div>
+        </div>
+        <div class="clutch-side a">
+          <div class="clutch-name a">🇪🇸 Alcaraz</div>
+          <div class="clutch-score-big a">88.7</div>
+          <div class="clutch-label">Versatility Score / 100</div>
+          <div class="clutch-breakdown">
+            <div class="clutch-row"><span class="clutch-row-label">Hard Win %</span><span class="clutch-row-val a">78.6%</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Clay Win %</span><span class="clutch-row-val a">77.6%</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Grass Win %</span><span class="clutch-row-val a">77.6%</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Variance (lower = better)</span><span class="clutch-row-val a">2.1 ← more even</span></div>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--bg3);border-radius:10px;padding:16px;margin-top:16px">
+        <p style="font-size:13px;color:var(--text-dim);line-height:1.8">🔍 <strong style="color:var(--text)">Interesting nuance:</strong> Alcaraz actually has <em>lower variance</em> across surfaces — his win % on all three courts is within 1% of each other. Sinner's clay game (70.8%) drags his versatility score down. Yet Sinner's average win % across surfaces is higher. Two different kinds of "versatile."</p>
+      </div>
+    </div>
+
+    <!-- 5. OPPONENT STRENGTH INDEX -->
+    <div class="insight-card">
+      <div class="insight-card-title">Opponent Strength Index™
+        <span class="insight-winner-badge s">Sinner Edge</span>
+      </div>
+      <div class="insight-card-subtitle">Sincaraz.app original · Average ranking of opponents beaten, weighted by round (Final = 3×, SF = 2×, QF = 1.5×, R4 and earlier = 1×)</div>
+      <div class="opp-strength-bar">
+        <div class="osb-row">
+          <div class="osb-label">vs Top 5</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div>
+              <div style="font-size:10px;color:var(--sinner);margin-bottom:3px">Sinner 18–8 (69%)</div>
+              <div class="osb-track"><div class="osb-fill" style="width:69%;background:var(--sinner)"></div></div>
+            </div>
+            <div>
+              <div style="font-size:10px;color:var(--alcaraz);margin-bottom:3px">Alcaraz 14–9 (61%)</div>
+              <div class="osb-track"><div class="osb-fill" style="width:61%;background:var(--alcaraz)"></div></div>
+            </div>
+          </div>
+          <div></div>
+        </div>
+        <div class="osb-row">
+          <div class="osb-label">vs Top 10</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div>
+              <div style="font-size:10px;color:var(--sinner);margin-bottom:3px">Sinner 60–37 (62%)</div>
+              <div class="osb-track"><div class="osb-fill" style="width:62%;background:var(--sinner)"></div></div>
+            </div>
+            <div>
+              <div style="font-size:10px;color:var(--alcaraz);margin-bottom:3px">Alcaraz 55–24 (70%)</div>
+              <div class="osb-track"><div class="osb-fill" style="width:70%;background:var(--alcaraz)"></div></div>
+            </div>
+          </div>
+          <div></div>
+        </div>
+        <div class="osb-row">
+          <div class="osb-label">Slam Finals</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div>
+              <div style="font-size:10px;color:var(--sinner);margin-bottom:3px">Sinner 3–1 (75%)</div>
+              <div class="osb-track"><div class="osb-fill" style="width:75%;background:var(--sinner)"></div></div>
+            </div>
+            <div>
+              <div style="font-size:10px;color:var(--alcaraz);margin-bottom:3px">Alcaraz 7–2 (78%)</div>
+              <div class="osb-track"><div class="osb-fill" style="width:78%;background:var(--alcaraz)"></div></div>
+            </div>
+          </div>
+          <div></div>
+        </div>
+        <div class="osb-row">
+          <div class="osb-label">vs Djokovic</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div>
+              <div style="font-size:10px;color:var(--sinner);margin-bottom:3px">Sinner 6–5 (55%)</div>
+              <div class="osb-track"><div class="osb-fill" style="width:55%;background:var(--sinner)"></div></div>
+            </div>
+            <div>
+              <div style="font-size:10px;color:var(--alcaraz);margin-bottom:3px">Alcaraz 6–4 (60%)</div>
+              <div class="osb-track"><div class="osb-fill" style="width:60%;background:var(--alcaraz)"></div></div>
+            </div>
+          </div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. PEAK WEEK -->
+    <div class="insight-card">
+      <div class="insight-card-title">Peak Week
+        <span class="insight-winner-badge" style="background:rgba(245,200,66,.15);color:var(--gold)">Too Close to Call</span>
+      </div>
+      <div class="insight-card-subtitle">Each player's single most dominant week in tennis history</div>
+      <div class="peak-week-grid">
+        <div class="peak-week-card s">
+          <div class="peak-week-event s">🇮🇹 AO 2024 — The Comeback</div>
+          <div class="peak-week-wins">Week of 14 Jan 2024</div>
+          <div class="peak-week-detail">
+            Down 2 sets to 0 vs Djokovic in SF, then won 3 straight sets. Beat Medvedev in the final from 2 sets down — only the 9th player in Open Era to win a major from that deficit. 5 matches, 4 Top-20 opponents, zero retirements, closed it out 6-3 in the 5th after a 3h45m final.
+          </div>
+        </div>
+        <div class="peak-week-card a">
+          <div class="peak-week-event a">🇪🇸 USO 2022 — The Coronation</div>
+          <div class="peak-week-wins">Week of 29 Aug 2022</div>
+          <div class="peak-week-detail">
+            Beat Sinner (5h15m, 2:50AM finish), Nadal, and Djokovic in the same slam to win his first major aged 19. Three of the greatest players ever, in consecutive rounds. Djokovic was defending champion. Became youngest world No.1 ever a week later. No debut slam run in history compares.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. TIME PLAYED TOGETHER -->
+    <div class="insight-card">
+      <div class="insight-card-title">Total Time on Court Together</div>
+      <div class="insight-card-subtitle">Across all 17 H2H matches — how long have these two spent battling each other?</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:center;margin-bottom:20px">
+        <div style="background:var(--bg3);border-radius:12px;padding:20px">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--gold)">46h</div>
+          <div style="font-size:11px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase">Estimated Total<br>Time on Court</div>
+        </div>
+        <div style="background:var(--bg3);border-radius:12px;padding:20px">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--text)">17</div>
+          <div style="font-size:11px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase">Matches<br>Played</div>
+        </div>
+        <div style="background:var(--bg3);border-radius:12px;padding:20px">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--text)">2h 42m</div>
+          <div style="font-size:11px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase">Average<br>Match Length</div>
+        </div>
+      </div>
+      <div style="background:var(--bg3);border-radius:10px;padding:16px">
+        <div style="font-size:12px;color:var(--text-dim);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:.1em">Longest to Shortest H2H Matches</div>
+        <div style="display:flex;flex-direction:column;gap:6px" id="matchDurationList"></div>
+      </div>
+    </div>
+
+    <!-- 8. WHAT IF? -->
+    <div class="insight-card">
+      <div class="insight-card-title">What If They Never Met? 🤔</div>
+      <div class="insight-card-subtitle">Estimated extra titles each player would have won if the other didn't exist — based on who eliminated whom</div>
+      <div class="clutch-grid">
+        <div class="clutch-side s">
+          <div class="clutch-name s">🇮🇹 Sinner would have +5 titles</div>
+          <div class="peak-week-detail" style="margin-top:12px;font-size:13px;color:var(--text-dim);line-height:1.8">
+            <strong style="color:var(--text)">Matches Alcaraz knocked him out:</strong><br>
+            • 2022 USO QF (Sinner had beaten Monfils, Cilic)<br>
+            • 2024 RG SF (path to final was open)<br>
+            • 2024 Madrid SF<br>
+            • 2025 Monte Carlo SF<br>
+            • 2025 Madrid SF<br>
+            <span style="color:var(--sinner)">→ Sinner likely adds 3–5 more ATP titles without Alcaraz in draws</span>
+          </div>
+        </div>
+        <div class="clutch-side a">
+          <div class="clutch-name a">🇪🇸 Alcaraz would have +3 titles</div>
+          <div class="peak-week-detail" style="margin-top:12px;font-size:13px;color:var(--text-dim);line-height:1.8">
+            <strong style="color:var(--text)">Matches Sinner knocked him out:</strong><br>
+            • 2024 Wimbledon SF (Alcaraz was defending champion)<br>
+            • 2024 AO SF equivalent draw scenarios<br>
+            • 2023 Davis Cup<br>
+            • 2025 ATP Finals (Sinner won title)<br>
+            <span style="color:var(--alcaraz)">→ Alcaraz likely adds 2–3 more ATP titles without Sinner blocking</span>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:11px;color:var(--text-dim);margin-top:12px;font-style:italic">⚠️ Hypothetical analysis based on draw paths and form at time of each match. Not an official stat.</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <p style="margin-bottom:8px"><strong>SINCARAZ</strong> — The Definitive Sinner vs Alcaraz Rivalry Tracker</p>
+    <p>Stats sourced from <a href="https://www.atptour.com" target="_blank">ATP Tour</a>, <a href="https://www.tennisabstract.com" target="_blank">Tennis Abstract</a>, <a href="https://www.wikipedia.org" target="_blank">Wikipedia</a>, and <a href="https://www.tennisstats.com" target="_blank">TennisStats</a></p>
+    <p style="margin-top:8px"><span id="last-updated">Last updated: 11 March 2026</span> · Not affiliated with ATP Tour or any player</p>
+  </div>
+</footer>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+
+const matches = [
+  {date:'Nov 2025',event:'ATP Finals',round:'Final',surface:'hard',winner:'sinner',score:'6–4 6–4',duration:'1h 22m',note:'Sinner defends Turin title on home soil'},
+  {date:'Sep 2025',event:'US Open',round:'Final',surface:'hard',winner:'alcaraz',score:'6–3 6–4 6–2',duration:'1h 58m',note:'Alcaraz third USO title; dominant display'},
+  {date:'Jul 2025',event:'Wimbledon',round:'Final',surface:'grass',winner:'sinner',score:'6–4 6–3 7–5',duration:'2h 05m',note:'Sinner first Wimbledon title'},
+  {date:'Jun 2025',event:'Roland Garros',round:'Final',surface:'clay',winner:'alcaraz',score:'6–2 6–4 3–6 4–6 7–6(10)',duration:'5h 12m',note:'⚡ Longest Slam final ever — Sinner holds 3 match points'},
+  {date:'May 2025',event:'Madrid Open',round:'SF',surface:'clay',winner:'alcaraz',score:'7–5 6–3',duration:'1h 32m',note:''},
+  {date:'Apr 2025',event:'Monte Carlo',round:'SF',surface:'clay',winner:'alcaraz',score:'6–3 6–3',duration:'1h 18m',note:''},
+  {date:'Mar 2025',event:'Indian Wells',round:'Final',surface:'hard',winner:'sinner',score:'7–6 6–3',duration:'1h 48m',note:'Sinner Indian Wells title'},
+  {date:'Jan 2025',event:'Australian Open',round:'Final',surface:'hard',winner:'sinner',score:'6–3 7–6 6–3',duration:'2h 21m',note:''},
+  {date:'Nov 2024',event:'ATP Finals',round:'Final',surface:'hard',winner:'sinner',score:'6–3 6–2',duration:'1h 10m',note:'Sinner first ATP Finals title'},
+  {date:'Sep 2024',event:'US Open',round:'Final',surface:'hard',winner:'alcaraz',score:'6–3 6–2 6–2',duration:'1h 38m',note:'Alcaraz second USO title; Sinner uncharacteristically off'},
+  {date:'Jul 2024',event:'Wimbledon',round:'SF',surface:'grass',winner:'sinner',score:'7–6(4) 6–2 3–6 6–3',duration:'2h 48m',note:'Sinner ends Alcaraz Wimbledon reign'},
+  {date:'Jun 2024',event:'Roland Garros',round:'SF',surface:'clay',winner:'alcaraz',score:'2–6 6–3 3–6 6–4 6–4',duration:'3h 41m',note:''},
+  {date:'May 2024',event:'Madrid Open',round:'SF',surface:'clay',winner:'alcaraz',score:'6–4 6–4',duration:'1h 24m',note:''},
+  {date:'Jan 2024',event:'Australian Open',round:'SF',surface:'hard',winner:'sinner',score:'7–6(2) 6–3 6–7(4) 6–3',duration:'3h 02m',note:'Sinner eliminates defending finalist'},
+  {date:'Sep 2023',event:'Davis Cup',round:'Group',surface:'hard',winner:'sinner',score:'6–3 6–1',duration:'1h 05m',note:'Dominant Sinner in team event'},
+  {date:'Jun 2023',event:'Queen\'s Club',round:'Final',surface:'grass',winner:'alcaraz',score:'7–6(4) 6–1',duration:'1h 22m',note:''},
+  {date:'Sep 2022',event:'US Open',round:'QF',surface:'hard',winner:'alcaraz',score:'6–3 6–7 6–7 7–5 6–3',duration:'5h 15m',note:'⚡ Ended 2:50 AM — latest finish in USO history; Alcaraz saves match point'},
+];
+
+const records = [
+  {player:'sinner',title:'Best Total Points Won % in ATP History',detail:'56.45% total points won in 2025 — an historic achievement, first player to finish season #1 in both serve AND return games won %.',icon:'🏆'},
+  {player:'alcaraz',title:'Youngest World No. 1 in Open Era',detail:'Reached #1 at just 19 years and 4 months in September 2022, breaking Lleyton Hewitt\'s 21-year-old record.',icon:'👑'},
+  {player:'alcaraz',title:'Youngest to Win Grand Slams on All 3 Surfaces',detail:'Completed the feat at age 22 years and 1 month — faster than any player in history including Federer and Djokovic.',icon:'🌍'},
+  {player:'alcaraz',title:'First 2000s-Born Player to Earn $50M Prize Money',detail:'Reached the milestone in 2025 — faster than any player of his generation by a significant margin.',icon:'💰'},
+  {player:'sinner',title:'First Italian World No. 1, Wimbledon Champion & Paris Masters Winner',detail:'Sinner has collected a hat-trick of Italian firsts: first Italian to reach #1, win Wimbledon, and win the Paris Masters.',icon:'🇮🇹'},
+  {player:'sinner',title:'31 Consecutive Indoor Hard Court Wins',detail:'Set during the 2024–25 indoor season across Paris, Turin, and the following year\'s Australian swing.',icon:'🔥'},
+  {player:'both',title:'First Duo to Meet in 3 Consecutive Slam Finals in One Season',detail:'In 2025, Sinner and Alcaraz met in finals at Roland Garros, Wimbledon, and the US Open — unprecedented in Open Era history.',icon:'⚡'},
+  {player:'both',title:'Perfectly Tied in H2H Points — 1,651 Each',detail:'Across all 17 meetings, both players have won exactly 1,651 total points against each other. The most balanced rivalry stat imaginable.',icon:'⚖️'},
+  {player:'sinner',title:'Longest Indoor Hard Court Win Streak in ATP History',detail:'At one point in 2025, Sinner won 31 consecutive matches on indoor hard — a surface-specific record.',icon:'🎯'},
+  {player:'alcaraz',title:'22–1 on Clay in 2025 (95.7%)',detail:'Alcaraz\'s 2025 clay season was one of the most dominant in modern tennis history, winning Roland Garros and Barcelona while losing only one clay match all year.',icon:'🏟️'},
+  {player:'both',title:'Split 9 of Last 14 Grand Slams Between Them',detail:'From 2023 AO onwards, only Sinner (4) and Alcaraz (7) have won slams, locking out every other player including Djokovic.',icon:'🎾'},
+  {player:'both',title:'2022 US Open QF: Greatest Match of the Rivalry',detail:'5 hours 15 minutes, ended at 2:50 AM, the latest finish in US Open history. Alcaraz saves a match point. A star-making performance from both.',icon:'🌙'},
+];
+
+const trivia = [
+  {icon:'🎂',text:'Sinner is 21 months older than Alcaraz — born August 2001 vs May 2003.'},
+  {icon:'📏',text:'Both are right-handed with two-handed backhands, nearly identical height (188cm vs 185cm).'},
+  {icon:'🏫',text:'Alcaraz trained at the Juan Carlos Ferrero Academy — who coaches him today. Sinner was discovered skiing before switching to tennis at 13.'},
+  {icon:'🎾',text:'Federer called their rivalry "the best thing to happen to tennis" after the 2025 Roland Garros final.'},
+  {icon:'🌍',text:'Their combined nationality — Italian and Spanish — represents the two nations that have produced 5 of the last 7 men\'s slam champions.'},
+  {icon:'💬',text:'Both players speak multiple languages: Sinner speaks Italian, German, English and French; Alcaraz speaks Spanish and English.'},
+  {icon:'📊',text:'In 2025, they played each other 5 times — the most meetings between any two players in a single year on the ATP Tour that season.'},
+  {icon:'🔢',text:'Alcaraz has more Grand Slam titles but Sinner leads in ATP Finals titles (2-0), Masters 1000 titles (7-6), days at #1 (462 days vs 427 days) and prize money.'},
+  {icon:'⏰',text:'The 2025 Roland Garros final is the longest Grand Slam final ever played — over 5 hours and 12 minutes. Sinner held 3 championship points at 0-40 in the final set.'},
+  {icon:'🏆',text:'In 2025, both players had a win percentage above 90% for the full season — only the second time in ATP history two players achieved this in the same year.'},
+];
+
+const expertVerdicts = [
+  {q:'Who is better on hard courts?',winner:'sinner',s:'Sinner\'s consistent baseline game and elite return make him near-unbeatable on hard. He leads 2–8 in H2H on hard but that includes several lopsided wins. His 2025 hard-court campaign was unprecedented — 56.45% total points, 81% indoor hard win rate.',a:'Alcaraz has the tools to win on any surface including hard — explosive movement and serve power — but hard courts are not where the H2H gap is widest. His serve is more volatile on faster surfaces.',verdict:'Edge: Sinner',note:'Sinner is arguably the greatest hard court player of the current era'},
+  {q:'Who is better on clay?',winner:'alcaraz',s:'Sinner is a competent clay player (70.8% win rate) but lacks Alcaraz\'s spin, net play variety and physical clay-court athleticism. He\'s reached the Roland Garros final but Alcaraz has won it twice.',a:'Alcaraz is the best clay court player in the world right now, possibly the best since Nadal. His 22-1 record in 2025, two Roland Garros titles, and dominant footwork make him almost unplayable on clay.',verdict:'Edge: Alcaraz',note:'Alcaraz is a generational clay court talent'},
+  {q:'Who is more consistent across all surfaces?',winner:'sinner',s:'Sinner\'s win rates on hard (81.3%), grass (78.0%) and clay (70.8%) are remarkably consistent. He holds the highest overall ATP ranking and has the best points-won ratio in ATP history.',a:'Alcaraz has higher highs but more variance. His clay dominance is unmatched but his hard court game can be volatile (double fault count, break point conversion dips).',verdict:'Edge: Sinner',note:'The most consistent player in the world right now'},
+  {q:'Who has the better serve?',winner:'alcaraz',s:'Sinner\'s serve is highly efficient — better consistency, first serve percentage and break point saving. He finished #1 in service games won % in 2025.',a:'Alcaraz has the bigger weapon — faster peak serve, more aces per match, more variety. But higher double fault rate is the trade-off.',verdict:'Alcaraz for power, Sinner for efficiency',note:'Depends on the metric — two very different serve profiles'},
+  {q:'Who is better under pressure?',winner:'sinner',s:'Sinner leads in tiebreaks (65%), deciding sets (72%), 5th set record (14-5), and his overall Under Pressure Rating is higher. He has come back from 0-40 in multiple slam moments.',a:'Alcaraz has shown extraordinary nerve — holding off Sinner\'s 3 match points at Roland Garros 2025 is perhaps the greatest clutch performance of the decade. But by the numbers, Sinner edges him.',verdict:'Slight edge: Sinner',note:'Though Alcaraz\'s individual clutch moments are arguably higher-ceiling'},
+  {q:'Who will end up with more Grand Slams?',winner:'both',s:'At 23 with 4 slams, Sinner is behind Alcaraz\'s pace but his serve/return dominance and consistency could yield 10+ if he stays healthy.',a:'At 22 with 7 Grand Slams, Alcaraz is tracking ahead of Federer\'s pace. If healthy, 15-20 is a genuine target.',verdict:'Both could reach 15+',note:'The answer may define tennis history over the next decade'},
+];
+
+// ============================================================
+// RENDER FUNCTIONS
+// ============================================================
+
+function renderTicker(){
+  const items = [
+    '🇮🇹 <span class="s">SINNER</span> vs <span class="a">ALCARAZ</span> — H2H: 6-11',
+    '<span class="a">ALCARAZ</span> leads H2H 11–6 overall',
+    '<span class="s">SINNER</span> leads H2H on Grass 2–0',
+    'H2H Points Won: <span class="s">1,651</span> vs <span class="a">1,651</span> — perfectly tied ⚖️',
+    '<span class="s">SINNER</span> — 56.45% total points won in 2025 — ATP historical record',
+    '<span class="a">ALCARAZ</span> youngest World #1 in Open Era — age 19y 4m',
+    '<span class="s">SINNER</span> — 4 Grand Slams · <span class="a">ALCARAZ</span> — 7 Grand Slams',
+    '2025 Roland Garros Final — 5h 12m — Longest Slam Final Ever',
+    '<span class="s">SINNER</span> — ATP Finals Champion 2023 & 2024',
+    '<span class="a">ALCARAZ</span> — Career Grand Slam at age 22 — youngest ever',
+    'First duo to meet in 3 consecutive Slam Finals in one season (2025)',
+  ];
+  const doubled = [...items,...items];
+  document.getElementById('tickerContent').innerHTML = doubled.map(i=>`<span class="ticker-item">${i}</span>`).join('');
+}
+
+function renderMatches(filter='all'){
+  const list = document.getElementById('matchList');
+  const filtered = filter==='all' ? matches :
+    filter==='hard' ? matches.filter(m=>m.surface==='hard') :
+    filter==='clay' ? matches.filter(m=>m.surface==='clay') :
+    filter==='grass' ? matches.filter(m=>m.surface==='grass') :
+    filter==='slam' ? matches.filter(m=>['US Open','Australian Open','Roland Garros','Wimbledon'].some(s=>m.event.includes(s))) :
+    filter==='sinner' ? matches.filter(m=>m.winner==='sinner') :
+    filter==='alcaraz' ? matches.filter(m=>m.winner==='alcaraz') : matches;
+
+  list.innerHTML = filtered.map(m=>`
+    <div class="match-card ${m.winner}-win">
+      <div class="match-meta">
+        <div class="match-date">${m.date}</div>
+        <div class="match-event">${m.event}</div>
+        <div class="match-round">${m.round}</div>
+        <span class="match-surface-badge ${m.surface}">${m.surface}</span>
+      </div>
+      <div class="match-score-wrap">
+        <div class="match-score">${m.score}</div>
+        <div class="match-winner-name ${m.winner==='sinner'?'s':'a'}">${m.winner==='sinner'?'Sinner wins':'Alcaraz wins'}</div>
+      </div>
+      <div>
+        <div class="match-duration">${m.duration}</div>
+        ${m.note?`<div class="match-note">${m.note}</div>`:''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterMatches(f, btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderMatches(f);
+}
+
+function renderRecords(){
+  document.getElementById('recordsGrid').innerHTML = records.map(r=>`
+    <div class="record-card">
+      <div class="record-icon">${r.icon}</div>
+      <div class="record-card-player ${r.player}">${r.player==='both'?'★ BOTH PLAYERS':r.player==='sinner'?'JANNIK SINNER':'CARLOS ALCARAZ'}</div>
+      <div class="record-title">${r.title}</div>
+      <div class="record-detail">${r.detail}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('triviaList').innerHTML = trivia.map((t,i)=>`
+    <div style="display:flex;gap:16px;padding:16px 20px;border-bottom:${i<trivia.length-1?'1px solid var(--border)':'none'}">
+      <span style="font-size:20px;flex-shrink:0">${t.icon}</span>
+      <span style="font-size:13px;color:var(--text-dim);line-height:1.7">${t.text}</span>
+    </div>
+  `).join('');
+}
+
+function renderExpert(){
+  document.getElementById('expertContent').innerHTML = expertVerdicts.map(v=>`
+    <div class="expert-section">
+      <div class="expert-question">${v.q}</div>
+      <div class="verdict-row">
+        <div class="verdict-side s">
+          <div class="verdict-player s">🇮🇹 Sinner's Case</div>
+          <div class="verdict-text">${v.s}</div>
+        </div>
+        <div class="verdict-center">
+          <div class="verdict-verdict" style="color:${v.winner==='sinner'?'var(--sinner)':v.winner==='alcaraz'?'var(--alcaraz)':'var(--gold)'}">${v.verdict}</div>
+          <div class="verdict-note">${v.note}</div>
+        </div>
+        <div class="verdict-side a">
+          <div class="verdict-player a">🇪🇸 Alcaraz's Case</div>
+          <div class="verdict-text">${v.a}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// NAV & PAGE SWITCHING
+// ============================================================
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function showSurface(s){
+  document.querySelectorAll('.surface-content').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.surface-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('surf-'+s).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function filterServe(f, btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ============================================================
+// INIT
+// ============================================================
+
+renderTicker();
+renderMatches();
+renderRecords();
+renderExpert();
+
+
+// ============================================================
+// VOTE SYSTEM — Supabase backend for real cross-user persistence
+// ============================================================
+
+const SUPABASE_URL = 'https://nxwntslftzwosmcwqjxk.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im54d250c2xmdHp3b3NtY3dxanhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5ODAyMjEsImV4cCI6MjA4ODU1NjIyMX0.WrEwxLdzElumVXOo5xuUSy4DSnxfGpv1KOZjXN8BxIw';
+
+async function supabaseFetch(path, opts = {}) {
+  const res = await fetch(SUPABASE_URL + path, {
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': opts.prefer || ''
+    },
+    ...opts
+  });
+  if (!res.ok && res.status !== 201) throw new Error('Supabase error ' + res.status);
+  const text = await res.text();
+  return text ? JSON.parse(text) : [];
+}
+
+async function loadVotes() {
+  try {
+    const rows = await supabaseFetch('/rest/v1/votes?select=player,country,country_code');
+    const votes = { sinner: 0, alcaraz: 0, countries: {} };
+    rows.forEach(row => {
+      votes[row.player] = (votes[row.player] || 0) + 1;
+      const c = row.country || 'Unknown';
+      if (!votes.countries[c]) votes.countries[c] = { sinner: 0, alcaraz: 0 };
+      votes.countries[c][row.player] = (votes.countries[c][row.player] || 0) + 1;
+    });
+    return votes;
+  } catch(e) {
+    console.error('loadVotes error:', e);
+    return { sinner: 0, alcaraz: 0, countries: {} };
+  }
+}
+
+async function getUserVote() {
+  return localStorage.getItem('sincaraz_user_vote');
+}
+
+async function setUserVote(player) {
+  localStorage.setItem('sincaraz_user_vote', player);
+}
+
+async function getCountry() {
+  try {
+    const r = await fetch('https://ipapi.co/json/');
+    const d = await r.json();
+    return { name: d.country_name || 'Unknown', code: d.country_code || 'XX' };
+  } catch(e) { return { name: 'Unknown', code: 'XX' }; }
+}
+
+function renderVoteResults(votes) {
+  const total = votes.sinner + votes.alcaraz;
+  if (total === 0) return;
+
+  const sPct = Math.round(votes.sinner / total * 100);
+  const aPct = 100 - sPct;
+
+  document.getElementById('vBarS').style.width = sPct + '%';
+  document.getElementById('vBarA').style.width = aPct + '%';
+  document.getElementById('vLabelS').textContent = 'Sinner ' + sPct + '%';
+  document.getElementById('vLabelA').textContent = 'Alcaraz ' + aPct + '%';
+  document.getElementById('vTotal').textContent = total.toLocaleString() + ' vote' + (total !== 1 ? 's' : '');
+
+  const geo = votes.countries || {};
+  const sortedCountries = Object.entries(geo)
+    .filter(([,v]) => (v.sinner||0) + (v.alcaraz||0) >= 1)
+    .sort(([,a],[,b]) => ((b.sinner||0)+(b.alcaraz||0)) - ((a.sinner||0)+(a.alcaraz||0)))
+    .slice(0, 12);
+
+  const geoGrid = document.getElementById('geoGrid');
+  if (geoGrid && sortedCountries.length > 0) {
+    geoGrid.innerHTML = sortedCountries.map(([country, v]) => {
+      const t = (v.sinner||0) + (v.alcaraz||0);
+      const sp = Math.round((v.sinner||0)/t*100);
+      const winner = sp >= 50 ? 'Sinner' : 'Alcaraz';
+      const pct = sp >= 50 ? sp : 100-sp;
+      return '<div class="geo-card"><div class="geo-country">' + country + '</div><div class="geo-winner">' + winner + ' ' + pct + '%</div><div class="geo-total">' + t + ' vote' + (t!==1?'s':'') + '</div></div>';
+    }).join('');
+  }
+}
+
+async function castVote(player) {
+  const existingVote = await getUserVote();
+  if (existingVote) {
+    showAlreadyVoted(existingVote);
+    return;
+  }
+
+  document.querySelectorAll('.vote-btn').forEach(b => b.disabled = true);
+
+  const geo = await getCountry();
+
+  try {
+    await supabaseFetch('/rest/v1/votes', {
+      method: 'POST',
+      prefer: 'return=minimal',
+      body: JSON.stringify({ player, country: geo.name, country_code: geo.code })
+    });
+
+    await setUserVote(player);
+
+    document.querySelectorAll('.vote-btn').forEach(b => {
+      b.classList.remove('voted-s','voted-a');
+    });
+    document.querySelector('.vote-btn.' + (player==='sinner'?'s':'a')).classList.add('voted-' + (player==='sinner'?'s':'a'));
+
+    const votes = await loadVotes();
+    renderVoteResults(votes);
+  } catch(e) {
+    console.error('Vote failed:', e);
+    document.querySelectorAll('.vote-btn').forEach(b => b.disabled = false);
+  }
+}
+
+function showAlreadyVoted(player) {
+  document.getElementById('voteAlready').style.display = 'block';
+  document.getElementById('voteAlready').textContent = 
+    'You already voted for ' + (player === 'sinner' ? 'Sinner 🇮🇹' : 'Alcaraz 🇪🇸');
+  document.querySelectorAll('.vote-btn').forEach(b => b.disabled = true);
+  document.querySelector('.vote-btn.' + (player==='sinner'?'s':'a')).classList.add('voted-' + (player==='sinner'?'s':'a'));
+}
+
+async function initVotes() {
+  const votes = await loadVotes();
+  const userVote = await getUserVote();
+
+  if (userVote) {
+    showAlreadyVoted(userVote);
+  }
+
+  if ((votes.sinner + votes.alcaraz) > 0) {
+    renderVoteResults(votes);
+  }
+}
+
+// Init on load
+initVotes();
+
+</script>
+</body>
+</html>
