@@ -1,7 +1,21 @@
 {
-  "scraped_at": "2026-03-11T14:24:55.783655+00:00",
+  "scraped_at": "2026-03-12T07:03:58.965853+00:00",
   "method": "atp-xhr-intercept",
   "sinner": {
+    "career_wins": 328,
+    "career_losses": 88,
+    "career_wl": "328\u201388",
+    "career_win_pct": 78.8,
+    "career_titles": 24,
+    "ranking": 2,
+    "career_high_rank": 1,
+    "ytd_wins": 7,
+    "ytd_losses": 2,
+    "ytd_titles": 0,
+    "prize_ytd": "$912,500",
+    "prize_career": "$58,878,696",
+    "coach": "Simone Vagnozzi, Darren Cahill",
+    "turned_pro": 2018,
     "career": {
       "aces": 2420,
       "double_faults": 795,
@@ -19,21 +33,7 @@
       "return_games_won_pct": 28,
       "return_points_won_pct": 41,
       "total_points_won_pct": 54
-    },
-    "career_wins": 328,
-    "career_losses": 88,
-    "career_wl": "328\u201388",
-    "career_win_pct": 78.8,
-    "career_titles": 24,
-    "ranking": 2,
-    "career_high_rank": 1,
-    "ytd_wins": 7,
-    "ytd_losses": 2,
-    "ytd_titles": 0,
-    "prize_ytd": "$912,500",
-    "prize_career": "$58,878,696",
-    "coach": "Simone Vagnozzi, Darren Cahill",
-    "turned_pro": 2018
+    }
   },
   "alcaraz": {
     "career_wins": 292,
