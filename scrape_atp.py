@@ -362,6 +362,22 @@ async def scrape_wiki_vision(ctx, key):
     paths = await screenshots(page, n=4, step=800, prefix=f"/tmp/{key}_wiki")
     await page.close()
     data = vision(img_blocks(paths), WIKI_PROMPT.format(name=name))
+    yer = data.get("year_end_rankings")
+    if not isinstance(yer, dict):
+        year_keys = {k: v for k, v in data.items() if str(k).isdigit() and len(str(k)) == 4}
+        if year_keys:
+            data["year_end_rankings"] = year_keys
+            for k in list(year_keys):
+                data.pop(k, None)
+    # Safely coerce year_end_rankings — vision sometimes returns years as top-level keys
+    yer = data.get("year_end_rankings")
+    if not isinstance(yer, dict):
+        # Try to pull year-like keys (4-digit numbers) into a nested dict
+        year_keys = {k: v for k, v in data.items() if str(k).isdigit() and len(str(k)) == 4}
+        if year_keys:
+            data["year_end_rankings"] = year_keys
+            for k in year_keys:
+                data.pop(k, None)
     print(f"  → {len(data)} fields")
     return data
 
