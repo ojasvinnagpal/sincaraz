@@ -347,7 +347,7 @@ WIKI_PROMPT = """Wikipedia career statistics page for {name}. Extract as JSON:
   masters_titles (integer)
   longest_win_streak (integer)
   current_win_streak (integer, if shown)
-  year_end_rankings  (object e.g. {"2022": 10, "2023": 4, "2024": 1})
+  year_end_rankings  (object e.g. {{"2022": 10, "2023": 4, "2024": 1}})
 Return ONLY valid JSON. Omit fields not visible."""
 
 async def scrape_wiki_vision(ctx, key):
