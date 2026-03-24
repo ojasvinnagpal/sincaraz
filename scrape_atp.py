@@ -364,7 +364,7 @@ async def scrape_wiki_vision(ctx, key):
         await page.wait_for_timeout(6000)
     paths = await screenshots(page, n=4, step=800, prefix=f"/tmp/{key}_wiki")
     await page.close()
-    data = vision(img_blocks(paths), WIKI_PROMPT.format(name=name))
+    data = vision(img_blocks(paths), WIKI_PROMPT.replace("{name}", name))
     # Safely coerce year_end_rankings — vision sometimes returns years as top-level keys
     yer = data.get("year_end_rankings")
     if not isinstance(yer, dict):
