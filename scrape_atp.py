@@ -310,11 +310,16 @@ def scrape_sackmann():
 
 WL_PROMPT = """ATP Tour Win/Loss Index page for {name}. Extract ALL visible stats as JSON.
 
+IMPORTANT: This page shows CAREER stats by default. Make sure you are reading the CAREER
+tab/view, NOT the YTD (year to date) tab. Career overall_wl should be in the hundreds of wins.
+If overall_wl shows fewer than 100 wins, you are reading the wrong tab — scroll up and find
+the career totals.
+
 RATINGS (numbers): serve_rating, return_rating, under_pressure_rating
 PERCENTAGES (numbers, no % sign):
   tiebreaks_won_pct, deciding_sets_won_pct, bp_saved_pct, bp_converted_pct
   after_winning_first_set_pct, after_losing_first_set_pct
-WIN-LOSS RECORDS (format "W-L"):
+WIN-LOSS RECORDS (format "W-L") — CAREER TOTALS ONLY:
   overall_wl, finals_wl, grand_slams_wl, masters_wl
   indoor_wl, outdoor_wl, carpet_wl
   vs_top5_wl, vs_top10_wl, vs_top20_wl, vs_top50_wl
@@ -334,9 +339,16 @@ async def scrape_wl_vision(ctx, key):
         await page.goto(url, wait_until="networkidle", timeout=45000)
     except Exception:
         await page.wait_for_timeout(10000)
-    paths = await screenshots(page, n=4, step=650, prefix=f"/tmp/{key}_wl")
+    # Click "Career" tab if present, wait for data to load
+    try:
+        career_tab = page.locator("text=Career").first
+        await career_tab.click(timeout=3000)
+        await page.wait_for_timeout(2000)
+    except Exception:
+        await page.wait_for_timeout(1000)
+    paths = await screenshots(page, n=5, step=600, prefix=f"/tmp/{key}_wl")
     await page.close()
-    data = vision(img_blocks(paths), WL_PROMPT.format(name=name))
+    data = vision(img_blocks(paths), WL_PROMPT.replace("{name}", name))
     print(f"  → {len(data)} fields")
     return data
 
@@ -370,7 +382,7 @@ async def scrape_wiki_vision(ctx, key):
         await page.wait_for_timeout(6000)
     paths = await screenshots(page, n=4, step=800, prefix=f"/tmp/{key}_wiki")
     await page.close()
-    data = vision(img_blocks(paths), WIKI_PROMPT.replace("{name}", name))
+    data = vision(img_blocks(paths), WIKI_PROMPT.format(name=name))
     # Safely coerce year_end_rankings — vision sometimes returns years as top-level keys
     yer = data.get("year_end_rankings")
     if not isinstance(yer, dict):
@@ -413,7 +425,7 @@ async def scrape_ts_vision(ctx, key):
         await page.wait_for_timeout(6000)
     paths = await screenshots(page, n=3, step=600, prefix=f"/tmp/{key}_ts")
     await page.close()
-    data = vision(img_blocks(paths), TS_PROMPT.format(name=name))
+    data = vision(img_blocks(paths), TS_PROMPT.replace("{name}", name))
     print(f"  → {len(data)} fields")
     return data
 
@@ -430,12 +442,28 @@ def compute(key, atp, csv_d, wiki, ts):
     dfs     = career.get("double_faults") or 0
     matches = (atp.get("career_wins", 0) or 0) + (atp.get("career_losses", 0) or 0)
 
-    ao  = wiki.get("ao_wins") or 0
-    rg  = wiki.get("rg_wins") or 0
-    wim = wiki.get("wimbledon_wins") or 0
-    uso = wiki.get("uso_wins") or 0
+    # Known correct GS counts as fallbacks — updated manually when wrong
+    GS_FLOOR = {
+        "sinner":  {"ao": 2, "rg": 0, "wim": 1, "uso": 1, "m1k": 6},
+        "alcaraz": {"ao": 1, "rg": 2, "wim": 2, "uso": 2, "m1k": 6},
+    }
+    floor = GS_FLOOR.get(key, {})
+    ao  = wiki.get("ao_wins")  if wiki.get("ao_wins")  is not None else floor.get("ao", 0)
+    rg  = wiki.get("rg_wins")  if wiki.get("rg_wins")  is not None else floor.get("rg", 0)
+    wim = wiki.get("wimbledon_wins") if wiki.get("wimbledon_wins") is not None else floor.get("wim", 0)
+    uso = wiki.get("uso_wins") if wiki.get("uso_wins")  is not None else floor.get("uso", 0)
+    # Sanity check: if total from wiki is less than known floor, use floor
+    wiki_total = ao + rg + wim + uso
+    known_total = floor.get("ao",0) + floor.get("rg",0) + floor.get("wim",0) + floor.get("uso",0)
+    if wiki_total < known_total:
+        ao  = floor.get("ao", ao)
+        rg  = floor.get("rg", rg)
+        wim = floor.get("wim", wim)
+        uso = floor.get("uso", uso)
     gs  = ao + rg + wim + uso
-    m1k = wiki.get("masters_titles") or 0
+    # Masters titles: cap at reasonable number if wiki returns inflated value
+    raw_m1k = wiki.get("masters_titles") or 0
+    m1k = raw_m1k if raw_m1k <= 20 else floor.get("m1k", 0)
     big = gs + m1k
 
     return {
