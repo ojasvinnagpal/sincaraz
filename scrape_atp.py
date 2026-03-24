@@ -229,14 +229,17 @@ def scrape_sackmann():
     print("\n[Sackmann CSV]")
     yr = datetime.now().year
     rows = []
-    for y in [yr - 1, yr]:
+    for y in [yr - 2, yr - 1, yr]:
         url = f"{SACKMANN_BASE}/atp_matches_{y}.csv"
         print(f"  Fetching {url}")
         t = fetch_csv(url)
         if t:
             r = list(csv.DictReader(io.StringIO(t)))
             rows.extend(r)
-            print(f"  → {len(r)} matches")
+            print(f"  → {len(r)} matches in {y}")
+        else:
+            print(f"  → no data for {y}")
+    print(f"  Total rows loaded: {len(rows)}")
 
     result = {}
     yr_s = str(yr)
@@ -347,7 +350,7 @@ WIKI_PROMPT = """Wikipedia career statistics page for {name}. Extract as JSON:
   masters_titles (integer)
   longest_win_streak (integer)
   current_win_streak (integer, if shown)
-  year_end_rankings  (object e.g. {{"2022": 10, "2023": 4, "2024": 1}})
+  year_end_rankings  (object e.g. {"2022": 10, "2023": 4, "2024": 1})
 Return ONLY valid JSON. Omit fields not visible."""
 
 async def scrape_wiki_vision(ctx, key):
@@ -361,14 +364,7 @@ async def scrape_wiki_vision(ctx, key):
         await page.wait_for_timeout(6000)
     paths = await screenshots(page, n=4, step=800, prefix=f"/tmp/{key}_wiki")
     await page.close()
-    data = vision(img_blocks(paths), WIKI_PROMPT.replace("{name}", name))
-    yer = data.get("year_end_rankings")
-    if not isinstance(yer, dict):
-        year_keys = {k: v for k, v in data.items() if str(k).isdigit() and len(str(k)) == 4}
-        if year_keys:
-            data["year_end_rankings"] = year_keys
-            for k in list(year_keys):
-                data.pop(k, None)
+    data = vision(img_blocks(paths), WIKI_PROMPT.format(name=name))
     # Safely coerce year_end_rankings — vision sometimes returns years as top-level keys
     yer = data.get("year_end_rankings")
     if not isinstance(yer, dict):
