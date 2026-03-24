@@ -31,7 +31,7 @@ PLAYERS = {
         "page_stats":  "https://www.atptour.com/en/players/jannik-sinner/s0ag/player-stats",
         "page_wl":     "https://www.atptour.com/en/players/jannik-sinner/s0ag/atp-win-loss",
         "wiki_stats":  "https://en.wikipedia.org/wiki/Jannik_Sinner_career_statistics",
-        "tennisstats": "https://tennisstats.com/players/jannik-sinner",
+        "tennisstats": "https://www.flashscore.com/player/sinner-jannik/WmrNaFhB/",
     },
     "alcaraz": {
         "id":          "a0e2",
@@ -40,7 +40,7 @@ PLAYERS = {
         "page_stats":  "https://www.atptour.com/en/players/carlos-alcaraz/a0e2/player-stats",
         "page_wl":     "https://www.atptour.com/en/players/carlos-alcaraz/a0e2/atp-win-loss",
         "wiki_stats":  "https://en.wikipedia.org/wiki/Carlos_Alcaraz_career_statistics",
-        "tennisstats": "https://tennisstats.com/players/carlos-alcaraz",
+        "tennisstats": "https://www.flashscore.com/player/alcaraz-carlos/W2Bkdnhj/",
     },
 }
 
@@ -343,15 +343,21 @@ async def scrape_wl_vision(ctx, key):
 
 # ─── Source 4: Vision — Wikipedia ─────────────────────────────────────────────
 
-WIKI_PROMPT = """Wikipedia career statistics page for {name}. Extract as JSON:
-  ao_wins, rg_wins, wimbledon_wins, uso_wins  (integers — titles won at each slam)
-  weeks_at_no1  (integer)
-  days_at_no1   (integer, if shown)
-  masters_titles (integer)
+WIKI_PROMPT = """Wikipedia career statistics page for {name}.
+
+Look carefully at the Grand Slam tournament results table. Count ONLY rows where the result
+says "W" (Won). Extract as JSON:
+  ao_wins        (integer — number of Australian Open titles WON, "W" rows only)
+  rg_wins        (integer — number of Roland Garros titles WON)
+  wimbledon_wins (integer — number of Wimbledon titles WON)
+  uso_wins       (integer — number of US Open titles WON)
+  weeks_at_no1   (integer — total weeks ranked World No. 1, look for "Weeks at No. 1")
+  days_at_no1    (integer — total days at No. 1, if shown)
+  masters_titles (integer — Masters 1000 titles only, NOT total titles)
   longest_win_streak (integer)
-  current_win_streak (integer, if shown)
-  year_end_rankings  (object e.g. {"2022": 10, "2023": 4, "2024": 1})
-Return ONLY valid JSON. Omit fields not visible."""
+  year_end_rankings  (object — year as string key, ranking as integer value)
+
+Return ONLY valid JSON. Be precise — do not confuse finals reached with titles won."""
 
 async def scrape_wiki_vision(ctx, key):
     name = PLAYERS[key]["name"]
@@ -579,8 +585,9 @@ def update_html(scraped):
                       lambda m: f'{m.group(1)}{a_sh.lstrip("$")}{m.group(2)}', html, count=1)
     if html != prev: updated.append(f"Card earnings: {s_sh}/{a_sh}")
 
-    s_ytd = SC.get("csv_ytd_win_pct") or S.get("ytd_win_pct")
-    a_ytd = AC.get("csv_ytd_win_pct") or A.get("ytd_win_pct")
+    # Use ATP XHR YTD if CSV YTD is missing (2026 CSV not yet on JeffSackmann)
+    s_ytd = (SC.get("csv_ytd_win_pct") if SC.get("csv_ytd_win_pct") else None) or S.get("ytd_win_pct")
+    a_ytd = (AC.get("csv_ytd_win_pct") if AC.get("csv_ytd_win_pct") else None) or A.get("ytd_win_pct")
     prev = html
     if s_ytd:
         html = re.sub(r'(class="qs-val s" style="font-size:28px">)[\d.]+%(</div>)',
