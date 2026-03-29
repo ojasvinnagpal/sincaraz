@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-03-28T07:05:39.576033+00:00",
+  "scraped_at": "2026-03-29T07:12:43.439747+00:00",
   "sinner": {
     "career": {
       "aces": 2471,
@@ -50,12 +50,30 @@
       "carpet_wl": "0-0",
       "indoor_wl": "91-21",
       "outdoor_wl": "243-67",
-      "after_winning_first_set_wl": "291-31",
-      "after_losing_first_set_wl": "43-57",
+      "after_winning_first_set_pct": 90.4,
+      "after_losing_first_set_pct": 43.0,
       "vs_righthanded_wl": "301-80",
       "vs_lefthanded_wl": "33-8"
     },
-    "vision_wiki": {},
+    "vision_wiki": {
+      "ao_wins": 2,
+      "rg_wins": 0,
+      "wimbledon_wins": 1,
+      "uso_wins": 1,
+      "weeks_at_no1": null,
+      "days_at_no1": null,
+      "masters_titles": null,
+      "longest_win_streak": null,
+      "year_end_rankings": {
+        "2019": 78,
+        "2020": 37,
+        "2021": 10,
+        "2022": 15,
+        "2023": 4,
+        "2024": 1,
+        "2025": 2
+      }
+    },
     "vision_ts": {},
     "csv": {
       "csv_career_wl": "74\u20137",
@@ -92,7 +110,15 @@
       "days_at_no1": null,
       "longest_win_streak": null,
       "current_win_streak": null,
-      "year_end_rankings": null,
+      "year_end_rankings": {
+        "2019": 78,
+        "2020": 37,
+        "2021": 10,
+        "2022": 15,
+        "2023": 4,
+        "2024": 1,
+        "2025": 2
+      },
       "fastest_serve_kmh": null,
       "fastest_serve_mph": null,
       "wins_straight_sets_pct": 73.0,
@@ -146,37 +172,23 @@
       "finals_wl": "26-8",
       "deciding_set_wl": "66-26",
       "fifth_set_wl": "15-1",
-      "indoor_wl": "35-15",
-      "outdoor_wl": "261-51",
-      "carpet_wl": "0-0",
-      "on_hard_wl": "158-43",
       "on_clay_wl": "103-19",
       "on_grass_wl": "35-4",
-      "tiebreak_wl": "101-62",
-      "vs_top10_wl": "55-24",
+      "on_hard_wl": "158-43",
+      "carpet_wl": "0-0",
+      "indoor_wl": "35-15",
+      "outdoor_wl": "261-51",
+      "after_winning_first_set_pct": 93.8,
+      "after_losing_first_set_pct": 45.6,
       "vs_righthanded_wl": "257-55",
       "vs_lefthanded_wl": "39-11",
-      "after_winning_first_set_pct": 93.8,
-      "after_losing_first_set_pct": 45.6
+      "tiebreak_wl": "101-62",
+      "vs_top5_wl": "19-18",
+      "vs_top10_wl": "32-22",
+      "vs_top20_wl": "47-28",
+      "vs_top50_wl": "86-39"
     },
-    "vision_wiki": {
-      "ao_wins": 1,
-      "rg_wins": 2,
-      "wimbledon_wins": 2,
-      "uso_wins": 2,
-      "weeks_at_no1": null,
-      "days_at_no1": null,
-      "masters_titles": null,
-      "longest_win_streak": null,
-      "year_end_rankings": {
-        "2020": 141,
-        "2021": 32,
-        "2022": 1,
-        "2023": 2,
-        "2024": 3,
-        "2025": 1
-      }
-    },
+    "vision_wiki": {},
     "vision_ts": {},
     "csv": {
       "csv_career_wl": "54\u201313",
@@ -213,14 +225,7 @@
       "days_at_no1": null,
       "longest_win_streak": null,
       "current_win_streak": null,
-      "year_end_rankings": {
-        "2020": 141,
-        "2021": 32,
-        "2022": 1,
-        "2023": 2,
-        "2024": 3,
-        "2025": 1
-      },
+      "year_end_rankings": null,
       "fastest_serve_kmh": null,
       "fastest_serve_mph": null,
       "wins_straight_sets_pct": 74.1,
