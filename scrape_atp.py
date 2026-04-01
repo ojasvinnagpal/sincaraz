@@ -448,10 +448,16 @@ def compute(key, atp, csv_d, wiki, ts):
     dfs     = career.get("double_faults") or 0
     matches = (atp.get("career_wins", 0) or 0) + (atp.get("career_losses", 0) or 0)
 
-    # Known correct GS counts as fallbacks — updated manually when wrong
+    # Known correct values as fallbacks — update after each slam/milestone
     GS_FLOOR = {
-        "sinner":  {"ao": 2, "rg": 0, "wim": 1, "uso": 1, "m1k": 6},
-        "alcaraz": {"ao": 1, "rg": 2, "wim": 2, "uso": 2, "m1k": 6},
+        "sinner":  {
+            "ao": 2, "rg": 0, "wim": 1, "uso": 1, "m1k": 6,
+            "weeks_no1": 66, "fastest_serve_kmh": 220, "fastest_serve_mph": 137,
+        },
+        "alcaraz": {
+            "ao": 1, "rg": 2, "wim": 2, "uso": 2, "m1k": 6,
+            "weeks_no1": 65, "fastest_serve_kmh": 220, "fastest_serve_mph": 137,
+        },
     }
     floor = GS_FLOOR.get(key, {})
     ao  = wiki.get("ao_wins")  if wiki.get("ao_wins")  is not None else floor.get("ao", 0)
@@ -483,13 +489,13 @@ def compute(key, atp, csv_d, wiki, ts):
         "gs_total":               gs or None,
         "masters_titles":         m1k or None,
         "big_titles":             big or None,
-        "weeks_at_no1":           wiki.get("weeks_at_no1") or ts.get("weeks_at_no1"),
+        "weeks_at_no1":           wiki.get("weeks_at_no1") or ts.get("weeks_at_no1") or floor.get("weeks_no1"),
         "days_at_no1":            wiki.get("days_at_no1") or ts.get("days_at_no1"),
         "longest_win_streak":     ts.get("longest_win_streak") or wiki.get("longest_win_streak"),
         "current_win_streak":     wiki.get("current_win_streak"),
         "year_end_rankings":      wiki.get("year_end_rankings"),
-        "fastest_serve_kmh":      ts.get("fastest_serve_kmh") or wiki.get("fastest_serve_kmh"),
-        "fastest_serve_mph":      ts.get("fastest_serve_mph") or wiki.get("fastest_serve_mph"),
+        "fastest_serve_kmh":      ts.get("fastest_serve_kmh") or wiki.get("fastest_serve_kmh") or floor.get("fastest_serve_kmh"),
+        "fastest_serve_mph":      ts.get("fastest_serve_mph") or wiki.get("fastest_serve_mph") or floor.get("fastest_serve_mph"),
         "wins_straight_sets_pct": ts.get("wins_straight_sets_pct") or csv_d.get("csv_straight_set_wins_pct"),
         "wins_from_behind_pct":   ts.get("wins_from_behind_pct"),
         "breaks_per_set":         ts.get("breaks_per_set"),
