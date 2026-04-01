@@ -47,7 +47,7 @@
       "name": "What is the Sinner vs Alcaraz head to head record?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "As of 2026, Carlos Alcaraz leads Jannik Sinner 11-6 in their head-to-head record across all surfaces."
+        "text": "As of April 2026, Carlos Alcaraz leads Jannik Sinner 12-6 in their head-to-head record across all surfaces, across 18 ATP Tour meetings."
       }
     },
     {
@@ -545,17 +545,17 @@ footer a:hover{color:var(--text)}
 <script async src="https://plausible.io/js/pa-6AZ2ReE-3C-zzAbT8gHU8.js">
 // Momentum list — last 8 H2H matches in reverse chronological order
 const momentumMatches = [
-  {date:'Nov 2025', event:'ATP Finals Final', winner:'sinner', score:'6-4 6-4', surface:'Hard'},
-  {date:'Sep 2025', event:'US Open Final', winner:'alcaraz', score:'3-6 6-3 6-3 6-4', surface:'Hard'},
-  {date:'Jul 2025', event:'Wimbledon Final', winner:'sinner', score:'6-2 6-3 7-6', surface:'Grass'},
-  {date:'Jun 2025', event:'Roland Garros Final', winner:'alcaraz', score:'6-2 3-6 7-6 2-6 7-5', surface:'Clay'},
-  {date:'May 2025', event:'Madrid SF', winner:'alcaraz', score:'6-3 6-4', surface:'Clay'},
-  {date:'Apr 2025', event:'Monte Carlo SF', winner:'alcaraz', score:'6-4 6-1', surface:'Clay'},
-  {date:'Nov 2024', event:'ATP Finals Final', winner:'sinner', score:'6-3 6-2', surface:'Hard'},
-  {date:'Sep 2024', event:'US Open Final', winner:'alcaraz', score:'5-7 6-2 4-6 6-3 6-4', surface:'Hard'},
+  {date:'Mar 2026', event:'Miami Open Final', winner:'alcaraz', score:'6-4 3-6 7-5', surface:'Hard'},
+  {date:'Nov 2025', event:'ATP Finals Final', winner:'sinner', score:'7-6 7-5', surface:'Hard'},
+  {date:'Sep 2025', event:'US Open Final', winner:'alcaraz', score:'6-3 6-4 6-2', surface:'Hard'},
+  {date:'Aug 2025', event:'Cincinnati Final', winner:'alcaraz', score:'5-0 ret.', surface:'Hard'},
+  {date:'Jul 2025', event:'Wimbledon Final', winner:'sinner', score:'3-6 6-3 6-3 6-4', surface:'Grass'},
+  {date:'Jun 2025', event:'Roland Garros Final', winner:'alcaraz', score:'2-6 6-4 7-6 3-6 7-5', surface:'Clay'},
+  {date:'May 2025', event:'Italian Open Final', winner:'alcaraz', score:'7-6 6-2', surface:'Clay'},
+  {date:'Mar 2025', event:'Indian Wells Final', winner:'sinner', score:'7-6 6-1', surface:'Hard'},
 ];
 
-const streakLabels = ['L','L','W','L','L','L','W','L'];
+const streakLabels = ['A','S','A','A','S','A','A','S']; // A=Alcaraz win, S=Sinner win
 document.getElementById('momentumList').innerHTML = momentumMatches.map((m,i) => {
   const isSinner = m.winner === 'sinner';
   return `<div class="momentum-match">
@@ -1652,7 +1652,7 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
     <div style="display:flex;flex-direction:column;gap:16px">
       <details style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px 20px">
         <summary style="font-weight:600;cursor:pointer;font-size:15px">What is the Sinner vs Alcaraz head-to-head record?</summary>
-        <p style="margin-top:12px;color:var(--text-dim);font-size:14px;line-height:1.7">Carlos Alcaraz leads Jannik Sinner 11–6 in their all-time head-to-head record. They have met across all surfaces — hard courts, clay, and grass — in Grand Slams, Masters events, and the ATP Finals. The rivalry is widely considered the defining tennis matchup of their generation.</p>
+        <p style="margin-top:12px;color:var(--text-dim);font-size:14px;line-height:1.7">Carlos Alcaraz leads Jannik Sinner 12–6 in their all-time head-to-head record, across 18 ATP Tour meetings. They have met across all surfaces — hard courts, clay, and grass — in Grand Slams, Masters events, and the ATP Finals. The rivalry is widely considered the defining tennis matchup of their generation.</p>
       </details>
       <details style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px 20px">
         <summary style="font-weight:600;cursor:pointer;font-size:15px">How many Grand Slams has Jannik Sinner won?</summary>
@@ -1695,23 +1695,31 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
 // ============================================================
 
 const matches = [
-  {date:'Nov 2025',event:'ATP Finals',round:'Final',surface:'hard',winner:'sinner',score:'6–4 6–4',duration:'1h 22m',note:'Sinner defends Turin title on home soil'},
-  {date:'Sep 2025',event:'US Open',round:'Final',surface:'hard',winner:'alcaraz',score:'6–3 6–4 6–2',duration:'1h 58m',note:'Alcaraz third USO title; dominant display'},
-  {date:'Jul 2025',event:'Wimbledon',round:'Final',surface:'grass',winner:'sinner',score:'6–4 6–3 7–5',duration:'2h 05m',note:'Sinner first Wimbledon title'},
-  {date:'Jun 2025',event:'Roland Garros',round:'Final',surface:'clay',winner:'alcaraz',score:'6–2 6–4 3–6 4–6 7–6(10)',duration:'5h 12m',note:'⚡ Longest Slam final ever — Sinner holds 3 match points'},
-  {date:'May 2025',event:'Madrid Open',round:'SF',surface:'clay',winner:'alcaraz',score:'7–5 6–3',duration:'1h 32m',note:''},
-  {date:'Apr 2025',event:'Monte Carlo',round:'SF',surface:'clay',winner:'alcaraz',score:'6–3 6–3',duration:'1h 18m',note:''},
-  {date:'Mar 2025',event:'Indian Wells',round:'Final',surface:'hard',winner:'sinner',score:'7–6 6–3',duration:'1h 48m',note:'Sinner Indian Wells title'},
-  {date:'Jan 2025',event:'Australian Open',round:'Final',surface:'hard',winner:'sinner',score:'6–3 7–6 6–3',duration:'2h 21m',note:''},
-  {date:'Nov 2024',event:'ATP Finals',round:'Final',surface:'hard',winner:'sinner',score:'6–3 6–2',duration:'1h 10m',note:'Sinner first ATP Finals title'},
-  {date:'Sep 2024',event:'US Open',round:'Final',surface:'hard',winner:'alcaraz',score:'6–3 6–2 6–2',duration:'1h 38m',note:'Alcaraz second USO title; Sinner uncharacteristically off'},
-  {date:'Jul 2024',event:'Wimbledon',round:'SF',surface:'grass',winner:'sinner',score:'7–6(4) 6–2 3–6 6–3',duration:'2h 48m',note:'Sinner ends Alcaraz Wimbledon reign'},
-  {date:'Jun 2024',event:'Roland Garros',round:'SF',surface:'clay',winner:'alcaraz',score:'2–6 6–3 3–6 6–4 6–4',duration:'3h 41m',note:''},
-  {date:'May 2024',event:'Madrid Open',round:'SF',surface:'clay',winner:'alcaraz',score:'6–4 6–4',duration:'1h 24m',note:''},
-  {date:'Jan 2024',event:'Australian Open',round:'SF',surface:'hard',winner:'sinner',score:'7–6(2) 6–3 6–7(4) 6–3',duration:'3h 02m',note:'Sinner eliminates defending finalist'},
-  {date:'Sep 2023',event:'Davis Cup',round:'Group',surface:'hard',winner:'sinner',score:'6–3 6–1',duration:'1h 05m',note:'Dominant Sinner in team event'},
-  {date:'Jun 2023',event:'Queen\'s Club',round:'Final',surface:'grass',winner:'alcaraz',score:'7–6(4) 6–1',duration:'1h 22m',note:''},
-  {date:'Sep 2022',event:'US Open',round:'QF',surface:'hard',winner:'alcaraz',score:'6–3 6–7 6–7 7–5 6–3',duration:'5h 15m',note:'⚡ Ended 2:50 AM — latest finish in USO history; Alcaraz saves match point'},
+  {date:'Mar 2026',event:'Miami Open',round:'Final',surface:'hard',winner:'alcaraz',score:'6–4 3–6 7–5',duration:'2h 47m',note:'Alcaraz wins Miami title; Sinner out of world #1'},
+  {date:'Nov 2025',event:'ATP Finals',round:'Final',surface:'hard',winner:'sinner',score:'7–6(4) 7–5',duration:'1h 58m',note:'Sinner defends Turin title on home soil'},
+  {date:'Sep 2025',event:'US Open',round:'Final',surface:'hard',winner:'alcaraz',score:'6–3 6–4 6–2',duration:'1h 58m',note:'Alcaraz third USO title; reclaims world #1'},
+  {date:'Aug 2025',event:'Cincinnati Open',round:'Final',surface:'hard',winner:'alcaraz',score:'5–0 ret.',duration:'—',note:'Sinner retires due to illness with Alcaraz leading 5–0'},
+  {date:'Jul 2025',event:'Wimbledon',round:'Final',surface:'grass',winner:'sinner',score:'3–6 6–3 6–3 6–4',duration:'2h 45m',note:'Sinner first Wimbledon title; ends Alcaraz 24-match win streak'},
+  {date:'Jun 2025',event:'Roland Garros',round:'Final',surface:'clay',winner:'alcaraz',score:'2–6 6–4 7–6(5) 3–6 7–5',duration:'5h 29m',note:'⚡ Longest Slam final ever — Sinner holds 3 match points at 5-3 in 4th'},
+  {date:'May 2025',event:'Italian Open',round:'Final',surface:'clay',winner:'alcaraz',score:'7–6(4) 6–2',duration:'1h 48m',note:'First Masters final between them; snaps Sinner 26-match win streak'},
+  {date:'May 2025',event:'Madrid Open',round:'SF',surface:'clay',winner:'alcaraz',score:'6–3 6–4',duration:'1h 22m',note:''},
+  {date:'Apr 2025',event:'Monte Carlo',round:'SF',surface:'clay',winner:'alcaraz',score:'6–4 6–1',duration:'1h 18m',note:''},
+  {date:'Mar 2025',event:'Indian Wells',round:'Final',surface:'hard',winner:'sinner',score:'7–6(3) 6–1',duration:'1h 42m',note:'Sinner Indian Wells title'},
+  {date:'Jan 2025',event:'Australian Open',round:'Final',surface:'hard',winner:'sinner',score:'6–3 7–6(4) 6–3',duration:'2h 21m',note:'Sinner back-to-back AO titles'},
+  {date:'Nov 2024',event:'ATP Finals',round:'Final',surface:'hard',winner:'sinner',score:'6–3 6–2',duration:'1h 10m',note:'Sinner first ATP Finals title; Alcaraz uncharacteristically off'},
+  {date:'Oct 2024',event:'China Open',round:'Final',surface:'hard',winner:'alcaraz',score:'6–7(3) 6–4 7–6(3)',duration:'3h 21m',note:'Longest match in China Open history; Alcaraz snaps Sinner 15-match streak'},
+  {date:'Sep 2024',event:'US Open',round:'Final',surface:'hard',winner:'alcaraz',score:'6–3 6–2 6–2',duration:'1h 38m',note:'Dominant Alcaraz; Sinner not at his best'},
+  {date:'Jul 2024',event:'Wimbledon',round:'SF',surface:'grass',winner:'sinner',score:'7–6(4) 6–2 3–6 6–3',duration:'2h 48m',note:'Sinner ends Alcaraz Wimbledon reign in 4 sets'},
+  {date:'Jun 2024',event:'Roland Garros',round:'SF',surface:'clay',winner:'alcaraz',score:'2–6 6–3 3–6 6–4 6–4',duration:'3h 41m',note:'Both players fighting injuries; grinding 5-setter'},
+  {date:'Mar 2024',event:'Indian Wells',round:'SF',surface:'hard',winner:'alcaraz',score:'1–6 6–3 6–2',duration:'1h 48m',note:'Alcaraz recovers from bagel; snaps Sinner 19-match streak'},
+  {date:'Nov 2023',event:'ATP Finals',round:'RR',surface:'hard',winner:'sinner',score:'6–7(4) 6–1 6–1',duration:'2h 15m',note:''},
+  {date:'Oct 2023',event:'China Open',round:'SF',surface:'hard',winner:'sinner',score:'6–4 6–1',duration:'1h 10m',note:'Sinner dominant; first straight sets win over Alcaraz'},
+  {date:'Jun 2023',event:'Queen's Club',round:'Final',surface:'grass',winner:'alcaraz',score:'7–6(4) 6–1',duration:'1h 22m',note:''},
+  {date:'Mar 2023',event:'Miami Open',round:'SF',surface:'hard',winner:'sinner',score:'6–7(5) 6–4 6–2',duration:'2h 28m',note:'Sinner dashes Alcaraz Sunshine Double hopes'},
+  {date:'Mar 2023',event:'Indian Wells',round:'SF',surface:'hard',winner:'alcaraz',score:'7–6(2) 6–3',duration:'1h 42m',note:''},
+  {date:'Sep 2022',event:'US Open',round:'QF',surface:'hard',winner:'alcaraz',score:'6–3 6–7 6–7 7–5 6–3',duration:'5h 15m',note:'⚡ Ended 2:50 AM — latest finish in USO history; Alcaraz saves match point in 4th'},
+  {date:'Jul 2022',event:'Wimbledon',round:'R16',surface:'grass',winner:'sinner',score:'5–7 6–3 6–3 6–7(2) 6–3',duration:'3h 10m',note:'Sinner upsets Alcaraz in their first Wimbledon meeting'},
+  {date:'Nov 2021',event:'Paris Masters',round:'R32',surface:'hard',winner:'alcaraz',score:'6–1 6–2',duration:'0h 52m',note:'First ever ATP meeting — 18-yr-old Alcaraz upsets top-20 Sinner in 52 mins'},
 ];
 
 const records = [
@@ -1722,7 +1730,7 @@ const records = [
   {player:'sinner',title:'First Italian World No. 1, Wimbledon Champion & Paris Masters Winner',detail:'Sinner has collected a hat-trick of Italian firsts: first Italian to reach #1, win Wimbledon, and win the Paris Masters.',icon:'🇮🇹'},
   {player:'sinner',title:'31 Consecutive Indoor Hard Court Wins',detail:'Set during the 2024–25 indoor season across Paris, Turin, and the following year\'s Australian swing.',icon:'🔥'},
   {player:'both',title:'First Duo to Meet in 3 Consecutive Slam Finals in One Season',detail:'In 2025, Sinner and Alcaraz met in finals at Roland Garros, Wimbledon, and the US Open — unprecedented in Open Era history.',icon:'⚡'},
-  {player:'both',title:'Perfectly Tied in H2H Points — 1,651 Each',detail:'Across all 17 meetings, both players have won exactly 1,651 total points against each other. The most balanced rivalry stat imaginable.',icon:'⚖️'},
+  {player:'both',title:'Perfectly Tied in H2H Points — 1,651 Each',detail:'Across their first 17 meetings, both players had won exactly 1,651 total points against each other — the most balanced rivalry stat imaginable. Miami 2026 will have shifted this balance slightly.',icon:'⚖️'},
   {player:'sinner',title:'Longest Indoor Hard Court Win Streak in ATP History',detail:'At one point in 2025, Sinner won 31 consecutive matches on indoor hard — a surface-specific record.',icon:'🎯'},
   {player:'alcaraz',title:'22–1 on Clay in 2025 (95.7%)',detail:'Alcaraz\'s 2025 clay season was one of the most dominant in modern tennis history, winning Roland Garros and Barcelona while losing only one clay match all year.',icon:'🏟️'},
   {player:'both',title:'Split 9 of Last 14 Grand Slams Between Them',detail:'From 2023 AO onwards, only Sinner (4) and Alcaraz (7) have won slams, locking out every other player including Djokovic.',icon:'🎾'},
@@ -1737,7 +1745,7 @@ const trivia = [
   {icon:'🌍',text:'Their combined nationality — Italian and Spanish — represents the two nations that have produced 5 of the last 7 men\'s slam champions.'},
   {icon:'💬',text:'Both players speak multiple languages: Sinner speaks Italian, German, English and French; Alcaraz speaks Spanish and English.'},
   {icon:'📊',text:'In 2025, they played each other 5 times — the most meetings between any two players in a single year on the ATP Tour that season.'},
-  {icon:'🔢',text:'Alcaraz has more Grand Slam titles but Sinner leads in ATP Finals titles (2-0), Masters 1000 titles (7-6), days at #1 (462 days vs 427 days) and prize money.'},
+  {icon:'🔢',text:'Alcaraz leads in Grand Slam titles (7-4) and H2H record (12-6). Sinner leads in ATP Finals titles (2-0), prize money ($60M vs $64M), and year-end ranking consistency.'},
   {icon:'⏰',text:'The 2025 Roland Garros final is the longest Grand Slam final ever played — over 5 hours and 12 minutes. Sinner held 3 championship points at 0-40 in the final set.'},
   {icon:'🏆',text:'In 2025, both players had a win percentage above 90% for the full season — only the second time in ATP history two players achieved this in the same year.'},
 ];
@@ -1757,8 +1765,8 @@ const expertVerdicts = [
 
 function renderTicker(){
   const items = [
-    '🇮🇹 <span class="s">SINNER</span> vs <span class="a">ALCARAZ</span> — H2H: 6-11',
-    '<span class="a">ALCARAZ</span> leads H2H 11–6 overall',
+    '🇮🇹 <span class="s">SINNER</span> vs <span class="a">ALCARAZ</span> — H2H: Alcaraz leads 12–6 (18 matches)',
+    '<span class="a">ALCARAZ</span> leads H2H 12–6 overall (18 ATP meetings)',
     '<span class="s">SINNER</span> leads H2H on Grass 2–0',
     'H2H Points Won: <span class="s">1,651</span> vs <span class="a">1,651</span> — perfectly tied ⚖️',
     '<span class="s">SINNER</span> — 56.45% total points won in 2025 — ATP historical record',

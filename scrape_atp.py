@@ -28,6 +28,9 @@ PLAYERS = {
         "id":          "s0ag",
         "name":        "Jannik Sinner",
         "dob":         date(2001, 8, 16),
+        # H2H as of Apr 2026 — update manually after each meeting
+        "h2h_wins":    6,
+        "h2h_losses":  12,
         "page_stats":  "https://www.atptour.com/en/players/jannik-sinner/s0ag/player-stats",
         "page_wl":     "https://www.atptour.com/en/players/jannik-sinner/s0ag/atp-win-loss",
         "wiki_stats":  "https://en.wikipedia.org/wiki/Jannik_Sinner_career_statistics",
@@ -37,6 +40,9 @@ PLAYERS = {
         "id":          "a0e2",
         "name":        "Carlos Alcaraz",
         "dob":         date(2003, 5, 3),
+        # H2H as of Apr 2026 — update manually after each meeting
+        "h2h_wins":    12,
+        "h2h_losses":  6,
         "page_stats":  "https://www.atptour.com/en/players/carlos-alcaraz/a0e2/player-stats",
         "page_wl":     "https://www.atptour.com/en/players/carlos-alcaraz/a0e2/atp-win-loss",
         "wiki_stats":  "https://en.wikipedia.org/wiki/Carlos_Alcaraz_career_statistics",
@@ -625,8 +631,9 @@ def update_html(scraped):
                       rf'\g<1>{a_ytd}%\2', html, count=1)
     if html != prev: updated.append(f"Card YTD Win%: {s_ytd}%/{a_ytd}%")
 
-    sh2h = SC.get("csv_h2h_wins")
-    ah2h = AC.get("csv_h2h_wins")
+    # Use ground truth H2H from PLAYERS config (CSV only covers recent years)
+    sh2h = PLAYERS["sinner"]["h2h_wins"]
+    ah2h = PLAYERS["alcaraz"]["h2h_wins"]
     if sh2h is not None and ah2h is not None:
         prev = html
         pat  = r'(class="qs-val s"[^>]*>)\d+(</div>.*?class="qs-val a"[^>]*>)\d+(</div>.*?matches played)'
