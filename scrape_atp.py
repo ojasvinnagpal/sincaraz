@@ -506,7 +506,7 @@ def compute(key, atp, csv_d, wiki, ts):
     }
 
 
-# ─── HTML update ──────────────────────────────────────────────────────────────
+# ─── JSON output (HTML now loads stats dynamically) ──────────────────────────
 
 def fmt_short(prize_str):
     if not prize_str:
@@ -516,311 +516,23 @@ def fmt_short(prize_str):
 
 
 def update_html(scraped):
+    """
+    The HTML now fetches scraped_stats.json dynamically at page load.
+    We only need to update the last-updated timestamp in the HTML.
+    All stat values are populated by JavaScript from scraped_stats.json.
+    """
     if not os.path.exists("index.html"):
-        print("  index.html not found")
         return
-
     with open("index.html", "r") as f:
         html = f.read()
-    orig    = html
-    updated = []
-
-    def rn(h, pat, val, n=1):
-        """replace nth regex match: keep group(1), replace group(2), keep group(3)"""
-        ms = list(re.finditer(pat, h))
-        if len(ms) >= n:
-            m = ms[n - 1]
-            return h[:m.start()] + m.group(1) + str(val) + m.group(2) + h[m.end():]
-        return h
-
-    S  = scraped.get("sinner", {})
-    A  = scraped.get("alcaraz", {})
-    SC = S.get("csv", {})
-    AC = A.get("csv", {})
-    SV = S.get("vision_wl", {})
-    AV = A.get("vision_wl", {})
-    SX = S.get("computed", {})
-    AX = A.get("computed", {})
-    SC_ = S.get("career", {})
-    AC_ = A.get("career", {})
-
-    def patch(pat, sv, av, label):
-        nonlocal html
-        prev = html
-        if sv is not None: html = rn(html, pat, sv, 1)
-        if av is not None: html = rn(html, pat, av, 2)
-        if html != prev: updated.append(f"{label}: {sv} / {av}")
-
-    def sub1(pat, val, label):
-        nonlocal html
-        prev = html
-        if val is not None:
-            html = re.sub(pat, lambda m: m.group(1) + str(val) + m.group(2), html, count=1)
-        if html != prev: updated.append(f"{label}: {val}")
-
-    def trow(label_text, sv, av, note_label):
-        nonlocal html
-        prev = html
-        le = re.escape(label_text)
-        if sv is not None:
-            html = re.sub(rf'({le}</td><td class="sv">)[^<]+(</td>)',
-                          rf'\g<1>{sv}\2', html, count=1)
-        if av is not None:
-            html = re.sub(rf'({le}</td><td class="sv">[^<]+</td><td class="av">)[^<]+(</td>)',
-                          rf'\g<1>{av}\2', html, count=1)
-        if html != prev: updated.append(f"Table {note_label}: {sv} / {av}")
-
-    # ── Profile spans ────────────────────────────────────────────────────
-    patch(r'(Career W/L</span><span class="ps-val">)[\d\u2013\-]+(</span>)',
-          S.get("career_wl"), A.get("career_wl"), "Profile W/L")
-    patch(r'(Win Ratio</span><span class="ps-val">)[\d.]+%(</span>)',
-          f"{S['career_win_pct']}%" if S.get("career_win_pct") else None,
-          f"{A['career_win_pct']}%" if A.get("career_win_pct") else None, "Profile Win%")
-    patch(r'(Titles</span><span class="ps-val">)\d+(</span>)',
-          S.get("career_titles"), A.get("career_titles"), "Profile Titles")
-    patch(r'(Grand Slams</span><span class="ps-val">)\d+(</span>)',
-          SX.get("gs_total"), AX.get("gs_total"), "Profile GS")
-    patch(r'(Prize Money</span><span class="ps-val">)[^<]+(</span>)',
-          S.get("prize_career"), A.get("prize_career"), "Profile Prize")
-    patch(r'(ATP Points</span><span class="ps-val">)[^<]+(</span>)',
-          f"{S['atp_points']:,}" if S.get("atp_points") else None,
-          f"{A['atp_points']:,}" if A.get("atp_points") else None, "Profile Points")
-    patch(r'(Age</span><span class="ps-val">)\d+(</span>)',
-          SX.get("age"), AX.get("age"), "Profile Age")
-    patch(r'(Coach</span><span class="ps-val">)[^<]+(</span>)',
-          S.get("coach"), A.get("coach"), "Profile Coach")
-    patch(r'(YTD W/L</span><span class="ps-val">)[\d\u2013\-]+(</span>)',
-          S.get("ytd_wl"), A.get("ytd_wl"), "Profile YTD W/L")
-    patch(r'(YTD Titles</span><span class="ps-val">)\d+(</span>)',
-          S.get("ytd_titles"), A.get("ytd_titles"), "Profile YTD Titles")
-    patch(r'(Aces</span><span class="ps-val">)\d+(</span>)',
-          SC_.get("aces"), AC_.get("aces"), "Profile Aces")
-    patch(r'(Double Faults</span><span class="ps-val">)\d+(</span>)',
-          SC_.get("double_faults"), AC_.get("double_faults"), "Profile DF")
-    patch(r'(1st Serve %</span><span class="ps-val">)[\d.]+%(</span>)',
-          f"{SC_['first_serve_pct']}%" if SC_.get("first_serve_pct") else None,
-          f"{AC_['first_serve_pct']}%" if AC_.get("first_serve_pct") else None, "Profile 1stSrv%")
-    patch(r'(Avg\. Aces/Match</span><span class="ps-val">)[\d.]+(</span>)',
-          SX.get("avg_aces_match"), AX.get("avg_aces_match"), "Profile Avg Aces/Match")
-    patch(r'(Avg\. DF/Match</span><span class="ps-val">)[\d.]+(</span>)',
-          SX.get("avg_df_match"), AX.get("avg_df_match"), "Profile Avg DF/Match")
-    patch(r'(Days at #1</span><span class="ps-val">)[\d+]+(</span>)',
-          SX.get("days_at_no1"), AX.get("days_at_no1"), "Profile Days#1")
-    patch(r'(Weeks at #1</span><span class="ps-val">)[\d+]+(</span>)',
-          SX.get("weeks_at_no1"), AX.get("weeks_at_no1"), "Profile Weeks#1")
-    patch(r'(Fastest Serve</span><span class="ps-val">)[^<]+(</span>)',
-          f"{SX['fastest_serve_kmh']} km/h" if SX.get("fastest_serve_kmh") else None,
-          f"{AX['fastest_serve_kmh']} km/h" if AX.get("fastest_serve_kmh") else None,
-          "Profile Fastest Serve")
-
-    # ── Summary cards ────────────────────────────────────────────────────
-    s_sh = fmt_short(S.get("prize_career"))
-    a_sh = fmt_short(A.get("prize_career"))
-    prev = html
-    if s_sh:
-        html = re.sub(r'(class="qs-val s" style="font-size:26px">\$)[\d.]+M(</div>)',
-                      lambda m: f'{m.group(1)}{s_sh.lstrip("$")}{m.group(2)}', html, count=1)
-    if a_sh:
-        html = re.sub(r'(class="qs-val a" style="font-size:26px">\$)[\d.]+M(</div>)',
-                      lambda m: f'{m.group(1)}{a_sh.lstrip("$")}{m.group(2)}', html, count=1)
-    if html != prev: updated.append(f"Card earnings: {s_sh}/{a_sh}")
-
-    # Use ATP XHR YTD if CSV YTD is missing (2026 CSV not yet on JeffSackmann)
-    s_ytd = (SC.get("csv_ytd_win_pct") if SC.get("csv_ytd_win_pct") else None) or S.get("ytd_win_pct")
-    a_ytd = (AC.get("csv_ytd_win_pct") if AC.get("csv_ytd_win_pct") else None) or A.get("ytd_win_pct")
-    prev = html
-    if s_ytd:
-        html = re.sub(r'(class="qs-val s" style="font-size:28px">)[\d.]+%(</div>)',
-                      rf'\g<1>{s_ytd}%\2', html, count=1)
-    if a_ytd:
-        html = re.sub(r'(class="qs-val a" style="font-size:28px">)[\d.]+%(</div>)',
-                      rf'\g<1>{a_ytd}%\2', html, count=1)
-    if html != prev: updated.append(f"Card YTD Win%: {s_ytd}%/{a_ytd}%")
-
-    # Use ground truth H2H from PLAYERS config (CSV only covers recent years)
-    sh2h = PLAYERS["sinner"]["h2h_wins"]
-    ah2h = PLAYERS["alcaraz"]["h2h_wins"]
-    if sh2h is not None and ah2h is not None:
-        prev = html
-        pat  = r'(class="qs-val s"[^>]*>)\d+(</div>.*?class="qs-val a"[^>]*>)\d+(</div>.*?matches played)'
-        html = re.sub(pat, lambda m: f'{m.group(1)}{sh2h}{m.group(2)}{ah2h}{m.group(3)}',
-                      html, count=1, flags=re.DOTALL)
-        if html != prev: updated.append(f"H2H: {sh2h}–{ah2h}")
-
-    # ── Comparison table ─────────────────────────────────────────────────
-    trow("Career Win/Loss",       S.get("career_wl"), A.get("career_wl"), "W/L")
-    trow("Career Win %",
-         f"{S['career_win_pct']}%" if S.get("career_win_pct") else None,
-         f"{A['career_win_pct']}%" if A.get("career_win_pct") else None, "Win%")
-    trow("Titles (ATP)",          S.get("career_titles"), A.get("career_titles"), "Titles")
-    trow("Grand Slams",           SX.get("gs_total"), AX.get("gs_total"), "GS")
-    trow("Prize Money",           s_sh, a_sh, "Prize")
-    trow("YTD W/L",               S.get("ytd_wl"), A.get("ytd_wl"), "YTD W/L")
-    trow("YTD Titles",            S.get("ytd_titles"), A.get("ytd_titles"), "YTD Titles")
-    trow("Days at World #1",      SX.get("days_at_no1"), AX.get("days_at_no1"), "Days#1")
-    trow("Weeks at World #1",     SX.get("weeks_at_no1"), AX.get("weeks_at_no1"), "Weeks#1")
-    trow("Aces",                  SC_.get("aces"), AC_.get("aces"), "Aces")
-    trow("Double Faults",         SC_.get("double_faults"), AC_.get("double_faults"), "DF")
-    trow("1st Serve %",
-         f"{SC_['first_serve_pct']}%" if SC_.get("first_serve_pct") else None,
-         f"{AC_['first_serve_pct']}%" if AC_.get("first_serve_pct") else None, "1stSrv%")
-    trow("1st Serve Won %",
-         f"{SC_['first_serve_won_pct']}%" if SC_.get("first_serve_won_pct") else None,
-         f"{AC_['first_serve_won_pct']}%" if AC_.get("first_serve_won_pct") else None, "1stSrvWon%")
-    trow("2nd Serve Won %",
-         f"{SC_['second_serve_won_pct']}%" if SC_.get("second_serve_won_pct") else None,
-         f"{AC_['second_serve_won_pct']}%" if AC_.get("second_serve_won_pct") else None, "2ndSrvWon%")
-    trow("BP Saved %",
-         f"{SC_['bp_saved_pct']}%" if SC_.get("bp_saved_pct") else None,
-         f"{AC_['bp_saved_pct']}%" if AC_.get("bp_saved_pct") else None, "BP Saved%")
-    trow("BP Converted %",
-         f"{SC_['bp_converted_pct']}%" if SC_.get("bp_converted_pct") else None,
-         f"{AC_['bp_converted_pct']}%" if AC_.get("bp_converted_pct") else None, "BP Conv%")
-    trow("1st Serve Return Won %",
-         f"{SC_['first_return_won_pct']}%" if SC_.get("first_return_won_pct") else None,
-         f"{AC_['first_return_won_pct']}%" if AC_.get("first_return_won_pct") else None, "1stRetWon%")
-    trow("2nd Serve Return Won %",
-         f"{SC_['second_return_won_pct']}%" if SC_.get("second_return_won_pct") else None,
-         f"{AC_['second_return_won_pct']}%" if AC_.get("second_return_won_pct") else None, "2ndRetWon%")
-    trow("Return Games Won %",
-         f"{SC_['return_games_won_pct']}%" if SC_.get("return_games_won_pct") else None,
-         f"{AC_['return_games_won_pct']}%" if AC_.get("return_games_won_pct") else None, "RetGamesWon%")
-    trow("Total Points Won %",
-         f"{SC_['total_points_won_pct']}%" if SC_.get("total_points_won_pct") else None,
-         f"{AC_['total_points_won_pct']}%" if AC_.get("total_points_won_pct") else None, "TotalPtsWon%")
-    trow("Avg. Aces / Match",     SX.get("avg_aces_match"), AX.get("avg_aces_match"), "Avg Aces/M")
-    trow("Avg. DF / Match",       SX.get("avg_df_match"), AX.get("avg_df_match"), "Avg DF/M")
-    trow("Fastest Serve",
-         f"{SX['fastest_serve_kmh']} km/h" if SX.get("fastest_serve_kmh") else None,
-         f"{AX['fastest_serve_kmh']} km/h" if AX.get("fastest_serve_kmh") else None, "Fastest Serve")
-    trow("Sets Won/Lost",
-         f"{SC['csv_sets_won']}\u2013{SC['csv_sets_lost']}" if SC.get("csv_sets_won") else None,
-         f"{AC['csv_sets_won']}\u2013{AC['csv_sets_lost']}" if AC.get("csv_sets_won") else None, "Sets W/L")
-    trow("Sets Won %",
-         f"{SC['csv_sets_ratio']}%" if SC.get("csv_sets_ratio") else None,
-         f"{AC['csv_sets_ratio']}%" if AC.get("csv_sets_ratio") else None, "Sets%")
-    trow("Wins in Straight Sets %",
-         f"{SX['wins_straight_sets_pct']}%" if SX.get("wins_straight_sets_pct") else None,
-         f"{AX['wins_straight_sets_pct']}%" if AX.get("wins_straight_sets_pct") else None, "SS Wins%")
-    trow("Wins from Behind %",
-         f"{SX['wins_from_behind_pct']}%" if SX.get("wins_from_behind_pct") else None,
-         f"{AX['wins_from_behind_pct']}%" if AX.get("wins_from_behind_pct") else None, "From Behind%")
-    trow("Avg Match Duration",    SX.get("avg_match_duration_str"), AX.get("avg_match_duration_str"), "Avg Duration")
-    trow("Longest Win Streak",    SX.get("longest_win_streak"), AX.get("longest_win_streak"), "Streak")
-    # Vision W/L situational
-    trow("Serve Rating",          SV.get("serve_rating"), AV.get("serve_rating"), "Serve Rating")
-    trow("Return Rating",         SV.get("return_rating"), AV.get("return_rating"), "Return Rating")
-    trow("Under Pressure Rating", SV.get("under_pressure_rating"), AV.get("under_pressure_rating"), "Pressure Rating")
-    trow("vs Top 5",              SV.get("vs_top5_wl"), AV.get("vs_top5_wl"), "vs Top5")
-    trow("vs Top 10",             SV.get("vs_top10_wl"), AV.get("vs_top10_wl"), "vs Top10")
-    trow("vs Top 20",             SV.get("vs_top20_wl"), AV.get("vs_top20_wl"), "vs Top20")
-    trow("Finals W/L",            SV.get("finals_wl"), AV.get("finals_wl"), "Finals W/L")
-    trow("Grand Slams W/L",       SV.get("grand_slams_wl"), AV.get("grand_slams_wl"), "GS W/L record")
-    trow("Masters 1000 W/L",      SV.get("masters_wl"), AV.get("masters_wl"), "Masters W/L")
-    trow("Indoor W/L",            SV.get("indoor_wl"), AV.get("indoor_wl"), "Indoor")
-    trow("Outdoor W/L",           SV.get("outdoor_wl"), AV.get("outdoor_wl"), "Outdoor")
-    trow("Tiebreaks W/L",         SV.get("tiebreak_wl"), AV.get("tiebreak_wl"), "TB W/L")
-    trow("Deciding Set W/L",      SV.get("deciding_set_wl"), AV.get("deciding_set_wl"), "Dec Set W/L")
-    trow("5th Set W/L",           SV.get("fifth_set_wl"), AV.get("fifth_set_wl"), "5th Set")
-    trow("vs Left-Handed",        SV.get("vs_lefthanded_wl"), AV.get("vs_lefthanded_wl"), "vs Left")
-    trow("vs Right-Handed",       SV.get("vs_righthanded_wl"), AV.get("vs_righthanded_wl"), "vs Right")
-    trow("After Winning 1st Set",
-         f"{SV['after_winning_first_set_pct']}%" if SV.get("after_winning_first_set_pct") else None,
-         f"{AV['after_winning_first_set_pct']}%" if AV.get("after_winning_first_set_pct") else None,
-         "After Win 1stSet")
-    trow("After Losing 1st Set",
-         f"{SV['after_losing_first_set_pct']}%" if SV.get("after_losing_first_set_pct") else None,
-         f"{AV['after_losing_first_set_pct']}%" if AV.get("after_losing_first_set_pct") else None,
-         "After Lose 1stSet")
-
-    # ── Surface table ────────────────────────────────────────────────────
-    for surf in ["hard", "clay", "grass"]:
-        cap   = surf.capitalize()
-        sw    = SC.get(f"csv_{surf}_wl")
-        sp    = SC.get(f"csv_{surf}_win_pct")
-        aw    = AC.get(f"csv_{surf}_wl")
-        ap    = AC.get(f"csv_{surf}_win_pct")
-        if sw and aw:
-            prev = html
-            pat  = rf'(<td>{cap}</td><td class="sv">)[\d\u2013\-]+(</td><td class="av">)[\d\u2013\-]+(</td><td class="sv">)[\d.]+%(</td><td class="av">)[\d.]+%'
-            html = re.sub(pat,
-                          lambda m, sv=sw, spc=sp, av=aw, apc=ap:
-                              f'{m.group(1)}{sv}{m.group(2)}{av}{m.group(3)}{spc}%{m.group(4)}{apc}%',
-                          html, count=1)
-            if html != prev: updated.append(f"{cap}: S {sw}({sp}%) A {aw}({ap}%)")
-
-    # ── Per-slam wins ────────────────────────────────────────────────────
-    for slam_name, sx_key in [
-        ("Australian Open", "gs_ao"),
-        ("Roland Garros",   "gs_rg"),
-        ("Wimbledon",       "gs_wimbledon"),
-        ("US Open",         "gs_uso"),
-    ]:
-        sv = SX.get(sx_key)
-        av = AX.get(sx_key)
-        if sv is not None or av is not None:
-            prev = html
-            esc  = re.escape(slam_name)
-            html = re.sub(
-                rf'({esc}</td><td class="sv">)\d+(</td><td class="av">)\d+(</td>)',
-                lambda m, s=sv or 0, a=av or 0:
-                    f'{m.group(1)}{s}{m.group(2)}{a}{m.group(3)}',
-                html, count=1
-            )
-            if html != prev: updated.append(f"{slam_name}: S={sv} A={av}")
-
-    # ── Clutch Score rows (tiebreaks / deciding sets / BP) ────────────────
-    def clutch_pair(label, pat, sv, av):
-        nonlocal html
-        prev = html
-        if sv is not None:
-            ms = list(re.finditer(pat, html))
-            if ms:
-                m = ms[0]
-                html = html[:m.start()] + m.group(1) + str(sv) + m.group(2) + html[m.end():]
-        if av is not None:
-            ms = list(re.finditer(pat, html))
-            if len(ms) >= 2:
-                m = ms[1]
-                html = html[:m.start()] + m.group(1) + str(av) + m.group(2) + html[m.end():]
-        if html != prev: updated.append(f"Clutch {label}: {sv}/{av}")
-
-    clutch_pair("Tiebreaks%",
-        r'(Tiebreaks Won %</span><span class="clutch-row-val [sa]">)[\d.]+(%)',
-        SV.get("tiebreaks_won_pct"), AV.get("tiebreaks_won_pct"))
-    clutch_pair("Deciding Sets%",
-        r'(Deciding Sets Won %</span><span class="clutch-row-val [sa]">)[\d.]+(%)',
-        SV.get("deciding_sets_won_pct"), AV.get("deciding_sets_won_pct"))
-    clutch_pair("BP Saved%",
-        r'(BP Saved %</span><span class="clutch-row-val [sa]">)[\d.]+(%)',
-        SV.get("bp_saved_pct"), AV.get("bp_saved_pct"))
-    clutch_pair("BP Converted%",
-        r'(BP Converted %</span><span class="clutch-row-val [sa]">)[\d.]+(%)',
-        SV.get("bp_converted_pct"), AV.get("bp_converted_pct"))
-
-    # ── vs Legends table ─────────────────────────────────────────────────
-    prev = html
-    if s_sh:
-        html = re.sub(r'(highlight-s">\$)[\d.]+M(</td>)',
-                      rf'\g<1>{s_sh.lstrip("$")}\2', html, count=1)
-    if a_sh:
-        html = re.sub(r'(highlight-a">\$)[\d.]+M(</td>)',
-                      rf'\g<1>{a_sh.lstrip("$")}\2', html, count=1)
-    if html != prev: updated.append(f"Legends: {s_sh}/{a_sh}")
-
-    # ── Timestamp ────────────────────────────────────────────────────────
     today = datetime.now(timezone.utc).strftime("%-d %B %Y")
-    html  = re.sub(r"Last updated: [^<\"]+", f"Last updated: {today}", html)
-
-    for msg in updated:
-        print(f"  ✓ {msg}")
-
-    if html != orig:
+    new_html = re.sub(r"Last updated: [^<\"]+", f"Last updated: {today}", html)
+    if new_html != html:
         with open("index.html", "w") as f:
-            f.write(html)
-        print(f"\n  ✅ index.html saved ({today}) — {len(updated)} fields updated")
+            f.write(new_html)
+        print(f"  ✅ Last updated timestamp → {today}")
     else:
-        print("\n  index.html unchanged")
+        print("  Timestamp unchanged")
 
 
 # ─── Main ─────────────────────────────────────────────────────────────────────
@@ -831,8 +543,17 @@ async def main():
     if not has_key:
         print("⚠  ANTHROPIC_API_KEY not set — vision sources skipped\n")
 
-    result = {"scraped_at": datetime.now(timezone.utc).isoformat(),
-              "sinner": {}, "alcaraz": {}}
+    result = {
+        "scraped_at": datetime.now(timezone.utc).isoformat(),
+        "sinner": {
+            "h2h_wins":   PLAYERS["sinner"]["h2h_wins"],
+            "h2h_losses": PLAYERS["sinner"]["h2h_losses"],
+        },
+        "alcaraz": {
+            "h2h_wins":   PLAYERS["alcaraz"]["h2h_wins"],
+            "h2h_losses": PLAYERS["alcaraz"]["h2h_losses"],
+        },
+    }
 
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=True)

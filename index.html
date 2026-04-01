@@ -643,9 +643,9 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
         </div>
         <div class="h2h-center">
           <div style="display:flex;align-items:center;justify-content:center;gap:16px">
-            <div class="h2h-score-num s">6</div>
+            <div class="h2h-score-num s" id="h2h-score-s">6</div>
             <div class="vs-circle">VS</div>
-            <div class="h2h-score-num a">11</div>
+            <div class="h2h-score-num a" id="h2h-score-a">11</div>
           </div>
           <div class="h2h-total">17 matches played · Alcaraz leads H2H</div>
         </div>
@@ -696,17 +696,17 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
         <div class="qs-card">
           <div class="qs-card-title">Career Earnings</div>
           <div class="qs-values">
-            <div><div class="qs-val s" style="font-size:26px">$56.6M</div><div class="qs-winner s">Sinner ✦</div></div>
+            <div><div class="qs-val s" style="font-size:26px" id="s-prize-card">$56.6M</div><div class="qs-winner s">Sinner ✦</div></div>
             <div class="qs-divider">/</div>
-            <div><div class="qs-val a" style="font-size:26px">$53.9M</div><div class="qs-winner a">Alcaraz</div></div>
+            <div><div class="qs-val a" style="font-size:26px" id="a-prize-card">$53.9M</div><div class="qs-winner a">Alcaraz</div></div>
           </div>
         </div>
         <div class="qs-card">
           <div class="qs-card-title">2025 Win %</div>
           <div class="qs-values">
-            <div><div class="qs-val s" style="font-size:28px">90.6%</div><div class="qs-winner s">Sinner</div></div>
+            <div><div class="qs-val s" style="font-size:28px" id="s-ytd-pct-card">90.6%</div><div class="qs-winner s">Sinner</div></div>
             <div class="qs-divider">/</div>
-            <div><div class="qs-val a" style="font-size:28px">91.2%</div><div class="qs-winner a">Alcaraz ✦</div></div>
+            <div><div class="qs-val a" style="font-size:28px" id="a-ytd-pct-card">91.2%</div><div class="qs-winner a">Alcaraz ✦</div></div>
           </div>
         </div>
         <div class="qs-card">
@@ -735,21 +735,21 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
         </div>
         <div class="profile-stats">
           <div class="ps-item"><span class="ps-label">Born</span><span class="ps-val">16 Aug 2001</span></div>
-          <div class="ps-item"><span class="ps-label">Age</span><span class="ps-val">23</span></div>
+          <div class="ps-item"><span class="ps-label">Age</span><span class="ps-val" id="s-age">23</span></div>
           <div class="ps-item"><span class="ps-label">Height</span><span class="ps-val">188 cm (6'2")</span></div>
           <div class="ps-item"><span class="ps-label">Weight</span><span class="ps-val">76 kg</span></div>
           <div class="ps-item"><span class="ps-label">Plays</span><span class="ps-val">Right-handed</span></div>
           <div class="ps-item"><span class="ps-label">Backhand</span><span class="ps-val">Two-handed</span></div>
           <div class="ps-item"><span class="ps-label">Turned Pro</span><span class="ps-val">2018</span></div>
-          <div class="ps-item"><span class="ps-label">ATP Points</span><span class="ps-val">11,830</span></div>
-          <div class="ps-item"><span class="ps-label">Career W/L</span><span class="ps-val">328–88</span></div>
-          <div class="ps-item"><span class="ps-label">Win Ratio</span><span class="ps-val">78.8%</span></div>
-          <div class="ps-item"><span class="ps-label">Titles</span><span class="ps-val">24</span></div>
-          <div class="ps-item"><span class="ps-label">Grand Slams</span><span class="ps-val">4</span></div>
+          <div class="ps-item"><span class="ps-label">ATP Points</span><span class="ps-val" id="s-atp-points">11,830</span></div>
+          <div class="ps-item"><span class="ps-label">Career W/L</span><span class="ps-val" id="s-career-wl">328–88</span></div>
+          <div class="ps-item"><span class="ps-label">Win Ratio</span><span class="ps-val" id="s-win-pct">78.8%</span></div>
+          <div class="ps-item"><span class="ps-label">Titles</span><span class="ps-val" id="s-titles">24</span></div>
+          <div class="ps-item"><span class="ps-label">Grand Slams</span><span class="ps-val" id="s-gs-total">4</span></div>
           <div class="ps-item"><span class="ps-label">Masters 1000</span><span class="ps-val">5</span></div>
           <div class="ps-item"><span class="ps-label">ATP Finals</span><span class="ps-val">2 (2023, 2024)</span></div>
-          <div class="ps-item"><span class="ps-label">Prize Money</span><span class="ps-val">$56.6M</span></div>
-          <div class="ps-item"><span class="ps-label">Coach</span><span class="ps-val">Vagnozzi / Cahill</span></div>
+          <div class="ps-item"><span class="ps-label">Prize Money</span><span class="ps-val" id="s-prize">$56.6M</span></div>
+          <div class="ps-item"><span class="ps-label">Coach</span><span class="ps-val" id="s-coach">Vagnozzi / Cahill</span></div>
         </div>
       </div>
 
@@ -763,21 +763,21 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
         </div>
         <div class="profile-stats">
           <div class="ps-item"><span class="ps-label">Born</span><span class="ps-val">5 May 2003</span></div>
-          <div class="ps-item"><span class="ps-label">Age</span><span class="ps-val">22</span></div>
+          <div class="ps-item"><span class="ps-label">Age</span><span class="ps-val" id="a-age">22</span></div>
           <div class="ps-item"><span class="ps-label">Height</span><span class="ps-val">185 cm (6'1")</span></div>
           <div class="ps-item"><span class="ps-label">Weight</span><span class="ps-val">79 kg</span></div>
           <div class="ps-item"><span class="ps-label">Plays</span><span class="ps-val">Right-handed</span></div>
           <div class="ps-item"><span class="ps-label">Backhand</span><span class="ps-val">Two-handed</span></div>
           <div class="ps-item"><span class="ps-label">Turned Pro</span><span class="ps-val">2018</span></div>
-          <div class="ps-item"><span class="ps-label">ATP Points</span><span class="ps-val">7,745</span></div>
-          <div class="ps-item"><span class="ps-label">Career W/L</span><span class="ps-val">362–90</span></div>
-          <div class="ps-item"><span class="ps-label">Win Ratio</span><span class="ps-val">80.1%</span></div>
-          <div class="ps-item"><span class="ps-label">Titles</span><span class="ps-val">26</span></div>
-          <div class="ps-item"><span class="ps-label">Grand Slams</span><span class="ps-val">7</span></div>
+          <div class="ps-item"><span class="ps-label">ATP Points</span><span class="ps-val" id="a-atp-points">7,745</span></div>
+          <div class="ps-item"><span class="ps-label">Career W/L</span><span class="ps-val" id="a-career-wl">362–90</span></div>
+          <div class="ps-item"><span class="ps-label">Win Ratio</span><span class="ps-val" id="a-win-pct">80.1%</span></div>
+          <div class="ps-item"><span class="ps-label">Titles</span><span class="ps-val" id="a-titles">26</span></div>
+          <div class="ps-item"><span class="ps-label">Grand Slams</span><span class="ps-val" id="a-gs-total">7</span></div>
           <div class="ps-item"><span class="ps-label">Masters 1000</span><span class="ps-val">6</span></div>
           <div class="ps-item"><span class="ps-label">ATP Finals</span><span class="ps-val">0</span></div>
-          <div class="ps-item"><span class="ps-label">Prize Money</span><span class="ps-val">$53.9M</span></div>
-          <div class="ps-item"><span class="ps-label">Coach</span><span class="ps-val">Samuel López (2026)</span></div>
+          <div class="ps-item"><span class="ps-label">Prize Money</span><span class="ps-val" id="a-prize">$53.9M</span></div>
+          <div class="ps-item"><span class="ps-label">Coach</span><span class="ps-val" id="a-coach">Samuel López (2026)</span></div>
         </div>
       </div>
     </div>
@@ -789,18 +789,18 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
       <div class="stats-table-wrap">
         <table class="stats-table">
           <tr><th style="width:40%">Category</th><th class="s">Sinner</th><th class="a">Alcaraz</th><th>Edge</th></tr>
-          <tr><td>Career Win/Loss</td><td class="sv">328–88</td><td class="av">362–90</td><td style="color:var(--text-dim);font-size:11px">Similar</td></tr>
-          <tr><td>Career Win %</td><td class="sv">78.8%</td><td class="av">80.1%</td><td style="color:var(--gold)">Tied ≈</td></tr>
-          <tr><td>Titles (ATP)</td><td class="sv">24</td><td class="av">26</td><td><span class="leader-a">Alcaraz</span></td></tr>
-          <tr><td>Grand Slams</td><td class="sv">4</td><td class="av">7</td><td><span class="leader-a">Alcaraz</span></td></tr>
-          <tr><td>Masters 1000</td><td class="sv">7</td><td class="av">6</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>ATP Finals Titles</td><td class="sv">2</td><td class="av">0</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>Days at World #1</td><td class="sv">462+</td><td class="av">427+</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>Prize Money</td><td class="sv">$56.6M</td><td class="av">$53.9M</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>H2H Record</td><td class="sv">6</td><td class="av">11</td><td><span class="leader-a">Alcaraz</span></td></tr>
-          <tr><td>2025 Win %</td><td class="sv">90.6%</td><td class="av">91.2%</td><td><span class="leader-a">Alcaraz</span></td></tr>
-          <tr><td>Finals Record</td><td class="sv">24–9</td><td class="av">26–9</td><td style="color:var(--text-dim);font-size:11px">Similar</td></tr>
-          <tr><td>vs Top 10</td><td class="sv">60–37</td><td class="av">55–24</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Career Win/Loss</td><td class="sv" id="t-s-career-wl">328–88</td><td class="av" id="t-a-career-wl">362–90</td><td style="color:var(--text-dim);font-size:11px">Similar</td></tr>
+          <tr><td>Career Win %</td><td class="sv" id="t-s-win-pct">78.8%</td><td class="av" id="t-a-win-pct">80.1%</td><td style="color:var(--gold)">Tied ≈</td></tr>
+          <tr><td>Titles (ATP)</td><td class="sv" id="t-s-titles">24</td><td class="av" id="t-a-titles">26</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Grand Slams</td><td class="sv" id="t-s-gs">4</td><td class="av" id="t-a-gs">7</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Masters 1000</td><td class="sv" id="t-s-masters">7</td><td class="av" id="t-a-masters">6</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>ATP Finals Titles</td><td class="sv" id="t-s-atp-finals">2</td><td class="av" id="t-a-atp-finals">0</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Days at World #1</td><td class="sv" id="t-s-days-no1">462+</td><td class="av" id="t-a-days-no1">427+</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Prize Money</td><td class="sv" id="t-s-prize">$56.6M</td><td class="av" id="t-a-prize">$53.9M</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>H2H Record</td><td class="sv" id="t-s-h2h">6</td><td class="av" id="t-a-h2h">11</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>2025 Win %</td><td class="sv" id="t-s-ytd-pct">90.6%</td><td class="av" id="t-a-ytd-pct">91.2%</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Finals Record</td><td class="sv" id="t-s-finals-rec"" id="t-s-finals>24–9</td><td class="av" id="t-a-finals-rec"" id="t-a-finals>26–9</td><td style="color:var(--text-dim);font-size:11px">Similar</td></tr>
+          <tr><td>vs Top 10</td><td class="sv" id="t-s-vs-top10">60–37</td><td class="av" id="t-a-vs-top10">55–24</td><td><span class="leader-s">Sinner</span></td></tr>
         </table>
       </div>
     </div>
@@ -816,10 +816,10 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
     <div class="surface-content active" id="surf-all">
       <table class="stats-table" style="border:1px solid var(--border);border-radius:8px;overflow:hidden">
         <tr><th>Surface</th><th class="s">Sinner W/L</th><th class="a">Alcaraz W/L</th><th class="s">Sinner %</th><th class="a">Alcaraz %</th><th>Edge</th></tr>
-        <tr><td>Hard</td><td class="sv">234–54</td><td class="av">154–42</td><td class="sv">81.3%</td><td class="av">78.6%</td><td><span class="leader-s">Sinner</span></td></tr>
-        <tr><td>Clay</td><td class="sv">46–19</td><td class="av">76–22</td><td class="sv">70.8%</td><td class="av">77.6%</td><td><span class="leader-a">Alcaraz</span></td></tr>
-        <tr><td>Grass</td><td class="sv">32–9</td><td class="av">38–11</td><td class="sv">80.1%</td><td class="av">77.6%</td><td style="color:var(--text-dim);font-size:11px">Tied ≈</td></tr>
-        <tr><td>Indoor Hard</td><td class="sv">87–20</td><td class="av">44–12</td><td class="sv">81.3%</td><td class="av">78.6%</td><td><span class="leader-s">Sinner</span></td></tr>
+        <tr><td>Hard</td><td class="sv" id="t-s-hard-wl">234–54</td><td class="av" id="t-a-hard-wl">154–42</td><td class="sv" id="t-s-hard-pct">81.3%</td><td class="av" id="t-a-hard-pct">78.6%</td><td><span class="leader-s">Sinner</span></td></tr>
+        <tr><td>Clay</td><td class="sv" id="t-s-clay-wl">46–19</td><td class="av" id="t-a-clay-wl">76–22</td><td class="sv" id="t-s-clay-pct">70.8%</td><td class="av" id="t-a-clay-pct">77.6%</td><td><span class="leader-a">Alcaraz</span></td></tr>
+        <tr><td>Grass</td><td class="sv" id="t-s-grass-wl">32–9</td><td class="av" id="t-a-grass-wl">38–11</td><td class="sv" id="t-s-grass-pct">80.1%</td><td class="av" id="t-a-grass-pct">77.6%</td><td style="color:var(--text-dim);font-size:11px">Tied ≈</td></tr>
+        <tr><td>Indoor Hard</td><td class="sv" id="t-s-indoor-wl">87–20</td><td class="av" id="t-a-indoor-wl">44–12</td><td class="sv">81.3%</td><td class="av">78.6%</td><td><span class="leader-s">Sinner</span></td></tr>
       </table>
     </div>
     <div class="surface-content" id="surf-hard">
@@ -827,7 +827,7 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
         <p style="color:var(--text-dim);margin-bottom:20px;font-size:13px">Hard court dominance is <strong style="color:var(--sinner)">Sinner's</strong> strongest suit — indoor hard especially, where he holds a 31-match winning streak at one point in 2025.</p>
         <table class="stats-table">
           <tr><th>Category</th><th class="s">Sinner</th><th class="a">Alcaraz</th></tr>
-          <tr><td>Hard W/L</td><td class="sv">234–54</td><td class="av">154–42</td></tr>
+          <tr><td>Hard W/L</td><td class="sv" id="t-s-hard-wl2">234–54</td><td class="av" id="t-a-hard-wl2">154–42</td></tr>
           <tr><td>Hard Win %</td><td class="sv win">81.3%</td><td class="av">78.6%</td></tr>
           <tr><td>H2H on Hard</td><td class="sv win">2</td><td class="av">8</td></tr>
           <tr><td>Slams on Hard</td><td class="sv win">3 (AO×3)</td><td class="av">2 (USO×2)</td></tr>
@@ -840,10 +840,10 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
         <p style="color:var(--text-dim);margin-bottom:20px;font-size:13px">Clay is <strong style="color:var(--alcaraz)">Alcaraz's</strong> playground — 22–1 in 2025 on clay (95.7%), including a 2025 Roland Garros title in the match of the decade.</p>
         <table class="stats-table">
           <tr><th>Category</th><th class="s">Sinner</th><th class="a">Alcaraz</th></tr>
-          <tr><td>Clay W/L</td><td class="sv">46–19</td><td class="av win">76–22</td></tr>
-          <tr><td>Clay Win %</td><td class="sv">70.8%</td><td class="av win">77.6%</td></tr>
-          <tr><td>H2H on Clay</td><td class="sv">1</td><td class="av win">3</td></tr>
-          <tr><td>Roland Garros</td><td class="sv">F (2025, L)</td><td class="av win">W 2024, 2025</td></tr>
+          <tr><td>Clay W/L</td><td class="sv" id="t-s-clay-wl2">46–19</td><td class="av" id="t-a-clay-wl2" win>76–22</td></tr>
+          <tr><td>Clay Win %</td><td class="sv id="t-s-clay-pct2"">70.8%</td><td class="av id="t-a-clay-pct2" win">77.6%</td></tr>
+          <tr><td>H2H on Clay</td><td class="sv" id="t-s-h2h-clay">1</td><td class="av" id="t-a-h2h-clay" win>3</td></tr>
+          <tr><td>Roland Garros</td><td class="sv" id="t-s-rg-wl">F (2025, L)</td><td class="av" id="t-a-rg-wl" win>W 2024, 2025</td></tr>
           <tr><td>Clay Streak (2025)</td><td class="sv">—</td><td class="av win">22–1</td></tr>
         </table>
       </div>
@@ -853,8 +853,8 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
         <p style="color:var(--text-dim);margin-bottom:20px;font-size:13px"><strong style="color:var(--sinner)">Sinner</strong> leads the H2H 2–0 on grass and won Wimbledon 2024 — their only meeting at Wimbledon. Alcaraz won Wimbledon 2023 and 2024.</p>
         <table class="stats-table">
           <tr><th>Category</th><th class="s">Sinner</th><th class="a">Alcaraz</th></tr>
-          <tr><td>Grass W/L</td><td class="sv">32–9</td><td class="av">38–11</td></tr>
-          <tr><td>Grass Win %</td><td class="sv">80.1%</td><td class="av">77.6%</td></tr>
+          <tr><td>Grass W/L</td><td class="sv" id="t-s-grass-wl2">32–9</td><td class="av" id="t-a-grass-wl2">38–11</td></tr>
+          <tr><td>Grass Win %</td><td class="sv" id="t-s-grass-pct2">80.1%</td><td class="av" id="t-a-grass-pct2">77.6%</td></tr>
           <tr><td>H2H on Grass</td><td class="sv win">2</td><td class="av">0</td></tr>
           <tr><td>Wimbledon</td><td class="sv win">W 2024</td><td class="av">W 2023, 2024*</td></tr>
           <tr><td>Queens/Halle</td><td class="sv">—</td><td class="av win">Queens ×2</td></tr>
@@ -928,16 +928,16 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
       <div class="stats-table-wrap">
         <table class="stats-table">
           <tr><th>Stat</th><th class="s">Sinner</th><th class="a">Alcaraz</th><th>Edge</th></tr>
-          <tr><td>Fastest Serve</td><td class="sv">217 km/h</td><td class="av">235 km/h</td><td><span class="leader-a">Alcaraz</span></td></tr>
-          <tr><td>Avg. 1st Serve Speed</td><td class="sv">183 km/h</td><td class="av">186 km/h</td><td><span class="leader-a">Alcaraz</span></td></tr>
-          <tr><td>% 1st Serve In</td><td class="sv win">64%</td><td class="av">60%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>% 1st Serve Pts Won</td><td class="sv win">77%</td><td class="av">76%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>% 2nd Serve Pts Won</td><td class="sv win">58%</td><td class="av">55%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>% Service Games Won</td><td class="sv win">84%</td><td class="av">82%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>Avg. Aces / Match</td><td class="sv">4.2</td><td class="av win">5.8</td><td><span class="leader-a">Alcaraz</span></td></tr>
-          <tr><td>Avg. Double Faults / Match</td><td class="sv win">1.8</td><td class="av">3.1</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>% Break Points Saved</td><td class="sv win">65%</td><td class="av">62%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>Serve Rating (ATP)</td><td class="sv win">260</td><td class="av">253</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Fastest Serve</td><td class="sv" id="t-s-fastest">217 km/h</td><td class="av" id="t-a-fastest">235 km/h</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Avg. 1st Serve Speed</td><td class="sv" id="sv-s-avg-speed">183 km/h</td><td class="av" id="sv-a-avg-speed">186 km/h</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>% 1st Serve In</td><td class="sv" id="sv-s-1st-in" win>64%</td><td class="av" id="sv-a-1st-in">60%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% 1st Serve Pts Won</td><td class="sv" id="sv-s-1st-won" win>77%</td><td class="av" id="sv-a-1st-won">76%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% 2nd Serve Pts Won</td><td class="sv" id="sv-s-2nd-won" win>58%</td><td class="av" id="sv-a-2nd-won">55%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% Service Games Won</td><td class="sv" id="sv-s-games-won" win>84%</td><td class="av" id="sv-a-games-won">82%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Avg. Aces / Match</td><td class="sv" id="t-s-avg-aces2">4.2</td><td class="av" id="t-a-avg-aces2" win>5.8</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Avg. Double Faults / Match</td><td class="sv" id="sv-s-df" win>1.8</td><td class="av" id="sv-a-df">3.1</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% Break Points Saved</td><td class="sv" id="pr-s-bp-saved" win>65%</td><td class="av" id="pr-a-bp-saved">62%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Serve Rating (ATP)</td><td class="sv" id="sv-s-rating" win>260</td><td class="av" id="sv-a-rating">253</td><td><span class="leader-s">Sinner</span></td></tr>
         </table>
       </div>
     </div>
@@ -949,7 +949,7 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
           <tr><th>Surface</th><th class="s">Sinner</th><th class="a">Alcaraz</th><th>Edge</th></tr>
           <tr><td>Hard (overall)</td><td class="sv win">78%</td><td class="av">77%</td><td><span class="leader-s">Sinner</span></td></tr>
           <tr><td>Indoor Hard</td><td class="sv win">80%</td><td class="av">75%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>Clay</td><td class="sv">71%</td><td class="av win">73%</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Clay</td><td class="sv" id="sv-s-clay-1st">71%</td><td class="av" id="sv-a-clay-1st">73%</td><td><span class="leader-a">Alcaraz</span></td></tr>
           <tr><td>Grass</td><td class="sv win">79%</td><td class="av">78%</td><td><span class="leader-s">Sinner</span></td></tr>
         </table>
       </div>
@@ -962,7 +962,7 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
           <tr><th>Stat</th><th class="s">Sinner 2025</th><th class="a">Alcaraz 2025</th><th>Edge</th></tr>
           <tr><td>Serve Rating</td><td class="sv win">275</td><td class="av">265</td><td><span class="leader-s">Sinner</span></td></tr>
           <tr><td>% Service Games Won</td><td class="sv win">87%</td><td class="av">84%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>Avg. Aces / Match</td><td class="sv">4.5</td><td class="av win">6.2</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Avg. Aces / Match</td><td class="sv" id="sv-s-aces3">4.5</td><td class="av" id="sv-a-aces3">6.2</td><td><span class="leader-a">Alcaraz</span></td></tr>
           <tr><td>% 1st Serve In</td><td class="sv win">66%</td><td class="av">59%</td><td><span class="leader-s">Sinner</span></td></tr>
           <tr><td>% Break Points Saved</td><td class="sv win">68%</td><td class="av">63%</td><td><span class="leader-s">Sinner</span></td></tr>
         </table>
@@ -990,12 +990,12 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
       <div class="stats-table-wrap">
         <table class="stats-table">
           <tr><th>Stat</th><th class="s">Sinner</th><th class="a">Alcaraz</th><th>Edge</th></tr>
-          <tr><td>Return Rating (ATP)</td><td class="sv win">295</td><td class="av">270</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>% 1st Serve Return Pts Won</td><td class="sv win">33%</td><td class="av">31%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>% 2nd Serve Return Pts Won</td><td class="sv win">57%</td><td class="av">53%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>% Return Games Won</td><td class="sv win">32%</td><td class="av">29%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>% Break Points Converted</td><td class="sv win">45%</td><td class="av">42%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>Return Points Won Total</td><td class="sv win">42.5%</td><td class="av">40.8%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Return Rating (ATP)</td><td class="sv" id="rt-s-rating" win>295</td><td class="av" id="rt-a-rating">270</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% 1st Serve Return Pts Won</td><td class="sv" id="rt-s-1st-ret" win>33%</td><td class="av" id="rt-a-1st-ret">31%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% 2nd Serve Return Pts Won</td><td class="sv" id="rt-s-2nd-ret" win>57%</td><td class="av" id="rt-a-2nd-ret">53%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% Return Games Won</td><td class="sv" id="rt-s-games-won" win>32%</td><td class="av" id="rt-a-games-won">29%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% Break Points Converted</td><td class="sv" id="pr-s-bp-conv" win>45%</td><td class="av" id="pr-a-bp-conv">42%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Return Points Won Total</td><td class="sv" id="rt-s-total" win>42.5%</td><td class="av" id="rt-a-total">40.8%</td><td><span class="leader-s">Sinner</span></td></tr>
         </table>
       </div>
     </div>
@@ -1006,10 +1006,10 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
         <table class="stats-table">
           <tr><th>Surface</th><th class="s">Sinner Return %</th><th class="a">Alcaraz Return %</th><th>Edge</th></tr>
           <tr><td>Hard — Return Games Won</td><td class="sv win">34%</td><td class="av">30%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>Clay — Return Games Won</td><td class="sv">30%</td><td class="av win">33%</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Clay — Return Games Won</td><td class="sv" id="rt-s-clay-ret">30%</td><td class="av" id="rt-a-clay-ret" win>33%</td><td><span class="leader-a">Alcaraz</span></td></tr>
           <tr><td>Grass — Return Games Won</td><td class="sv win">27%</td><td class="av">26%</td><td><span class="leader-s">Sinner</span></td></tr>
           <tr><td>% BP Converted — Hard</td><td class="sv win">46%</td><td class="av">41%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>% BP Converted — Clay</td><td class="sv">40%</td><td class="av win">45%</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>% BP Converted — Clay</td><td class="sv" id="rt-s-bp-clay">40%</td><td class="av" id="rt-a-bp-clay" win>45%</td><td><span class="leader-a">Alcaraz</span></td></tr>
           <tr><td>% BP Converted — Grass</td><td class="sv win">39%</td><td class="av">37%</td><td><span class="leader-s">Sinner</span></td></tr>
         </table>
       </div>
@@ -1048,12 +1048,12 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
       <div class="stats-table-wrap">
         <table class="stats-table">
           <tr><th>Metric</th><th class="s">Sinner</th><th class="a">Alcaraz</th><th>Edge</th></tr>
-          <tr><td>Under Pressure Rating</td><td class="sv win">245</td><td class="av">238</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>Under Pressure Rating</td><td class="sv" id="pr-s-rating" win>245</td><td class="av" id="pr-a-rating">238</td><td><span class="leader-s">Sinner</span></td></tr>
           <tr><td>% Break Points Saved</td><td class="sv win">65%</td><td class="av">62%</td><td><span class="leader-s">Sinner</span></td></tr>
           <tr><td>% Break Points Converted</td><td class="sv win">45%</td><td class="av">42%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>% Tiebreaks Won</td><td class="sv win">65%</td><td class="av">57%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>% Deciding Sets Won</td><td class="sv win">72%</td><td class="av">69%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>5th Set Record</td><td class="sv win">14–5</td><td class="av">8–5</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% Tiebreaks Won</td><td class="sv" id="pr-s-tb" win>65%</td><td class="av" id="pr-a-tb">57%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>% Deciding Sets Won</td><td class="sv" id="pr-s-ds" win>72%</td><td class="av" id="pr-a-ds">69%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>5th Set Record</td><td class="sv" id="pr-s-5th" win>14–5</td><td class="av" id="pr-a-5th">8–5</td><td><span class="leader-s">Sinner</span></td></tr>
         </table>
       </div>
     </div>
@@ -1063,17 +1063,17 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
       <div class="stats-table-wrap">
         <table class="stats-table">
           <tr><th>Scenario</th><th class="s">Sinner</th><th class="a">Alcaraz</th><th>Edge</th></tr>
-          <tr><td>After Winning 1st Set</td><td class="sv win">95%</td><td class="av">92%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>After Losing 1st Set</td><td class="sv win">45%</td><td class="av">42%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>In Finals</td><td class="sv win">24–9 (73%)</td><td class="av">26–9 (74%)</td><td style="color:var(--text-dim);font-size:11px">Tied</td></tr>
-          <tr><td>Grand Slams (overall)</td><td class="sv">87–19 (82%)</td><td class="av win">82–16 (84%)</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>After Winning 1st Set</td><td class="sv" id="pr-s-after-win" win>95%</td><td class="av" id="pr-a-after-win">92%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>After Losing 1st Set</td><td class="sv" id="pr-s-after-lose" win>45%</td><td class="av" id="pr-a-after-lose">42%</td><td><span class="leader-s">Sinner</span></td></tr>
+          <tr><td>In Finals</td><td class="sv" id="pr-s-finals" win>24–9 (73%)</td><td class="av" id="pr-a-finals">26–9 (74%)</td><td style="color:var(--text-dim);font-size:11px">Tied</td></tr>
+          <tr><td>Grand Slams (overall)</td><td class="sv" id="pr-s-gs-overall">87–19 (82%)</td><td class="av" id="pr-a-gs-overall" win>82–16 (84%)</td><td><span class="leader-a">Alcaraz</span></td></tr>
           <tr><td>Masters 1000</td><td class="sv win">113–28 (80%)</td><td class="av">78–24 (76%)</td><td><span class="leader-s">Sinner</span></td></tr>
           <tr><td>vs Top 10</td><td class="sv win">60–37 (75%)</td><td class="av">55–24 (70%)</td><td><span class="leader-s">Sinner</span></td></tr>
           <tr><td>vs Top 20</td><td class="sv win">132–44 (75%)</td><td class="av">108–40 (73%)</td><td><span class="leader-s">Sinner</span></td></tr>
           <tr><td>Indoor</td><td class="sv win">87–20 (81%)</td><td class="av">44–12 (79%)</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>Outdoor</td><td class="sv">245–73 (77%)</td><td class="av win">239–68 (78%)</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Outdoor</td><td class="sv" id="t-s-outdoor-wl">245–73 (77%)</td><td class="av" id="t-a-outdoor-wl" win>239–68 (78%)</td><td><span class="leader-a">Alcaraz</span></td></tr>
           <tr><td>Right-Handed Opponents</td><td class="sv win">76%</td><td class="av">74%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>Left-Handed Opponents</td><td class="sv">62%</td><td class="av win">68%</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Left-Handed Opponents</td><td class="sv" id="t-s-lefthanded">62%</td><td class="av" id="t-a-lefthanded" win>68%</td><td><span class="leader-a">Alcaraz</span></td></tr>
           <tr><td>Tiebreak Sets</td><td class="sv win">65%</td><td class="av">57%</td><td><span class="leader-s">Sinner</span></td></tr>
         </table>
       </div>
@@ -1365,8 +1365,8 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
           <div class="clutch-score-big s">72.4</div>
           <div class="clutch-label">Clutch Score / 100</div>
           <div class="clutch-breakdown">
-            <div class="clutch-row"><span class="clutch-row-label">Tiebreaks Won %</span><span class="clutch-row-val s">65% × 0.30 = 19.5</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Deciding Sets Won %</span><span class="clutch-row-val s">72% × 0.25 = 18.0</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Tiebreaks Won %</span><span class="clutch-row-val s" id="c-s-tb">65% × 0.30 = 19.5</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Deciding Sets Won %</span><span class="clutch-row-val s" id="c-s-ds">72% × 0.25 = 18.0</span></div>
             <div class="clutch-row"><span class="clutch-row-label">Break Points Saved %</span><span class="clutch-row-val s">65% × 0.25 = 16.3</span></div>
             <div class="clutch-row"><span class="clutch-row-label">Break Points Converted %</span><span class="clutch-row-val s">45% × 0.20 = 9.0</span></div>
             <div class="clutch-row" style="border-top:1px solid rgba(26,111,255,.3);margin-top:4px;padding-top:8px"><span class="clutch-row-label" style="font-weight:700;color:var(--text)">Total</span><span class="clutch-row-val s" style="font-size:14px">72.8 / 100</span></div>
@@ -1377,7 +1377,7 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
           <div class="clutch-score-big a">66.1</div>
           <div class="clutch-label">Clutch Score / 100</div>
           <div class="clutch-breakdown">
-            <div class="clutch-row"><span class="clutch-row-label">Tiebreaks Won %</span><span class="clutch-row-val a">57% × 0.30 = 17.1</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Tiebreaks Won %</span><span class="clutch-row-val a" id="c-a-ds">57% × 0.30 = 17.1</span></div>
             <div class="clutch-row"><span class="clutch-row-label">Deciding Sets Won %</span><span class="clutch-row-val a">69% × 0.25 = 17.3</span></div>
             <div class="clutch-row"><span class="clutch-row-label">Break Points Saved %</span><span class="clutch-row-val a">62% × 0.25 = 15.5</span></div>
             <div class="clutch-row"><span class="clutch-row-label">Break Points Converted %</span><span class="clutch-row-val a">42% × 0.20 = 8.4</span></div>
@@ -1885,10 +1885,256 @@ function filterServe(f, btn){
 // INIT
 // ============================================================
 
-renderTicker();
-renderMatches();
-renderRecords();
-renderExpert();
+// ============================================================
+// DYNAMIC STATS LOADER — fetches scraped_stats.json from GitHub
+// ============================================================
+
+async function loadScrapedStats() {
+  const STATS_URL = 'https://raw.githubusercontent.com/ojasvinnagpal/sincaraz/main/scraped_stats.json';
+  try {
+    const res = await fetch(STATS_URL + '?t=' + Date.now());
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return await res.json();
+  } catch(e) {
+    console.warn('Could not load scraped_stats.json:', e);
+    return null;
+  }
+}
+
+function applyStats(data) {
+  if (!data) return;
+  const S = data.sinner || {};
+  const A = data.alcaraz || {};
+  const SC = S.career || {};
+  const AC = A.career || {};
+  const SV = S.vision_wl || {};
+  const AV = A.vision_wl || {};
+  const SW = S.vision_wiki || {};
+  const AW = A.vision_wiki || {};
+  const SX = S.computed || {};
+  const AX = A.computed || {};
+  const SCSS = S.csv || {};
+  const ACSS = A.csv || {};
+
+  function set(id, val) {
+    const el = document.getElementById(id);
+    if (el && val !== null && val !== undefined) el.textContent = val;
+  }
+
+  function setAll(cls, val, nth) {
+    const els = document.querySelectorAll('.' + cls);
+    const idx = nth || 0;
+    if (els[idx] && val !== null && val !== undefined) els[idx].textContent = val;
+  }
+
+  function setPair(cls, sVal, aVal) {
+    const els = document.querySelectorAll('.' + cls);
+    if (els[0] && sVal !== null && sVal !== undefined) els[0].textContent = sVal;
+    if (els[1] && aVal !== null && aVal !== undefined) els[1].textContent = aVal;
+  }
+
+  // Helper: format prize money short
+  function fmtPrize(str) {
+    if (!str) return null;
+    const n = parseInt(str.replace(/[^\d]/g,''));
+    return isNaN(n) ? str : '$' + (n/1e6).toFixed(1) + 'M';
+  }
+
+  function fmtPrizeFull(str) { return str || null; }
+
+  // ── Profile spans ──────────────────────────────────────────
+  set('s-career-wl', S.career_wl);
+  set('a-career-wl', A.career_wl);
+  set('s-win-pct', S.career_win_pct ? S.career_win_pct + '%' : null);
+  set('a-win-pct', A.career_win_pct ? A.career_win_pct + '%' : null);
+  set('s-titles', S.career_titles);
+  set('a-titles', A.career_titles);
+  set('s-gs-total', SX.gs_total);
+  set('a-gs-total', AX.gs_total);
+  set('s-ranking', S.ranking ? '#' + S.ranking : null);
+  set('a-ranking', A.ranking ? '#' + A.ranking : null);
+  set('s-atp-points', S.atp_points ? S.atp_points.toLocaleString() : null);
+  set('a-atp-points', A.atp_points ? A.atp_points.toLocaleString() : null);
+  set('s-prize', S.prize_career);
+  set('a-prize', A.prize_career);
+  set('s-age', SX.age);
+  set('a-age', AX.age);
+  set('s-coach', S.coach);
+  set('a-coach', A.coach);
+  set('s-ytd-wl', S.ytd_wl);
+  set('a-ytd-wl', A.ytd_wl);
+  set('s-ytd-titles', S.ytd_titles);
+  set('a-ytd-titles', A.ytd_titles);
+  set('s-aces', SC.aces);
+  set('a-aces', AC.aces);
+  set('s-df', SC.double_faults);
+  set('a-df', AC.double_faults);
+  set('s-1st-serve', SC.first_serve_pct ? SC.first_serve_pct + '%' : null);
+  set('a-1st-serve', AC.first_serve_pct ? AC.first_serve_pct + '%' : null);
+  set('s-weeks-no1', SX.weeks_at_no1);
+  set('a-weeks-no1', AX.weeks_at_no1);
+  set('s-fastest-serve', SX.fastest_serve_kmh ? SX.fastest_serve_kmh + ' km/h' : null);
+  set('a-fastest-serve', AX.fastest_serve_kmh ? AX.fastest_serve_kmh + ' km/h' : null);
+  set('s-avg-aces', SX.avg_aces_match);
+  set('a-avg-aces', AX.avg_aces_match);
+
+  // ── Summary cards ──────────────────────────────────────────
+  set('s-prize-card', fmtPrize(S.prize_career));
+  set('a-prize-card', fmtPrize(A.prize_career));
+  set('s-ytd-pct-card', (SCSS.csv_ytd_win_pct || S.ytd_win_pct) ? (SCSS.csv_ytd_win_pct || S.ytd_win_pct) + '%' : null);
+  set('a-ytd-pct-card', (ACSS.csv_ytd_win_pct || A.ytd_win_pct) ? (ACSS.csv_ytd_win_pct || A.ytd_win_pct) + '%' : null);
+  set('s-h2h-score', S.h2h_wins !== undefined ? S.h2h_wins : null);
+  set('a-h2h-score', A.h2h_wins !== undefined ? A.h2h_wins : null);
+
+  // ── Comparison table (using actual label-matched IDs) ─────────
+  set('t-s-career-wl', S.career_wl);           set('t-a-career-wl', A.career_wl);
+  set('t-s-win-pct', S.career_win_pct ? S.career_win_pct + '%' : null);
+  set('t-a-win-pct', A.career_win_pct ? A.career_win_pct + '%' : null);
+  set('t-s-titles', S.career_titles);           set('t-a-titles', A.career_titles);
+  set('t-s-gs', SX.gs_total);                   set('t-a-gs', AX.gs_total);
+  set('t-s-masters', SX.masters_titles);         set('t-a-masters', AX.masters_titles);
+  set('t-s-prize', fmtPrize(S.prize_career));   set('t-a-prize', fmtPrize(A.prize_career));
+  set('t-s-h2h', S.h2h_wins !== undefined ? S.h2h_wins : null);
+  set('t-a-h2h', A.h2h_wins !== undefined ? A.h2h_wins : null);
+  set('t-s-days-no1', SX.days_at_no1);          set('t-a-days-no1', AX.days_at_no1);
+  set('t-s-ytd-pct', (SCSS.csv_ytd_win_pct||S.ytd_win_pct) ? (SCSS.csv_ytd_win_pct||S.ytd_win_pct)+'%' : null);
+  set('t-a-ytd-pct', (ACSS.csv_ytd_win_pct||A.ytd_win_pct) ? (ACSS.csv_ytd_win_pct||A.ytd_win_pct)+'%' : null);
+  set('t-s-finals', SV.finals_wl);              set('t-a-finals', AV.finals_wl);
+  set('t-s-vs-top10', SV.vs_top10_wl);          set('t-a-vs-top10', AV.vs_top10_wl);
+  set('t-s-hard-wl', SCSS.csv_hard_wl||SV.on_hard_wl);
+  set('t-a-hard-wl', ACSS.csv_hard_wl||AV.on_hard_wl);
+  set('t-s-clay-wl', SCSS.csv_clay_wl||SV.on_clay_wl);
+  set('t-a-clay-wl', ACSS.csv_clay_wl||AV.on_clay_wl);
+  set('t-s-grass-wl', SCSS.csv_grass_wl||SV.on_grass_wl);
+  set('t-a-grass-wl', ACSS.csv_grass_wl||AV.on_grass_wl);
+  set('t-s-fastest', SX.fastest_serve_kmh ? SX.fastest_serve_kmh + ' km/h' : null);
+  set('t-a-fastest', AX.fastest_serve_kmh ? AX.fastest_serve_kmh + ' km/h' : null);
+  set('t-s-avg-aces', SX.avg_aces_match);       set('t-a-avg-aces', AX.avg_aces_match);
+
+  // Surface table (from CSV)
+  for (const surf of ['hard','clay','grass']) {
+    set('t-s-'+surf+'-wl', SCSS['csv_'+surf+'_wl']);
+    set('t-a-'+surf+'-wl', ACSS['csv_'+surf+'_wl']);
+    set('t-s-'+surf+'-pct', SCSS['csv_'+surf+'_win_pct'] ? SCSS['csv_'+surf+'_win_pct']+'%' : null);
+    set('t-a-'+surf+'-pct', ACSS['csv_'+surf+'_win_pct'] ? ACSS['csv_'+surf+'_win_pct']+'%' : null);
+  }
+
+  // Per-slam wins
+  set('t-s-ao', SX.gs_ao);       set('t-a-ao', AX.gs_ao);
+  set('t-s-rg', SX.gs_rg);       set('t-a-rg', AX.gs_rg);
+  set('t-s-wim', SX.gs_wimbledon); set('t-a-wim', AX.gs_wimbledon);
+  set('t-s-uso', SX.gs_uso);     set('t-a-uso', AX.gs_uso);
+
+  // ── W/L page vision stats ──────────────────────────────────────
+  set('t-s-vs-top10', SV.vs_top10_wl);     set('t-a-vs-top10', AV.vs_top10_wl);
+  set('t-s-indoor-wl', SV.indoor_wl);      set('t-a-indoor-wl', AV.indoor_wl);
+
+  // ── Serve page ─────────────────────────────────────────────────
+  set('sv-s-1st-in',    SC.first_serve_pct ? SC.first_serve_pct+'%' : null);
+  set('sv-a-1st-in',    AC.first_serve_pct ? AC.first_serve_pct+'%' : null);
+  set('sv-s-1st-won',   SC.first_serve_won_pct ? SC.first_serve_won_pct+'%' : null);
+  set('sv-a-1st-won',   AC.first_serve_won_pct ? AC.first_serve_won_pct+'%' : null);
+  set('sv-s-2nd-won',   SC.second_serve_won_pct ? SC.second_serve_won_pct+'%' : null);
+  set('sv-a-2nd-won',   AC.second_serve_won_pct ? AC.second_serve_won_pct+'%' : null);
+  set('sv-s-games-won', SC.service_games_won_pct ? SC.service_games_won_pct+'%' : null);
+  set('sv-a-games-won', AC.service_games_won_pct ? AC.service_games_won_pct+'%' : null);
+  set('sv-s-aces',      SX.avg_aces_match);
+  set('sv-a-aces',      AX.avg_aces_match);
+  set('sv-s-df',        SX.avg_df_match);
+  set('sv-a-df',        AX.avg_df_match);
+  set('sv-s-bp-saved',  SC.bp_saved_pct ? SC.bp_saved_pct+'%' : null);
+  set('sv-a-bp-saved',  AC.bp_saved_pct ? AC.bp_saved_pct+'%' : null);
+  set('sv-s-rating',    SV.serve_rating);
+  set('sv-a-rating',    AV.serve_rating);
+
+  // ── Return page ────────────────────────────────────────────────
+  set('rt-s-rating',    AV.return_rating);   // Note: cross-check which player
+  set('rt-s-rating',    SV.return_rating);
+  set('rt-a-rating',    AV.return_rating);
+  set('rt-s-1st-ret',   SC.first_return_won_pct ? SC.first_return_won_pct+'%' : null);
+  set('rt-a-1st-ret',   AC.first_return_won_pct ? AC.first_return_won_pct+'%' : null);
+  set('rt-s-2nd-ret',   SC.second_return_won_pct ? SC.second_return_won_pct+'%' : null);
+  set('rt-a-2nd-ret',   AC.second_return_won_pct ? AC.second_return_won_pct+'%' : null);
+  set('rt-s-games-won', SC.return_games_won_pct ? SC.return_games_won_pct+'%' : null);
+  set('rt-a-games-won', AC.return_games_won_pct ? AC.return_games_won_pct+'%' : null);
+  set('rt-s-bp-conv',   SC.bp_converted_pct ? SC.bp_converted_pct+'%' : null);
+  set('rt-a-bp-conv',   AC.bp_converted_pct ? AC.bp_converted_pct+'%' : null);
+  set('rt-s-total',     SC.total_points_won_pct ? SC.total_points_won_pct+'%' : null);
+  set('rt-a-total',     AC.total_points_won_pct ? AC.total_points_won_pct+'%' : null);
+
+  // ── Pressure page ──────────────────────────────────────────────
+  set('pr-s-rating',    SV.under_pressure_rating);
+  set('pr-a-rating',    AV.under_pressure_rating);
+  set('pr-s-bp-saved',  SC.bp_saved_pct ? SC.bp_saved_pct+'%' : null);
+  set('pr-a-bp-saved',  AC.bp_saved_pct ? AC.bp_saved_pct+'%' : null);
+  set('pr-s-bp-conv',   SC.bp_converted_pct ? SC.bp_converted_pct+'%' : null);
+  set('pr-a-bp-conv',   AC.bp_converted_pct ? AC.bp_converted_pct+'%' : null);
+  set('pr-s-tb',        SV.tiebreaks_won_pct ? SV.tiebreaks_won_pct+'%' : null);
+  set('pr-a-tb',        AV.tiebreaks_won_pct ? AV.tiebreaks_won_pct+'%' : null);
+  set('pr-s-ds',        SV.deciding_sets_won_pct ? SV.deciding_sets_won_pct+'%' : null);
+  set('pr-a-ds',        AV.deciding_sets_won_pct ? AV.deciding_sets_won_pct+'%' : null);
+  set('pr-s-5th',       SV.fifth_set_wl);
+  set('pr-a-5th',       AV.fifth_set_wl);
+  set('pr-s-after-win', SV.after_winning_first_set_pct ? SV.after_winning_first_set_pct+'%' : null);
+  set('pr-a-after-win', AV.after_winning_first_set_pct ? AV.after_winning_first_set_pct+'%' : null);
+  set('pr-s-after-lose',SV.after_losing_first_set_pct ? SV.after_losing_first_set_pct+'%' : null);
+  set('pr-a-after-lose',AV.after_losing_first_set_pct ? AV.after_losing_first_set_pct+'%' : null);
+  set('pr-s-finals',    SV.finals_wl);
+  set('pr-a-finals',    AV.finals_wl);
+  set('pr-s-gs-overall',SV.grand_slams_wl);
+  set('pr-a-gs-overall',AV.grand_slams_wl);
+
+  // ── Clutch score inputs ────────────────────────────────────────
+  set('c-s-tb',         SV.tiebreaks_won_pct ? SV.tiebreaks_won_pct+'%' : null);
+  set('c-a-tb',         AV.tiebreaks_won_pct ? AV.tiebreaks_won_pct+'%' : null);
+  set('c-s-ds',         SV.deciding_sets_won_pct ? SV.deciding_sets_won_pct+'%' : null);
+  set('c-a-ds',         AV.deciding_sets_won_pct ? AV.deciding_sets_won_pct+'%' : null);
+  set('c-s-bp-saved',   SV.bp_saved_pct ? SV.bp_saved_pct+'%' : null);
+  set('c-a-bp-saved',   AV.bp_saved_pct ? AV.bp_saved_pct+'%' : null);
+  set('c-s-bp-conv',    SV.bp_converted_pct ? SV.bp_converted_pct+'%' : null);
+  set('c-a-bp-conv',    AV.bp_converted_pct ? AV.bp_converted_pct+'%' : null);
+
+  // ── Extra surface/context rows ───────────────────────────────
+  set('t-s-clay-wl2',  SCSS.csv_clay_wl||SV.on_clay_wl);
+  set('t-a-clay-wl2',  ACSS.csv_clay_wl||AV.on_clay_wl);
+  set('t-s-clay-pct',  SCSS.csv_clay_win_pct ? SCSS.csv_clay_win_pct+'%' : null);
+  set('t-a-clay-pct',  ACSS.csv_clay_win_pct ? ACSS.csv_clay_win_pct+'%' : null);
+  set('t-s-grass-pct2',SCSS.csv_grass_win_pct ? SCSS.csv_grass_win_pct+'%' : null);
+  set('t-a-grass-pct2',ACSS.csv_grass_win_pct ? ACSS.csv_grass_win_pct+'%' : null);
+  set('t-s-rg-wl',     SX.gs_rg !== undefined ? SX.gs_rg+' titles' : null);
+  set('t-a-rg-wl',     AX.gs_rg !== undefined ? AX.gs_rg+' titles' : null);
+  set('t-s-outdoor-wl',SV.outdoor_wl);    set('t-a-outdoor-wl',AV.outdoor_wl);
+  set('t-s-lefthanded',SV.vs_lefthanded_wl); set('t-a-lefthanded',AV.vs_lefthanded_wl);
+  set('rt-s-clay-ret', null); set('rt-a-clay-ret', null); // Surface-specific return stats not in scraper yet
+
+  // Last updated
+  if (data.scraped_at) {
+    const d = new Date(data.scraped_at);
+    const fmt = d.toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
+    set('last-updated', 'Last updated: ' + fmt);
+  }
+
+  // Ticker — update H2H if available
+  // (ticker is rebuilt on load anyway from hardcoded data — live H2H in JSON)
+  const h2hS = S.h2h_wins; const h2hA = A.h2h_wins;
+  if (h2hS !== undefined && h2hA !== undefined) {
+    const leader = h2hA > h2hS ? 'Alcaraz' : 'Sinner';
+    const score = h2hA > h2hS ? h2hA+'–'+h2hS : h2hS+'–'+h2hA;
+    set('h2h-score-s', h2hS);
+    set('h2h-score-a', h2hA);
+  }
+}
+
+async function initApp() {
+  renderTicker();
+  renderMatches();
+  renderRecords();
+  renderExpert();
+  const stats = await loadScrapedStats();
+  applyStats(stats);
+}
+
+initApp();
 
 
 // ============================================================
