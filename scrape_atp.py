@@ -457,11 +457,11 @@ def compute(key, atp, csv_d, wiki, ts, vision_wl=None):
     # Known correct values as fallbacks — update after each slam/milestone
     GS_FLOOR = {
         "sinner":  {
-            "ao": 2, "rg": 0, "wim": 1, "uso": 1, "m1k": 6,
+            "ao": 2, "rg": 0, "wim": 1, "uso": 1, "m1k": 7,
             "weeks_no1": 66, "fastest_serve_kmh": 220, "fastest_serve_mph": 137,
         },
         "alcaraz": {
-            "ao": 1, "rg": 2, "wim": 2, "uso": 2, "m1k": 6,
+            "ao": 1, "rg": 2, "wim": 2, "uso": 2, "m1k": 8,
             "weeks_no1": 65, "fastest_serve_kmh": 220, "fastest_serve_mph": 137,
         },
     }
@@ -488,7 +488,7 @@ def compute(key, atp, csv_d, wiki, ts, vision_wl=None):
     # Masters titles: Wikipedia often confuses total titles with Masters titles
     # Use floor value unless wiki returns something reasonable (<=12)
     raw_m1k = wiki.get("masters_titles") or 0
-    m1k = raw_m1k if (0 < raw_m1k <= 10) else floor.get("m1k", 0)
+    m1k = raw_m1k if (0 < raw_m1k <= 15) else floor.get("m1k", 0)
     big = gs + m1k
 
     # Parse W/L strings into percentages
@@ -518,7 +518,7 @@ def compute(key, atp, csv_d, wiki, ts, vision_wl=None):
         "gs_total":               gs or None,
         "masters_titles":         m1k or None,
         "big_titles":             big or None,
-        "weeks_at_no1":           wiki.get("weeks_at_no1") or ts.get("weeks_at_no1") or floor.get("weeks_no1"),
+        "weeks_at_no1":           wiki.get("weeks_at_no1") or vwl.get("weeks_at_no1") or ts.get("weeks_at_no1") or floor.get("weeks_no1"),
         "days_at_no1":            wiki.get("days_at_no1") or ts.get("days_at_no1"),
         "longest_win_streak":     ts.get("longest_win_streak") or wiki.get("longest_win_streak"),
         "current_win_streak":     wiki.get("current_win_streak"),
@@ -526,9 +526,9 @@ def compute(key, atp, csv_d, wiki, ts, vision_wl=None):
         "fastest_serve_kmh":      ts.get("fastest_serve_kmh") or wiki.get("fastest_serve_kmh") or floor.get("fastest_serve_kmh"),
         "fastest_serve_mph":      ts.get("fastest_serve_mph") or wiki.get("fastest_serve_mph") or floor.get("fastest_serve_mph"),
         "wins_straight_sets_pct": ts.get("wins_straight_sets_pct") or csv_d.get("csv_straight_set_wins_pct"),
-        "wins_from_behind_pct":   after_lose_pct or ts.get("wins_from_behind_pct"),
-        "after_winning_first_set_pct": after_win_pct,
-        "after_losing_first_set_pct":  after_lose_pct,
+        "wins_from_behind_pct":   vwl.get("after_losing_first_set_pct") or after_lose_pct or ts.get("wins_from_behind_pct"),
+        "after_winning_first_set_pct": vwl.get("after_winning_first_set_pct") or after_win_pct,
+        "after_losing_first_set_pct":  vwl.get("after_losing_first_set_pct") or after_lose_pct,
         "tiebreaks_won_pct":      tb_pct,
         "deciding_sets_won_pct":  ds_pct,
         "breaks_per_set":         ts.get("breaks_per_set"),
