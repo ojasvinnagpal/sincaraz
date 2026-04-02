@@ -363,19 +363,23 @@ async def scrape_wl_vision(ctx, key):
 
 WIKI_PROMPT = """Wikipedia career statistics page for {name}.
 
-Look carefully at the Grand Slam tournament results table. Count ONLY rows where the result
-says "W" (Won). Extract as JSON:
-  ao_wins        (integer — number of Australian Open titles WON, "W" rows only)
-  rg_wins        (integer — number of Roland Garros titles WON)
-  wimbledon_wins (integer — number of Wimbledon titles WON)
-  uso_wins       (integer — number of US Open titles WON)
-  weeks_at_no1   (integer — total weeks ranked World No. 1, look for "Weeks at No. 1")
-  days_at_no1    (integer — total days at No. 1, if shown)
-  masters_titles (integer — Masters 1000 titles only, NOT total titles)
-  longest_win_streak (integer)
-  year_end_rankings  (object — year as string key, ranking as integer value)
+Look carefully at the Grand Slam tournament results table (usually near the top of the page).
+Count ONLY cells/rows marked "W" which means the player WON that tournament that year.
+Do NOT count F (finalist), SF (semifinalist), or other results.
 
-Return ONLY valid JSON. Be precise — do not confuse finals reached with titles won."""
+Extract as JSON:
+  ao_wins        (integer — Australian Open WINS only, count "W" cells in AO row)
+  rg_wins        (integer — Roland Garros WINS only)
+  wimbledon_wins (integer — Wimbledon WINS only)
+  uso_wins       (integer — US Open WINS only)
+  weeks_at_no1   (integer — total weeks at World No. 1, look for "Weeks at No. 1" text)
+  days_at_no1    (integer — total days at No. 1 if shown)
+  masters_titles (integer — ATP Masters 1000 titles ONLY, NOT counting Grand Slams or 500s)
+  longest_win_streak (integer — longest single winning streak)
+  year_end_rankings  (object — {"2022": 1, "2023": 2} format)
+
+IMPORTANT: Carlos Alcaraz won the 2026 Australian Open. Jannik Sinner won AO 2024 and AO 2025.
+Return ONLY valid JSON. Be very precise."""
 
 async def scrape_wiki_vision(ctx, key):
     name = PLAYERS[key]["name"]
@@ -386,7 +390,9 @@ async def scrape_wiki_vision(ctx, key):
         await page.goto(url, wait_until="networkidle", timeout=30000)
     except Exception:
         await page.wait_for_timeout(6000)
-    paths = await screenshots(page, n=4, step=800, prefix=f"/tmp/{key}_wiki")
+    # Extra wait for Wikipedia to fully render
+    await page.wait_for_timeout(2000)
+    paths = await screenshots(page, n=5, step=700, prefix=f"/tmp/{key}_wiki")
     await page.close()
     data = vision(img_blocks(paths), WIKI_PROMPT.format(name=name))
     # Safely coerce year_end_rankings — vision sometimes returns years as top-level keys
@@ -438,7 +444,7 @@ async def scrape_ts_vision(ctx, key):
 
 # ─── Source 6: Computed ───────────────────────────────────────────────────────
 
-def compute(key, atp, csv_d, wiki, ts):
+def compute(key, atp, csv_d, wiki, ts, vision_wl=None):
     dob   = PLAYERS[key]["dob"]
     today = date.today()
     age   = today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
@@ -464,19 +470,42 @@ def compute(key, atp, csv_d, wiki, ts):
     rg  = wiki.get("rg_wins")  if wiki.get("rg_wins")  is not None else floor.get("rg", 0)
     wim = wiki.get("wimbledon_wins") if wiki.get("wimbledon_wins") is not None else floor.get("wim", 0)
     uso = wiki.get("uso_wins") if wiki.get("uso_wins")  is not None else floor.get("uso", 0)
-    # Sanity check: if total from wiki is less than known floor, use floor
+    # Sanity check: use floor for any slam where wiki returns 0 but floor says > 0
+    # Also use floor if total is less than known minimum
     wiki_total = ao + rg + wim + uso
     known_total = floor.get("ao",0) + floor.get("rg",0) + floor.get("wim",0) + floor.get("uso",0)
     if wiki_total < known_total:
-        ao  = floor.get("ao", ao)
-        rg  = floor.get("rg", rg)
-        wim = floor.get("wim", wim)
-        uso = floor.get("uso", uso)
+        ao  = max(ao,  floor.get("ao", 0))
+        rg  = max(rg,  floor.get("rg", 0))
+        wim = max(wim, floor.get("wim", 0))
+        uso = max(uso, floor.get("uso", 0))
+    # Per-slam floor: never show 0 if floor says player has won it
+    ao  = max(ao,  floor.get("ao", 0))
+    rg  = max(rg,  floor.get("rg", 0))
+    wim = max(wim, floor.get("wim", 0))
+    uso = max(uso, floor.get("uso", 0))
     gs  = ao + rg + wim + uso
-    # Masters titles: cap at reasonable number if wiki returns inflated value
+    # Masters titles: Wikipedia often confuses total titles with Masters titles
+    # Use floor value unless wiki returns something reasonable (<=12)
     raw_m1k = wiki.get("masters_titles") or 0
-    m1k = raw_m1k if raw_m1k <= 20 else floor.get("m1k", 0)
+    m1k = raw_m1k if (0 < raw_m1k <= 10) else floor.get("m1k", 0)
     big = gs + m1k
+
+    # Parse W/L strings into percentages
+    def wl_pct(s):
+        if not s: return None
+        try:
+            w, l = (int(x) for x in str(s).replace('–','-').split('-'))
+            return round(w/(w+l)*100, 1) if (w+l) else None
+        except: return None
+
+    vwl = vision_wl or {}
+    after_win_pct   = wl_pct(vwl.get("after_winning_first_set_wl"))
+    after_lose_pct  = wl_pct(vwl.get("after_losing_first_set_wl"))
+    tb_wl           = vwl.get("tiebreak_wl")
+    tb_pct          = wl_pct(tb_wl)
+    ds_wl           = vwl.get("deciding_set_wl")
+    ds_pct          = wl_pct(ds_wl)
 
     return {
         "age":                    age,
@@ -497,7 +526,11 @@ def compute(key, atp, csv_d, wiki, ts):
         "fastest_serve_kmh":      ts.get("fastest_serve_kmh") or wiki.get("fastest_serve_kmh") or floor.get("fastest_serve_kmh"),
         "fastest_serve_mph":      ts.get("fastest_serve_mph") or wiki.get("fastest_serve_mph") or floor.get("fastest_serve_mph"),
         "wins_straight_sets_pct": ts.get("wins_straight_sets_pct") or csv_d.get("csv_straight_set_wins_pct"),
-        "wins_from_behind_pct":   ts.get("wins_from_behind_pct"),
+        "wins_from_behind_pct":   after_lose_pct or ts.get("wins_from_behind_pct"),
+        "after_winning_first_set_pct": after_win_pct,
+        "after_losing_first_set_pct":  after_lose_pct,
+        "tiebreaks_won_pct":      tb_pct,
+        "deciding_sets_won_pct":  ds_pct,
         "breaks_per_set":         ts.get("breaks_per_set"),
         "tiebreaks_per_match":    ts.get("tiebreaks_per_match"),
         "avg_match_duration_str": ts.get("avg_match_duration_str"),
@@ -620,6 +653,7 @@ async def main():
             result[key].get("csv", {}),
             result[key].get("vision_wiki", {}),
             result[key].get("vision_ts", {}),
+            result[key].get("vision_wl", {}),
         )
 
     print("\n=== SUMMARY ===")
