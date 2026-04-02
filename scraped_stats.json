@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-04-01T16:52:43.870263+00:00",
+  "scraped_at": "2026-04-02T07:21:14.599036+00:00",
   "sinner": {
     "h2h_wins": 6,
     "h2h_losses": 12,
@@ -55,12 +55,27 @@
       "after_winning_first_set_wl": "297-31",
       "after_losing_first_set_wl": "43-57",
       "vs_righthanded_wl": "306-80",
-      "vs_lefthanded_wl": "34-8",
-      "serve_rating": 300.0,
-      "return_rating": 298.0,
-      "under_pressure_rating": 297.6
+      "vs_lefthanded_wl": "34-8"
     },
-    "vision_wiki": {},
+    "vision_wiki": {
+      "ao_wins": 2,
+      "rg_wins": 0,
+      "wimbledon_wins": 1,
+      "uso_wins": 1,
+      "weeks_at_no1": null,
+      "days_at_no1": null,
+      "masters_titles": null,
+      "longest_win_streak": null,
+      "year_end_rankings": {
+        "2019": 78,
+        "2020": 37,
+        "2021": 10,
+        "2022": 15,
+        "2023": 4,
+        "2024": 1,
+        "2025": 2
+      }
+    },
     "vision_ts": {},
     "csv": {
       "csv_career_wl": "74\u20137",
@@ -97,7 +112,15 @@
       "days_at_no1": null,
       "longest_win_streak": null,
       "current_win_streak": null,
-      "year_end_rankings": null,
+      "year_end_rankings": {
+        "2019": 78,
+        "2020": 37,
+        "2021": 10,
+        "2022": 15,
+        "2023": 4,
+        "2024": 1,
+        "2025": 2
+      },
       "fastest_serve_kmh": 220,
       "fastest_serve_mph": 137,
       "wins_straight_sets_pct": 73.0,
@@ -159,12 +182,17 @@
       "carpet_wl": "0-0",
       "indoor_wl": "35-15",
       "outdoor_wl": "262-52",
+      "tiebreak_wl": "101-62",
+      "vs_top10_wl": "55-24",
       "after_winning_first_set_wl": "256-17",
       "after_losing_first_set_wl": "41-50",
       "vs_righthanded_wl": "258-56",
       "vs_lefthanded_wl": "39-11",
-      "tiebreak_wl": "101-62",
-      "vs_top10_wl": "55-24"
+      "tiebreaks_won_pct": 62.0,
+      "deciding_sets_won_pct": 71.0,
+      "fifth_set_won_pct": 93.8,
+      "after_winning_first_set_pct": 93.8,
+      "after_losing_first_set_pct": 45.1
     },
     "vision_wiki": {
       "ao_wins": 0,
