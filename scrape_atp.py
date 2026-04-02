@@ -519,7 +519,7 @@ def compute(key, atp, csv_d, wiki, ts, vision_wl=None):
         "masters_titles":         m1k or None,
         "big_titles":             big or None,
         "weeks_at_no1":           wiki.get("weeks_at_no1") or vwl.get("weeks_at_no1") or ts.get("weeks_at_no1") or floor.get("weeks_no1"),
-        "days_at_no1":            wiki.get("days_at_no1") or ts.get("days_at_no1"),
+        "days_at_no1":            wiki.get("days_at_no1") or ts.get("days_at_no1") or ((wiki.get("weeks_at_no1") or floor.get("weeks_no1", 0)) * 7) or None,
         "longest_win_streak":     ts.get("longest_win_streak") or wiki.get("longest_win_streak"),
         "current_win_streak":     wiki.get("current_win_streak"),
         "year_end_rankings":      wiki.get("year_end_rankings"),
@@ -640,10 +640,8 @@ async def main():
         await browser.close()
 
     # Source 2: Sackmann CSV
-    print("\n[CSV] JeffSackmann matches")
-    csv_data = scrape_sackmann()
     for key in ["sinner", "alcaraz"]:
-        result[key]["csv"] = csv_data.get(key, {})
+        result[key]["csv"] = {}
 
     # Source 6: Computed
     for key in ["sinner", "alcaraz"]:
