@@ -1685,7 +1685,7 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
   <div class="footer-inner">
     <p style="margin-bottom:8px"><strong>SINCARAZ</strong> — The Definitive Sinner vs Alcaraz Rivalry Tracker</p>
     <p>Stats sourced from <a href="https://www.atptour.com" target="_blank">ATP Tour</a>, <a href="https://www.tennisabstract.com" target="_blank">Tennis Abstract</a>, <a href="https://www.wikipedia.org" target="_blank">Wikipedia</a>, and <a href="https://www.tennisstats.com" target="_blank">TennisStats</a></p>
-    <p style="margin-top:8px"><span id="last-updated">Last updated: 8 March 2026</span> · Not affiliated with ATP Tour or any player</p>
+    <p style="margin-top:8px"><span id="last-updated">Last updated: 2 April 2026</span> · Not affiliated with ATP Tour or any player</p>
   </div>
 </footer>
 
@@ -2114,114 +2114,7 @@ function applyStats(data) {
   if (data.scraped_at) {
     const d = new Date(data.scraped_at);
     const fmt = d.toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
-    set('last-updated', 'Last updated: ' + fmt);
-  }
-
-  // Ticker — update H2H if available
-  // (ticker is rebuilt on load anyway from hardcoded data — live H2H in JSON)
-  const h2hS = S.h2h_wins; const h2hA = A.h2h_wins;
-  if (h2hS !== undefined && h2hA !== undefined) {
-    const leader = h2hA > h2hS ? 'Alcaraz' : 'Sinner';
-    const score = h2hA > h2hS ? h2hA+'–'+h2hS : h2hS+'–'+h2hA;
-    set('h2h-score-s', h2hS);
-    set('h2h-score-a', h2hA);
-  }
-}
-
-async function initApp() {
-  renderTicker();
-  renderMatches();
-  renderRecords();
-  renderExpert();
-  const stats = await loadScrapedStats();
-  applyStats(stats);
-}
-
-initApp();
-
-
-// ============================================================
-// VOTE SYSTEM — Supabase backend for real cross-user persistence
-// ============================================================
-
-const SUPABASE_URL = 'https://nxwntslftzwosmcwqjxk.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im54d250c2xmdHp3b3NtY3dxanhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5ODAyMjEsImV4cCI6MjA4ODU1NjIyMX0.WrEwxLdzElumVXOo5xuUSy4DSnxfGpv1KOZjXN8BxIw';
-
-async function supabaseFetch(path, opts = {}) {
-  const res = await fetch(SUPABASE_URL + path, {
-    headers: {
-      'apikey': SUPABASE_KEY,
-      'Authorization': 'Bearer ' + SUPABASE_KEY,
-      'Content-Type': 'application/json',
-      'Prefer': opts.prefer || ''
-    },
-    ...opts
-  });
-  if (!res.ok && res.status !== 201) throw new Error('Supabase error ' + res.status);
-  const text = await res.text();
-  return text ? JSON.parse(text) : [];
-}
-
-async function loadVotes() {
-  try {
-    const rows = await supabaseFetch('/rest/v1/votes?select=player,country,country_code');
-    const votes = { sinner: 0, alcaraz: 0, countries: {} };
-    rows.forEach(row => {
-      votes[row.player] = (votes[row.player] || 0) + 1;
-      const c = row.country || 'Unknown';
-      if (!votes.countries[c]) votes.countries[c] = { sinner: 0, alcaraz: 0 };
-      votes.countries[c][row.player] = (votes.countries[c][row.player] || 0) + 1;
-    });
-    return votes;
-  } catch(e) {
-    console.error('loadVotes error:', e);
-    return { sinner: 0, alcaraz: 0, countries: {} };
-  }
-}
-
-async function getUserVote() {
-  return localStorage.getItem('sincaraz_user_vote');
-}
-
-async function setUserVote(player) {
-  localStorage.setItem('sincaraz_user_vote', player);
-}
-
-async function getCountry() {
-  try {
-    const r = await fetch('https://ipapi.co/json/');
-    const d = await r.json();
-    return { name: d.country_name || 'Unknown', code: d.country_code || 'XX' };
-  } catch(e) { return { name: 'Unknown', code: 'XX' }; }
-}
-
-function renderVoteResults(votes) {
-  const total = votes.sinner + votes.alcaraz;
-  if (total === 0) return;
-
-  const sPct = Math.round(votes.sinner / total * 100);
-  const aPct = 100 - sPct;
-
-  document.getElementById('vBarS').style.width = sPct + '%';
-  document.getElementById('vBarA').style.width = aPct + '%';
-  document.getElementById('vLabelS').textContent = 'Sinner ' + sPct + '%';
-  document.getElementById('vLabelA').textContent = 'Alcaraz ' + aPct + '%';
-  document.getElementById('vTotal').textContent = total.toLocaleString() + ' vote' + (total !== 1 ? 's' : '');
-
-  const geo = votes.countries || {};
-  const sortedCountries = Object.entries(geo)
-    .filter(([,v]) => (v.sinner||0) + (v.alcaraz||0) >= 1)
-    .sort(([,a],[,b]) => ((b.sinner||0)+(b.alcaraz||0)) - ((a.sinner||0)+(a.alcaraz||0)))
-    .slice(0, 12);
-
-  const geoGrid = document.getElementById('geoGrid');
-  if (geoGrid && sortedCountries.length > 0) {
-    geoGrid.innerHTML = sortedCountries.map(([country, v]) => {
-      const t = (v.sinner||0) + (v.alcaraz||0);
-      const sp = Math.round((v.sinner||0)/t*100);
-      const winner = sp >= 50 ? 'Sinner' : 'Alcaraz';
-      const pct = sp >= 50 ? sp : 100-sp;
-      return '<div class="geo-card"><div class="geo-country">' + country + '</div><div class="geo-winner">' + winner + ' ' + pct + '%</div><div class="geo-total">' + t + ' vote' + (t!==1?'s':'') + '</div></div>';
+    set('last-updated', 'Last updated: 2 April 2026<div class="geo-card"><div class="geo-country">' + country + '</div><div class="geo-winner">' + winner + ' ' + pct + '%</div><div class="geo-total">' + t + ' vote' + (t!==1?'s':'') + '</div></div>';
     }).join('');
   }
 }
