@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-04-02T16:35:07.994207+00:00",
+  "scraped_at": "2026-04-02T16:42:29.787435+00:00",
   "sinner": {
     "h2h_wins": 6,
     "h2h_losses": 12,
@@ -55,7 +55,12 @@
       "after_winning_first_set_wl": "297-31",
       "after_losing_first_set_wl": "43-57",
       "vs_righthanded_wl": "306-80",
-      "vs_lefthanded_wl": "34-8"
+      "vs_lefthanded_wl": "34-8",
+      "serve_rating": 300.0,
+      "tiebreaks_won_pct": 64.9,
+      "deciding_sets_won_pct": 66.7,
+      "after_winning_first_set_pct": 90.5,
+      "after_losing_first_set_pct": 43.0
     },
     "vision_wiki": {
       "ao_wins": 2,
@@ -120,20 +125,6 @@
   "alcaraz": {
     "h2h_wins": 12,
     "h2h_losses": 6,
-    "career_wins": 297,
-    "career_losses": 67,
-    "career_wl": "297\u201367",
-    "career_win_pct": 81.6,
-    "career_titles": 26,
-    "ranking": 1,
-    "atp_points": null,
-    "ytd_wins": 17,
-    "ytd_losses": 2,
-    "ytd_wl": "17\u20132",
-    "ytd_win_pct": 89.5,
-    "ytd_titles": 2,
-    "prize_career": "$64,336,028",
-    "coach": "Samuel Lopez",
     "career": {
       "aces": 1564,
       "double_faults": 833,
@@ -154,6 +145,20 @@
       "return_points_won_pct": 42,
       "total_points_won_pct": 54
     },
+    "career_wins": 297,
+    "career_losses": 67,
+    "career_wl": "297\u201367",
+    "career_win_pct": 81.6,
+    "career_titles": 26,
+    "ranking": 1,
+    "atp_points": null,
+    "ytd_wins": 17,
+    "ytd_losses": 2,
+    "ytd_wl": "17\u20132",
+    "ytd_win_pct": 89.5,
+    "ytd_titles": 2,
+    "prize_career": "$64,336,028",
+    "coach": "Samuel Lopez",
     "vision_wl": {
       "overall_wl": "297-67",
       "grand_slams_wl": "91-13",
@@ -167,15 +172,12 @@
       "carpet_wl": "0-0",
       "indoor_wl": "35-15",
       "outdoor_wl": "262-52",
-      "after_winning_first_set_wl": "256-17",
-      "after_losing_first_set_wl": "41-50",
+      "tiebreak_wl": "101-62",
+      "vs_top10_wl": "55-24",
       "vs_righthanded_wl": "258-56",
       "vs_lefthanded_wl": "39-11",
-      "tiebreak_wl": "101-62",
-      "vs_top5_wl": "17-20",
-      "vs_top10_wl": "38-32",
-      "vs_top20_wl": "59-44",
-      "vs_top50_wl": "105-56"
+      "after_winning_first_set_pct": 93.8,
+      "after_losing_first_set_pct": 45.1
     },
     "vision_wiki": {},
     "vision_ts": {},
