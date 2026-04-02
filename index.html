@@ -612,22 +612,22 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
   <div class="nav-inner">
     <div class="nav-logo"><span>SIN</span>CARAZ<span class="a"> ✦</span></div>
     <div class="nav-tabs">
-      <button class="nav-tab active" onclick="showPage('home')">Overview</button>
-      <button class="nav-tab" onclick="showPage('h2h')">H2H Matches</button>
-      <button class="nav-tab" onclick="showPage('serve')">Serve Stats</button>
-      <button class="nav-tab" onclick="showPage('return')">Return Stats</button>
-      <button class="nav-tab" onclick="showPage('pressure')">Under Pressure</button>
-      <button class="nav-tab" onclick="showPage('slams')">Grand Slams</button>
-      <button class="nav-tab" onclick="showPage('records')">Records</button>
-      <button class="nav-tab" onclick="showPage('legends')">vs Legends</button>
-      <button class="nav-tab" onclick="showPage('expert')">Who's Better?</button>
-      <button class="nav-tab" onclick="showPage('insights')">⚡ Insights</button>
+      <button class="nav-tab active" onclick=\"showPage('home',this)\">Overview</button>
+      <button class="nav-tab active" onclick=\"showPage('h2h',this)\">H2H Matches</button>
+      <button class="nav-tab" onclick=\"showPage('serve',this)\">Serve Stats</button>
+      <button class="nav-tab" onclick=\"showPage('return',this)\">Return Stats</button>
+      <button class="nav-tab" onclick=\"showPage('pressure',this)\">Under Pressure</button>
+      <button class="nav-tab" onclick=\"showPage('slams',this)\">Grand Slams</button>
+      <button class="nav-tab" onclick=\"showPage('records',this)\">Records</button>
+      <button class="nav-tab" onclick=\"showPage('legends',this)\">vs Legends</button>
+      <button class="nav-tab" onclick=\"showPage('expert',this)\">Who's Better?</button>
+      <button class="nav-tab" onclick=\"showPage('insights',this)\">⚡ Insights</button>
     </div>
   </div>
 </nav>
 
 <!-- ============================================================ HOME PAGE -->
-<div class="page active" id="page-home">
+<div class="page active" id="page-home" class="page active">
   <div class="hero">
     <div class="hero-inner">
       <div class="hero-title">
@@ -1861,11 +1861,12 @@ function renderExpert(){
 // NAV & PAGE SWITCHING
 // ============================================================
 
-function showPage(id){
+function showPage(id, el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  event.target.classList.add('active');
+  const page = document.getElementById('page-'+id);
+  if(page) page.classList.add('active');
+  if(el) el.classList.add('active');
   window.scrollTo(0,0);
 }
 
