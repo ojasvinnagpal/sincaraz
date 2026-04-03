@@ -1685,7 +1685,7 @@ if(durEl) durEl.innerHTML = h2hDurations.map(m => `
   <div class="footer-inner">
     <p style="margin-bottom:8px"><strong>SINCARAZ</strong> — The Definitive Sinner vs Alcaraz Rivalry Tracker</p>
     <p>Stats sourced from <a href="https://www.atptour.com" target="_blank">ATP Tour</a>, <a href="https://www.tennisabstract.com" target="_blank">Tennis Abstract</a>, <a href="https://www.wikipedia.org" target="_blank">Wikipedia</a>, and <a href="https://www.tennisstats.com" target="_blank">TennisStats</a></p>
-    <p style="margin-top:8px"><span id="last-updated">Last updated: 2 April 2026</span> · Not affiliated with ATP Tour or any player</p>
+    <p style="margin-top:8px"><span id="last-updated">Last updated: 3 April 2026</span> · Not affiliated with ATP Tour or any player</p>
   </div>
 </footer>
 
@@ -2115,7 +2115,7 @@ function applyStats(data) {
   if (data.scraped_at) {
     const d = new Date(data.scraped_at);
     const fmt = d.toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
-    set('last-updated', 'Last updated: 2 April 2026<div class="geo-card"><div class="geo-country">' + country + '</div><div class="geo-winner">' + winner + ' ' + pct + '%</div><div class="geo-total">' + t + ' vote' + (t!==1?'s':'') + '</div></div>';
+    set('last-updated', 'Last updated: 3 April 2026<div class="geo-card"><div class="geo-country">' + country + '</div><div class="geo-winner">' + winner + ' ' + pct + '%</div><div class="geo-total">' + t + ' vote' + (t!==1?'s':'') + '</div></div>';
     }).join('');
   }
 }
