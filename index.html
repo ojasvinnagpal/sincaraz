@@ -2072,7 +2072,7 @@ function applyStats(data) {
   if (data.scraped_at) {
     const d = new Date(data.scraped_at);
     const fmt = d.toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
-    set('last-updated', 'Last updated: ' + fmt);
+    set('last-updated', 'Stats updated: ' + fmt);
   }
 
   // Ticker — update H2H if available

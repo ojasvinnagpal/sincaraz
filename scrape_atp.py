@@ -30,7 +30,7 @@ PLAYERS = {
         "dob":         date(2001, 8, 16),
         # H2H as of Apr 2026 — update manually after each meeting
         "h2h_wins":    6,
-        "h2h_losses":  12,
+        "h2h_losses":  10,
         "page_stats":  "https://www.atptour.com/en/players/jannik-sinner/s0ag/player-stats",
         "page_wl":     "https://www.atptour.com/en/players/jannik-sinner/s0ag/atp-win-loss",
         "wiki_stats":  "https://en.wikipedia.org/wiki/Jannik_Sinner_career_statistics",
@@ -41,7 +41,7 @@ PLAYERS = {
         "name":        "Carlos Alcaraz",
         "dob":         date(2003, 5, 3),
         # H2H as of Apr 2026 — update manually after each meeting
-        "h2h_wins":    12,
+        "h2h_wins":    10,
         "h2h_losses":  6,
         "page_stats":  "https://www.atptour.com/en/players/carlos-alcaraz/a0e2/player-stats",
         "page_wl":     "https://www.atptour.com/en/players/carlos-alcaraz/a0e2/atp-win-loss",
@@ -149,7 +149,7 @@ async def scrape_xhr(context, key):
                 "career_win_pct": round(w / (w + l) * 100, 1) if (w + l) else None,
                 "career_titles":  data.get("SglCareerTitles"),
                 "ranking":        data.get("SglRank"),
-                "atp_points":     data.get("SglRankPts"),
+                "atp_points":     data.get("SglRankPts") or data.get("RankPoints") or data.get("Points"),
                 "ytd_wins":       yw,
                 "ytd_losses":     yl,
                 "ytd_wl":         f"{yw}\u2013{yl}",
@@ -192,124 +192,6 @@ async def scrape_xhr(context, key):
     if not stats:
         print(f"  WARNING: No XHR data for {name}")
     return stats
-
-
-# ─── Source 2: JeffSackmann CSV ───────────────────────────────────────────────
-
-def fetch_csv(url):
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": "sincaraz/1.0"})
-        with urllib.request.urlopen(req, timeout=15) as r:
-            return r.read().decode("utf-8", errors="replace")
-    except Exception as e:
-        print(f"  CSV error {url}: {e}")
-        return None
-
-
-def pmatch(name_str, key):
-    return name_str.lower().strip() in (SINNER_NAMES if key == "sinner" else ALCARAZ_NAMES)
-
-
-def score_sets(score, won):
-    sw = sl = 0
-    for part in score.replace("(", " ").replace(")", " ").split():
-        if "-" not in part:
-            continue
-        h = part.split("-")
-        if len(h) != 2:
-            continue
-        try:
-            a, b = int(h[0]), int(h[1])
-            if won:
-                sw += 1 if a > b else 0
-                sl += 1 if b > a else 0
-            else:
-                sw += 1 if b > a else 0
-                sl += 1 if a > b else 0
-        except ValueError:
-            pass
-    return sw, sl
-
-
-def scrape_sackmann():
-    print("\n[Sackmann CSV]")
-    yr = datetime.now().year
-    rows = []
-    for y in [yr - 2, yr - 1, yr]:
-        url = f"{SACKMANN_BASE}/atp_matches_{y}.csv"
-        print(f"  Fetching {url}")
-        t = fetch_csv(url)
-        if t:
-            r = list(csv.DictReader(io.StringIO(t)))
-            rows.extend(r)
-            print(f"  → {len(r)} matches in {y}")
-        else:
-            print(f"  → no data for {y}")
-    print(f"  Total rows loaded: {len(rows)}")
-
-    result = {}
-    yr_s = str(yr)
-    for key in ["sinner", "alcaraz"]:
-        opp = "alcaraz" if key == "sinner" else "sinner"
-        w = l = yw = yl = hw = hl = cw = cl = gw = gl = h2w = h2l = 0
-        sw_tot = sl_tot = ss_wins = 0
-
-        for row in rows:
-            winner  = row.get("winner_name", "")
-            loser   = row.get("loser_name", "")
-            surface = row.get("surface", "").lower()
-            tdate   = row.get("tourney_date", "")
-            score   = row.get("score", "")
-            is_w    = pmatch(winner, key)
-            is_l    = pmatch(loser, key)
-            if not is_w and not is_l:
-                continue
-            sw, sl = score_sets(score, is_w)
-            sw_tot += sw
-            sl_tot += sl
-            if is_w:
-                w += 1
-                if tdate.startswith(yr_s): yw += 1
-                if surface == "hard":   hw += 1
-                elif surface == "clay": cw += 1
-                elif surface == "grass":gw += 1
-                if pmatch(loser, opp):  h2w += 1
-                if sl == 0 and sw > 0:  ss_wins += 1
-            else:
-                l += 1
-                if tdate.startswith(yr_s): yl += 1
-                if surface == "hard":   hl += 1
-                elif surface == "clay": cl += 1
-                elif surface == "grass":gl += 1
-                if pmatch(winner, opp): h2l += 1
-
-        tot = w + l
-        yrt = yw + yl
-        st  = sw_tot + sl_tot
-        result[key] = {
-            "csv_career_wl":            f"{w}\u2013{l}",
-            "csv_career_wins":          w,
-            "csv_career_losses":        l,
-            "csv_career_win_pct":       round(w / tot * 100, 1) if tot else None,
-            "csv_ytd_wl":               f"{yw}\u2013{yl}",
-            "csv_ytd_win_pct":          round(yw / yrt * 100, 1) if yrt else None,
-            "csv_hard_wl":              f"{hw}\u2013{hl}",
-            "csv_hard_win_pct":         round(hw / (hw+hl) * 100, 1) if (hw+hl) else None,
-            "csv_clay_wl":              f"{cw}\u2013{cl}",
-            "csv_clay_win_pct":         round(cw / (cw+cl) * 100, 1) if (cw+cl) else None,
-            "csv_grass_wl":             f"{gw}\u2013{gl}",
-            "csv_grass_win_pct":        round(gw / (gw+gl) * 100, 1) if (gw+gl) else None,
-            "csv_h2h_wins":             h2w,
-            "csv_h2h_losses":           h2l,
-            "csv_sets_won":             sw_tot,
-            "csv_sets_lost":            sl_tot,
-            "csv_sets_ratio":           round(sw_tot / st * 100, 1) if st else None,
-            "csv_straight_set_wins_pct": round(ss_wins / w * 100, 1) if w else None,
-        }
-        d = result[key]
-        print(f"  {key}: {d['csv_career_wl']} | YTD {d['csv_ytd_wl']} | "
-              f"H2H {h2w}-{h2l} | Sets {sw_tot}-{sl_tot} | SS wins {d['csv_straight_set_wins_pct']}%")
-    return result
 
 
 # ─── Source 3: Vision — ATP Win/Loss Index ────────────────────────────────────
@@ -458,11 +340,11 @@ def compute(key, atp, csv_d, wiki, ts, vision_wl=None):
     GS_FLOOR = {
         "sinner":  {
             "ao": 2, "rg": 0, "wim": 1, "uso": 1, "m1k": 7,
-            "weeks_no1": 66, "fastest_serve_kmh": 220, "fastest_serve_mph": 137,
+            "weeks_no1": 66,
         },
         "alcaraz": {
             "ao": 1, "rg": 2, "wim": 2, "uso": 2, "m1k": 8,
-            "weeks_no1": 65, "fastest_serve_kmh": 220, "fastest_serve_mph": 137,
+            "weeks_no1": 65,
         },
     }
     floor = GS_FLOOR.get(key, {})
@@ -488,7 +370,7 @@ def compute(key, atp, csv_d, wiki, ts, vision_wl=None):
     # Masters titles: Wikipedia often confuses total titles with Masters titles
     # Use floor value unless wiki returns something reasonable (<=12)
     raw_m1k = wiki.get("masters_titles") or 0
-    m1k = raw_m1k if (0 < raw_m1k <= 15) else floor.get("m1k", 0)
+    m1k = raw_m1k if (0 < raw_m1k <= 10) else floor.get("m1k", 0)
     big = gs + m1k
 
     # Parse W/L strings into percentages
@@ -520,22 +402,13 @@ def compute(key, atp, csv_d, wiki, ts, vision_wl=None):
         "big_titles":             big or None,
         "weeks_at_no1":           wiki.get("weeks_at_no1") or vwl.get("weeks_at_no1") or ts.get("weeks_at_no1") or floor.get("weeks_no1"),
         "days_at_no1":            wiki.get("days_at_no1") or ts.get("days_at_no1") or ((wiki.get("weeks_at_no1") or floor.get("weeks_no1", 0)) * 7) or None,
-        "longest_win_streak":     ts.get("longest_win_streak") or wiki.get("longest_win_streak"),
-        "current_win_streak":     wiki.get("current_win_streak"),
+
         "year_end_rankings":      wiki.get("year_end_rankings"),
-        "fastest_serve_kmh":      ts.get("fastest_serve_kmh") or wiki.get("fastest_serve_kmh") or floor.get("fastest_serve_kmh"),
-        "fastest_serve_mph":      ts.get("fastest_serve_mph") or wiki.get("fastest_serve_mph") or floor.get("fastest_serve_mph"),
-        "wins_straight_sets_pct": ts.get("wins_straight_sets_pct") or csv_d.get("csv_straight_set_wins_pct"),
-        "wins_from_behind_pct":   vwl.get("after_losing_first_set_pct") or after_lose_pct or ts.get("wins_from_behind_pct"),
+
         "after_winning_first_set_pct": vwl.get("after_winning_first_set_pct") or after_win_pct,
         "after_losing_first_set_pct":  vwl.get("after_losing_first_set_pct") or after_lose_pct,
         "tiebreaks_won_pct":      tb_pct,
         "deciding_sets_won_pct":  ds_pct,
-        "breaks_per_set":         ts.get("breaks_per_set"),
-        "tiebreaks_per_match":    ts.get("tiebreaks_per_match"),
-        "avg_match_duration_str": ts.get("avg_match_duration_str"),
-        "avg_match_duration_mins":ts.get("avg_match_duration_mins"),
-        "current_form_str":       ts.get("current_form_str"),
     }
 
 
@@ -559,7 +432,7 @@ def update_html(scraped):
     with open("index.html", "r") as f:
         html = f.read()
     today = datetime.now(timezone.utc).strftime("%-d %B %Y")
-    new_html = re.sub(r"Last updated: [^<\"]+", f"Last updated: {today}", html)
+    new_html = re.sub(r'(id="last-updated">)Last updated: [^<]+', rf'\1Last updated: {today}', html)
     if new_html != html:
         with open("index.html", "w") as f:
             f.write(new_html)
@@ -609,7 +482,7 @@ async def main():
 
         if has_key:
             # Source 3: ATP W/L vision
-            print("\n[2/4] Vision — ATP Win/Loss Index")
+            print("\n[2/3] Vision — ATP Win/Loss Index")
             for i, key in enumerate(["sinner", "alcaraz"]):
                 print(f"\n  {PLAYERS[key]['name']}")
                 if i > 0: await asyncio.sleep(8)
@@ -618,28 +491,19 @@ async def main():
                 await ctx.close()
 
             # Source 4: Wikipedia
-            print("\n[3/4] Vision — Wikipedia")
+            print("\n[3/3] Vision — Wikipedia")
             for i, key in enumerate(["sinner", "alcaraz"]):
                 print(f"\n  {PLAYERS[key]['name']}")
                 if i > 0: await asyncio.sleep(5)
                 ctx = await make_context(browser)
                 result[key]["vision_wiki"] = await scrape_wiki_vision(ctx, key)
                 await ctx.close()
-
-            # Source 5: TennisStats
-            print("\n[4/4] Vision — TennisStats")
-            for i, key in enumerate(["sinner", "alcaraz"]):
-                print(f"\n  {PLAYERS[key]['name']}")
-                if i > 0: await asyncio.sleep(5)
-                ctx = await make_context(browser)
-                result[key]["vision_ts"] = await scrape_ts_vision(ctx, key)
-                await ctx.close()
         else:
-            print("\n[2-4/4] Vision sources skipped (no ANTHROPIC_API_KEY)")
+            print("\n[2-3/3] Vision sources skipped (no ANTHROPIC_API_KEY)")
 
         await browser.close()
 
-    # Source 2: Sackmann CSV
+    # CSV source removed — surface W/L comes from ATP W/L vision instead
     for key in ["sinner", "alcaraz"]:
         result[key]["csv"] = {}
 
