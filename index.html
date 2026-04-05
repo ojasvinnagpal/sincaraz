@@ -1236,6 +1236,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <tr><td>Djokovic</td><td>#83</td><td>#16</td><td>#3</td><td>#3</td><td>#3</td></tr>
       </table>
     </div>
+    </div>
 
     <div class="section-title">Prize Money by Age</div>
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:32px">
@@ -1272,17 +1273,121 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="section-h2">Who's Better?</div>
     <p style="color:var(--text-dim);margin-bottom:32px;font-size:14px">Analytical breakdown by category — and the verdict</p>
 
-    <div id="expertContent"></div>
+    <div class="expert-section">
+      <div class="expert-question">Who is better on hard courts?</div>
+      <div class="verdict-row">
+        <div class="verdict-side s">
+          <div class="verdict-player s">Sinner's Case</div>
+          <div class="verdict-text">Sinner is arguably the greatest hard-court player of the current era. Consistent baseline game, elite return, and a historic 2025 campaign (56.45% total points won). He won AO 2024, AO 2025, USO 2024, and Wimbledon 2025 — all hard-court or hard-surface crowns in the last two years.</div>
+        </div>
+        <div class="verdict-center">
+          <div class="verdict-verdict" style="color:var(--sinner)">Edge: Sinner</div>
+          <div class="verdict-note">Slight statistical advantage across most serve & return metrics</div>
+        </div>
+        <div class="verdict-side a">
+          <div class="verdict-player a">Alcaraz's Case</div>
+          <div class="verdict-text">Alcaraz has the explosive movement and serve power to win on any surface, and leads the H2H on hard. But his hard-court serve can be volatile — higher double fault rate and lower first-serve percentage than Sinner.</div>
+        </div>
+      </div>
+    </div>
 
-    <!-- SOCIAL MEDIA -->
+    <div class="expert-section">
+      <div class="expert-question">Who is better on clay?</div>
+      <div class="verdict-row">
+        <div class="verdict-side s">
+          <div class="verdict-player s">Sinner's Case</div>
+          <div class="verdict-text">Sinner is a competent clay player (70.8% career win rate) and reached the 2025 Roland Garros final, but he lacks Alcaraz's spin variety, net-play versatility, and physical clay-court athleticism.</div>
+        </div>
+        <div class="verdict-center">
+          <div class="verdict-verdict" style="color:var(--alcaraz)">Edge: Alcaraz</div>
+          <div class="verdict-note">A generational clay-court talent</div>
+        </div>
+        <div class="verdict-side a">
+          <div class="verdict-player a">Alcaraz's Case</div>
+          <div class="verdict-text">Alcaraz is the best clay-court player in the world right now, and possibly the best since Nadal. His 22-1 record in 2025, two Roland Garros titles, and dominant footwork make him nearly unplayable on the surface.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="expert-section">
+      <div class="expert-question">Who is more consistent across surfaces?</div>
+      <div class="verdict-row">
+        <div class="verdict-side s">
+          <div class="verdict-player s">Sinner's Case</div>
+          <div class="verdict-text">Sinner's win rates on hard (81.3%), grass (78.0%) and clay (70.8%) are remarkably consistent. He holds the highest points-won ratio in ATP history and finished No.1 in service games won % in 2025.</div>
+        </div>
+        <div class="verdict-center">
+          <div class="verdict-verdict" style="color:var(--sinner)">Edge: Sinner</div>
+          <div class="verdict-note">Higher average win % across all surfaces</div>
+        </div>
+        <div class="verdict-side a">
+          <div class="verdict-player a">Alcaraz's Case</div>
+          <div class="verdict-text">Alcaraz has higher highs but more variance. His clay dominance is unmatched, but his hard-court results are more volatile. Interestingly, his win % across the three surfaces is within ~1% of each other — remarkably even.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="expert-section">
+      <div class="expert-question">Who has the better serve?</div>
+      <div class="verdict-row">
+        <div class="verdict-side s">
+          <div class="verdict-player s">Sinner's Case</div>
+          <div class="verdict-text">Sinner's serve is highly efficient — better 1st-serve percentage, fewer double faults, and better break point saving. He finished #1 in service games won % in 2025.</div>
+        </div>
+        <div class="verdict-center">
+          <div class="verdict-verdict" style="color:var(--gold)">Split decision</div>
+          <div class="verdict-note">Two different serve profiles</div>
+        </div>
+        <div class="verdict-side a">
+          <div class="verdict-player a">Alcaraz's Case</div>
+          <div class="verdict-text">Alcaraz has the bigger weapon — faster peak serve speed, more aces per match, more variety. The trade-off is a higher double fault rate and shakier second serve.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="expert-section">
+      <div class="expert-question">Who is better under pressure?</div>
+      <div class="verdict-row">
+        <div class="verdict-side s">
+          <div class="verdict-player s">Sinner's Case</div>
+          <div class="verdict-text">Sinner leads in tiebreaks won % (64.9%), deciding sets won % (66.7%), and has a strong fifth-set record. By the raw numbers, he edges Alcaraz in most pressure metrics.</div>
+        </div>
+        <div class="verdict-center">
+          <div class="verdict-verdict" style="color:var(--sinner)">Slight edge: Sinner</div>
+          <div class="verdict-note">Though Alcaraz's clutch moments are historic</div>
+        </div>
+        <div class="verdict-side a">
+          <div class="verdict-player a">Alcaraz's Case</div>
+          <div class="verdict-text">Alcaraz has shown extraordinary nerve — saving match points against Sinner at the 2025 Roland Garros final is one of the greatest clutch performances of the decade. His deciding-set W/L (71.0%) is actually better than Sinner's.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="expert-section">
+      <div class="expert-question">Who will end up with more Grand Slams?</div>
+      <div class="verdict-row">
+        <div class="verdict-side s">
+          <div class="verdict-player s">Sinner's Case</div>
+          <div class="verdict-text">At 24 with 4 Slams, Sinner is slightly behind Alcaraz's pace but his serve/return dominance and consistency could yield 10+ if he stays healthy. He has already beaten Alcaraz in a Grand Slam final (Wimbledon 2025).</div>
+        </div>
+        <div class="verdict-center">
+          <div class="verdict-verdict" style="color:var(--gold)">Both could reach 15+</div>
+          <div class="verdict-note">The answer may define tennis history</div>
+        </div>
+        <div class="verdict-side a">
+          <div class="verdict-player a">Alcaraz's Case</div>
+          <div class="verdict-text">At 22 with 7 Grand Slams, Alcaraz is tracking ahead of Federer's pace. He's the youngest man in the Open Era to win all four different Grand Slams. If he stays healthy, 15-20 is a genuine target.</div>
+        </div>
+      </div>
+    </div>
 
     <!-- VOTE WIDGET -->
     <div class="vote-section" id="voteSection">
       <div class="vote-title">Who Is Better?</div>
       <div class="vote-subtitle">Cast your vote · Results are live & aggregated globally</div>
       <div class="vote-buttons" id="voteBtns">
-        <button class="vote-btn s" onclick="castVote('sinner')">🇮🇹 Sinner</button>
-        <button class="vote-btn a" onclick="castVote('alcaraz')">🇪🇸 Alcaraz</button>
+        <button class="vote-btn s" onclick="castVote('sinner')">Sinner</button>
+        <button class="vote-btn a" onclick="castVote('alcaraz')">Alcaraz</button>
       </div>
       <div id="voteAlready" class="vote-already" style="display:none"></div>
       <div class="vote-results" id="voteResults">
@@ -1304,28 +1409,8 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
 
-    <div class="section-title" style="margin-top:48px">Social Media Fan Following</div>
-    <div class="social-grid">
-      <div class="social-card">
-        <h3 class="s">🇮🇹 Jannik Sinner</h3>
-        <div class="social-row"><span class="social-platform">Instagram</span><span class="social-num">8.5M followers</span></div>
-        <div class="social-row"><span class="social-platform">X (Twitter)</span><span class="social-num">1.2M followers</span></div>
-        <div class="social-row"><span class="social-platform">TikTok</span><span class="social-num">2.1M followers</span></div>
-        <div class="social-row"><span class="social-platform">YouTube</span><span class="social-num">~500K subscribers</span></div>
-        <div class="social-row"><span class="social-platform">Total Est.</span><span class="social-num" style="color:var(--sinner)">~12M</span></div>
-      </div>
-      <div class="social-card">
-        <h3 class="a">🇪🇸 Carlos Alcaraz</h3>
-        <div class="social-row"><span class="social-platform">Instagram</span><span class="social-num">14.2M followers</span></div>
-        <div class="social-row"><span class="social-platform">X (Twitter)</span><span class="social-num">2.3M followers</span></div>
-        <div class="social-row"><span class="social-platform">TikTok</span><span class="social-num">5.8M followers</span></div>
-        <div class="social-row"><span class="social-platform">YouTube</span><span class="social-num">~1.1M subscribers</span></div>
-        <div class="social-row"><span class="social-platform">Total Est.</span><span class="social-num" style="color:var(--alcaraz)">~23M</span></div>
-      </div>
-    </div>
   </div>
 </div>
-
 
 <!-- ============================================================ INSIGHTS PAGE -->
 <div class="page" id="page-insights">
@@ -1335,55 +1420,44 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <!-- 1. CLUTCH SCORE -->
     <div class="insight-card">
-      <div class="insight-card-title">Clutch Score™
-        <span class="insight-winner-badge s">Sinner Leads</span>
-      </div>
-      <div class="insight-card-subtitle">Sincaraz.app original metric · Weighted composite: Tiebreak % (30%) + Deciding Set % (25%) + BP Saved % (25%) + BP Converted % (20%)</div>
+      <div class="insight-card-title">Clutch Score™ <span class="insight-winner-badge s">Sinner Leads</span></div>
+      <div class="insight-card-subtitle">Weighted composite: Tiebreak % (30%) + Deciding Set % (25%) + BP Saved % (25%) + BP Converted % (20%)</div>
       <div class="clutch-grid">
         <div class="clutch-side s">
-          <div class="clutch-name s">🇮🇹 Sinner</div>
-          <div class="clutch-score-big s">72.4</div>
+          <div class="clutch-name s">Sinner</div>
+          <div class="clutch-score-big s">72.8</div>
           <div class="clutch-label">Clutch Score / 100</div>
           <div class="clutch-breakdown">
-            <div class="clutch-row"><span class="clutch-row-label">Tiebreaks Won %</span><span class="clutch-row-val s" id="c-s-tb">65% × 0.30 = 19.5</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Deciding Sets Won %</span><span class="clutch-row-val s" id="c-s-ds">72% × 0.25 = 18.0</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Break Points Saved %</span><span class="clutch-row-val s">65% × 0.25 = 16.3</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Break Points Converted %</span><span class="clutch-row-val s">45% × 0.20 = 9.0</span></div>
-            <div class="clutch-row" style="border-top:1px solid rgba(26,111,255,.3);margin-top:4px;padding-top:8px"><span class="clutch-row-label" style="font-weight:700;color:var(--text)">Total</span><span class="clutch-row-val s" style="font-size:14px">72.8 / 100</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Tiebreaks Won %</span><span class="clutch-row-val s">64.9% × 0.30 = 19.5</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Deciding Sets Won %</span><span class="clutch-row-val s">66.7% × 0.25 = 16.7</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Break Points Saved %</span><span class="clutch-row-val s">68% × 0.25 = 17.0</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Break Points Converted %</span><span class="clutch-row-val s">43% × 0.20 = 8.6</span></div>
           </div>
         </div>
         <div class="clutch-side a">
-          <div class="clutch-name a">🇪🇸 Alcaraz</div>
-          <div class="clutch-score-big a">66.1</div>
+          <div class="clutch-name a">Alcaraz</div>
+          <div class="clutch-score-big a">66.9</div>
           <div class="clutch-label">Clutch Score / 100</div>
           <div class="clutch-breakdown">
-            <div class="clutch-row"><span class="clutch-row-label">Tiebreaks Won %</span><span class="clutch-row-val a" id="c-a-ds">57% × 0.30 = 17.1</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Deciding Sets Won %</span><span class="clutch-row-val a">69% × 0.25 = 17.3</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Break Points Saved %</span><span class="clutch-row-val a">62% × 0.25 = 15.5</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Tiebreaks Won %</span><span class="clutch-row-val a">62.0% × 0.30 = 18.6</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Deciding Sets Won %</span><span class="clutch-row-val a">71.0% × 0.25 = 17.8</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Break Points Saved %</span><span class="clutch-row-val a">64% × 0.25 = 16.0</span></div>
             <div class="clutch-row"><span class="clutch-row-label">Break Points Converted %</span><span class="clutch-row-val a">42% × 0.20 = 8.4</span></div>
-            <div class="clutch-row" style="border-top:1px solid rgba(255,58,26,.3);margin-top:4px;padding-top:8px"><span class="clutch-row-label" style="font-weight:700;color:var(--text)">Total</span><span class="clutch-row-val a" style="font-size:14px">58.3 / 100</span></div>
           </div>
         </div>
       </div>
-      <p style="font-size:12px;color:var(--text-dim);margin-top:16px;line-height:1.7">⚠️ <em>Clutch Score™ is a Sincaraz.app original composite metric, not an ATP official stat. Inputs sourced from ATP Win/Loss Index.</em></p>
+      <p style="font-size:12px;color:var(--text-dim);margin-top:16px;line-height:1.7">Sincaraz.app original composite metric. Inputs sourced from ATP Win/Loss Index.</p>
     </div>
 
-    <!-- 2. H2H GAMES WON — the hidden stat -->
+    <!-- 2. H2H GAMES WON -->
     <div class="insight-card">
-      <div class="insight-card-title">H2H: Games Won
-        <span class="insight-winner-badge s">Almost Even</span>
-      </div>
-      <div class="insight-card-subtitle">Despite losing 6–10 in matches, Sinner has won nearly half of all games played in the rivalry</div>
+      <div class="insight-card-title">H2H: Points Won <span class="insight-winner-badge" style="background:rgba(245,200,66,.15);color:var(--gold)">Perfectly Tied</span></div>
+      <div class="insight-card-subtitle">Despite losing 6–10 in matches, Sinner has won nearly half of all points in the rivalry</div>
       <div style="max-width:700px;margin:0 auto">
         <div class="big-stat-row">
-          <div class="big-stat-val s">47.8%</div>
-          <div class="big-stat-label">Games Won<br>Across All<br>16 Matches</div>
-          <div class="big-stat-val a">52.2%</div>
-        </div>
-        <div class="big-stat-row">
-          <div class="big-stat-val s">~312</div>
-          <div class="big-stat-label">Total Games<br>Won in<br>H2H</div>
-          <div class="big-stat-val a">~341</div>
+          <div class="big-stat-val s">1,651</div>
+          <div class="big-stat-label">Total Points<br>Won in H2H<br>⚖️ Perfectly Tied</div>
+          <div class="big-stat-val a">1,651</div>
         </div>
         <div class="big-stat-row">
           <div class="big-stat-val s">28</div>
@@ -1391,22 +1465,9 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="big-stat-val a">30</div>
         </div>
         <div class="big-stat-row">
-          <div class="big-stat-val s">1,651</div>
-          <div class="big-stat-label">Total Points<br>Won in H2H<br>⚖️ Perfectly Tied</div>
-          <div class="big-stat-val a">1,651</div>
-        </div>
-      </div>
-      <div style="margin-top:20px">
-        <div class="games-bar-wrap">
-          <div style="font-size:11px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Games Won Distribution</div>
-          <div class="games-bar-track">
-            <div class="games-bar-s" style="width:47.8%"></div>
-            <div class="games-bar-a" style="width:52.2%"></div>
-          </div>
-          <div class="games-bar-labels">
-            <span class="games-bar-label-s">Sinner 47.8%</span>
-            <span class="games-bar-label-a">Alcaraz 52.2%</span>
-          </div>
+          <div class="big-stat-val s">6</div>
+          <div class="big-stat-label">Matches Won<br>in H2H</div>
+          <div class="big-stat-val a">10</div>
         </div>
       </div>
       <p style="font-size:13px;color:var(--text-dim);margin-top:16px;line-height:1.8;font-style:italic">"The 6–10 H2H record overstates how one-sided this rivalry is. At the points level, it's literally tied at 1,651 each through the end of 2025. Alcaraz wins more of the close matches — that's the real edge."</p>
@@ -1414,19 +1475,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <!-- 3. RIVALRY MOMENTUM -->
     <div class="insight-card">
-      <div class="insight-card-title">Rivalry Momentum
-        <span class="insight-winner-badge a">Alcaraz on Top</span>
-      </div>
+      <div class="insight-card-title">Rivalry Momentum <span class="insight-winner-badge a">Alcaraz on Top</span></div>
       <div class="insight-card-subtitle">Last 5 and last 10 H2H results — who has the recent edge?</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px">
+      <div class="clutch-grid">
         <div style="text-align:center;background:var(--bg3);border-radius:12px;padding:20px">
           <div style="font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px">Last 5 Matches</div>
           <div style="display:flex;justify-content:center;gap:8px;align-items:center">
-            <span style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--sinner)">1</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--sinner)">2</span>
             <span style="color:var(--text-dim);font-size:20px">–</span>
-            <span style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--alcaraz)">4</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--alcaraz)">3</span>
           </div>
-          <div style="font-size:11px;color:var(--alcaraz);font-weight:700">Alcaraz dominates recent form</div>
+          <div style="font-size:11px;color:var(--alcaraz);font-weight:700">Alcaraz edge in recent form</div>
         </div>
         <div style="text-align:center;background:var(--bg3);border-radius:12px;padding:20px">
           <div style="font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px">Last 10 Matches</div>
@@ -1438,188 +1497,88 @@ document.addEventListener('DOMContentLoaded', function() {
           <div style="font-size:11px;color:var(--text-dim);font-weight:700">Competitive across last 10</div>
         </div>
       </div>
-      <div class="momentum-wrap" id="momentumList"></div>
     </div>
 
-    <!-- 4. SURFACE VERSATILITY SCORE -->
+    <!-- 4. SURFACE VERSATILITY -->
     <div class="insight-card">
-      <div class="insight-card-title">Surface Versatility Score™
-        <span class="insight-winner-badge s">Sinner Wins</span>
-      </div>
-      <div class="insight-card-subtitle">Sincaraz.app original · How consistent is each player across all three surfaces? Lower variance = more versatile.</div>
+      <div class="insight-card-title">Surface Versatility <span class="insight-winner-badge a">Alcaraz More Even</span></div>
+      <div class="insight-card-subtitle">How consistent is each player across all three surfaces? Lower variance = more versatile.</div>
       <div class="clutch-grid">
         <div class="clutch-side s">
-          <div class="clutch-name s">🇮🇹 Sinner</div>
-          <div class="clutch-score-big s">96.2</div>
-          <div class="clutch-label">Versatility Score / 100</div>
+          <div class="clutch-name s">Sinner</div>
           <div class="clutch-breakdown">
             <div class="clutch-row"><span class="clutch-row-label">Hard Win %</span><span class="clutch-row-val s">81.3%</span></div>
             <div class="clutch-row"><span class="clutch-row-label">Clay Win %</span><span class="clutch-row-val s">70.8%</span></div>
             <div class="clutch-row"><span class="clutch-row-label">Grass Win %</span><span class="clutch-row-val s">78.0%</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Variance (lower = better)</span><span class="clutch-row-val s">22.5</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Spread (high–low)</span><span class="clutch-row-val s">10.5 pts</span></div>
           </div>
         </div>
         <div class="clutch-side a">
-          <div class="clutch-name a">🇪🇸 Alcaraz</div>
-          <div class="clutch-score-big a">88.7</div>
-          <div class="clutch-label">Versatility Score / 100</div>
+          <div class="clutch-name a">Alcaraz</div>
           <div class="clutch-breakdown">
             <div class="clutch-row"><span class="clutch-row-label">Hard Win %</span><span class="clutch-row-val a">78.6%</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Clay Win %</span><span class="clutch-row-val a">77.6%</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Grass Win %</span><span class="clutch-row-val a">77.6%</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Variance (lower = better)</span><span class="clutch-row-val a">2.1 ← more even</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Clay Win %</span><span class="clutch-row-val a">84.4%</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Grass Win %</span><span class="clutch-row-val a">89.7%</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Spread (high–low)</span><span class="clutch-row-val a">11.1 pts</span></div>
           </div>
         </div>
       </div>
-      <div style="background:var(--bg3);border-radius:10px;padding:16px;margin-top:16px">
-        <p style="font-size:13px;color:var(--text-dim);line-height:1.8">🔍 <strong style="color:var(--text)">Interesting nuance:</strong> Alcaraz actually has <em>lower variance</em> across surfaces — his win % on all three courts is within 1% of each other. Sinner's clay game (70.8%) drags his versatility score down. Yet Sinner's average win % across surfaces is higher. Two different kinds of "versatile."</p>
-      </div>
+      <p style="font-size:13px;color:var(--text-dim);margin-top:16px;line-height:1.8">Sinner's average win rate across surfaces is higher overall, but Alcaraz's floor is higher — he doesn't have a clearly "weaker" surface the way Sinner does on clay.</p>
     </div>
 
-    <!-- 5. OPPONENT STRENGTH INDEX -->
+    <!-- 5. PEAK MOMENTS -->
     <div class="insight-card">
-      <div class="insight-card-title">Opponent Strength Index™
-        <span class="insight-winner-badge s">Sinner Edge</span>
-      </div>
-      <div class="insight-card-subtitle">Sincaraz.app original · Average ranking of opponents beaten, weighted by round (Final = 3×, SF = 2×, QF = 1.5×, R4 and earlier = 1×)</div>
-      <div class="opp-strength-bar">
-        <div class="osb-row">
-          <div class="osb-label">vs Top 5</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <div>
-              <div style="font-size:10px;color:var(--sinner);margin-bottom:3px">Sinner 18–8 (69%)</div>
-              <div class="osb-track"><div class="osb-fill" style="width:69%;background:var(--sinner)"></div></div>
-            </div>
-            <div>
-              <div style="font-size:10px;color:var(--alcaraz);margin-bottom:3px">Alcaraz 14–9 (61%)</div>
-              <div class="osb-track"><div class="osb-fill" style="width:61%;background:var(--alcaraz)"></div></div>
-            </div>
-          </div>
-          <div></div>
-        </div>
-        <div class="osb-row">
-          <div class="osb-label">vs Top 10</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <div>
-              <div style="font-size:10px;color:var(--sinner);margin-bottom:3px">Sinner 60–37 (62%)</div>
-              <div class="osb-track"><div class="osb-fill" style="width:62%;background:var(--sinner)"></div></div>
-            </div>
-            <div>
-              <div style="font-size:10px;color:var(--alcaraz);margin-bottom:3px">Alcaraz 55–24 (70%)</div>
-              <div class="osb-track"><div class="osb-fill" style="width:70%;background:var(--alcaraz)"></div></div>
-            </div>
-          </div>
-          <div></div>
-        </div>
-        <div class="osb-row">
-          <div class="osb-label">Slam Finals</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <div>
-              <div style="font-size:10px;color:var(--sinner);margin-bottom:3px">Sinner 3–1 (75%)</div>
-              <div class="osb-track"><div class="osb-fill" style="width:75%;background:var(--sinner)"></div></div>
-            </div>
-            <div>
-              <div style="font-size:10px;color:var(--alcaraz);margin-bottom:3px">Alcaraz 7–2 (78%)</div>
-              <div class="osb-track"><div class="osb-fill" style="width:78%;background:var(--alcaraz)"></div></div>
-            </div>
-          </div>
-          <div></div>
-        </div>
-        <div class="osb-row">
-          <div class="osb-label">vs Djokovic</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-            <div>
-              <div style="font-size:10px;color:var(--sinner);margin-bottom:3px">Sinner 6–5 (55%)</div>
-              <div class="osb-track"><div class="osb-fill" style="width:55%;background:var(--sinner)"></div></div>
-            </div>
-            <div>
-              <div style="font-size:10px;color:var(--alcaraz);margin-bottom:3px">Alcaraz 6–4 (60%)</div>
-              <div class="osb-track"><div class="osb-fill" style="width:60%;background:var(--alcaraz)"></div></div>
-            </div>
-          </div>
-          <div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 6. PEAK WEEK -->
-    <div class="insight-card">
-      <div class="insight-card-title">Peak Week
-        <span class="insight-winner-badge" style="background:rgba(245,200,66,.15);color:var(--gold)">Too Close to Call</span>
-      </div>
-      <div class="insight-card-subtitle">Each player's single most dominant week in tennis history</div>
-      <div class="peak-week-grid">
-        <div class="peak-week-card s">
-          <div class="peak-week-event s">🇮🇹 AO 2024 — The Comeback</div>
-          <div class="peak-week-wins">Week of 14 Jan 2024</div>
-          <div class="peak-week-detail">
-            Down 2 sets to 0 vs Djokovic in SF, then won 3 straight sets. Beat Medvedev in the final from 2 sets down — only the 9th player in Open Era to win a major from that deficit. 5 matches, 4 Top-20 opponents, zero retirements, closed it out 6-3 in the 5th after a 3h45m final.
-          </div>
-        </div>
-        <div class="peak-week-card a">
-          <div class="peak-week-event a">🇪🇸 USO 2022 — The Coronation</div>
-          <div class="peak-week-wins">Week of 29 Aug 2022</div>
-          <div class="peak-week-detail">
-            Beat Sinner (5h15m, 2:50AM finish), Nadal, and Djokovic in the same slam to win his first major aged 19. Three of the greatest players ever, in consecutive rounds. Djokovic was defending champion. Became youngest world No.1 ever a week later. No debut slam run in history compares.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 7. TIME PLAYED TOGETHER -->
-    <div class="insight-card">
-      <div class="insight-card-title">Total Time on Court Together</div>
-      <div class="insight-card-subtitle">Across all 16 H2H matches — how long have these two spent battling each other?</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:center;margin-bottom:20px">
-        <div style="background:var(--bg3);border-radius:12px;padding:20px">
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--gold)">46h</div>
-          <div style="font-size:11px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase">Estimated Total<br>Time on Court</div>
-        </div>
-        <div style="background:var(--bg3);border-radius:12px;padding:20px">
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--text)">16</div>
-          <div style="font-size:11px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase">Matches<br>Played</div>
-        </div>
-        <div style="background:var(--bg3);border-radius:12px;padding:20px">
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--text)">2h 42m</div>
-          <div style="font-size:11px;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase">Average<br>Match Length</div>
-        </div>
-      </div>
-      <div style="background:var(--bg3);border-radius:10px;padding:16px">
-        <div style="font-size:12px;color:var(--text-dim);margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:.1em">Longest to Shortest H2H Matches</div>
-        <div style="display:flex;flex-direction:column;gap:6px" id="matchDurationList"></div>
-      </div>
-    </div>
-
-    <!-- 8. WHAT IF? -->
-    <div class="insight-card">
-      <div class="insight-card-title">What If They Never Met? 🤔</div>
-      <div class="insight-card-subtitle">Estimated extra titles each player would have won if the other didn't exist — based on who eliminated whom</div>
+      <div class="insight-card-title">Peak Moments <span class="insight-winner-badge" style="background:rgba(245,200,66,.15);color:var(--gold)">Too Close to Call</span></div>
+      <div class="insight-card-subtitle">Each player's single most dominant run in their career so far</div>
       <div class="clutch-grid">
         <div class="clutch-side s">
-          <div class="clutch-name s">🇮🇹 Sinner would have +5 titles</div>
-          <div class="peak-week-detail" style="margin-top:12px;font-size:13px;color:var(--text-dim);line-height:1.8">
-            <strong style="color:var(--text)">Matches Alcaraz knocked him out:</strong><br>
-            • 2022 USO QF (Sinner had beaten Monfils, Cilic)<br>
-            • 2024 RG SF (path to final was open)<br>
-            • 2024 Madrid SF<br>
-            • 2025 Monte Carlo SF<br>
-            • 2025 Madrid SF<br>
-            <span style="color:var(--sinner)">→ Sinner likely adds 3–5 more ATP titles without Alcaraz in draws</span>
-          </div>
+          <div class="clutch-name s">AO 2024 — The Comeback</div>
+          <p style="font-size:13px;color:var(--text-dim);line-height:1.7;margin-top:12px">Down two sets to Medvedev in the final, Sinner won three straight to claim his first Grand Slam — becoming only the ninth player in the Open Era to recover from 2-0 down in a major final. Italy's first male Slam champion.</p>
         </div>
         <div class="clutch-side a">
-          <div class="clutch-name a">🇪🇸 Alcaraz would have +3 titles</div>
-          <div class="peak-week-detail" style="margin-top:12px;font-size:13px;color:var(--text-dim);line-height:1.8">
-            <strong style="color:var(--text)">Matches Sinner knocked him out:</strong><br>
-            • 2024 Wimbledon SF (Alcaraz was defending champion)<br>
-            • 2024 AO SF equivalent draw scenarios<br>
-            • 2023 Davis Cup<br>
-            • 2025 ATP Finals (Sinner won title)<br>
-            <span style="color:var(--alcaraz)">→ Alcaraz likely adds 2–3 more ATP titles without Sinner blocking</span>
-          </div>
+          <div class="clutch-name a">USO 2022 — The Coronation</div>
+          <p style="font-size:13px;color:var(--text-dim);line-height:1.7;margin-top:12px">At 19, Alcaraz beat Sinner (5h15m, 2:50AM finish), then Tiafoe, then Ruud to win his first major. A week later, he became the youngest men's World No.1 in Open Era history. No debut Slam run compares.</p>
         </div>
       </div>
-      <p style="font-size:11px;color:var(--text-dim);margin-top:12px;font-style:italic">⚠️ Hypothetical analysis based on draw paths and form at time of each match. Not an official stat.</p>
+    </div>
+
+    <!-- 6. BIG TITLES RACE -->
+    <div class="insight-card">
+      <div class="insight-card-title">Big Titles Race <span class="insight-winner-badge a">Alcaraz Ahead</span></div>
+      <div class="insight-card-subtitle">Grand Slams + Masters 1000 + ATP Finals (the "Big Titles" benchmark)</div>
+      <div class="big-stat-row">
+        <div class="big-stat-val s">13</div>
+        <div class="big-stat-label">Total<br>Big Titles</div>
+        <div class="big-stat-val a">15</div>
+      </div>
+      <div class="big-stat-row">
+        <div class="big-stat-val s">4</div>
+        <div class="big-stat-label">Grand<br>Slams</div>
+        <div class="big-stat-val a">7</div>
+      </div>
+      <div class="big-stat-row">
+        <div class="big-stat-val s">7</div>
+        <div class="big-stat-label">Masters<br>1000</div>
+        <div class="big-stat-val a">8</div>
+      </div>
+      <div class="big-stat-row">
+        <div class="big-stat-val s">2</div>
+        <div class="big-stat-label">ATP<br>Finals</div>
+        <div class="big-stat-val a">0</div>
+      </div>
+      <p style="font-size:13px;color:var(--text-dim);margin-top:16px;line-height:1.8">Alcaraz leads the big-titles race 15–13, but Sinner has completely closed ground since losing world #1 in September 2025 — winning four big titles (Paris Masters, ATP Finals, Indian Wells, Miami) while Alcaraz won only one (AO 2026) in the same window.</p>
+    </div>
+
+    <!-- 7. WEEKS AT #1 -->
+    <div class="insight-card">
+      <div class="insight-card-title">Race to 100 Weeks at #1</div>
+      <div class="insight-card-subtitle">Both players have held World No. 1 — who will get to 100 weeks first?</div>
+      <div class="big-stat-row">
+        <div class="big-stat-val s">66</div>
+        <div class="big-stat-label">Weeks at #1<br>(all-time)</div>
+        <div class="big-stat-val a">65</div>
+      </div>
+      <p style="font-size:13px;color:var(--text-dim);margin-top:16px;line-height:1.8">Sinner holds a slim lead in total weeks at World No. 1, but Alcaraz is set to match Sinner's 66-week milestone in April 2026. Alcaraz has held the #1 ranking more recently (since September 2025) while Sinner held it from June 2024 to September 2025.</p>
     </div>
 
   </div>
@@ -1807,7 +1766,9 @@ function renderRecords(){
 }
 
 function renderExpert(){
-  document.getElementById('expertContent').innerHTML = expertVerdicts.map(v=>`
+  var el = document.getElementById('expertContent');
+  if (!el) return;
+  el.innerHTML = expertVerdicts.map(v=>`
     <div class="expert-section">
       <div class="expert-question">${v.q}</div>
       <div class="verdict-row">
@@ -2122,12 +2083,14 @@ function applyStats(data) {
 }
 
 async function initApp() {
-  renderTicker();
-  renderMatches();
-  renderRecords();
-  renderExpert();
-  const stats = await loadScrapedStats();
-  applyStats(stats);
+  try { renderTicker(); } catch(e) { console.error('renderTicker:', e); }
+  try { renderMatches(); } catch(e) { console.error('renderMatches:', e); }
+  try { renderRecords(); } catch(e) { console.error('renderRecords:', e); }
+  try { renderExpert(); } catch(e) { console.error('renderExpert:', e); }
+  try {
+    const stats = await loadScrapedStats();
+    applyStats(stats);
+  } catch(e) { console.error('applyStats:', e); }
 }
 
 initApp();
