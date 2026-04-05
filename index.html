@@ -539,6 +539,41 @@ footer a:hover{color:var(--text)}
   .clutch-grid,.peak-week-grid{grid-template-columns:1fr}
   .clutch-score-big{font-size:52px}
   .momentum-match{grid-template-columns:90px 1fr 60px}
+  /* Fix inline grids in insights page at mobile */
+  .insight-card{padding:18px}
+  .insight-card-title{font-size:18px;flex-wrap:wrap}
+  .insight-card > div[style*="grid-template-columns:repeat(3,1fr)"],
+  .insight-card > div[style*="grid-template-columns:1fr 1fr"]{
+    grid-template-columns:1fr !important;
+    gap:12px !important;
+  }
+  /* Fix grand slams page 4-col grid */
+  #page-slams > .section > div[style*="grid-template-columns:repeat(4,1fr)"]{
+    grid-template-columns:repeat(2,1fr) !important;
+    gap:12px !important;
+  }
+  /* Expert page verdict-row already handled */
+  .expert-section{padding:16px !important}
+  /* Big stat rows in insights */
+  .big-stat-row{grid-template-columns:1fr 1.2fr 1fr !important;gap:8px !important}
+  .big-stat-val{font-size:32px !important}
+  .big-stat-label{font-size:10px !important}
+  /* Opponent strength bars */
+  .osb-row > div[style*="grid-template-columns:1fr 1fr"]{
+    grid-template-columns:1fr !important;
+    gap:8px !important;
+  }
+}
+@media(max-width:480px){
+  .insight-card > div[style*="grid-template-columns:repeat(3,1fr)"]{
+    grid-template-columns:1fr !important;
+  }
+  #page-slams > .section > div[style*="grid-template-columns"]{
+    grid-template-columns:1fr 1fr !important;
+  }
+  .clutch-breakdown{font-size:11px}
+  .section-h2{font-size:26px !important}
+  .insight-card{padding:14px}
 }
 </style>
 <!-- Plausible Analytics -->
