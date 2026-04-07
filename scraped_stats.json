@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-04-06T07:52:53.930538+00:00",
+  "scraped_at": "2026-04-07T07:26:35.096595+00:00",
   "sinner": {
     "h2h_wins": 6,
     "h2h_losses": 10,
@@ -52,17 +52,33 @@
       "carpet_wl": "0-0",
       "indoor_wl": "91-21",
       "outdoor_wl": "249-67",
-      "after_winning_first_set_wl": "297-31",
-      "after_losing_first_set_wl": "43-57",
+      "after_winning_first_set_pct": 90.5,
+      "after_losing_first_set_pct": 43.0,
       "vs_righthanded_wl": "306-80",
       "vs_lefthanded_wl": "34-8",
       "serve_rating": 300.0,
       "tiebreaks_won_pct": 64.9,
-      "deciding_sets_won_pct": 66.7,
-      "after_winning_first_set_pct": 90.5,
-      "after_losing_first_set_pct": 43.0
+      "deciding_sets_won_pct": 66.7
     },
-    "vision_wiki": {},
+    "vision_wiki": {
+      "ao_wins": 2,
+      "rg_wins": 0,
+      "wimbledon_wins": 0,
+      "uso_wins": 1,
+      "weeks_at_no1": null,
+      "days_at_no1": null,
+      "masters_titles": 7,
+      "longest_win_streak": null,
+      "year_end_rankings": {
+        "2019": 78,
+        "2020": 37,
+        "2021": 10,
+        "2022": 15,
+        "2023": 4,
+        "2024": 1,
+        "2025": 2
+      }
+    },
     "csv": {},
     "computed": {
       "age": 24,
@@ -77,7 +93,15 @@
       "big_titles": 11,
       "weeks_at_no1": 66,
       "days_at_no1": 462,
-      "year_end_rankings": null,
+      "year_end_rankings": {
+        "2019": 78,
+        "2020": 37,
+        "2021": 10,
+        "2022": 15,
+        "2023": 4,
+        "2024": 1,
+        "2025": 2
+      },
       "after_winning_first_set_pct": 90.5,
       "after_losing_first_set_pct": 43.0,
       "tiebreaks_won_pct": 64.9,
@@ -133,11 +157,11 @@
       "on_clay_wl": "103-19",
       "on_grass_wl": "35-4",
       "on_hard_wl": "159-44",
-      "on_carpet_wl": "0-0",
+      "carpet_wl": "0-0",
       "indoor_wl": "35-15",
       "outdoor_wl": "262-52",
-      "after_winning_first_set_pct": 93.8,
-      "after_losing_first_set_pct": 45.1,
+      "after_winning_first_set_wl": "256-17",
+      "after_losing_first_set_wl": "41-50",
       "vs_righthanded_wl": "258-56",
       "vs_lefthanded_wl": "39-11"
     },
@@ -148,7 +172,7 @@
       "uso_wins": 2,
       "weeks_at_no1": null,
       "days_at_no1": null,
-      "masters_titles": 15,
+      "masters_titles": 8,
       "longest_win_streak": null,
       "year_end_rankings": {
         "2021": 32,
