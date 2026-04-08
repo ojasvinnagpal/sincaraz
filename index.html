@@ -128,7 +128,8 @@ nav{position:sticky;top:0;z-index:100;background:rgba(7,8,15,0.95);backdrop-filt
 
 /* PAGES */
 .page{display:none;min-height:80vh}
-.page.active{display:block}
+.page.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 /* ===== HERO / HOME ===== */
 .hero{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);border-bottom:1px solid var(--border);padding:60px 24px 40px}
@@ -303,7 +304,8 @@ nav{position:sticky;top:0;z-index:100;background:rgba(7,8,15,0.95);backdrop-filt
 .pc-bar-a{background:var(--alcaraz);transition:width 1s ease}
 
 /* EXPERT PAGE */
-.expert-section{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:32px;margin-bottom:24px}
+.expert-section{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:32px;margin-bottom:24px;transition:border-color .2s,box-shadow .2s}
+.expert-section:hover{border-color:rgba(255,255,255,.13);box-shadow:0 4px 20px rgba(0,0,0,.2)}
 .expert-question{font-family:'DM Serif Display',serif;font-size:26px;margin-bottom:20px;line-height:1.3}
 .verdict-row{display:grid;grid-template-columns:1fr 220px 1fr;gap:24px;align-items:start;margin-bottom:24px}
 .verdict-side{padding:20px;border-radius:12px}
@@ -429,15 +431,15 @@ footer a:hover{color:var(--text)}
 }
 
 /* ===== VOTE WIDGET ===== */
-.vote-section{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:40px;margin-bottom:32px;text-align:center}
+.vote-section{background:rgba(13,15,26,.85);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:40px;margin-bottom:32px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3)}
 .vote-title{font-family:"Bebas Neue",sans-serif;font-size:48px;letter-spacing:.05em;margin-bottom:8px}
 .vote-subtitle{color:var(--text-dim);font-size:13px;margin-bottom:36px;letter-spacing:.05em}
 .vote-buttons{display:flex;gap:16px;justify-content:center;margin-bottom:32px;flex-wrap:wrap}
 .vote-btn{padding:18px 48px;border-radius:50px;font-family:"Barlow Condensed",sans-serif;font-size:22px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:2px solid;transition:all .25s;min-width:200px}
 .vote-btn.s{border-color:var(--sinner);color:var(--sinner);background:transparent}
-.vote-btn.s:hover{background:var(--sinner);color:#fff;transform:scale(1.04)}
+.vote-btn.s:hover{background:var(--sinner);color:#fff;transform:scale(1.04);box-shadow:0 0 24px rgba(26,111,255,.4)}
 .vote-btn.a{border-color:var(--alcaraz);color:var(--alcaraz);background:transparent}
-.vote-btn.a:hover{background:var(--alcaraz);color:#fff;transform:scale(1.04)}
+.vote-btn.a:hover{background:var(--alcaraz);color:#fff;transform:scale(1.04);box-shadow:0 0 24px rgba(255,58,26,.4)}
 .vote-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
 .vote-btn.voted-s{background:var(--sinner);color:#fff}
 .vote-btn.voted-a{background:var(--alcaraz);color:#fff}
@@ -448,7 +450,7 @@ footer a:hover{color:var(--text)}
 .vote-bar-label{font-family:"Barlow Condensed",sans-serif;font-size:20px;font-weight:800}
 .vote-bar-label.s{color:var(--sinner)}
 .vote-bar-label.a{color:var(--alcaraz)}
-.vote-bar-track{height:20px;border-radius:10px;background:var(--bg3);overflow:hidden;display:flex}
+.vote-bar-track{height:24px;border-radius:12px;background:var(--bg3);overflow:hidden;display:flex;box-shadow:inset 0 2px 4px rgba(0,0,0,.3)}
 .vote-bar-s{background:var(--sinner);transition:width 1s ease;border-radius:10px 0 0 10px}
 .vote-bar-a{background:var(--alcaraz);transition:width 1s ease;border-radius:0 10px 10px 0}
 .vote-total{font-size:12px;color:var(--text-dim);margin-top:8px;letter-spacing:.1em;text-transform:uppercase}
@@ -471,7 +473,8 @@ footer a:hover{color:var(--text)}
 }
 
 /* ===== INSIGHTS PAGE ===== */
-.insight-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:24px}
+.insight-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:24px;transition:border-color .2s,box-shadow .2s}
+.insight-card:hover{border-color:rgba(255,255,255,.13);box-shadow:0 4px 20px rgba(0,0,0,.2)}
 .insight-card-title{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
 .insight-card-subtitle{font-size:12px;color:var(--text-dim);margin-bottom:24px;letter-spacing:.05em}
 .clutch-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
@@ -1275,6 +1278,34 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="section-h2">Who's Better?</div>
     <p style="color:var(--text-dim);margin-bottom:32px;font-size:14px">Analytical breakdown by category — and the verdict</p>
 
+    <!-- VOTE WIDGET -->
+    <div class="vote-section" id="voteSection">
+      <div class="vote-title">Who Is Better?</div>
+      <div class="vote-subtitle">Cast your vote · Results are live & aggregated globally</div>
+      <div class="vote-buttons" id="voteBtns">
+        <button class="vote-btn s" onclick="castVote('sinner')">Sinner</button>
+        <button class="vote-btn a" onclick="castVote('alcaraz')">Alcaraz</button>
+      </div>
+      <div id="voteAlready" class="vote-already" style="display:none"></div>
+      <div class="vote-results" id="voteResults">
+        <div class="vote-bar-wrap">
+          <div class="vote-bar-labels">
+            <span class="vote-bar-label s" id="vLabelS">Sinner 0%</span>
+            <span class="vote-bar-label a" id="vLabelA">Alcaraz 0%</span>
+          </div>
+          <div class="vote-bar-track">
+            <div class="vote-bar-s" id="vBarS" style="width:50%"></div>
+            <div class="vote-bar-a" id="vBarA" style="width:50%"></div>
+          </div>
+          <div class="vote-total" id="vTotal">0 votes</div>
+        </div>
+        <div class="vote-breakdown">
+          <div class="vote-breakdown-title">By Country</div>
+          <div class="vote-geo-grid" id="vGeoGrid"></div>
+        </div>
+      </div>
+    </div>
+
     <div class="expert-section">
       <div class="expert-question">Who is better on hard courts?</div>
       <div class="verdict-row">
@@ -1383,34 +1414,6 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
 
-    <!-- VOTE WIDGET -->
-    <div class="vote-section" id="voteSection">
-      <div class="vote-title">Who Is Better?</div>
-      <div class="vote-subtitle">Cast your vote · Results are live & aggregated globally</div>
-      <div class="vote-buttons" id="voteBtns">
-        <button class="vote-btn s" onclick="castVote('sinner')">Sinner</button>
-        <button class="vote-btn a" onclick="castVote('alcaraz')">Alcaraz</button>
-      </div>
-      <div id="voteAlready" class="vote-already" style="display:none"></div>
-      <div class="vote-results" id="voteResults">
-        <div class="vote-bar-wrap">
-          <div class="vote-bar-labels">
-            <span class="vote-bar-label s" id="vLabelS">Sinner 0%</span>
-            <span class="vote-bar-label a" id="vLabelA">Alcaraz 0%</span>
-          </div>
-          <div class="vote-bar-track">
-            <div class="vote-bar-s" id="vBarS" style="width:50%"></div>
-            <div class="vote-bar-a" id="vBarA" style="width:50%"></div>
-          </div>
-          <div class="vote-total" id="vTotal">0 votes</div>
-        </div>
-        <div class="vote-breakdown">
-          <div class="vote-breakdown-title">By Country</div>
-          <div class="vote-geo-grid" id="vGeoGrid"></div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>
 
@@ -1422,29 +1425,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <!-- 1. CLUTCH SCORE -->
     <div class="insight-card">
-      <div class="insight-card-title">Clutch Score™ <span class="insight-winner-badge s">Sinner Leads</span></div>
+      <div class="insight-card-title">Clutch Score™ <span class="insight-winner-badge s" id="clutch-badge">Sinner Leads</span></div>
       <div class="insight-card-subtitle">Weighted composite: Tiebreak % (30%) + Deciding Set % (25%) + BP Saved % (25%) + BP Converted % (20%)</div>
       <div class="clutch-grid">
         <div class="clutch-side s">
           <div class="clutch-name s">Sinner</div>
-          <div class="clutch-score-big s">72.8</div>
+          <div class="clutch-score-big s" id="clutch-s-total">72.8</div>
           <div class="clutch-label">Clutch Score / 100</div>
           <div class="clutch-breakdown">
-            <div class="clutch-row"><span class="clutch-row-label">Tiebreaks Won %</span><span class="clutch-row-val s">64.9% × 0.30 = 19.5</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Deciding Sets Won %</span><span class="clutch-row-val s">66.7% × 0.25 = 16.7</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Break Points Saved %</span><span class="clutch-row-val s">68% × 0.25 = 17.0</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Break Points Converted %</span><span class="clutch-row-val s">43% × 0.20 = 8.6</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Tiebreaks Won %</span><span class="clutch-row-val s" id="clutch-s-tb">64.9% × 0.30 = 19.5</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Deciding Sets Won %</span><span class="clutch-row-val s" id="clutch-s-ds">66.7% × 0.25 = 16.7</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Break Points Saved %</span><span class="clutch-row-val s" id="clutch-s-bps">68% × 0.25 = 17.0</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Break Points Converted %</span><span class="clutch-row-val s" id="clutch-s-bpc">43% × 0.20 = 8.6</span></div>
           </div>
         </div>
         <div class="clutch-side a">
           <div class="clutch-name a">Alcaraz</div>
-          <div class="clutch-score-big a">66.9</div>
+          <div class="clutch-score-big a" id="clutch-a-total">66.9</div>
           <div class="clutch-label">Clutch Score / 100</div>
           <div class="clutch-breakdown">
-            <div class="clutch-row"><span class="clutch-row-label">Tiebreaks Won %</span><span class="clutch-row-val a">62.0% × 0.30 = 18.6</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Deciding Sets Won %</span><span class="clutch-row-val a">71.0% × 0.25 = 17.8</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Break Points Saved %</span><span class="clutch-row-val a">64% × 0.25 = 16.0</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Break Points Converted %</span><span class="clutch-row-val a">42% × 0.20 = 8.4</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Tiebreaks Won %</span><span class="clutch-row-val a" id="clutch-a-tb">62.0% × 0.30 = 18.6</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Deciding Sets Won %</span><span class="clutch-row-val a" id="clutch-a-ds">71.0% × 0.25 = 17.8</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Break Points Saved %</span><span class="clutch-row-val a" id="clutch-a-bps">64% × 0.25 = 16.0</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Break Points Converted %</span><span class="clutch-row-val a" id="clutch-a-bpc">42% × 0.20 = 8.4</span></div>
           </div>
         </div>
       </div>
@@ -1467,9 +1470,9 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="big-stat-val a">30</div>
         </div>
         <div class="big-stat-row">
-          <div class="big-stat-val s">6</div>
+          <div class="big-stat-val s" id="ins-h2h-s">6</div>
           <div class="big-stat-label">Matches Won<br>in H2H</div>
-          <div class="big-stat-val a">10</div>
+          <div class="big-stat-val a" id="ins-h2h-a">10</div>
         </div>
       </div>
       <p style="font-size:13px;color:var(--text-dim);margin-top:16px;line-height:1.8;font-style:italic">"The 6–10 H2H record overstates how one-sided this rivalry is. At the points level, it's literally tied at 1,651 each through the end of 2025. Alcaraz wins more of the close matches — that's the real edge."</p>
@@ -1509,19 +1512,19 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="clutch-side s">
           <div class="clutch-name s">Sinner</div>
           <div class="clutch-breakdown">
-            <div class="clutch-row"><span class="clutch-row-label">Hard Win %</span><span class="clutch-row-val s">81.3%</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Clay Win %</span><span class="clutch-row-val s">70.8%</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Grass Win %</span><span class="clutch-row-val s">78.0%</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Spread (high–low)</span><span class="clutch-row-val s">10.5 pts</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Hard Win %</span><span class="clutch-row-val s" id="ins-s-hard">81.3%</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Clay Win %</span><span class="clutch-row-val s" id="ins-s-clay">70.8%</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Grass Win %</span><span class="clutch-row-val s" id="ins-s-grass">78.0%</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Spread (high–low)</span><span class="clutch-row-val s" id="ins-s-spread">10.5 pts</span></div>
           </div>
         </div>
         <div class="clutch-side a">
           <div class="clutch-name a">Alcaraz</div>
           <div class="clutch-breakdown">
-            <div class="clutch-row"><span class="clutch-row-label">Hard Win %</span><span class="clutch-row-val a">78.6%</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Clay Win %</span><span class="clutch-row-val a">84.4%</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Grass Win %</span><span class="clutch-row-val a">89.7%</span></div>
-            <div class="clutch-row"><span class="clutch-row-label">Spread (high–low)</span><span class="clutch-row-val a">11.1 pts</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Hard Win %</span><span class="clutch-row-val a" id="ins-a-hard">78.6%</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Clay Win %</span><span class="clutch-row-val a" id="ins-a-clay">84.4%</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Grass Win %</span><span class="clutch-row-val a" id="ins-a-grass">89.7%</span></div>
+            <div class="clutch-row"><span class="clutch-row-label">Spread (high–low)</span><span class="clutch-row-val a" id="ins-a-spread">11.1 pts</span></div>
           </div>
         </div>
       </div>
@@ -1546,27 +1549,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <!-- 6. BIG TITLES RACE -->
     <div class="insight-card">
-      <div class="insight-card-title">Big Titles Race <span class="insight-winner-badge a">Alcaraz Ahead</span></div>
+      <div class="insight-card-title">Big Titles Race <span class="insight-winner-badge a" id="big-titles-badge">Alcaraz Ahead</span></div>
       <div class="insight-card-subtitle">Grand Slams + Masters 1000 + ATP Finals (the "Big Titles" benchmark)</div>
       <div class="big-stat-row">
-        <div class="big-stat-val s">13</div>
+        <div class="big-stat-val s" id="ins-s-big">13</div>
         <div class="big-stat-label">Total<br>Big Titles</div>
-        <div class="big-stat-val a">15</div>
+        <div class="big-stat-val a" id="ins-a-big">15</div>
       </div>
       <div class="big-stat-row">
-        <div class="big-stat-val s">4</div>
+        <div class="big-stat-val s" id="ins-s-gs">4</div>
         <div class="big-stat-label">Grand<br>Slams</div>
-        <div class="big-stat-val a">7</div>
+        <div class="big-stat-val a" id="ins-a-gs">7</div>
       </div>
       <div class="big-stat-row">
-        <div class="big-stat-val s">7</div>
+        <div class="big-stat-val s" id="ins-s-masters">7</div>
         <div class="big-stat-label">Masters<br>1000</div>
-        <div class="big-stat-val a">8</div>
+        <div class="big-stat-val a" id="ins-a-masters">8</div>
       </div>
       <div class="big-stat-row">
-        <div class="big-stat-val s">2</div>
+        <div class="big-stat-val s" id="ins-s-finals">2</div>
         <div class="big-stat-label">ATP<br>Finals</div>
-        <div class="big-stat-val a">0</div>
+        <div class="big-stat-val a" id="ins-a-finals">0</div>
       </div>
       <p style="font-size:13px;color:var(--text-dim);margin-top:16px;line-height:1.8">Alcaraz leads the big-titles race 15–13, but Sinner has completely closed ground since losing world #1 in September 2025 — winning four big titles (Paris Masters, ATP Finals, Indian Wells, Miami) while Alcaraz won only one (AO 2026) in the same window.</p>
     </div>
@@ -1576,9 +1579,9 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="insight-card-title">Race to 100 Weeks at #1</div>
       <div class="insight-card-subtitle">Both players have held World No. 1 — who will get to 100 weeks first?</div>
       <div class="big-stat-row">
-        <div class="big-stat-val s">66</div>
+        <div class="big-stat-val s" id="ins-s-weeks1">66</div>
         <div class="big-stat-label">Weeks at #1<br>(all-time)</div>
-        <div class="big-stat-val a">65</div>
+        <div class="big-stat-val a" id="ins-a-weeks1">65</div>
       </div>
       <p style="font-size:13px;color:var(--text-dim);margin-top:16px;line-height:1.8">Sinner holds a slim lead in total weeks at World No. 1, but Alcaraz is set to match Sinner's 66-week milestone in April 2026. Alcaraz has held the #1 ranking more recently (since September 2025) while Sinner held it from June 2024 to September 2025.</p>
     </div>
@@ -2066,6 +2069,102 @@ function applyStats(data) {
   set('t-s-outdoor-wl',SV.outdoor_wl);    set('t-a-outdoor-wl',AV.outdoor_wl);
   set('t-s-lefthanded',SV.vs_lefthanded_wl); set('t-a-lefthanded',AV.vs_lefthanded_wl);
 
+  // ── Insights page — Clutch Score ────────────────────────────
+  function computeClutch(tb, ds, bps, bpc) {
+    if (tb==null||ds==null||bps==null||bpc==null) return null;
+    return +(tb*0.30 + ds*0.25 + bps*0.25 + bpc*0.20).toFixed(1);
+  }
+  function clutchRow(pct, wt) {
+    if (pct==null) return null;
+    return pct+'% × '+wt.toFixed(2)+' = '+(pct*wt).toFixed(1);
+  }
+  var sTB=SX.tiebreaks_won_pct, sDS=SX.deciding_sets_won_pct, sBPS=SC.bp_saved_pct, sBPC=SC.bp_converted_pct;
+  var aTB=AX.tiebreaks_won_pct, aDS=AX.deciding_sets_won_pct, aBPS=AC.bp_saved_pct, aBPC=AC.bp_converted_pct;
+  var sClutch = computeClutch(sTB, sDS, sBPS, sBPC);
+  var aClutch = computeClutch(aTB, aDS, aBPS, aBPC);
+  if (sClutch!=null) set('clutch-s-total', sClutch);
+  if (aClutch!=null) set('clutch-a-total', aClutch);
+  set('clutch-s-tb', clutchRow(sTB, 0.30));
+  set('clutch-s-ds', clutchRow(sDS, 0.25));
+  set('clutch-s-bps', clutchRow(sBPS, 0.25));
+  set('clutch-s-bpc', clutchRow(sBPC, 0.20));
+  set('clutch-a-tb', clutchRow(aTB, 0.30));
+  set('clutch-a-ds', clutchRow(aDS, 0.25));
+  set('clutch-a-bps', clutchRow(aBPS, 0.25));
+  set('clutch-a-bpc', clutchRow(aBPC, 0.20));
+  if (sClutch!=null && aClutch!=null) {
+    var badge = document.getElementById('clutch-badge');
+    if (badge) {
+      badge.textContent = sClutch > aClutch ? 'Sinner Leads' : aClutch > sClutch ? 'Alcaraz Leads' : 'Tied';
+      badge.className = 'insight-winner-badge ' + (sClutch > aClutch ? 's' : aClutch > sClutch ? 'a' : '');
+    }
+  }
+
+  // ── Insights — H2H matches ────────────────────────────────
+  set('ins-h2h-s', S.h2h_wins);
+  set('ins-h2h-a', A.h2h_wins);
+
+  // ── Insights — Surface Versatility ────────────────────────
+  function surfPct(wlStr) {
+    if(!wlStr) return null;
+    try { var p=wlStr.split('-').map(Number); return p[0]+p[1]>0 ? +(p[0]/(p[0]+p[1])*100).toFixed(1) : null; } catch(e) { return null; }
+  }
+  var sHard=surfPct(SV.on_hard_wl), sCite=surfPct(SV.on_clay_wl), sGrass=surfPct(SV.on_grass_wl);
+  var aHard=surfPct(AV.on_hard_wl), aCite=surfPct(AV.on_clay_wl), aGrass=surfPct(AV.on_grass_wl);
+  if(sHard!=null) set('ins-s-hard', sHard+'%');
+  if(sCite!=null) set('ins-s-clay', sCite+'%');
+  if(sGrass!=null) set('ins-s-grass', sGrass+'%');
+  if(aHard!=null) set('ins-a-hard', aHard+'%');
+  if(aCite!=null) set('ins-a-clay', aCite+'%');
+  if(aGrass!=null) set('ins-a-grass', aGrass+'%');
+  if(sHard!=null&&sCite!=null&&sGrass!=null) {
+    var sArr=[sHard,sCite,sGrass]; set('ins-s-spread', (Math.max(...sArr)-Math.min(...sArr)).toFixed(1)+' pts');
+  }
+  if(aHard!=null&&aCite!=null&&aGrass!=null) {
+    var aArr=[aHard,aCite,aGrass]; set('ins-a-spread', (Math.max(...aArr)-Math.min(...aArr)).toFixed(1)+' pts');
+  }
+
+  // ── Insights — Big Titles ────────────────────────────────
+  set('ins-s-big', SX.big_titles);
+  set('ins-a-big', AX.big_titles);
+  set('ins-s-gs', SX.gs_total);
+  set('ins-a-gs', AX.gs_total);
+  set('ins-s-masters', SX.masters_titles);
+  set('ins-a-masters', AX.masters_titles);
+  // ATP Finals not in scraped data — kept as static fallback
+  if (SX.big_titles!=null && AX.big_titles!=null) {
+    var btBadge = document.getElementById('big-titles-badge');
+    if (btBadge) {
+      btBadge.textContent = AX.big_titles>SX.big_titles ? 'Alcaraz Ahead' : SX.big_titles>AX.big_titles ? 'Sinner Ahead' : 'Tied';
+      btBadge.className = 'insight-winner-badge ' + (AX.big_titles>SX.big_titles ? 'a' : SX.big_titles>AX.big_titles ? 's' : '');
+    }
+  }
+
+  // ── Insights — Weeks at #1 ────────────────────────────────
+  set('ins-s-weeks1', SX.weeks_at_no1);
+  set('ins-a-weeks1', AX.weeks_at_no1);
+
+  // ── Dynamic Ticker ────────────────────────────────────────
+  var h2hSW = S.h2h_wins||6, h2hAW = A.h2h_wins||10;
+  var h2hTot = h2hSW + h2hAW;
+  var gsS = SX.gs_total||4, gsA = AX.gs_total||7;
+  var tickerItems = [
+    '🇮🇹 <span class="s">SINNER</span> vs <span class="a">ALCARAZ</span> — H2H: '+(h2hAW>h2hSW?'Alcaraz':'Sinner')+' leads '+Math.max(h2hAW,h2hSW)+'–'+Math.min(h2hAW,h2hSW)+' ('+h2hTot+' matches)',
+    '<span class="a">ALCARAZ</span> leads H2H '+h2hAW+'–'+h2hSW+' overall ('+h2hTot+' ATP meetings)',
+    '<span class="s">SINNER</span> leads H2H on Grass 2–0',
+    'H2H Points Won: <span class="s">1,651</span> vs <span class="a">1,651</span> — perfectly tied through 2025 ⚖️',
+    '<span class="s">SINNER</span> — Sunshine Double 2026 (Indian Wells + Miami)',
+    '<span class="a">ALCARAZ</span> youngest World #1 in Open Era — age 19y 4m',
+    '<span class="s">SINNER</span> — '+gsS+' Grand Slams · <span class="a">ALCARAZ</span> — '+gsA+' Grand Slams',
+    '2025 Roland Garros Final — 5h 29m — Longest Slam Final Ever',
+    '<span class="s">SINNER</span> — ATP Finals Champion 2024 & 2025',
+    '<span class="a">ALCARAZ</span> — Career Grand Slam at age 22 — youngest ever',
+    'First duo to meet in 3 consecutive Slam Finals in one season (2025)',
+  ];
+  var tickerDoubled = [...tickerItems,...tickerItems];
+  var tickerEl = document.getElementById('tickerContent');
+  if(tickerEl) tickerEl.innerHTML = tickerDoubled.map(function(i){return '<span class="ticker-item">'+i+'</span>';}).join('');
+
   // Last updated
   if (data.scraped_at) {
     const d = new Date(data.scraped_at);
@@ -2172,14 +2271,15 @@ function renderVoteResults(votes) {
     .sort(([,a],[,b]) => ((b.sinner||0)+(b.alcaraz||0)) - ((a.sinner||0)+(a.alcaraz||0)))
     .slice(0, 12);
 
-  const geoGrid = document.getElementById('geoGrid');
+  const geoGrid = document.getElementById('vGeoGrid');
   if (geoGrid && sortedCountries.length > 0) {
     geoGrid.innerHTML = sortedCountries.map(([country, v]) => {
       const t = (v.sinner||0) + (v.alcaraz||0);
       const sp = Math.round((v.sinner||0)/t*100);
       const winner = sp >= 50 ? 'Sinner' : 'Alcaraz';
       const pct = sp >= 50 ? sp : 100-sp;
-      return '<div class="geo-card"><div class="geo-country">' + country + '</div><div class="geo-winner">' + winner + ' ' + pct + '%</div><div class="geo-total">' + t + ' vote' + (t!==1?'s':'') + '</div></div>';
+      var sPctBar = Math.round((v.sinner||0)/t*100);
+      return '<div class="vote-geo-card"><div class="vote-geo-name">' + country + '</div><div class="vote-geo-bar"><div class="vote-geo-s" style="width:'+sPctBar+'%"></div><div class="vote-geo-a" style="width:'+(100-sPctBar)+'%"></div></div><div class="vote-geo-nums"><span class="vote-geo-ns">Sinner '+sPctBar+'%</span><span class="vote-geo-na">Alcaraz '+(100-sPctBar)+'%</span></div></div>';
     }).join('');
   }
 }
