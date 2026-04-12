@@ -1,6 +1,6 @@
 """
-sincaraz.app — ATP Stats Scraper v10
-Four data sources covering every stat in the master wishlist:
+sincaraz.app — ATP Stats Scraper v11
+Five data sources covering every stat in the master wishlist:
 
   1. ATP XHR intercept     → career W/L, rankings, prize money, ALL serve/return stats
                              (+ fields previously captured but not written to HTML)
@@ -8,7 +8,8 @@ Four data sources covering every stat in the master wishlist:
   3. Vision: ATP W/L page  → ALL situational records, ratings, vs-opponent splits
   4. Vision: Wikipedia     → Grand Slam counts per slam, weeks/days at #1, year-end rankings
   5. Vision: TennisStats   → avg match duration, wins from behind, breaks/set, streaks
-  6. Computed              → age (live from DOB), avg aces/match, sets ratio, big titles
+  6. Vision: ATP H2H page  → match-by-match H2H results, scores, surfaces
+  7. Computed              → age (live from DOB), avg aces/match, sets ratio, big titles
 """
 
 import asyncio
@@ -49,6 +50,8 @@ PLAYERS = {
         "tennisstats": "https://www.flashscore.com/player/alcaraz-carlos/W2Bkdnhj/",
     },
 }
+
+H2H_URL = "https://www.atptour.com/en/players/atp-head-2-head/jannik-sinner-vs-carlos-alcaraz/s0ag/a0e2"
 
 SACKMANN_BASE = "https://raw.githubusercontent.com/JeffSackmann/tennis_atp/master"
 SINNER_NAMES  = {"jannik sinner", "sinner j.", "sinner"}
@@ -324,7 +327,95 @@ async def scrape_ts_vision(ctx, key):
     return data
 
 
-# ─── Source 6: Computed ───────────────────────────────────────────────────────
+# ─── Source 6: Vision — ATP H2H page ─────────────────────────────────────────
+
+H2H_PROMPT = """ATP Head-to-Head page for Sinner vs Alcaraz. Extract every match listed.
+
+Return JSON with this exact structure:
+{
+  "sinner_wins": <integer>,
+  "alcaraz_wins": <integer>,
+  "matches": [
+    {
+      "date": "<Mon YYYY>",
+      "tournament": "<tournament name>",
+      "surface": "<hard|clay|grass>",
+      "round": "<Final|SF|QF|R16|R32|etc>",
+      "score": "<set scores separated by spaces>",
+      "winner": "<sinner|alcaraz>"
+    }
+  ]
+}
+
+List matches in reverse chronological order (most recent first).
+Surface must be lowercase: hard, clay, or grass.
+Winner must be lowercase: sinner or alcaraz.
+For the score, use the exact set scores shown (e.g. "6-3 6-7(7) 6-7(0) 7-5 6-3").
+Return ONLY valid JSON."""
+
+async def scrape_h2h_vision(ctx):
+    print(f"  Loading {H2H_URL}")
+    page = await ctx.new_page()
+    try:
+        await page.goto(H2H_URL, wait_until="networkidle", timeout=45000)
+    except Exception:
+        await page.wait_for_timeout(10000)
+    # Scroll down to reveal all matches
+    await page.wait_for_timeout(2000)
+    paths = await screenshots(page, n=6, step=600, prefix="/tmp/h2h")
+    await page.close()
+    data = vision(img_blocks(paths), H2H_PROMPT)
+    matches = data.get("matches", [])
+    print(f"  → {len(matches)} matches, Sinner {data.get('sinner_wins')}, Alcaraz {data.get('alcaraz_wins')}")
+    return data
+
+
+def compute_h2h_derived(matches):
+    """Compute sets won, last-5/last-10 from match list."""
+    sinner_sets = 0
+    alcaraz_sets = 0
+    for m in matches:
+        score = m.get("score", "")
+        if "ret" in score.lower() or "w/o" in score.lower():
+            continue
+        sets = re.split(r'\s+', score.strip())
+        for s in sets:
+            # Parse "6-3" or "7-6(4)" → extract games before and after dash
+            sm = re.match(r'(\d+)-(\d+)', s)
+            if not sm:
+                continue
+            g1, g2 = int(sm.group(1)), int(sm.group(2))
+            winner = m.get("winner", "")
+            if g1 > g2:
+                # First player in the score won this set
+                # On ATP H2H pages, the winner's score is listed first
+                if winner == "sinner":
+                    sinner_sets += 1
+                else:
+                    alcaraz_sets += 1
+            elif g2 > g1:
+                if winner == "sinner":
+                    alcaraz_sets += 1
+                else:
+                    sinner_sets += 1
+
+    # Last N records
+    last5_s = sum(1 for m in matches[:5] if m.get("winner") == "sinner")
+    last5_a = sum(1 for m in matches[:5] if m.get("winner") == "alcaraz")
+    last10_s = sum(1 for m in matches[:10] if m.get("winner") == "sinner")
+    last10_a = sum(1 for m in matches[:10] if m.get("winner") == "alcaraz")
+
+    return {
+        "sinner_sets_won": sinner_sets,
+        "alcaraz_sets_won": alcaraz_sets,
+        "last5_sinner": last5_s,
+        "last5_alcaraz": last5_a,
+        "last10_sinner": last10_s,
+        "last10_alcaraz": last10_a,
+    }
+
+
+# ─── Source 7: Computed ───────────────────────────────────────────────────────
 
 def compute(key, atp, csv_d, wiki, ts, vision_wl=None):
     dob   = PLAYERS[key]["dob"]
@@ -444,7 +535,7 @@ def update_html(scraped):
 # ─── Main ─────────────────────────────────────────────────────────────────────
 
 async def main():
-    print(f"=== sincaraz.app scraper v10 — {datetime.now(timezone.utc).isoformat()} ===\n")
+    print(f"=== sincaraz.app scraper v11 — {datetime.now(timezone.utc).isoformat()} ===\n")
     has_key = bool(os.environ.get("ANTHROPIC_API_KEY"))
     if not has_key:
         print("⚠  ANTHROPIC_API_KEY not set — vision sources skipped\n")
@@ -482,7 +573,7 @@ async def main():
 
         if has_key:
             # Source 3: ATP W/L vision
-            print("\n[2/3] Vision — ATP Win/Loss Index")
+            print("\n[2/4] Vision — ATP Win/Loss Index")
             for i, key in enumerate(["sinner", "alcaraz"]):
                 print(f"\n  {PLAYERS[key]['name']}")
                 if i > 0: await asyncio.sleep(8)
@@ -491,15 +582,37 @@ async def main():
                 await ctx.close()
 
             # Source 4: Wikipedia
-            print("\n[3/3] Vision — Wikipedia")
+            print("\n[3/4] Vision — Wikipedia")
             for i, key in enumerate(["sinner", "alcaraz"]):
                 print(f"\n  {PLAYERS[key]['name']}")
                 if i > 0: await asyncio.sleep(5)
                 ctx = await make_context(browser)
                 result[key]["vision_wiki"] = await scrape_wiki_vision(ctx, key)
                 await ctx.close()
+
+            # Source 6: ATP H2H vision
+            print("\n[4/4] Vision — ATP H2H")
+            ctx = await make_context(browser, wide=True)
+            h2h_data = await scrape_h2h_vision(ctx)
+            await ctx.close()
+            h2h_matches = h2h_data.get("matches", [])
+            if h2h_matches:
+                result["h2h_matches"] = h2h_matches
+                # Override hardcoded H2H wins with scraped values
+                sw = h2h_data.get("sinner_wins")
+                aw = h2h_data.get("alcaraz_wins")
+                if sw is not None:
+                    result["sinner"]["h2h_wins"] = sw
+                    result["sinner"]["h2h_losses"] = aw or PLAYERS["sinner"]["h2h_losses"]
+                if aw is not None:
+                    result["alcaraz"]["h2h_wins"] = aw
+                    result["alcaraz"]["h2h_losses"] = sw or PLAYERS["alcaraz"]["h2h_losses"]
+                # Compute derived H2H stats
+                result["h2h_derived"] = compute_h2h_derived(h2h_matches)
+            else:
+                print("  ⚠ No matches extracted — keeping hardcoded H2H values")
         else:
-            print("\n[2-3/3] Vision sources skipped (no ANTHROPIC_API_KEY)")
+            print("\n[2-4/4] Vision sources skipped (no ANTHROPIC_API_KEY)")
 
         await browser.close()
 
@@ -507,7 +620,7 @@ async def main():
     for key in ["sinner", "alcaraz"]:
         result[key]["csv"] = {}
 
-    # Source 6: Computed
+    # Source 7: Computed
     for key in ["sinner", "alcaraz"]:
         result[key]["computed"] = compute(
             key,
