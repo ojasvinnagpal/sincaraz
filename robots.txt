@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /venv/
+
+Sitemap: https://sincaraz.app/sitemap.xml

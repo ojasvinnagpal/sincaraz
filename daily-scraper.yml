@@ -26,33 +26,51 @@ jobs:
           playwright install chromium
           playwright install-deps chromium
 
-      - name: Run ATP scraper
+      - name: Run ATP scraper (smart: vision only when match detected or weekly)
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python scrape_atp.py
 
       - name: Generate SEO pages
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python generate_pages.py
 
       - name: Show scraped data (for debugging)
         if: always()
-        run: cat scraped_stats.json 2>/dev/null || echo "No JSON output"
+        run: |
+          python3 -c "
+          import json
+          d = json.load(open('scraped_stats.json'))
+          print('Sinner:', d['sinner']['career_wl'], '#'+str(d['sinner']['ranking']))
+          print('Alcaraz:', d['alcaraz']['career_wl'], '#'+str(d['alcaraz']['ranking']))
+          print('H2H matches:', len(d.get('h2h_matches', [])))
+          print('Vision ran:', bool(d['sinner'].get('vision_wl')))
+          " 2>/dev/null || cat scraped_stats.json 2>/dev/null || echo "No JSON output"
 
       - name: Commit changes if any
+        id: commit
         run: |
           git config user.name "sincaraz-bot"
           git config user.email "bot@sincaraz.app"
-          git add index.html scraped_stats.json sitemap.xml matches/ surface/
-          git diff --staged --quiet || git commit -m "Auto-update stats $(date -u '+%Y-%m-%d')"
+          git add index.html scraped_stats.json sitemap.xml matches/ surface/ robots.txt netlify.toml 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "Nothing changed — skipping deploy"
+          else
+            git commit -m "Auto-update stats $(date -u '+%Y-%m-%d')"
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
 
       - name: Push to main
+        if: steps.commit.outputs.changed == 'true'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
 
       - name: Trigger Netlify redeploy
-        if: env.NETLIFY_DEPLOY_HOOK != ''
+        if: steps.commit.outputs.changed == 'true' && env.NETLIFY_DEPLOY_HOOK != ''
         env:
           NETLIFY_DEPLOY_HOOK: ${{ secrets.NETLIFY_DEPLOY_HOOK }}
         run: curl -X POST "$NETLIFY_DEPLOY_HOOK"

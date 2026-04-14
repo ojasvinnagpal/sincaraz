@@ -15,6 +15,11 @@ import json
 import os
 import re
 from datetime import datetime, timezone
+try:
+    import anthropic as _anthropic
+    _HAS_ANTHROPIC = True
+except ImportError:
+    _HAS_ANTHROPIC = False
 
 BASE_URL = "https://sincaraz.app"
 
@@ -23,6 +28,20 @@ BASE_URL = "https://sincaraz.app"
 # Update this list after each new Sinner-Alcaraz meeting.
 
 MATCHES = [
+    {
+        "slug":    "2026-monte-carlo-final",
+        "date":    "April 2026",
+        "year":    "2026",
+        "event":   "Monte-Carlo Masters",
+        "location":"Monte-Carlo, Monaco",
+        "round":   "Final",
+        "surface": "clay",
+        "winner":  "sinner",
+        "score":   "7–6(5) 6–3",
+        "duration":"1h 52m",
+        "note":    "Sinner claims his first Monte-Carlo title, closing to 7–10 in the H2H. He dominates the second set after edging a tight opener, snapping Alcaraz's clay winning run.",
+        "sinner_rank": 2, "alcaraz_rank": 1,
+    },
     {
         "slug":    "2025-atp-finals-final",
         "date":    "November 2025",
@@ -445,77 +464,174 @@ def related_matches(current_slug, all_matches, n=4):
 </table>"""
 
 
+def parse_set_scores(score_str, winner):
+    """Return list of (winner_games, loser_games, tb_str) per set. Skip ret/w/o."""
+    if not score_str or re.search(r'ret|w/o', score_str, re.I):
+        return []
+    sets = []
+    for s in score_str.strip().split():
+        m = re.match(r'(\d+)[–\-](\d+)(?:\((\d+)\))?', s)
+        if not m:
+            continue
+        g1, g2, tb = int(m.group(1)), int(m.group(2)), m.group(3)
+        tb_str = f"({tb})" if tb else ""
+        sets.append((g1, g2, tb_str))
+    return sets
+
+
+def set_score_table(m):
+    """HTML set-by-set score table. Winner's games listed first per ATP convention."""
+    sets = parse_set_scores(m.get("score", ""), m["winner"])
+    if not sets:
+        return ""
+    winner_name = "Sinner" if m["winner"] == "sinner" else "Alcaraz"
+    loser_name  = "Alcaraz" if m["winner"] == "sinner" else "Sinner"
+    w_cls = "s" if m["winner"] == "sinner" else "a"
+    l_cls = "a" if m["winner"] == "sinner" else "s"
+    rows = ""
+    for i, (g1, g2, tb) in enumerate(sets, 1):
+        set_winner = winner_name if g1 > g2 else loser_name
+        set_cls    = w_cls if g1 > g2 else l_cls
+        rows += f"""<tr>
+  <td style="color:var(--text-dim);text-align:center">Set {i}</td>
+  <td style="color:var(--{w_cls});font-weight:700;text-align:center">{g1}{tb if g1<g2 else ''}</td>
+  <td style="color:var(--{l_cls});text-align:center">{g2}{tb if g1>g2 else ''}</td>
+  <td><span class="badge {set_cls}" style="font-size:11px">{set_winner}</span></td>
+</tr>"""
+    return f"""<h2>Set-by-Set Breakdown</h2>
+<table class="match-table" style="max-width:400px">
+<thead><tr><th></th><th style="text-align:center;color:var(--{w_cls})">{winner_name}</th><th style="text-align:center;color:var(--{l_cls})">{loser_name}</th><th>Set winner</th></tr></thead>
+<tbody>{rows}</tbody>
+</table>"""
+
+
+def auto_generate_note(m):
+    """Call Claude Haiku to write a match note for a new scraped match."""
+    if not _HAS_ANTHROPIC or not os.environ.get("ANTHROPIC_API_KEY"):
+        return ""
+    try:
+        client = _anthropic.Anthropic()
+        resp = client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=80,
+            messages=[{"role": "user", "content":
+                f"Write a 1-sentence match summary for: Sinner vs Alcaraz, {m.get('event','')} {m.get('year','')} {m.get('round','')}, "
+                f"winner: {m.get('winner','').title()}, score: {m.get('score','')}. "
+                f"Be specific and factual. Under 25 words. No 'impressive'."
+            }]
+        )
+        return resp.content[0].text.strip()
+    except Exception as e:
+        print(f"  Note gen failed: {e}")
+        return ""
+
+
 def generate_match_page(m, all_matches):
     winner_name = "Sinner" if m["winner"] == "sinner" else "Alcaraz"
     loser_name  = "Alcaraz" if m["winner"] == "sinner" else "Sinner"
     is_slam     = m["event"] in SLAM_EVENTS
-    slam_label  = "Grand Slam" if is_slam else "ATP Tour"
+    is_masters  = "masters" in m["event"].lower() or "open" in m["event"].lower()
+    event_label = "Grand Slam" if is_slam else ("Masters 1000" if is_masters else "ATP Tour")
     duration_str = f" · {m['duration']}" if m.get("duration") else ""
 
-    title       = f"Sinner vs Alcaraz {m['event']} {m['year']} {m['round']}: {winner_name} wins {m['score']} | Sincaraz"
-    description = (
-        f"{winner_name} defeats {loser_name} {m['score']} in the {m['round']} of the "
-        f"{m['year']} {m['event']}{duration_str}. Full match report, score and stats on sincaraz.app."
-    )
-    canonical   = f"{BASE_URL}/matches/{m['slug']}/"
+    note = m.get("note") or ""
+
+    # Build a keyword-rich, specific title
+    score_display = m['score'].replace('–','-')
+    title = f"Sinner vs Alcaraz {m['event']} {m['year']} {m['round']}: {winner_name} wins {score_display} | Sincaraz"
+
+    # Description: lead with what makes this match memorable
+    if note:
+        # Use first sentence of note as hook
+        hook = note.split('.')[0].rstrip()
+        description = f"{hook}. {winner_name} def. {loser_name} {score_display}{duration_str}. Full score, set breakdown & H2H stats."
+    else:
+        description = (
+            f"{winner_name} defeats {loser_name} {score_display} in the {m['round']} of the "
+            f"{m['year']} {m['event']}{duration_str}. Score, set breakdown and H2H stats on sincaraz.app."
+        )
+    # Cap description at 155 chars for SERP
+    if len(description) > 155:
+        description = description[:152] + "..."
+
+    canonical = f"{BASE_URL}/matches/{m['slug']}/"
+
+    # H2H record up to and including this match (count by position in list)
+    idx = next((i for i, x in enumerate(all_matches) if x["slug"] == m["slug"]), None)
+    if idx is not None:
+        subset = all_matches[idx:]  # matches from this point backwards in time
+        sw_then = sum(1 for x in subset if x["winner"] == "sinner")
+        aw_then = sum(1 for x in subset if x["winner"] == "alcaraz")
+    else:
+        sw_then = aw_then = "?"
 
     body = f"""<div class="breadcrumb">
-  <a href="/">Home</a> › <a href="/matches/">H2H Matches</a> › {m['event']} {m['year']}
+  <a href="/">Home</a> › <a href="/matches/">All H2H Matches</a> › {m['event']} {m['year']}
 </div>
 
 <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
   {winner_badge(m['winner'])}
   {surface_badge(m['surface'])}
-  <span class="badge surf">{slam_label}</span>
-  {'<span class="badge" style="background:rgba(245,200,66,.15);color:var(--gold)">⭐ Grand Slam Final</span>' if is_slam and m['round']=='Final' else ''}
+  <span class="badge surf">{event_label}</span>
+  {'<span class="badge" style="background:rgba(245,200,66,.15);color:var(--gold)">⭐ Grand Slam Final</span>' if is_slam and m["round"]=="Final" else ''}
 </div>
 
-<h1>Sinner vs Alcaraz<br>{m['event']} {m['year']} — {m['round']}</h1>
+<h1>Sinner vs Alcaraz — {m['event']} {m['year']}<br>
+  <span style="font-size:0.55em;font-weight:400;color:var(--text-dim)">{m['round']} · {m.get('location', m['event'])} · {SURFACE_INFO.get(m['surface'],{}).get('label', m['surface'].title())}</span>
+</h1>
 
 <div class="result-card">
-  <div style="font-size:13px;color:var(--text-dim);margin-bottom:8px">{m['date']} · {m.get('location',m['event'])} · {SURFACE_INFO.get(m['surface'],{}).get('label',m['surface'].title())}</div>
+  <div style="font-size:13px;color:var(--text-dim);margin-bottom:12px">{m['date']}</div>
   <div class="score-display">
     <span class="{'s' if m['winner']=='sinner' else 'a'}">{winner_name}</span>
-    <span style="color:var(--text-dim);font-size:0.6em"> def. </span>
+    <span style="color:var(--text-dim);font-size:0.55em;margin:0 8px">def.</span>
     <span class="{'a' if m['winner']=='sinner' else 's'}">{loser_name}</span>
   </div>
-  <div style="font-size:28px;font-family:'Bebas Neue',Impact,sans-serif;letter-spacing:.04em;color:var(--text);margin:8px 0">{m['score']}</div>
+  <div style="font-size:clamp(20px,4vw,32px);font-family:'Bebas Neue',Impact,sans-serif;letter-spacing:.04em;color:var(--text);margin:8px 0">{m['score']}</div>
   <div class="match-meta-row">
     <span>🏆 {m['event']}</span>
-    <span>📍 {m.get('location','')}</span>
-    <span>🎾 {m['round']}</span>
-    {f'<span>⏱ {m["duration"]}</span>' if m.get('duration') else ''}
+    {f'<span>⏱ {m["duration"]}</span>' if m.get("duration") else ''}
+    <span>📊 H2H at time: Sinner {sw_then}–Alcaraz {aw_then}</span>
   </div>
 </div>
 
-{('<div class="note-box">💬 ' + m['note'] + '</div>') if m.get('note') else ''}
+{('<div class="note-box">💬 ' + note + '</div>') if note else ''}
 
-<div class="stat-grid">
+{set_score_table(m)}
+
+<div class="stat-grid" style="max-width:480px;margin-top:24px">
   <div class="stat-box">
-    <div class="lbl">Sinner ATP Ranking</div>
+    <div class="lbl">Sinner Ranking</div>
     <div class="val" style="color:var(--sinner)">#{m.get('sinner_rank','—')}</div>
     <div class="lbl">at time of match</div>
   </div>
   <div class="stat-box">
-    <div class="lbl">Alcaraz ATP Ranking</div>
+    <div class="lbl">Alcaraz Ranking</div>
     <div class="val" style="color:var(--alcaraz)">#{m.get('alcaraz_rank','—')}</div>
     <div class="lbl">at time of match</div>
   </div>
 </div>
 
-<a class="cta" href="/">📊 See Full H2H Stats & Live Data → sincaraz.app</a>
+<a class="cta" href="/">📊 Full H2H Stats, Live Rankings & Career Data → sincaraz.app</a>
 
 {related_matches(m['slug'], all_matches)}
 
-<h2>About This Rivalry</h2>
-<p style="color:var(--text-dim);font-size:14px;line-height:1.8">
-  Jannik Sinner and Carlos Alcaraz are the defining tennis rivalry of their generation.
-  This {m['event']} {m['year']} {m['round']} was one of {len(all_matches)} meetings between them.
-  For the complete head-to-head record, live career stats, surface splits, Grand Slam breakdowns
-  and the Clutch Score™, visit <a href="/">sincaraz.app</a>.
+<h2>About the Sinner–Alcaraz Rivalry</h2>
+<p style="color:var(--text-dim);font-size:14px;line-height:1.8;margin-bottom:16px">
+  Jannik Sinner and Carlos Alcaraz are the defining tennis rivalry of the 2020s —
+  two world No. 1s born just 21 months apart, with {len(all_matches)} meetings across
+  hard courts, clay and grass. This {m['event']} {m['year']} {m['round']} is one chapter in that story.
 </p>
+<p style="color:var(--text-dim);font-size:14px;line-height:1.8">
+  For the complete head-to-head record, live career stats, serve & return ratings, surface splits,
+  Grand Slam breakdown and the Clutch Score™ comparison, visit
+  <a href="/">sincaraz.app</a> — updated daily from official ATP data.
+</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">
+  <a href="/surface/{m['surface']}/" style="padding:10px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px">{SURFACE_INFO.get(m['surface'],{}).get('emoji','')} All {SURFACE_INFO.get(m['surface'],{}).get('label','') } H2H matches</a>
+  <a href="/matches/" style="padding:10px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px">📋 Full H2H match list</a>
+</div>
 """
-
     return html_page(title, description, canonical, body, match_schema(m))
 
 
@@ -648,8 +764,31 @@ def generate_sitemap(all_matches):
 
 # ─── Main ─────────────────────────────────────────────────────────────────────
 
+# ATP tournament name aliases — maps scraped names → canonical names used in editorial slugs
+_TOURNAMENT_ALIASES = {
+    "nitto atp finals": "atp finals",
+    "atp finals": "atp finals",
+    "atp masters 1000 rome": "italian open",
+    "atp masters 1000 cincinnati": "cincinnati open",
+    "atp masters 1000 indian wells": "indian wells",
+    "atp masters 1000 paris": "paris masters",
+    "atp masters 1000 miami": "miami open",
+    "atp masters 1000 monte-carlo": "monte-carlo",
+    "atp masters 1000 monte carlo": "monte-carlo",
+    "beijing": "china open",
+    "umag": "croatia open",
+}
+
+def _canonical_tournament(name):
+    return _TOURNAMENT_ALIASES.get(name.lower().strip(), name.lower().strip())
+
+
 def load_scraped_matches():
-    """Merge scraped h2h_matches into MATCHES if available, preserving editorial fields."""
+    """Use editorial MATCHES as primary source, then append any brand-new scraped matches.
+
+    New matches are those in scraped h2h_matches whose year+canonical-tournament
+    doesn't match any editorial slug — they get auto-generated minimal pages.
+    """
     try:
         with open("scraped_stats.json") as f:
             data = json.load(f)
@@ -657,49 +796,54 @@ def load_scraped_matches():
         if not scraped:
             return MATCHES
 
-        # Build lookup by approximate slug match (event+year) for merge
-        slug_map = {m["slug"]: m for m in MATCHES}
-        merged = []
-        for sm in scraped:
-            # Try to find a matching editorial entry
-            year = ""
-            date_str = sm.get("date", "")
-            for y in ["2025", "2024", "2023", "2022", "2021"]:
-                if y in date_str:
-                    year = y
-                    break
-            event_key = re.sub(r"[^a-z0-9]", "-", (sm.get("tournament", "") + "-" + sm.get("round", "")).lower())
-            slug_guess = f"{year}-{event_key}"[:40].rstrip("-")
+        # Build keyword fingerprints for all editorial slugs
+        editorial_slugs = {m["slug"] for m in MATCHES}
+        # e.g. {"2025-atp-finals": {"atp","finals","2025"}, ...}
+        slug_keywords = {}
+        for m in MATCHES:
+            yr = m.get("year", "")
+            words = set(m["slug"].replace("-", " ").split())
+            slug_keywords[m["slug"]] = words | {yr}
 
-            editorial = next(
-                (m for slug, m in slug_map.items() if slug.startswith(year) and
-                 any(w in slug for w in sm.get("tournament", "").lower().split()[:2])),
-                None
-            )
-            if editorial:
-                entry = editorial.copy()
-                # Override with scraped values where available
-                if sm.get("winner"): entry["winner"] = sm["winner"].lower()
-                if sm.get("score"):  entry["score"]  = sm["score"].replace("-", "–")
-                if sm.get("surface"): entry["surface"] = sm["surface"].lower()
-                merged.append(entry)
-            else:
-                # Brand new match not in editorial data yet — minimal entry
-                merged.append({
+        def is_known(year, tournament):
+            """Return True if this scraped entry maps to an editorial slug."""
+            canon = _canonical_tournament(tournament)
+            canon_words = {w for w in canon.split() if len(w) > 3}
+            for slug, kws in slug_keywords.items():
+                if year in kws and canon_words & kws:
+                    return True
+            return False
+
+        extra = []
+        seen_extra = set()
+        for sm in scraped:
+            date_str = sm.get("date", "")
+            year = next((y for y in ["2026","2025","2024","2023","2022","2021","2020"] if y in date_str), "")
+            tournament = sm.get("tournament", "")
+            if is_known(year, tournament):
+                continue
+            # Brand-new match — generate a minimal page
+            canon = _canonical_tournament(tournament)
+            event_key = re.sub(r"[^a-z0-9]+", "-", (canon + "-" + sm.get("round", "")).lower())
+            slug_guess = f"{year}-{event_key}"[:50].strip("-")
+            if slug_guess not in seen_extra and slug_guess not in editorial_slugs:
+                extra.append({
                     "slug":    slug_guess,
                     "date":    date_str,
                     "year":    year,
-                    "event":   sm.get("tournament", ""),
+                    "event":   tournament,
                     "location":"",
                     "round":   sm.get("round", ""),
                     "surface": sm.get("surface", "hard").lower(),
                     "winner":  sm.get("winner", "").lower(),
                     "score":   sm.get("score", "").replace("-", "–"),
                     "duration":"",
-                    "note":    "",
+                    "note":    auto_generate_note(sm) if sm.get("winner") else "",
                     "sinner_rank": "—", "alcaraz_rank": "—",
                 })
-        return merged if merged else MATCHES
+                seen_extra.add(slug_guess)
+
+        return MATCHES + extra
     except Exception as e:
         print(f"  Note: could not load scraped matches ({e}), using hardcoded data")
         return MATCHES

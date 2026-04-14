@@ -540,6 +540,26 @@ async def main():
     if not has_key:
         print("⚠  ANTHROPIC_API_KEY not set — vision sources skipped\n")
 
+    # Load previous stats to detect if a match was played since last run
+    prev_totals = {}
+    prev_scraped_at = None
+    try:
+        with open("scraped_stats.json") as f:
+            prev = json.load(f)
+        for key in ["sinner", "alcaraz"]:
+            w = prev.get(key, {}).get("career_wins", 0) or 0
+            l = prev.get(key, {}).get("career_losses", 0) or 0
+            prev_totals[key] = w + l
+        prev_scraped_at = prev.get("scraped_at")
+        # Preserve existing h2h_matches/h2h_derived so they survive XHR-only runs
+        prev_h2h_matches  = prev.get("h2h_matches", [])
+        prev_h2h_derived  = prev.get("h2h_derived")
+        prev_h2h_wins_s   = prev.get("sinner", {}).get("h2h_wins")
+        prev_h2h_wins_a   = prev.get("alcaraz", {}).get("h2h_wins")
+    except Exception:
+        prev_h2h_matches, prev_h2h_derived = [], None
+        prev_h2h_wins_s, prev_h2h_wins_a = None, None
+
     result = {
         "scraped_at": datetime.now(timezone.utc).isoformat(),
         "sinner": {
@@ -571,7 +591,44 @@ async def main():
             result[key].update(stats)
             await ctx.close()
 
-        if has_key:
+        # Smart skip: only run vision if a match was played or weekly refresh due
+        match_played = False
+        for key in ["sinner", "alcaraz"]:
+            new_total = (result[key].get("career_wins", 0) or 0) + (result[key].get("career_losses", 0) or 0)
+            old_total = prev_totals.get(key, 0)
+            if old_total and new_total != old_total:
+                match_played = True
+                print(f"\n  📍 Match detected: {PLAYERS[key]['name']} total matches {old_total} → {new_total}")
+
+        weekly_due = True
+        if prev_scraped_at:
+            try:
+                last = datetime.fromisoformat(prev_scraped_at)
+                weekly_due = (datetime.now(timezone.utc) - last).days >= 7
+            except Exception:
+                pass
+
+        run_vision = has_key and (match_played or weekly_due)
+        if has_key and not run_vision:
+            print(f"\n⏭  No match played and weekly refresh not due — skipping vision (saves ~15 min + API cost)")
+            print(f"   Preserving existing H2H data ({len(prev_h2h_matches)} matches)")
+            # Restore previous H2H/vision data so the JSON stays complete
+            if prev_h2h_matches:
+                result["h2h_matches"] = prev_h2h_matches
+            if prev_h2h_derived:
+                result["h2h_derived"] = prev_h2h_derived
+            if prev_h2h_wins_s is not None:
+                result["sinner"]["h2h_wins"] = prev_h2h_wins_s
+            if prev_h2h_wins_a is not None:
+                result["alcaraz"]["h2h_wins"] = prev_h2h_wins_a
+            # Also restore vision fields so the site doesn't lose data
+            for key in ["sinner", "alcaraz"]:
+                for field in ["vision_wl", "vision_wiki"]:
+                    val = prev.get(key, {}).get(field)
+                    if val:
+                        result[key][field] = val
+
+        if run_vision:
             # Source 3: ATP W/L vision
             print("\n[2/4] Vision — ATP Win/Loss Index")
             for i, key in enumerate(["sinner", "alcaraz"]):
@@ -611,7 +668,7 @@ async def main():
                 result["h2h_derived"] = compute_h2h_derived(h2h_matches)
             else:
                 print("  ⚠ No matches extracted — keeping hardcoded H2H values")
-        else:
+        elif not has_key:
             print("\n[2-4/4] Vision sources skipped (no ANTHROPIC_API_KEY)")
 
         await browser.close()

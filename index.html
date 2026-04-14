@@ -246,6 +246,8 @@ nav{position:sticky;top:0;z-index:100;background:rgba(7,8,15,0.95);backdrop-filt
 .match-list{display:flex;flex-direction:column;gap:12px}
 .match-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;transition:border-color .2s}
 .match-card:hover{border-color:rgba(255,255,255,0.15)}
+a.match-card-link{color:inherit;text-decoration:none;display:grid;cursor:pointer}
+a.match-card-link:hover{border-color:rgba(255,255,255,0.25);transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,0.3)}
 .match-card.sinner-win{border-left:3px solid var(--sinner)}
 .match-card.alcaraz-win{border-left:3px solid var(--alcaraz)}
 .match-meta{display:flex;flex-direction:column;gap:4px}
@@ -1633,23 +1635,24 @@ document.addEventListener('DOMContentLoaded', function() {
 // DATA
 // ============================================================
 
-const matches = [
-  {date:'Nov 2025',event:'ATP Finals',round:'Final',surface:'hard',winner:'sinner',score:'7–6(4) 7–5',duration:'2h 15m',note:'Sinner defends Turin title; ends 2025 tied at 1,651 H2H points each'},
-  {date:'Sep 2025',event:'US Open',round:'Final',surface:'hard',winner:'alcaraz',score:'6–2 3–6 6–1 6–4',duration:'2h 42m',note:'Alcaraz reclaims world #1; ends Sinner hardcourt Slam streak'},
-  {date:'Aug 2025',event:'Cincinnati Open',round:'Final',surface:'hard',winner:'alcaraz',score:'5–0 ret.',duration:'0h 23m',note:'Sinner retires due to illness with Alcaraz leading 5–0'},
-  {date:'Jul 2025',event:'Wimbledon',round:'Final',surface:'grass',winner:'sinner',score:'4–6 6–4 6–4 6–4',duration:'3h 04m',note:'Sinner first Wimbledon title; ends Alcaraz 24-match win streak'},
-  {date:'Jun 2025',event:'Roland Garros',round:'Final',surface:'clay',winner:'alcaraz',score:'4–6 6–7(4) 6–4 7–6(3) 7–6(2)',duration:'5h 29m',note:'⚡ Longest Slam final ever — Sinner holds 3 match points in 4th set'},
-  {date:'May 2025',event:'Italian Open',round:'Final',surface:'clay',winner:'alcaraz',score:'7–6(5) 6–1',duration:'1h 43m',note:'First Masters final between them; snaps Sinner 26-match win streak'},
-  {date:'Oct 2024',event:'China Open',round:'Final',surface:'hard',winner:'alcaraz',score:'6–7(6) 6–4 7–6(3)',duration:'3h 21m',note:'Longest match in China Open history; Alcaraz snaps Sinner 15-match streak'},
-  {date:'Jun 2024',event:'Roland Garros',round:'SF',surface:'clay',winner:'alcaraz',score:'2–6 6–3 3–6 6–4 6–3',duration:'4h 09m',note:'Both players fighting injuries; gruelling 5-setter'},
-  {date:'Mar 2024',event:'Indian Wells',round:'SF',surface:'hard',winner:'alcaraz',score:'1–6 6–3 6–2',duration:'2h 05m',note:'Alcaraz recovers from bagel; snaps Sinner 19-match streak'},
-  {date:'Oct 2023',event:'China Open',round:'SF',surface:'hard',winner:'sinner',score:'7–6(4) 6–1',duration:'1h 55m',note:'Sinner dominant; first straight sets win over Alcaraz'},
-  {date:'Mar 2023',event:'Miami Open',round:'SF',surface:'hard',winner:'sinner',score:'6–7(4) 6–4 6–2',duration:'3h 02m',note:'Sinner dashes Alcaraz Sunshine Double hopes'},
-  {date:'Mar 2023',event:'Indian Wells',round:'SF',surface:'hard',winner:'alcaraz',score:'7–6(4) 6–3',duration:'1h 52m',note:''},
-  {date:'Sep 2022',event:'US Open',round:'QF',surface:'hard',winner:'alcaraz',score:'6–3 6–7(7) 6–7(0) 7–5 6–3',duration:'5h 15m',note:'⚡ Ended 2:50 AM — latest finish in USO history; Alcaraz saves match point in 4th'},
-  {date:'Jul 2022',event:'Croatia Open',round:'Final',surface:'clay',winner:'sinner',score:'6–7(5) 6–1 6–1',duration:'2h 26m',note:'Sinner first clay title; breadsticks Alcaraz twice'},
-  {date:'Jul 2022',event:'Wimbledon',round:'R16',surface:'grass',winner:'sinner',score:'6–1 6–4 6–7(8) 6–3',duration:'3h 35m',note:'Sinner upsets Alcaraz in their first Wimbledon meeting'},
-  {date:'Nov 2021',event:'Paris Masters',round:'R32',surface:'hard',winner:'alcaraz',score:'7–6(1) 7–5',duration:'2h 08m',note:'First ever ATP meeting — 18-yr-old Alcaraz upsets top-20 Sinner'},
+let matches = [
+  {slug:'2026-monte-carlo-final',date:'Apr 2026',event:'Monte-Carlo Masters',round:'Final',surface:'clay',winner:'sinner',score:'7–6(5) 6–3',duration:'1h 52m',note:'Sinner claims first Monte-Carlo title; closes to 7–10 in H2H'},
+  {slug:'2025-atp-finals-final',date:'Nov 2025',event:'ATP Finals',round:'Final',surface:'hard',winner:'sinner',score:'7–6(4) 7–5',duration:'2h 15m',note:'Sinner defends Turin title; ends 2025 tied at 1,651 H2H points each'},
+  {slug:'2025-us-open-final',date:'Sep 2025',event:'US Open',round:'Final',surface:'hard',winner:'alcaraz',score:'6–2 3–6 6–1 6–4',duration:'2h 42m',note:'Alcaraz reclaims world #1; ends Sinner hardcourt Slam streak'},
+  {slug:'2025-cincinnati-open-final',date:'Aug 2025',event:'Cincinnati Open',round:'Final',surface:'hard',winner:'alcaraz',score:'5–0 ret.',duration:'0h 23m',note:'Sinner retires due to illness with Alcaraz leading 5–0'},
+  {slug:'2025-wimbledon-final',date:'Jul 2025',event:'Wimbledon',round:'Final',surface:'grass',winner:'sinner',score:'4–6 6–4 6–4 6–4',duration:'3h 04m',note:'Sinner first Wimbledon title; ends Alcaraz 24-match win streak'},
+  {slug:'2025-roland-garros-final',date:'Jun 2025',event:'Roland Garros',round:'Final',surface:'clay',winner:'alcaraz',score:'4–6 6–7(4) 6–4 7–6(3) 7–6(2)',duration:'5h 29m',note:'⚡ Longest Slam final ever — Sinner holds 3 match points in 4th set'},
+  {slug:'2025-italian-open-final',date:'May 2025',event:'Italian Open',round:'Final',surface:'clay',winner:'alcaraz',score:'7–6(5) 6–1',duration:'1h 43m',note:'First Masters final between them; snaps Sinner 26-match win streak'},
+  {slug:'2024-china-open-final',date:'Oct 2024',event:'China Open',round:'Final',surface:'hard',winner:'alcaraz',score:'6–7(6) 6–4 7–6(3)',duration:'3h 21m',note:'Longest match in China Open history; Alcaraz snaps Sinner 15-match streak'},
+  {slug:'2024-roland-garros-sf',date:'Jun 2024',event:'Roland Garros',round:'SF',surface:'clay',winner:'alcaraz',score:'2–6 6–3 3–6 6–4 6–3',duration:'4h 09m',note:'Both players fighting injuries; gruelling 5-setter'},
+  {slug:'2024-indian-wells-sf',date:'Mar 2024',event:'Indian Wells',round:'SF',surface:'hard',winner:'alcaraz',score:'1–6 6–3 6–2',duration:'2h 05m',note:'Alcaraz recovers from bagel; snaps Sinner 19-match streak'},
+  {slug:'2023-china-open-sf',date:'Oct 2023',event:'China Open',round:'SF',surface:'hard',winner:'sinner',score:'7–6(4) 6–1',duration:'1h 55m',note:'Sinner dominant; first straight sets win over Alcaraz'},
+  {slug:'2023-miami-open-sf',date:'Mar 2023',event:'Miami Open',round:'SF',surface:'hard',winner:'sinner',score:'6–7(4) 6–4 6–2',duration:'3h 02m',note:'Sinner dashes Alcaraz Sunshine Double hopes'},
+  {slug:'2023-indian-wells-sf',date:'Mar 2023',event:'Indian Wells',round:'SF',surface:'hard',winner:'alcaraz',score:'7–6(4) 6–3',duration:'1h 52m',note:''},
+  {slug:'2022-us-open-qf',date:'Sep 2022',event:'US Open',round:'QF',surface:'hard',winner:'alcaraz',score:'6–3 6–7(7) 6–7(0) 7–5 6–3',duration:'5h 15m',note:'⚡ Ended 2:50 AM — latest finish in USO history; Alcaraz saves match point in 4th'},
+  {slug:'2022-croatia-open-final',date:'Jul 2022',event:'Croatia Open',round:'Final',surface:'clay',winner:'sinner',score:'6–7(5) 6–1 6–1',duration:'2h 26m',note:'Sinner first clay title; breadsticks Alcaraz twice'},
+  {slug:'2022-wimbledon-r16',date:'Jul 2022',event:'Wimbledon',round:'R16',surface:'grass',winner:'sinner',score:'6–1 6–4 6–7(8) 6–3',duration:'3h 35m',note:'Sinner upsets Alcaraz in their first Wimbledon meeting'},
+  {slug:'2021-paris-masters-r32',date:'Nov 2021',event:'Paris Masters',round:'R32',surface:'hard',winner:'alcaraz',score:'7–6(1) 7–5',duration:'2h 08m',note:'First ever ATP meeting — 18-yr-old Alcaraz upsets top-20 Sinner'},
 ];
 
 const records = [
@@ -1721,8 +1724,8 @@ function renderMatches(filter='all'){
     filter==='sinner' ? matches.filter(m=>m.winner==='sinner') :
     filter==='alcaraz' ? matches.filter(m=>m.winner==='alcaraz') : matches;
 
-  list.innerHTML = filtered.map(m=>`
-    <div class="match-card ${m.winner}-win">
+  list.innerHTML = filtered.map(m=>{
+    const inner = `
       <div class="match-meta">
         <div class="match-date">${m.date}</div>
         <div class="match-event">${m.event}</div>
@@ -1736,9 +1739,12 @@ function renderMatches(filter='all'){
       <div>
         <div class="match-duration">${m.duration}</div>
         ${m.note?`<div class="match-note">${m.note}</div>`:''}
-      </div>
-    </div>
-  `).join('');
+      </div>`;
+    if (m.slug) {
+      return `<a href="/matches/${m.slug}/" class="match-card ${m.winner}-win match-card-link">${inner}</a>`;
+    }
+    return `<div class="match-card ${m.winner}-win">${inner}</div>`;
+  }).join('');
 }
 
 function filterMatches(f, btn){
@@ -2159,6 +2165,51 @@ function applyStats(data) {
   var tickerDoubled = [...tickerItems,...tickerItems];
   var tickerEl = document.getElementById('tickerContent');
   if(tickerEl) tickerEl.innerHTML = tickerDoubled.map(function(i){return '<span class="ticker-item">'+i+'</span>';}).join('');
+
+  // ── Dynamic H2H match list from scraped JSON ─────────────────
+  if (data.h2h_matches && data.h2h_matches.length > 0) {
+    var scrapedMatches = data.h2h_matches.map(function(m) {
+      // Map JSON fields to the JS matches array shape
+      var surf = (m.surface||'').toLowerCase();
+      var slug = m.slug || '';
+      return {
+        slug: slug,
+        date: m.date||'',
+        event: m.tournament||m.event||'',
+        round: m.round||'',
+        surface: surf,
+        winner: (m.winner||'').toLowerCase(),
+        score: (m.score||'').replace(/-/g,'–'),
+        duration: m.duration||'',
+        note: m.note||''
+      };
+    });
+    // Replace the global matches array in-place (newest first, chronological from JSON is oldest-first)
+    var reversed = scrapedMatches.slice().reverse();
+    matches.length = 0;
+    reversed.forEach(function(m){ matches.push(m); });
+    try { renderMatches(); } catch(e) {}
+  }
+
+  // ── H2H derived stats (sets won, momentum) ────────────────────
+  var hd = data.h2h_derived;
+  if (hd) {
+    set('h2h-sets-s', hd.sinner_sets_won);
+    set('h2h-sets-a', hd.alcaraz_sets_won);
+    set('ins-sets-s', hd.sinner_sets_won);
+    set('ins-sets-a', hd.alcaraz_sets_won);
+    set('mom-last5-s', hd.last5_sinner);
+    set('mom-last5-a', hd.last5_alcaraz);
+    set('mom-last10-s', hd.last10_sinner);
+    set('mom-last10-a', hd.last10_alcaraz);
+    // Momentum badge
+    var momBadge = document.getElementById('momentum-badge');
+    if (momBadge) {
+      var ml5s = hd.last5_sinner||0, ml5a = hd.last5_alcaraz||0;
+      momBadge.textContent = ml5s > ml5a ? 'Sinner Hot' : ml5a > ml5s ? 'Alcaraz Hot' : 'Tied';
+      momBadge.className = 'insight-winner-badge ' + (ml5s > ml5a ? 's' : ml5a > ml5s ? 'a' : '');
+    }
+  }
 
   // Last updated
   if (data.scraped_at) {
