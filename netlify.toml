@@ -12,6 +12,17 @@
   [headers.values]
     Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
 
+# SEO topic/comparison pages: daily cache (data updates daily)
+[[headers]]
+  for = "/sinner-vs-alcaraz-*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+[[headers]]
+  for = "/who-is-better-*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
 # Main page: short cache (updates daily)
 [[headers]]
   for = "/"
@@ -29,3 +40,54 @@
   for = "/sitemap.xml"
   [headers.values]
     Cache-Control = "public, max-age=86400"
+
+# 301 redirects: old /stats/ URLs → keyword-rich root URLs
+[[redirects]]
+  from = "/stats/serve-comparison/*"
+  to = "/sinner-vs-alcaraz-serve-stats/"
+  status = 301
+
+[[redirects]]
+  from = "/stats/return-stats/*"
+  to = "/sinner-vs-alcaraz-return-stats/"
+  status = 301
+
+[[redirects]]
+  from = "/stats/grand-slam-record/*"
+  to = "/sinner-vs-alcaraz-grand-slams/"
+  status = 301
+
+[[redirects]]
+  from = "/stats/break-points/*"
+  to = "/sinner-vs-alcaraz-break-points/"
+  status = 301
+
+[[redirects]]
+  from = "/stats/tiebreak-record/*"
+  to = "/sinner-vs-alcaraz-tiebreak-record/"
+  status = 301
+
+[[redirects]]
+  from = "/stats/ranking-history/*"
+  to = "/sinner-vs-alcaraz-ranking-history/"
+  status = 301
+
+[[redirects]]
+  from = "/stats/career-titles/*"
+  to = "/sinner-vs-alcaraz-career-titles/"
+  status = 301
+
+[[redirects]]
+  from = "/stats/five-set-record/*"
+  to = "/sinner-vs-alcaraz-five-set-record/"
+  status = 301
+
+[[redirects]]
+  from = "/stats/clutch-stats/*"
+  to = "/sinner-vs-alcaraz-clutch-stats/"
+  status = 301
+
+[[redirects]]
+  from = "/stats/prize-money/*"
+  to = "/sinner-vs-alcaraz-prize-money/"
+  status = 301
