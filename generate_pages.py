@@ -812,6 +812,48 @@ def _stat_table(rows_html):
 </table>"""
 
 
+def _latest_match(matches):
+    """Return the most recent H2H match dict (first in list, sorted newest-first)."""
+    return matches[0] if matches else {}
+
+
+def _filter_matches(matches, **kwargs):
+    """Filter h2h_matches by surface, round pattern, tournament keyword, etc."""
+    result = []
+    for m in matches:
+        if "surface" in kwargs and m.get("surface","").lower() != kwargs["surface"].lower():
+            continue
+        if "round" in kwargs and kwargs["round"].lower() not in m.get("round","").lower():
+            continue
+        if "tournament" in kwargs and kwargs["tournament"].lower() not in m.get("tournament","").lower():
+            continue
+        if "year" in kwargs and kwargs["year"] not in m.get("date",""):
+            continue
+        result.append(m)
+    return result
+
+
+def _h2h_count(matches):
+    """Return (sinner_wins, alcaraz_wins) from a list of match dicts."""
+    sw = sum(1 for m in matches if m.get("winner") == "sinner")
+    aw = sum(1 for m in matches if m.get("winner") == "alcaraz")
+    return sw, aw
+
+
+def _match_rows_html(matches, max_rows=10):
+    """Generate HTML table rows for a list of matches."""
+    rows = ""
+    for m in matches[:max_rows]:
+        w = "Sinner" if m.get("winner") == "sinner" else "Alcaraz"
+        w_cls = "s" if m.get("winner") == "sinner" else "a"
+        rows += f'<tr><td>{m.get("date","")}</td><td>{m.get("tournament","")}</td><td>{m.get("round","")}</td><td>{m.get("surface","").title()}</td><td><span class="badge {w_cls}">{w}</span></td><td style="font-family:monospace">{m.get("score","")}</td></tr>'
+    return rows
+
+
+def _current_year():
+    return str(datetime.now(timezone.utc).year)
+
+
 def _internal_links(exclude_slug=""):
     """Standard internal linking block for topic pages."""
     links = [
@@ -822,17 +864,18 @@ def _internal_links(exclude_slug=""):
         ("/sinner-vs-alcaraz-clay-stats/", "Clay Stats"),
         ("/sinner-vs-alcaraz-hard-court-stats/", "Hard Court Stats"),
         ("/sinner-vs-alcaraz-grass-record/", "Grass Record"),
-        ("/sinner-vs-alcaraz-2026-stats/", "2026 Season Stats"),
+        (f"/sinner-vs-alcaraz-{_current_year()}-stats/", f"{_current_year()} Season"),
         ("/sinner-vs-alcaraz-last-5-matches/", "Last 5 Matches"),
         ("/sinner-vs-alcaraz-serve-stats/", "Serve Stats"),
         ("/sinner-vs-alcaraz-return-stats/", "Return Stats"),
         ("/sinner-vs-alcaraz-grand-slams/", "Grand Slam Record"),
-        ("/sinner-vs-alcaraz-break-points/", "Break Point Stats"),
+        ("/sinner-vs-alcaraz-grand-slam-finals/", "GS Finals"),
+        ("/sinner-vs-alcaraz-finals-record/", "Finals Record"),
+        ("/sinner-vs-alcaraz-rivalry-analysis/", "Rivalry Analysis"),
+        ("/sinner-vs-alcaraz-break-points/", "Break Points"),
         ("/sinner-vs-alcaraz-tiebreak-record/", "Tiebreak Record"),
         ("/sinner-vs-alcaraz-ranking-history/", "Ranking History"),
-        ("/sinner-vs-alcaraz-career-titles/", "Career Titles"),
-        ("/sinner-vs-alcaraz-five-set-record/", "Five-Set Record"),
-        ("/sinner-vs-alcaraz-clutch-stats/", "Clutch & Pressure Stats"),
+        ("/sinner-vs-alcaraz-win-percentage/", "Win Percentage"),
         ("/sinner-vs-alcaraz-prize-money/", "Prize Money"),
     ]
     items = "".join(
@@ -1570,6 +1613,8 @@ def _page_head_to_head(stats):
     sc, ac = s["career"], a["career"]
     matches = stats.get("h2h_matches", [])
     derived = stats.get("h2h_derived", {})
+    latest = _latest_match(matches)
+    year = _current_year()
 
     h2h_leader = "Alcaraz" if a["h2h_wins"] > s["h2h_wins"] else "Sinner"
     h2h_score = f'{max(a["h2h_wins"], s["h2h_wins"])}–{min(a["h2h_wins"], s["h2h_wins"])}'
@@ -1581,6 +1626,21 @@ def _page_head_to_head(stats):
         if surf in surf_h2h:
             if m.get("winner") == "sinner": surf_h2h[surf][0] += 1
             else: surf_h2h[surf][1] += 1
+
+    # Dynamic latest match reference
+    latest_winner = "Sinner" if latest.get("winner") == "sinner" else "Alcaraz"
+    latest_desc = f'{latest.get("tournament","")} {latest.get("date","")}'
+    latest_score = latest.get("score","")
+
+    # Slam finals from match data
+    slam_finals = [m for m in matches if m.get("round","").lower() == "final"
+                   and any(gs in m.get("tournament","") for gs in ["US Open","Australian Open","Roland Garros","Wimbledon"])]
+    slam_final_names = ", ".join(f'{m.get("tournament","")} {m.get("date","").split()[-1] if m.get("date") else ""}' for m in slam_finals[:4])
+
+    # Last 5 surface wins for insight 3
+    l5 = matches[:5]
+    l5_sinner_surfs = list({m.get("surface","").lower() for m in l5 if m.get("winner") == "sinner"})
+    l5_sinner_events = [f'{m.get("tournament","")}' for m in l5 if m.get("winner") == "sinner"][:3]
 
     rows = "".join([
         _comparison_row("H2H Record", f'{s["h2h_wins"]} wins', f'{a["h2h_wins"]} wins'),
@@ -1595,20 +1655,15 @@ def _page_head_to_head(stats):
         _comparison_row("Career Titles", s["career_titles"], a["career_titles"]),
     ])
 
-    # Recent matches table
-    recent_rows = ""
-    for m in matches[:10]:
-        w = "Sinner" if m.get("winner") == "sinner" else "Alcaraz"
-        w_cls = "s" if m.get("winner") == "sinner" else "a"
-        recent_rows += f'<tr><td>{m.get("date","")}</td><td>{m.get("tournament","")}</td><td>{m.get("round","")}</td><td>{m.get("surface","").title()}</td><td><span class="badge {w_cls}">{w}</span></td><td style="font-family:monospace">{m.get("score","")}</td></tr>'
+    recent_rows = _match_rows_html(matches, 10)
 
     faqs = [
         ("What is the Sinner vs Alcaraz head-to-head record?",
-         f"Alcaraz leads the head-to-head {a['h2h_wins']}–{s['h2h_wins']} across {len(matches)} ATP meetings. On clay: {surf_h2h['clay'][1]}–{surf_h2h['clay'][0]} Alcaraz. On hard courts: {surf_h2h['hard'][1]}–{surf_h2h['hard'][0]} Alcaraz. On grass: {surf_h2h['grass'][0]}–{surf_h2h['grass'][1]} Sinner. The sets won are nearly tied at {derived.get('alcaraz_sets_won','—')}–{derived.get('sinner_sets_won','—')}."),
+         f"{h2h_leader} leads the head-to-head {a['h2h_wins']}–{s['h2h_wins']} across {len(matches)} ATP meetings. On clay: {surf_h2h['clay'][1]}–{surf_h2h['clay'][0]} Alcaraz. On hard courts: {surf_h2h['hard'][1]}–{surf_h2h['hard'][0]} Alcaraz. On grass: {surf_h2h['grass'][0]}–{surf_h2h['grass'][1]} Sinner. The sets won are nearly tied at {derived.get('alcaraz_sets_won','—')}–{derived.get('sinner_sets_won','—')}."),
         ("How many times have Sinner and Alcaraz played each other?",
-         f"They have played {len(matches)} times on the ATP Tour since their first meeting at the 2021 Paris Masters. Their rivalry spans Grand Slam finals (Roland Garros 2025, Wimbledon 2025, US Open 2025), Masters 1000 finals, and early-round encounters."),
-        ("Who leads the Sinner vs Alcaraz rivalry in 2026?",
-         f"In their most recent meeting at the 2026 Monte-Carlo Masters final, Sinner won 7–6(5) 6–3. In the last 5 meetings, Sinner leads {derived.get('last5_sinner','—')}–{derived.get('last5_alcaraz','—')}. The overall H2H remains {a['h2h_wins']}–{s['h2h_wins']} in favor of Alcaraz."),
+         f"They have played {len(matches)} times on the ATP Tour since their first meeting at the {matches[-1].get('tournament','')} in {matches[-1].get('date','')}. Their rivalry spans Grand Slam finals ({slam_final_names}), Masters 1000 finals, and early-round encounters."),
+        ("Who won the last Sinner vs Alcaraz match?",
+         f"In their most recent meeting at the {latest_desc}, {latest_winner} won {latest_score}. In the last 5 meetings, Sinner leads {derived.get('last5_sinner','—')}–{derived.get('last5_alcaraz','—')}. The overall H2H remains {h2h_score} in favor of {h2h_leader}."),
     ]
 
     body = f"""<div class="breadcrumb"><a href="/">Home</a> › Head to Head</div>
@@ -1652,13 +1707,13 @@ the total sets won are nearly even ({derived.get('sinner_sets_won','—')}–{de
 their matches have gone to five sets or tight tiebreaks — the margins between them are razor-thin.
 </div>
 <div class="note-box">
-<strong>2. Surface matters enormously.</strong> Alcaraz dominates on clay ({surf_h2h['clay'][1]}–{surf_h2h['clay'][0]}),
-but Sinner has the edge on grass ({surf_h2h['grass'][0]}–{surf_h2h['grass'][1]}). Hard courts — where they meet most
-often — lean {surf_h2h['hard'][1]}–{surf_h2h['hard'][0]} to Alcaraz but include Sinner's 2025 ATP Finals title.
+<strong>2. Surface matters enormously.</strong> Alcaraz leads on clay ({surf_h2h['clay'][1]}–{surf_h2h['clay'][0]})
+while Sinner leads on grass ({surf_h2h['grass'][0]}–{surf_h2h['grass'][1]}). Hard courts — where they meet most
+often — sit at {surf_h2h['hard'][1]}–{surf_h2h['hard'][0]} in favor of {'Alcaraz' if surf_h2h['hard'][1]>surf_h2h['hard'][0] else 'Sinner'}.
 </div>
 <div class="note-box">
-<strong>3. Momentum has shifted.</strong> In their last 5 meetings, Sinner leads {derived.get('last5_sinner','—')}–{derived.get('last5_alcaraz','—')},
-including the 2025 Wimbledon final and 2026 Monte-Carlo Masters final. The H2H gap is closing.
+<strong>3. Momentum has shifted.</strong> In the last 5 meetings, Sinner leads {derived.get('last5_sinner','—')}–{derived.get('last5_alcaraz','—')},
+including wins at {', '.join(l5_sinner_events)}. The H2H gap is closing.
 </div>
 
 <a class="cta" href="/">📊 Live Stats, Rankings & Full Rivalry Data → sincaraz.app</a>
@@ -1667,10 +1722,11 @@ including the 2025 Wimbledon final and 2026 Monte-Carlo Masters final. The H2H g
 
 {_internal_links("head-to-head")}
 """
+    scraped_date = stats.get("scraped_at","")[:10]
     return {
         "slug": "sinner-vs-alcaraz-head-to-head",
         "title": f"Sinner vs Alcaraz H2H: {s['h2h_wins']}–{a['h2h_wins']} Record ({len(matches)} Matches)",
-        "description": f"Alcaraz leads {a['h2h_wins']}–{s['h2h_wins']} in {len(matches)} meetings. Surface splits, last 5 results, set counts, and every match score. Updated April 2026.",
+        "description": f"{h2h_leader} leads {h2h_score} in {len(matches)} meetings. Surface splits, last 5 results, set counts, and every match score. Updated {scraped_date}.",
         "body": body,
         "faqs": faqs,
     }
@@ -1785,11 +1841,13 @@ def _page_clay_stats(stats):
     sv, av = s["vision_wl"], a["vision_wl"]
     sco, aco = s["computed"], a["computed"]
     matches = stats.get("h2h_matches", [])
-    clay_matches = [m for m in matches if m.get("surface","").lower() == "clay"]
+    clay_matches = _filter_matches(matches, surface="clay")
     s_clay = _parse_wl(sv.get("on_clay_wl", "0-0"))
     a_clay = _parse_wl(av.get("on_clay_wl", "0-0"))
-    s_clay_h2h = sum(1 for m in clay_matches if m.get("winner") == "sinner")
-    a_clay_h2h = sum(1 for m in clay_matches if m.get("winner") == "alcaraz")
+    s_clay_h2h, a_clay_h2h = _h2h_count(clay_matches)
+    latest_clay = _latest_match(clay_matches)
+    latest_clay_winner = "Sinner" if latest_clay.get("winner") == "sinner" else "Alcaraz"
+    clay_leader = "Alcaraz" if a_clay_h2h > s_clay_h2h else "Sinner"
 
     rows = "".join([
         _comparison_row("Clay H2H Record", f'{s_clay_h2h} wins', f'{a_clay_h2h} wins'),
@@ -1800,29 +1858,33 @@ def _page_clay_stats(stats):
         _comparison_row("Career Win %", f'{s["career_win_pct"]}%', f'{a["career_win_pct"]}%'),
     ])
 
-    # Clay H2H match list
+    clay_event_list = ", ".join(f'{m.get("tournament","")} ({m.get("date","")})' for m in clay_matches[:5])
     clay_rows = ""
     for m in clay_matches:
         w = "Sinner" if m.get("winner") == "sinner" else "Alcaraz"
         w_cls = "s" if m.get("winner") == "sinner" else "a"
         clay_rows += f'<tr><td>{m.get("date","")}</td><td>{m.get("tournament","")}</td><td>{m.get("round","")}</td><td><span class="badge {w_cls}">{w}</span></td><td style="font-family:monospace">{m.get("score","")}</td></tr>'
 
+    # RG matches for insight 3
+    rg_matches = _filter_matches(clay_matches, tournament="Roland Garros")
+    rg_desc = " and ".join(f'their {m.get("date","")} {m.get("round","")}' for m in rg_matches[:2])
+
     faqs = [
         ("What is the Sinner vs Alcaraz record on clay?",
-         f"Alcaraz leads the clay H2H {a_clay_h2h}–{s_clay_h2h} across {len(clay_matches)} clay court meetings. Their clay encounters include the historic 2025 Roland Garros final (5h29m, longest Slam final ever), the 2024 Roland Garros semifinal, the 2025 Italian Open final, the 2022 Croatia Open final, and the 2026 Monte-Carlo Masters final."),
+         f"{clay_leader} leads the clay H2H {max(a_clay_h2h,s_clay_h2h)}–{min(a_clay_h2h,s_clay_h2h)} across {len(clay_matches)} clay court meetings including {clay_event_list}."),
         ("Who is better on clay, Sinner or Alcaraz?",
-         f"Alcaraz has the superior overall clay record at {av.get('on_clay_wl','—')} ({_pct(*a_clay)}%) compared to Sinner's {sv.get('on_clay_wl','—')} ({_pct(*s_clay)}%). Alcaraz also has {aco['gs_rg']} Roland Garros titles vs {sco['gs_rg']} for Sinner. However, Sinner won their most recent clay meeting at 2026 Monte-Carlo."),
+         f"Alcaraz has the superior overall clay record at {av.get('on_clay_wl','—')} ({_pct(*a_clay)}%) compared to Sinner's {sv.get('on_clay_wl','—')} ({_pct(*s_clay)}%). Alcaraz has {aco['gs_rg']} Roland Garros titles vs {sco['gs_rg']} for Sinner. Their most recent clay meeting: {latest_clay_winner} won at the {latest_clay.get('tournament','')} ({latest_clay.get('date','')})."),
     ]
 
     body = f"""<div class="breadcrumb"><a href="/">Home</a> › <a href="/sinner-vs-alcaraz-head-to-head/">H2H</a> › Clay Stats</div>
 
-<h1>Sinner vs Alcaraz on Clay: H2H Record & Stats (2026)</h1>
+<h1>Sinner vs Alcaraz on Clay: H2H Record & Stats ({_current_year()})</h1>
 
 <p style="font-size:16px;line-height:1.7;margin-bottom:24px">
-Clay is where this rivalry burns hottest. Alcaraz leads the clay H2H {a_clay_h2h}–{s_clay_h2h} across
-{len(clay_matches)} meetings, including the 2025 Roland Garros final — at 5 hours 29 minutes, the longest
-Grand Slam final in history. But Sinner took the most recent clay meeting at the 2026 Monte-Carlo Masters,
-winning 7–6(5) 6–3 to close the gap.
+Clay is where this rivalry burns hottest. {clay_leader} leads the clay H2H
+{max(a_clay_h2h,s_clay_h2h)}–{min(a_clay_h2h,s_clay_h2h)} across {len(clay_matches)} meetings.
+Most recently, {latest_clay_winner} won at the {latest_clay.get('tournament','')} ({latest_clay.get('date','')})
+with a score of {latest_clay.get('score','')}.
 </p>
 
 <h2>Clay Court Comparison</h2>
@@ -1841,14 +1903,13 @@ with {aco['gs_rg']} Roland Garros titles puts him in rare company. His movement,
 on clay make him the most dangerous clay-courter since Nadal.
 </div>
 <div class="note-box">
-<strong>2. Sinner is closing the gap.</strong> His 2026 Monte-Carlo title (beating Alcaraz in the final) shows
-he's evolved his clay game. At {sv.get('on_clay_wl','—')} ({_pct(*s_clay)}%), Sinner is no longer a hard-court
-specialist — he's a genuine threat on every surface.
+<strong>2. Sinner is a genuine clay threat.</strong> At {sv.get('on_clay_wl','—')} ({_pct(*s_clay)}%), Sinner is no longer
+a hard-court specialist. He has won {s_clay_h2h} of their {len(clay_matches)} clay meetings, proving he can compete
+on any surface against anyone.
 </div>
 <div class="note-box">
-<strong>3. Roland Garros is the ultimate battleground.</strong> Their 2024 semifinal (Alcaraz won in 5) and
-2025 final (Alcaraz won saving 3 match points) were two of the greatest clay matches ever played. This
-is where legacies are built and their rivalry reaches its highest level.
+<strong>3. Roland Garros is the ultimate battleground.</strong> {rg_desc if rg_desc else 'Their Roland Garros meetings'}
+produced some of the greatest clay matches ever played. This is where legacies are built and their rivalry reaches its highest level.
 </div>
 
 <a class="cta" href="/">📊 Full Surface Stats & Live Data → sincaraz.app</a>
@@ -2028,91 +2089,89 @@ Alcaraz's {aco['gs_uso']} US Open titles shows they've carved out hard-court ter
     }
 
 
-def _page_2026_stats(stats):
+def _page_current_year_stats(stats):
     s, a = stats["sinner"], stats["alcaraz"]
     sco, aco = s["computed"], a["computed"]
     matches = stats.get("h2h_matches", [])
-    matches_2026 = [m for m in matches if "2026" in m.get("date","")]
+    year = _current_year()
+    matches_yr = _filter_matches(matches, year=year)
     derived = stats.get("h2h_derived", {})
+    latest_yr = _latest_match(matches_yr)
+    latest_yr_winner = "Sinner" if latest_yr.get("winner") == "sinner" else "Alcaraz"
+    ytd_leader = "Sinner" if s["ytd_win_pct"] > a["ytd_win_pct"] else "Alcaraz"
 
     rows = "".join([
-        _comparison_row("2026 Record", s["ytd_wl"], a["ytd_wl"]),
-        _comparison_row("2026 Win %", f'{s["ytd_win_pct"]}%', f'{a["ytd_win_pct"]}%'),
-        _comparison_row("2026 Titles", s["ytd_titles"], a["ytd_titles"]),
+        _comparison_row(f"{year} Record", s["ytd_wl"], a["ytd_wl"]),
+        _comparison_row(f"{year} Win %", f'{s["ytd_win_pct"]}%', f'{a["ytd_win_pct"]}%'),
+        _comparison_row(f"{year} Titles", s["ytd_titles"], a["ytd_titles"]),
         _comparison_row("Current Ranking", f'#{s["ranking"]}', f'#{a["ranking"]}'),
         _comparison_row("Career Win %", f'{s["career_win_pct"]}%', f'{a["career_win_pct"]}%'),
         _comparison_row("Grand Slam Titles", sco["gs_total"], aco["gs_total"]),
         _comparison_row("H2H Record (All-Time)", f'{s["h2h_wins"]}', f'{a["h2h_wins"]}'),
     ])
 
-    m2026_rows = ""
-    for m in matches_2026:
-        w = "Sinner" if m.get("winner") == "sinner" else "Alcaraz"
-        w_cls = "s" if m.get("winner") == "sinner" else "a"
-        m2026_rows += f'<tr><td>{m.get("date","")}</td><td>{m.get("tournament","")}</td><td>{m.get("round","")}</td><td><span class="badge {w_cls}">{w}</span></td><td style="font-family:monospace">{m.get("score","")}</td></tr>'
+    yr_match_rows = _match_rows_html(matches_yr)
+    latest_yr_desc = ""
+    if latest_yr:
+        latest_yr_desc = f"— most recently at the {latest_yr.get('tournament','')}, won by {latest_yr_winner} {latest_yr.get('score','')}."
 
     faqs = [
-        ("What is the Sinner vs Alcaraz record in 2026?",
-         f"In 2026, Sinner and Alcaraz have met {len(matches_2026)} time(s). Sinner has a {s['ytd_wl']} overall 2026 record ({s['ytd_win_pct']}%) with {s['ytd_titles']} titles, while Alcaraz is {a['ytd_wl']} ({a['ytd_win_pct']}%) with {a['ytd_titles']} titles."),
-        ("Who is having a better 2026 season, Sinner or Alcaraz?",
-         f"Sinner edges Alcaraz in 2026 with a {s['ytd_win_pct']}% win rate (vs {a['ytd_win_pct']}%), {s['ytd_titles']} titles (vs {a['ytd_titles']}), and the current No. {s['ranking']} ranking. He won their most recent meeting at Monte-Carlo."),
+        (f"What is the Sinner vs Alcaraz record in {year}?",
+         f"In {year}, Sinner and Alcaraz have met {len(matches_yr)} time(s). Sinner has a {s['ytd_wl']} overall {year} record ({s['ytd_win_pct']}%) with {s['ytd_titles']} titles, while Alcaraz is {a['ytd_wl']} ({a['ytd_win_pct']}%) with {a['ytd_titles']} titles."),
+        (f"Who is having a better {year} season, Sinner or Alcaraz?",
+         f"{ytd_leader} leads in {year} with a {'higher' if ytd_leader == 'Sinner' else ''} win rate of {max(s['ytd_win_pct'],a['ytd_win_pct'])}%. Sinner: {s['ytd_wl']} ({s['ytd_titles']} titles). Alcaraz: {a['ytd_wl']} ({a['ytd_titles']} titles). Current rankings: Sinner #{s['ranking']}, Alcaraz #{a['ranking']}."),
     ]
 
-    body = f"""<div class="breadcrumb"><a href="/">Home</a> › <a href="/sinner-vs-alcaraz-head-to-head/">H2H</a> › 2026 Stats</div>
+    body = f"""<div class="breadcrumb"><a href="/">Home</a> › <a href="/sinner-vs-alcaraz-head-to-head/">H2H</a> › {year} Stats</div>
 
-<h1>Sinner vs Alcaraz 2026: Season Stats & H2H Results</h1>
+<h1>Sinner vs Alcaraz {year}: Season Stats & H2H Results</h1>
 
 <p style="font-size:16px;line-height:1.7;margin-bottom:24px">
-The 2026 season so far: Sinner holds the No. {s['ranking']} ranking with a {s['ytd_wl']} record
+The {year} season so far: Sinner holds the No. {s['ranking']} ranking with a {s['ytd_wl']} record
 ({s['ytd_win_pct']}% win rate) and {s['ytd_titles']} titles. Alcaraz is No. {a['ranking']} at {a['ytd_wl']}
-({a['ytd_win_pct']}%) with {a['ytd_titles']} titles. They've met {len(matches_2026)} time(s) in 2026
-{('— most recently at the Monte-Carlo Masters final, won by Sinner 7–6(5) 6–3.' if matches_2026 else '.')}
+({a['ytd_win_pct']}%) with {a['ytd_titles']} titles. They've met {len(matches_yr)} time(s) in {year}
+{latest_yr_desc if matches_yr else '.'}
 </p>
 
-<h2>2026 Season Comparison</h2>
+<h2>{year} Season Comparison</h2>
 {_stat_table(rows)}
 
-{'<h2>2026 H2H Meetings</h2><table class="match-table"><thead><tr><th>Date</th><th>Tournament</th><th>Round</th><th>Winner</th><th>Score</th></tr></thead><tbody>' + m2026_rows + '</tbody></table>' if m2026_rows else ''}
+{'<h2>' + year + ' H2H Meetings</h2><table class="match-table"><thead><tr><th>Date</th><th>Tournament</th><th>Round</th><th>Surface</th><th>Winner</th><th>Score</th></tr></thead><tbody>' + yr_match_rows + '</tbody></table>' if yr_match_rows else ''}
 
 <div class="stat-grid" style="max-width:500px;margin-top:24px">
   <div class="stat-box">
-    <div class="lbl">Sinner 2026</div>
+    <div class="lbl">Sinner {year}</div>
     <div class="val" style="color:var(--sinner)">{s['ytd_wl']}</div>
     <div class="lbl">{s['ytd_win_pct']}% · {s['ytd_titles']} titles</div>
   </div>
   <div class="stat-box">
-    <div class="lbl">Alcaraz 2026</div>
+    <div class="lbl">Alcaraz {year}</div>
     <div class="val" style="color:var(--alcaraz)">{a['ytd_wl']}</div>
     <div class="lbl">{a['ytd_win_pct']}% · {a['ytd_titles']} titles</div>
   </div>
 </div>
 
-<h2>Key 2026 Storylines</h2>
+<h2>Key {year} Storylines</h2>
 <div class="note-box">
-<strong>1. Sinner's consistency is remarkable.</strong> A {s['ytd_win_pct']}% win rate through April puts him
-on pace for one of the best seasons in recent Tour history. Only 2 losses all year show a player
-who rarely drops his level.
+<strong>1. {ytd_leader}'s season leads the way.</strong> A {max(s['ytd_win_pct'],a['ytd_win_pct'])}% win rate
+and {max(s['ytd_titles'],a['ytd_titles'])} titles so far — {ytd_leader} is setting the pace in {year}.
+Only {s['ytd_losses'] if ytd_leader == 'Sinner' else a['ytd_losses']} losses all year.
 </div>
 <div class="note-box">
-<strong>2. The rivalry continues to produce drama.</strong> Their Monte-Carlo final saw Sinner claim his first
-clay Masters title, a surface where Alcaraz had been dominant. The H2H stands at {a['h2h_wins']}–{s['h2h_wins']}
-overall but Sinner is gaining ground.
-</div>
-<div class="note-box">
-<strong>3. Roland Garros looms.</strong> The French Open will be the next major battleground. After their
-epic 2025 final (Alcaraz won in 5 sets), a 2026 rematch would be the most anticipated match of the year.
+<strong>2. The H2H remains tight.</strong> The all-time record stands at {a['h2h_wins']}–{s['h2h_wins']} with
+{len(matches_yr)} meetings in {year}. Every encounter between these two continues to produce high-quality tennis.
 </div>
 
-<a class="cta" href="/">📊 Live 2026 Stats Updated Daily → sincaraz.app</a>
+<a class="cta" href="/">📊 Live {year} Stats Updated Daily → sincaraz.app</a>
 
 {_faq_html(faqs)}
 
-{_internal_links("2026-stats")}
+{_internal_links(f"{year}-stats")}
 """
     return {
-        "slug": "sinner-vs-alcaraz-2026-stats",
-        "title": f"Sinner vs Alcaraz 2026: {s['ytd_wl']} vs {a['ytd_wl']} Season Stats",
-        "description": f"Sinner: {s['ytd_wl']} ({s['ytd_win_pct']}%), {s['ytd_titles']} titles. Alcaraz: {a['ytd_wl']} ({a['ytd_win_pct']}%), {a['ytd_titles']} titles. 2026 H2H results and season comparison.",
+        "slug": f"sinner-vs-alcaraz-{year}-stats",
+        "title": f"Sinner vs Alcaraz {year}: {s['ytd_wl']} vs {a['ytd_wl']} Season Stats",
+        "description": f"Sinner: {s['ytd_wl']} ({s['ytd_win_pct']}%), {s['ytd_titles']} titles. Alcaraz: {a['ytd_wl']} ({a['ytd_win_pct']}%), {a['ytd_titles']} titles. {year} H2H results and season comparison.",
         "body": body,
         "faqs": faqs,
     }
@@ -2126,30 +2185,25 @@ def _page_last_5_matches(stats):
 
     s5 = derived.get("last5_sinner", 0)
     a5 = derived.get("last5_alcaraz", 0)
+    l5_leader = "Sinner" if s5 > a5 else ("Alcaraz" if a5 > s5 else "tied")
 
-    match_rows = ""
-    for m in last5:
-        w = "Sinner" if m.get("winner") == "sinner" else "Alcaraz"
-        w_cls = "s" if m.get("winner") == "sinner" else "a"
-        match_rows += f'<tr class="win-{m.get("winner","")[0]}"><td>{m.get("date","")}</td><td>{m.get("tournament","")}</td><td>{m.get("round","")}</td><td>{m.get("surface","").title()}</td><td><span class="badge {w_cls}">{w}</span></td><td style="font-family:monospace">{m.get("score","")}</td></tr>'
+    match_rows = _match_rows_html(last5, 5)
 
-    # Analyze surface split in last 5
-    l5_surfaces = {}
-    for m in last5:
-        surf = m.get("surface","").lower()
-        winner = m.get("winner","")
-        if surf not in l5_surfaces:
-            l5_surfaces[surf] = {"sinner":0,"alcaraz":0}
-        l5_surfaces[surf][winner] += 1
+    # Dynamic surface wins in last 5
+    l5_sinner_surfs = sorted({m.get("surface","").lower() for m in last5 if m.get("winner") == "sinner"})
+    l5_sinner_events = [m.get("tournament","") for m in last5 if m.get("winner") == "sinner"][:3]
+    l5_alcaraz_events = [m.get("tournament","") for m in last5 if m.get("winner") == "alcaraz"][:3]
+    l5_finals = [m for m in last5 if "final" in m.get("round","").lower()]
+    l5_event_list = ", ".join(f'{m.get("tournament","")} ({m.get("date","")})' for m in last5)
 
     faqs = [
         ("What happened in the last 5 Sinner vs Alcaraz matches?",
-         f"In their last 5 meetings, Sinner leads {s5}–{a5}. The matches: " + "; ".join(
+         f"In their last 5 meetings, {'Sinner leads' if s5>a5 else 'Alcaraz leads' if a5>s5 else 'they are tied'} {s5}–{a5}. The matches: " + "; ".join(
              f'{m.get("tournament","")} {m.get("date","")} — {"Sinner" if m.get("winner")=="sinner" else "Alcaraz"} won {m.get("score","")}'
              for m in last5
          ) + "."),
         ("Who has momentum in the Sinner-Alcaraz rivalry?",
-         f"Sinner has won {s5} of the last 5 meetings, including the 2026 Monte-Carlo Masters final and 2025 Wimbledon final. The overall H2H still favors Alcaraz {a['h2h_wins']}–{s['h2h_wins']}, but the recent trend has shifted toward Sinner."),
+         f"{'Sinner' if s5>=a5 else 'Alcaraz'} has won {max(s5,a5)} of the last 5 meetings, including {', '.join(l5_sinner_events if s5>=a5 else l5_alcaraz_events)}. The overall H2H is {a['h2h_wins']}–{s['h2h_wins']}."),
     ]
 
     body = f"""<div class="breadcrumb"><a href="/">Home</a> › <a href="/sinner-vs-alcaraz-head-to-head/">H2H</a> › Last 5 Matches</div>
@@ -2157,10 +2211,10 @@ def _page_last_5_matches(stats):
 <h1>Sinner vs Alcaraz Last 5 Matches: Results & Momentum</h1>
 
 <p style="font-size:16px;line-height:1.7;margin-bottom:24px">
-Recent form says Sinner. He leads the last 5 meetings <strong>{s5}–{a5}</strong>,
-reversing what was once a lopsided rivalry. The all-time H2H remains {a['h2h_wins']}–{s['h2h_wins']}
-in Alcaraz's favor, but the momentum has clearly shifted — Sinner has won on clay (Monte-Carlo 2026),
-grass (Wimbledon 2025), and hard courts (ATP Finals 2025) in recent meetings.
+Recent form: {'Sinner leads' if s5>a5 else 'Alcaraz leads' if a5>s5 else 'they are tied at'} the last 5 meetings
+<strong>{s5}–{a5}</strong>. The all-time H2H remains {a['h2h_wins']}–{s['h2h_wins']}
+in {'Alcaraz' if a['h2h_wins']>s['h2h_wins'] else 'Sinner'}'s favor.
+{('Sinner has won on ' + ', '.join(l5_sinner_surfs) + ' in recent meetings.') if len(l5_sinner_surfs) > 1 else ''}
 </p>
 
 <div class="stat-grid" style="max-width:500px">
@@ -2184,19 +2238,18 @@ grass (Wimbledon 2025), and hard courts (ATP Finals 2025) in recent meetings.
 
 <h2>Key Insights</h2>
 <div class="note-box">
-<strong>1. Sinner now wins on every surface.</strong> His last 5 results include wins on clay (Monte-Carlo), grass (Wimbledon),
-and hard courts (ATP Finals). Early in the rivalry, Alcaraz dominated across surfaces — that's no longer the case.
-Sinner has become a complete player who can beat Alcaraz anywhere.
+<strong>1. Surface versatility in recent matches.</strong> The last 5 meetings span {', '.join(sorted({m.get('surface','').lower() for m in last5}))} courts,
+and {'Sinner has won on ' + ', '.join(l5_sinner_surfs) if l5_sinner_surfs else 'Alcaraz has won on multiple surfaces'}.
+Neither player can claim a surface where they're guaranteed to win anymore.
 </div>
 <div class="note-box">
-<strong>2. The quality of Sinner's recent wins matters.</strong> These aren't early-round flukes — they're finals.
-Monte-Carlo Masters final, Wimbledon final, ATP Finals final. Sinner is beating Alcaraz in the biggest moments,
-which is the most meaningful trend shift.
+<strong>2. {len(l5_finals)} of the last 5 were finals.</strong> These aren't early-round matches —
+they're meeting in the biggest moments. {', '.join(m.get('tournament','') for m in l5_finals) if l5_finals else 'Multiple'} finals
+show both players consistently reach the sharp end of draws.
 </div>
 <div class="note-box">
 <strong>3. Sets remain razor-close.</strong> Total sets in the rivalry: {derived.get('sinner_sets_won','—')}–{derived.get('alcaraz_sets_won','—')}.
-Even as Sinner wins more matches recently, the individual sets are still tight. This is a rivalry where
-one or two points can flip the result.
+Even as the match count shifts, individual sets are tight. This is a rivalry where one or two points can flip the result.
 </div>
 
 <a class="cta" href="/">📊 Live H2H Stats Updated Daily → sincaraz.app</a>
@@ -2207,13 +2260,704 @@ one or two points can flip the result.
 
 {_internal_links("last-5-matches")}
 """
+    l5_events_short = ", ".join(m.get("tournament","") for m in last5[:3])
     return {
         "slug": "sinner-vs-alcaraz-last-5-matches",
         "title": f"Sinner vs Alcaraz Last 5 Matches: {s5}–{a5} Recent Form",
-        "description": f"Sinner leads the last 5 meetings {s5}–{a5}. Monte-Carlo 2026, Wimbledon 2025, ATP Finals 2025 — full results, scores, and momentum analysis.",
+        "description": f"{'Sinner leads' if s5>a5 else 'Alcaraz leads' if a5>s5 else 'Tied'} {s5}–{a5} in last 5 meetings: {l5_events_short}. Full results, scores, and momentum analysis.",
         "body": body,
         "faqs": faqs,
     }
+
+
+# --- Layer 3: Ultra long-tail pages ---
+
+def _page_us_open_stats(stats):
+    s, a = stats["sinner"], stats["alcaraz"]
+    sco, aco = s["computed"], a["computed"]
+    matches = stats.get("h2h_matches", [])
+    uso_matches = _filter_matches(matches, tournament="US Open")
+    s_uso, a_uso = _h2h_count(uso_matches)
+    sv, av = s["vision_wl"], a["vision_wl"]
+    s_hard = _parse_wl(sv.get("on_hard_wl","0-0"))
+    a_hard = _parse_wl(av.get("on_hard_wl","0-0"))
+
+    rows = "".join([
+        _comparison_row("US Open H2H", f'{s_uso} wins', f'{a_uso} wins'),
+        _comparison_row("US Open Titles", sco["gs_uso"], aco["gs_uso"]),
+        _comparison_row("Hard Court Record", sv.get("on_hard_wl","—"), av.get("on_hard_wl","—")),
+        _comparison_row("Hard Court Win %", f'{_pct(*s_hard)}%', f'{_pct(*a_hard)}%'),
+        _comparison_row("Grand Slam Titles", sco["gs_total"], aco["gs_total"]),
+        _comparison_row("Career Win %", f'{s["career_win_pct"]}%', f'{a["career_win_pct"]}%'),
+    ])
+    uso_rows = _match_rows_html(uso_matches)
+    uso_leader = "Alcaraz" if aco["gs_uso"] > sco["gs_uso"] else ("Sinner" if sco["gs_uso"] > aco["gs_uso"] else "tied")
+
+    faqs = [
+        ("What is the Sinner vs Alcaraz record at the US Open?",
+         f"They have met {len(uso_matches)} time(s) at the US Open with {'Alcaraz' if a_uso>s_uso else 'Sinner'} leading {max(s_uso,a_uso)}–{min(s_uso,a_uso)}. Alcaraz has {aco['gs_uso']} US Open titles vs {sco['gs_uso']} for Sinner."),
+        ("Who is better at the US Open, Sinner or Alcaraz?",
+         f"Alcaraz has {aco['gs_uso']} US Open titles to Sinner's {sco['gs_uso']}. The hard courts of Flushing Meadows suit Alcaraz's aggressive return game and his ability to thrive in the electric New York atmosphere."),
+    ]
+
+    body = f"""<div class="breadcrumb"><a href="/">Home</a> › <a href="/sinner-vs-alcaraz-head-to-head/">H2H</a> › US Open</div>
+<h1>Sinner vs Alcaraz at the US Open: H2H Record & Stats</h1>
+<p style="font-size:16px;line-height:1.7;margin-bottom:24px">
+The US Open has produced some of the most memorable moments in this rivalry. Alcaraz has {aco['gs_uso']} titles
+at Flushing Meadows vs {sco['gs_uso']} for Sinner. They've met {len(uso_matches)} time(s) at the US Open,
+with the night-session atmosphere adding another dimension to their encounters.
+</p>
+<h2>US Open Comparison</h2>
+{_stat_table(rows)}
+{'<h2>US Open H2H Meetings</h2><table class="match-table"><thead><tr><th>Date</th><th>Tournament</th><th>Round</th><th>Surface</th><th>Winner</th><th>Score</th></tr></thead><tbody>' + uso_rows + '</tbody></table>' if uso_rows else ''}
+<h2>Key Insights</h2>
+<div class="note-box">
+<strong>1. Alcaraz owns Flushing Meadows.</strong> With {aco['gs_uso']} titles, the US Open is Alcaraz's most
+successful Slam. The night sessions under lights suit his showmanship and aggressive style.
+</div>
+<div class="note-box">
+<strong>2. Hard-court parity makes predictions impossible.</strong> Sinner's overall hard-court record
+({sv.get('on_hard_wl','—')}, {_pct(*s_hard)}%) actually exceeds Alcaraz's ({av.get('on_hard_wl','—')}, {_pct(*a_hard)}%),
+yet Alcaraz has more US Open success. Tournament-specific form matters.
+</div>
+<a class="cta" href="/">📊 Full H2H & Grand Slam Stats → sincaraz.app</a>
+{_faq_html(faqs)}
+{_internal_links("us-open")}"""
+    return {"slug": "sinner-vs-alcaraz-us-open-stats",
+            "title": f"Sinner vs Alcaraz US Open: {sco['gs_uso']} vs {aco['gs_uso']} Titles & H2H",
+            "description": f"Alcaraz has {aco['gs_uso']} US Open titles vs Sinner's {sco['gs_uso']}. {len(uso_matches)} H2H meetings at Flushing Meadows. Full stats and match history.",
+            "body": body, "faqs": faqs}
+
+
+def _page_wimbledon_record(stats):
+    s, a = stats["sinner"], stats["alcaraz"]
+    sco, aco = s["computed"], a["computed"]
+    matches = stats.get("h2h_matches", [])
+    wim_matches = _filter_matches(matches, tournament="Wimbledon")
+    s_wim, a_wim = _h2h_count(wim_matches)
+    sv, av = s["vision_wl"], a["vision_wl"]
+    s_grass = _parse_wl(sv.get("on_grass_wl","0-0"))
+    a_grass = _parse_wl(av.get("on_grass_wl","0-0"))
+
+    rows = "".join([
+        _comparison_row("Wimbledon H2H", f'{s_wim} wins', f'{a_wim} wins'),
+        _comparison_row("Wimbledon Titles", sco["gs_wimbledon"], aco["gs_wimbledon"]),
+        _comparison_row("Grass Record", sv.get("on_grass_wl","—"), av.get("on_grass_wl","—")),
+        _comparison_row("Grass Win %", f'{_pct(*s_grass)}%', f'{_pct(*a_grass)}%'),
+        _comparison_row("Aces / Match", sco["avg_aces_match"], aco["avg_aces_match"]),
+        _comparison_row("1st Serve Won %", f'{s["career"]["first_serve_won_pct"]}%', f'{a["career"]["first_serve_won_pct"]}%'),
+    ])
+    wim_rows = _match_rows_html(wim_matches)
+
+    faqs = [
+        ("What is the Sinner vs Alcaraz record at Wimbledon?",
+         f"Sinner leads the Wimbledon H2H {s_wim}–{a_wim} across {len(wim_matches)} meetings. Sinner has {sco['gs_wimbledon']} Wimbledon title(s) vs {aco['gs_wimbledon']} for Alcaraz."),
+        ("Who is better at Wimbledon, Sinner or Alcaraz?",
+         f"Both have Wimbledon titles — Sinner {sco['gs_wimbledon']}, Alcaraz {aco['gs_wimbledon']}. Alcaraz has the higher overall grass win rate ({_pct(*a_grass)}% vs {_pct(*s_grass)}%), but Sinner leads the head-to-head at the All England Club {s_wim}–{a_wim}."),
+    ]
+
+    body = f"""<div class="breadcrumb"><a href="/">Home</a> › <a href="/sinner-vs-alcaraz-head-to-head/">H2H</a> › Wimbledon</div>
+<h1>Sinner vs Alcaraz at Wimbledon: H2H Record & Grass Stats</h1>
+<p style="font-size:16px;line-height:1.7;margin-bottom:24px">
+Wimbledon is where serve power meets grass-court craft. Sinner leads the Wimbledon H2H {s_wim}–{a_wim}
+across {len(wim_matches)} meetings. Both have lifted the trophy — Sinner {sco['gs_wimbledon']} time(s),
+Alcaraz {aco['gs_wimbledon']} — making Centre Court the most prestigious stage for this rivalry.
+</p>
+<h2>Wimbledon Comparison</h2>
+{_stat_table(rows)}
+{'<h2>Wimbledon H2H Meetings</h2><table class="match-table"><thead><tr><th>Date</th><th>Tournament</th><th>Round</th><th>Surface</th><th>Winner</th><th>Score</th></tr></thead><tbody>' + wim_rows + '</tbody></table>' if wim_rows else ''}
+<h2>Key Insights</h2>
+<div class="note-box">
+<strong>1. Sinner's serve is the grass-court weapon.</strong> Averaging {sco['avg_aces_match']} aces per match and winning
+{s['career']['first_serve_won_pct']}% of first-serve points, Sinner's flat delivery is amplified by the low grass bounce.
+</div>
+<div class="note-box">
+<strong>2. Alcaraz's grass record is elite overall.</strong> At {av.get('on_grass_wl','—')} ({_pct(*a_grass)}%), Alcaraz
+is one of the best grass-court players in the world — but against Sinner specifically, the surface favors the Italian.
+</div>
+<a class="cta" href="/">📊 Full Surface & Serve Stats → sincaraz.app</a>
+{_faq_html(faqs)}
+{_internal_links("wimbledon")}"""
+    return {"slug": "sinner-vs-alcaraz-wimbledon-record",
+            "title": f"Sinner vs Alcaraz Wimbledon: {s_wim}–{a_wim} H2H & Grass Stats",
+            "description": f"Sinner leads {s_wim}–{a_wim} at Wimbledon. Titles: Sinner {sco['gs_wimbledon']}, Alcaraz {aco['gs_wimbledon']}. Grass records, serve stats, and match history.",
+            "body": body, "faqs": faqs}
+
+
+def _page_roland_garros_stats(stats):
+    s, a = stats["sinner"], stats["alcaraz"]
+    sco, aco = s["computed"], a["computed"]
+    matches = stats.get("h2h_matches", [])
+    rg_matches = _filter_matches(matches, tournament="Roland Garros")
+    s_rg, a_rg = _h2h_count(rg_matches)
+    sv, av = s["vision_wl"], a["vision_wl"]
+    s_clay = _parse_wl(sv.get("on_clay_wl","0-0"))
+    a_clay = _parse_wl(av.get("on_clay_wl","0-0"))
+
+    rows = "".join([
+        _comparison_row("Roland Garros H2H", f'{s_rg} wins', f'{a_rg} wins'),
+        _comparison_row("Roland Garros Titles", sco["gs_rg"], aco["gs_rg"]),
+        _comparison_row("Clay Record", sv.get("on_clay_wl","—"), av.get("on_clay_wl","—")),
+        _comparison_row("Clay Win %", f'{_pct(*s_clay)}%', f'{_pct(*a_clay)}%'),
+        _comparison_row("Deciding Sets Won %", f'{sco["deciding_sets_won_pct"]}%', f'{aco["deciding_sets_won_pct"]}%'),
+        _comparison_row("Grand Slam Titles", sco["gs_total"], aco["gs_total"]),
+    ])
+    rg_rows = _match_rows_html(rg_matches)
+
+    faqs = [
+        ("What is the Sinner vs Alcaraz record at Roland Garros?",
+         f"Alcaraz leads the Roland Garros H2H {a_rg}–{s_rg} across {len(rg_matches)} meetings. Their encounters at Roland Garros have produced some of the longest and most dramatic matches in French Open history."),
+        ("Who has more Roland Garros titles, Sinner or Alcaraz?",
+         f"Alcaraz has {aco['gs_rg']} Roland Garros titles vs {sco['gs_rg']} for Sinner. Alcaraz's clay-court game — combining power, spin, and tactical versatility — makes him the dominant force at Roland Garros in this era."),
+    ]
+
+    body = f"""<div class="breadcrumb"><a href="/">Home</a> › <a href="/sinner-vs-alcaraz-head-to-head/">H2H</a> › Roland Garros</div>
+<h1>Sinner vs Alcaraz at Roland Garros: H2H & Clay Stats</h1>
+<p style="font-size:16px;line-height:1.7;margin-bottom:24px">
+Roland Garros has produced the most epic chapters of this rivalry. Alcaraz leads {a_rg}–{s_rg} at the French Open,
+with {aco['gs_rg']} titles to Sinner's {sco['gs_rg']}. Their meetings on the Parisian clay have been marathon affairs
+that test physical endurance and mental fortitude alike.
+</p>
+<h2>Roland Garros Comparison</h2>
+{_stat_table(rows)}
+{'<h2>Roland Garros H2H Meetings</h2><table class="match-table"><thead><tr><th>Date</th><th>Tournament</th><th>Round</th><th>Surface</th><th>Winner</th><th>Score</th></tr></thead><tbody>' + rg_rows + '</tbody></table>' if rg_rows else ''}
+<h2>Key Insights</h2>
+<div class="note-box">
+<strong>1. Alcaraz thrives in five-set clay battles.</strong> His {aco['deciding_sets_won_pct']}% deciding-set win rate
+combined with the gruelling nature of best-of-five on clay gives him a structural advantage in Roland Garros encounters.
+</div>
+<div class="note-box">
+<strong>2. Clay Win % tells the story.</strong> Alcaraz's {_pct(*a_clay)}% career clay win rate vs Sinner's {_pct(*s_clay)}%
+translates directly into Roland Garros performance. On the surface where points are longest, Alcaraz's variety and
+fitness make him the favorite.
+</div>
+<a class="cta" href="/">📊 Full Clay & Grand Slam Stats → sincaraz.app</a>
+{_faq_html(faqs)}
+{_internal_links("roland-garros")}"""
+    return {"slug": "sinner-vs-alcaraz-roland-garros-stats",
+            "title": f"Sinner vs Alcaraz Roland Garros: {s_rg}–{a_rg} H2H & Clay Record",
+            "description": f"Alcaraz leads {a_rg}–{s_rg} at Roland Garros with {aco['gs_rg']} titles vs {sco['gs_rg']}. Clay records, five-set stats, and every French Open meeting.",
+            "body": body, "faqs": faqs}
+
+
+def _page_finals_record(stats):
+    s, a = stats["sinner"], stats["alcaraz"]
+    sv, av = s["vision_wl"], a["vision_wl"]
+    matches = stats.get("h2h_matches", [])
+    finals = _filter_matches(matches, round="final")
+    s_fin, a_fin = _h2h_count(finals)
+
+    rows = "".join([
+        _comparison_row("H2H Finals Record", f'{s_fin} wins', f'{a_fin} wins'),
+        _comparison_row("Career Finals Record", sv.get("finals_wl","—"), av.get("finals_wl","—")),
+        _comparison_row("Career Titles", s["career_titles"], a["career_titles"]),
+        _comparison_row("Grand Slam Titles", s["computed"]["gs_total"], a["computed"]["gs_total"]),
+        _comparison_row("Masters Titles", s["computed"]["masters_titles"], a["computed"]["masters_titles"]),
+    ])
+    fin_rows = _match_rows_html(finals)
+
+    faqs = [
+        ("How many finals have Sinner and Alcaraz played against each other?",
+         f"They have met in {len(finals)} finals. Sinner has won {s_fin} and Alcaraz has won {a_fin}. These include Grand Slam finals, Masters 1000 finals, and ATP Tour finals."),
+        ("What is Sinner and Alcaraz's overall finals record?",
+         f"Sinner's career finals record is {sv.get('finals_wl','—')} ({s['career_titles']} titles). Alcaraz's is {av.get('finals_wl','—')} ({a['career_titles']} titles). Both convert the majority of their finals into trophies."),
+    ]
+
+    body = f"""<div class="breadcrumb"><a href="/">Home</a> › <a href="/sinner-vs-alcaraz-head-to-head/">H2H</a> › Finals Record</div>
+<h1>Sinner vs Alcaraz Finals Record: Who Wins the Big Ones?</h1>
+<p style="font-size:16px;line-height:1.7;margin-bottom:24px">
+When they meet in finals, the stakes are highest. They've faced each other in {len(finals)} finals,
+with {'Sinner' if s_fin>a_fin else 'Alcaraz'} leading {max(s_fin,a_fin)}–{min(s_fin,a_fin)}.
+Across their entire careers, Sinner has a {sv.get('finals_wl','—')} finals record and Alcaraz has {av.get('finals_wl','—')}.
+</p>
+<h2>Finals Comparison</h2>
+{_stat_table(rows)}
+{'<h2>Head-to-Head Finals</h2><table class="match-table"><thead><tr><th>Date</th><th>Tournament</th><th>Round</th><th>Surface</th><th>Winner</th><th>Score</th></tr></thead><tbody>' + fin_rows + '</tbody></table>' if fin_rows else ''}
+<h2>Key Insights</h2>
+<div class="note-box">
+<strong>1. They find each other in finals.</strong> {len(finals)} finals against the same opponent is remarkable
+for two players still in their early 20s. It shows both consistently reach the sharp end of draws at the same events.
+</div>
+<div class="note-box">
+<strong>2. Both are elite closers.</strong> Sinner converts finals at {sv.get('finals_wl','—')} and Alcaraz at
+{av.get('finals_wl','—')}. Neither chokes when the trophy is on the line — they just have to beat each other.
+</div>
+<a class="cta" href="/">📊 Full H2H & Career Stats → sincaraz.app</a>
+{_faq_html(faqs)}
+{_internal_links("finals-record")}"""
+    return {"slug": "sinner-vs-alcaraz-finals-record",
+            "title": f"Sinner vs Alcaraz Finals: {s_fin}–{a_fin} H2H in Championship Matches",
+            "description": f"{'Sinner' if s_fin>a_fin else 'Alcaraz'} leads {max(s_fin,a_fin)}–{min(s_fin,a_fin)} in {len(finals)} H2H finals. Career finals: Sinner {sv.get('finals_wl','—')}, Alcaraz {av.get('finals_wl','—')}.",
+            "body": body, "faqs": faqs}
+
+
+def _page_semi_finals_record(stats):
+    s, a = stats["sinner"], stats["alcaraz"]
+    matches = stats.get("h2h_matches", [])
+    semis = _filter_matches(matches, round="semifinal")
+    s_sf, a_sf = _h2h_count(semis)
+    finals = _filter_matches(matches, round="final")
+
+    rows = "".join([
+        _comparison_row("H2H Semifinal Record", f'{s_sf} wins', f'{a_sf} wins'),
+        _comparison_row("H2H Finals Record", f'{sum(1 for m in finals if m.get("winner")=="sinner")} wins', f'{sum(1 for m in finals if m.get("winner")=="alcaraz")} wins'),
+        _comparison_row("H2H Semis Played", len(semis), "—"),
+        _comparison_row("H2H Finals Played", len(finals), "—"),
+        _comparison_row("Career Win %", f'{s["career_win_pct"]}%', f'{a["career_win_pct"]}%'),
+    ])
+    sf_rows = _match_rows_html(semis)
+
+    faqs = [
+        ("How many semifinals have Sinner and Alcaraz played?",
+         f"They have met in {len(semis)} semifinals, with {'Alcaraz' if a_sf>s_sf else 'Sinner'} leading {max(s_sf,a_sf)}–{min(s_sf,a_sf)}. They have also met in {len(finals)} finals."),
+        ("What is the Sinner vs Alcaraz record by round?",
+         f"In semifinals: Sinner {s_sf}–Alcaraz {a_sf}. In finals: Sinner {sum(1 for m in finals if m.get('winner')=='sinner')}–Alcaraz {sum(1 for m in finals if m.get('winner')=='alcaraz')}. The rivalry has overwhelmingly played out in the last two rounds of tournaments."),
+    ]
+
+    body = f"""<div class="breadcrumb"><a href="/">Home</a> › <a href="/sinner-vs-alcaraz-head-to-head/">H2H</a> › Semifinals</div>
+<h1>Sinner vs Alcaraz Semifinal Record: H2H by Round</h1>
+<p style="font-size:16px;line-height:1.7;margin-bottom:24px">
+Their semifinal meetings have often been the de facto finals. They've met {len(semis)} times in semifinals,
+with {'Alcaraz' if a_sf>s_sf else 'Sinner'} leading {max(s_sf,a_sf)}–{min(s_sf,a_sf)}. Combined with
+{len(finals)} finals, {len(semis)+len(finals)} of their {len(matches)} total meetings have come in the
+last two rounds — showing both players consistently reach the business end of draws.
+</p>
+<h2>Semifinal & Round Comparison</h2>
+{_stat_table(rows)}
+{'<h2>All Semifinal Meetings</h2><table class="match-table"><thead><tr><th>Date</th><th>Tournament</th><th>Round</th><th>Surface</th><th>Winner</th><th>Score</th></tr></thead><tbody>' + sf_rows + '</tbody></table>' if sf_rows else ''}
+<h2>Key Insights</h2>
+<div class="note-box">
+<strong>1. Semifinals as proving grounds.</strong> Several of their most competitive matches came in semifinals —
+the stage where both players were fighting for a spot in the final. The stakes drive both to their highest levels.
+</div>
+<div class="note-box">
+<strong>2. They dominate the late rounds.</strong> {len(semis)+len(finals)} of {len(matches)} career meetings
+({round(100*(len(semis)+len(finals))/max(len(matches),1))}%) came in semis or finals. They rarely meet before
+the last weekend of a tournament.
+</div>
+<a class="cta" href="/">📊 Full Match History & Stats → sincaraz.app</a>
+{_faq_html(faqs)}
+{_internal_links("semi-finals")}"""
+    return {"slug": "sinner-vs-alcaraz-semi-finals-record",
+            "title": f"Sinner vs Alcaraz Semifinals: {s_sf}–{a_sf} H2H Record by Round",
+            "description": f"{'Alcaraz' if a_sf>s_sf else 'Sinner'} leads {max(s_sf,a_sf)}–{min(s_sf,a_sf)} in {len(semis)} semifinal meetings. Plus {len(finals)} finals. Full round-by-round H2H breakdown.",
+            "body": body, "faqs": faqs}
+
+
+def _page_grand_slam_finals(stats):
+    s, a = stats["sinner"], stats["alcaraz"]
+    sco, aco = s["computed"], a["computed"]
+    matches = stats.get("h2h_matches", [])
+    slam_events = {"US Open", "Australian Open", "Roland Garros", "Wimbledon"}
+    gs_finals = [m for m in matches if m.get("round","").lower() == "final"
+                 and any(gs in m.get("tournament","") for gs in slam_events)]
+    s_gsf, a_gsf = _h2h_count(gs_finals)
+    sv, av = s["vision_wl"], a["vision_wl"]
+    s_gs = _parse_wl(sv.get("grand_slams_wl","0-0"))
+    a_gs = _parse_wl(av.get("grand_slams_wl","0-0"))
+
+    rows = "".join([
+        _comparison_row("GS Finals H2H", f'{s_gsf} wins', f'{a_gsf} wins'),
+        _comparison_row("Grand Slam Titles", sco["gs_total"], aco["gs_total"]),
+        _comparison_row("GS Win/Loss", sv.get("grand_slams_wl","—"), av.get("grand_slams_wl","—")),
+        _comparison_row("GS Win %", f'{_pct(*s_gs)}%', f'{_pct(*a_gs)}%'),
+        _comparison_row("5th Set Record", sv.get("fifth_set_wl","—"), av.get("fifth_set_wl","—")),
+    ])
+    gsf_rows = _match_rows_html(gs_finals)
+
+    faqs = [
+        ("How many Grand Slam finals have Sinner and Alcaraz played against each other?",
+         f"They have met in {len(gs_finals)} Grand Slam finals, with {'Alcaraz' if a_gsf>s_gsf else 'Sinner'} winning {max(s_gsf,a_gsf)} and {'Sinner' if a_gsf>s_gsf else 'Alcaraz'} winning {min(s_gsf,a_gsf)}."),
+        ("Which Grand Slam finals have Sinner and Alcaraz played?",
+         ". ".join(f'{m.get("tournament","")} {m.get("date","")}: {"Sinner" if m.get("winner")=="sinner" else "Alcaraz"} won {m.get("score","")}' for m in gs_finals) + "." if gs_finals else "They have not yet met in a Grand Slam final."),
+    ]
+
+    body = f"""<div class="breadcrumb"><a href="/">Home</a> › <a href="/sinner-vs-alcaraz-head-to-head/">H2H</a> › Grand Slam Finals</div>
+<h1>Sinner vs Alcaraz Grand Slam Finals: The Biggest Stage</h1>
+<p style="font-size:16px;line-height:1.7;margin-bottom:24px">
+Grand Slam finals are where legacies are made. Sinner and Alcaraz have met {len(gs_finals)} times on
+tennis's biggest stage, with {'Alcaraz' if a_gsf>s_gsf else 'Sinner'} leading {max(s_gsf,a_gsf)}–{min(s_gsf,a_gsf)}.
+Combined they hold {sco['gs_total'] + aco['gs_total']} Grand Slam titles — {sco['gs_total']} for Sinner and
+{aco['gs_total']} for Alcaraz — before either has turned 25.
+</p>
+<h2>Grand Slam Finals Comparison</h2>
+{_stat_table(rows)}
+{'<h2>Their Grand Slam Finals</h2><table class="match-table"><thead><tr><th>Date</th><th>Tournament</th><th>Round</th><th>Surface</th><th>Winner</th><th>Score</th></tr></thead><tbody>' + gsf_rows + '</tbody></table>' if gsf_rows else ''}
+<h2>Key Insights</h2>
+<div class="note-box">
+<strong>1. These are legacy-defining matches.</strong> With {len(gs_finals)} Slam finals against each other already,
+they're on pace to rival Federer-Nadal (9 Slam finals) and Djokovic-Nadal (7) for most Grand Slam final meetings.
+</div>
+<div class="note-box">
+<strong>2. Five-set records matter at Slams.</strong> Alcaraz's {av.get('fifth_set_wl','—')} fifth-set record vs Sinner's
+{sv.get('fifth_set_wl','—')} is a crucial edge in best-of-five format. When Slam finals go the distance, Alcaraz has
+the statistical and psychological advantage.
+</div>
+<a class="cta" href="/">📊 Full Grand Slam & Career Stats → sincaraz.app</a>
+{_faq_html(faqs)}
+{_internal_links("grand-slam-finals")}"""
+    return {"slug": "sinner-vs-alcaraz-grand-slam-finals",
+            "title": f"Sinner vs Alcaraz Grand Slam Finals: {s_gsf}–{a_gsf} Record",
+            "description": f"They've met in {len(gs_finals)} Slam finals ({'Alcaraz' if a_gsf>s_gsf else 'Sinner'} leads {max(s_gsf,a_gsf)}–{min(s_gsf,a_gsf)}). {sco['gs_total']} + {aco['gs_total']} = {sco['gs_total']+aco['gs_total']} combined Grand Slams. Full breakdown.",
+            "body": body, "faqs": faqs}
+
+
+def _page_aces_double_faults(stats):
+    s, a = stats["sinner"], stats["alcaraz"]
+    sc, ac = s["career"], a["career"]
+    sco, aco = s["computed"], a["computed"]
+
+    rows = "".join([
+        _comparison_row("Career Aces", f'{sc["aces"]:,}', f'{ac["aces"]:,}'),
+        _comparison_row("Aces / Match", sco["avg_aces_match"], aco["avg_aces_match"]),
+        _comparison_row("Career Double Faults", f'{sc["double_faults"]:,}', f'{ac["double_faults"]:,}', False),
+        _comparison_row("DFs / Match", sco["avg_df_match"], aco["avg_df_match"], False),
+        _comparison_row("Ace-to-DF Ratio", f'{sc["aces"]/max(sc["double_faults"],1):.1f}:1', f'{ac["aces"]/max(ac["double_faults"],1):.1f}:1'),
+        _comparison_row("1st Serve %", f'{sc["first_serve_pct"]}%', f'{ac["first_serve_pct"]}%'),
+        _comparison_row("1st Serve Won %", f'{sc["first_serve_won_pct"]}%', f'{ac["first_serve_won_pct"]}%'),
+    ])
+    s_ratio = sc["aces"]/max(sc["double_faults"],1)
+    a_ratio = ac["aces"]/max(ac["double_faults"],1)
+
+    faqs = [
+        ("Who hits more aces, Sinner or Alcaraz?",
+         f"Sinner leads with {sc['aces']:,} career aces ({sco['avg_aces_match']} per match) vs Alcaraz's {ac['aces']:,} ({aco['avg_aces_match']} per match). Sinner's height advantage and flatter serve produce more free points."),
+        ("Who has more double faults, Sinner or Alcaraz?",
+         f"Alcaraz has {ac['double_faults']:,} career double faults ({aco['avg_df_match']} per match) vs Sinner's {sc['double_faults']:,} ({sco['avg_df_match']} per match). However, Sinner's ace-to-DF ratio ({s_ratio:.1f}:1) is significantly better than Alcaraz's ({a_ratio:.1f}:1)."),
+    ]
+
+    body = f"""<div class="breadcrumb"><a href="/">Home</a> › <a href="/sinner-vs-alcaraz-head-to-head/">H2H</a> › Aces & Double Faults</div>
+<h1>Sinner vs Alcaraz Aces & Double Faults: Serve Risk vs Reward</h1>
+<p style="font-size:16px;line-height:1.7;margin-bottom:24px">
+Sinner hits more aces ({sc['aces']:,} career, {sco['avg_aces_match']}/match) while Alcaraz commits more
+double faults ({ac['double_faults']:,}, {aco['avg_df_match']}/match). Sinner's ace-to-DF ratio of {s_ratio:.1f}:1
+vs Alcaraz's {a_ratio:.1f}:1 shows he gets more reward for less risk on serve.
+</p>
+<h2>Aces & Double Faults Comparison</h2>
+{_stat_table(rows)}
+<h2>Key Insights</h2>
+<div class="note-box">
+<strong>1. Sinner's serve is more efficient.</strong> A {s_ratio:.1f}:1 ace-to-DF ratio means Sinner generates
+{s_ratio:.1f} free points for every unforced serve error. Alcaraz's {a_ratio:.1f}:1 ratio shows he takes
+more risk on second serve — which sometimes costs him.
+</div>
+<div class="note-box">
+<strong>2. The aces gap is meaningful.</strong> {sco['avg_aces_match']} vs {aco['avg_aces_match']} aces per match
+means Sinner gets roughly {sco['avg_aces_match'] - aco['avg_aces_match']:.1f} extra free points per match.
+Over a five-set Grand Slam encounter, that's 5-8 additional free points — often the margin of victory.
+</div>
+<a class="cta" href="/">📊 Full Serve & Return Stats → sincaraz.app</a>
+{_faq_html(faqs)}
+{_internal_links("aces-double-faults")}"""
+    return {"slug": "sinner-vs-alcaraz-aces-double-faults",
+            "title": f"Sinner vs Alcaraz Aces: {sc['aces']:,} vs {ac['aces']:,} Career Stats",
+            "description": f"Sinner: {sc['aces']:,} aces ({sco['avg_aces_match']}/match). Alcaraz: {ac['aces']:,} ({aco['avg_aces_match']}/match). Double faults, ace-to-DF ratio, and serve efficiency compared.",
+            "body": body, "faqs": faqs}
+
+
+def _page_break_point_conversion(stats):
+    s, a = stats["sinner"], stats["alcaraz"]
+    sc, ac = s["career"], a["career"]
+
+    rows = "".join([
+        _comparison_row("BP Converted %", f'{sc["bp_converted_pct"]}%', f'{ac["bp_converted_pct"]}%'),
+        _comparison_row("BP Opportunities", f'{sc["bp_opportunities"]:,}', f'{ac["bp_opportunities"]:,}'),
+        _comparison_row("BP Saved %", f'{sc["bp_saved_pct"]}%', f'{ac["bp_saved_pct"]}%'),
+        _comparison_row("BP Faced", f'{sc["bp_faced"]:,}', f'{ac["bp_faced"]:,}'),
+        _comparison_row("Return Games Won %", f'{sc["return_games_won_pct"]}%', f'{ac["return_games_won_pct"]}%'),
+        _comparison_row("Service Games Won %", f'{sc["service_games_won_pct"]}%', f'{ac["service_games_won_pct"]}%'),
+    ])
+
+    # Estimated BPs converted
+    s_bp_conv = round(sc["bp_converted_pct"] * sc["bp_opportunities"] / 100)
+    a_bp_conv = round(ac["bp_converted_pct"] * ac["bp_opportunities"] / 100)
+    s_bp_saved = round(sc["bp_saved_pct"] * sc["bp_faced"] / 100)
+    a_bp_saved = round(ac["bp_saved_pct"] * ac["bp_faced"] / 100)
+
+    faqs = [
+        ("Who converts more break points, Sinner or Alcaraz?",
+         f"They are nearly identical: Sinner converts {sc['bp_converted_pct']}% vs Alcaraz's {ac['bp_converted_pct']}%. From {sc['bp_opportunities']:,} opportunities, Sinner has converted ~{s_bp_conv:,} break points. Alcaraz has converted ~{a_bp_conv:,} from {ac['bp_opportunities']:,} chances."),
+        ("Who is better at saving break points?",
+         f"Sinner saves {sc['bp_saved_pct']}% of break points faced ({sc['bp_faced']:,} total) vs Alcaraz's {ac['bp_saved_pct']}% ({ac['bp_faced']:,} total). Sinner is the tougher player to break — he saves roughly {s_bp_saved:,} break points career-wide."),
+    ]
+
+    body = f"""<div class="breadcrumb"><a href="/">Home</a> › <a href="/sinner-vs-alcaraz-head-to-head/">H2H</a> › Break Point Conversion</div>
+<h1>Sinner vs Alcaraz Break Point Conversion: The Complete Picture</h1>
+<p style="font-size:16px;line-height:1.7;margin-bottom:24px">
+Break point conversion is where matches are won and lost. Sinner converts {sc['bp_converted_pct']}% of
+break point opportunities vs Alcaraz's {ac['bp_converted_pct']}% — nearly identical. But the full picture
+includes creation and defense: Alcaraz creates more opportunities ({ac['bp_opportunities']:,} career)
+while Sinner defends them better ({sc['bp_saved_pct']}% saved vs {ac['bp_saved_pct']}%).
+</p>
+<h2>Break Point Conversion & Defense</h2>
+{_stat_table(rows)}
+<h2>Key Insights</h2>
+<div class="note-box">
+<strong>1. Conversion parity, creation edge to Alcaraz.</strong> At {sc['bp_converted_pct']}% vs {ac['bp_converted_pct']}%,
+conversion is a wash. But Alcaraz's {ac['return_games_won_pct']}% return games won rate means he generates break
+chances more consistently — he needs fewer games to create an opportunity.
+</div>
+<div class="note-box">
+<strong>2. Sinner's defense is the differentiator.</strong> Saving {sc['bp_saved_pct']}% of {sc['bp_faced']:,} break
+points faced means approximately {s_bp_saved:,} clutch holds. That's ~{s_bp_saved - a_bp_saved:,} more saved break points
+than Alcaraz's {a_bp_saved:,} — a significant edge in tight matches.
+</div>
+<a class="cta" href="/">📊 Full Break Point & Serve Stats → sincaraz.app</a>
+{_faq_html(faqs)}
+{_internal_links("break-point-conversion")}"""
+    return {"slug": "sinner-vs-alcaraz-break-point-conversion",
+            "title": f"Sinner vs Alcaraz Break Point Conversion: {sc['bp_converted_pct']}% vs {ac['bp_converted_pct']}%",
+            "description": f"Conversion: Sinner {sc['bp_converted_pct']}%, Alcaraz {ac['bp_converted_pct']}%. Saved: Sinner {sc['bp_saved_pct']}%, Alcaraz {ac['bp_saved_pct']}%. Full break point analysis with career data.",
+            "body": body, "faqs": faqs}
+
+
+def _page_win_percentage(stats):
+    s, a = stats["sinner"], stats["alcaraz"]
+    sv, av = s["vision_wl"], a["vision_wl"]
+    sco, aco = s["computed"], a["computed"]
+    s_gs = _parse_wl(sv.get("grand_slams_wl","0-0"))
+    a_gs = _parse_wl(av.get("grand_slams_wl","0-0"))
+    s_masters = _parse_wl(sv.get("masters_wl","0-0"))
+    a_masters = _parse_wl(av.get("masters_wl","0-0"))
+    s_clay = _parse_wl(sv.get("on_clay_wl","0-0"))
+    a_clay = _parse_wl(av.get("on_clay_wl","0-0"))
+    s_hard = _parse_wl(sv.get("on_hard_wl","0-0"))
+    a_hard = _parse_wl(av.get("on_hard_wl","0-0"))
+    s_grass = _parse_wl(sv.get("on_grass_wl","0-0"))
+    a_grass = _parse_wl(av.get("on_grass_wl","0-0"))
+
+    rows = "".join([
+        _comparison_row("Career Win %", f'{s["career_win_pct"]}%', f'{a["career_win_pct"]}%'),
+        _comparison_row("Career W/L", s["career_wl"], a["career_wl"]),
+        _comparison_row(f"{_current_year()} Win %", f'{s["ytd_win_pct"]}%', f'{a["ytd_win_pct"]}%'),
+        _comparison_row("Grand Slam Win %", f'{_pct(*s_gs)}%', f'{_pct(*a_gs)}%'),
+        _comparison_row("Masters Win %", f'{_pct(*s_masters)}%', f'{_pct(*a_masters)}%'),
+        _comparison_row("Clay Win %", f'{_pct(*s_clay)}%', f'{_pct(*a_clay)}%'),
+        _comparison_row("Hard Win %", f'{_pct(*s_hard)}%', f'{_pct(*a_hard)}%'),
+        _comparison_row("Grass Win %", f'{_pct(*s_grass)}%', f'{_pct(*a_grass)}%'),
+        _comparison_row("vs Top 10 W/L", sv.get("vs_top10_wl","—"), av.get("vs_top10_wl","—")),
+    ])
+
+    faqs = [
+        ("Who has the higher win percentage, Sinner or Alcaraz?",
+         f"Alcaraz leads with a {a['career_win_pct']}% career win rate ({a['career_wl']}) vs Sinner's {s['career_win_pct']}% ({s['career_wl']}). The gap reflects Alcaraz's fewer early-career losses."),
+        ("What is Sinner and Alcaraz's win percentage by surface?",
+         f"Clay: Sinner {_pct(*s_clay)}% vs Alcaraz {_pct(*a_clay)}%. Hard: Sinner {_pct(*s_hard)}% vs Alcaraz {_pct(*a_hard)}%. Grass: Sinner {_pct(*s_grass)}% vs Alcaraz {_pct(*a_grass)}%. Alcaraz leads on clay and grass; Sinner leads on hard courts."),
+    ]
+
+    body = f"""<div class="breadcrumb"><a href="/">Home</a> › <a href="/sinner-vs-alcaraz-head-to-head/">H2H</a> › Win Percentage</div>
+<h1>Sinner vs Alcaraz Win Percentage: Career, Surface & Tournament</h1>
+<p style="font-size:16px;line-height:1.7;margin-bottom:24px">
+Alcaraz holds the higher career win percentage at {a['career_win_pct']}% ({a['career_wl']}) vs Sinner's
+{s['career_win_pct']}% ({s['career_wl']}). But win percentage varies dramatically by surface and tournament
+level — Sinner leads on hard courts ({_pct(*s_hard)}% to {_pct(*a_hard)}%), while Alcaraz dominates
+on grass ({_pct(*a_grass)}%) and clay ({_pct(*a_clay)}%).
+</p>
+<h2>Win Percentage Breakdown</h2>
+{_stat_table(rows)}
+<h2>Key Insights</h2>
+<div class="note-box">
+<strong>1. Grand Slam win rate is the prestige metric.</strong> Alcaraz at {_pct(*a_gs)}% vs Sinner at {_pct(*s_gs)}%
+at Grand Slams shows who performs when it matters most. At the Majors, Alcaraz wins more matches per tournament.
+</div>
+<div class="note-box">
+<strong>2. Surface splits reveal different strengths.</strong> Sinner's hard-court dominance ({_pct(*s_hard)}%) vs
+Alcaraz's clay and grass superiority shows complementary skill sets. In a best-of-five on their preferred surface,
+each is nearly unbeatable.
+</div>
+<a class="cta" href="/">📊 Full Career Stats & Live Data → sincaraz.app</a>
+{_faq_html(faqs)}
+{_internal_links("win-percentage")}"""
+    return {"slug": "sinner-vs-alcaraz-win-percentage",
+            "title": f"Sinner vs Alcaraz Win %: {s['career_win_pct']}% vs {a['career_win_pct']}% Career",
+            "description": f"Alcaraz: {a['career_win_pct']}% career win rate. Sinner: {s['career_win_pct']}%. Breakdown by surface, tournament level, and vs Top 10 opponents.",
+            "body": body, "faqs": faqs}
+
+
+def _page_why_alcaraz_better(stats):
+    s, a = stats["sinner"], stats["alcaraz"]
+    sco, aco = s["computed"], a["computed"]
+    sv, av = s["vision_wl"], a["vision_wl"]
+    sc, ac = s["career"], a["career"]
+    a_gs = _parse_wl(av.get("grand_slams_wl","0-0"))
+    a_5s = _parse_wl(av.get("fifth_set_wl","0-0"))
+
+    points = [
+        f"More Grand Slams: {aco['gs_total']} titles vs {sco['gs_total']}, with a Career Grand Slam (all 4 Slams) by age {aco['age']}",
+        f"Better H2H: leads {a['h2h_wins']}–{s['h2h_wins']} in {a['h2h_wins']+s['h2h_wins']} meetings",
+        f"Higher career win %: {a['career_win_pct']}% vs {s['career_win_pct']}%",
+        f"Superior return game: {ac['return_games_won_pct']}% break rate vs {sc['return_games_won_pct']}%",
+        f"Dominant in deciding sets: {aco['deciding_sets_won_pct']}% vs {sco['deciding_sets_won_pct']}%",
+        f"Near-perfect five-set record: {av.get('fifth_set_wl','—')} ({_pct(*a_5s)}%)",
+        f"Better comeback ability: wins {aco['after_losing_first_set_pct']}% after losing the first set vs {sco['after_losing_first_set_pct']}%",
+        f"2 years younger ({aco['age']} vs {sco['age']}), with more peak years ahead",
+    ]
+
+    faqs = [
+        ("Why is Alcaraz better than Sinner?",
+         f"Alcaraz leads in Grand Slams ({aco['gs_total']} vs {sco['gs_total']}), H2H record ({a['h2h_wins']}–{s['h2h_wins']}), career win percentage ({a['career_win_pct']}% vs {s['career_win_pct']}%), deciding sets ({aco['deciding_sets_won_pct']}% vs {sco['deciding_sets_won_pct']}%), and return game ({ac['return_games_won_pct']}% break rate vs {sc['return_games_won_pct']}%). He's also 2 years younger."),
+        ("Is Alcaraz the GOAT of his generation?",
+         f"With {aco['gs_total']} Grand Slams across all 4 surfaces by age {aco['age']}, Alcaraz is on a GOAT-level trajectory. His Career Grand Slam puts him in territory achieved only by Laver, Agassi, Federer, Nadal, and Djokovic. But Sinner is right behind him, and the rivalry is far from decided."),
+    ]
+
+    body = f"""<div class="breadcrumb"><a href="/">Home</a> › <a href="/who-is-better-sinner-or-alcaraz/">Who Is Better?</a> › Case for Alcaraz</div>
+<h1>Why Is Alcaraz Better Than Sinner? The Stats Case</h1>
+<p style="font-size:16px;line-height:1.7;margin-bottom:24px">
+If you believe Grand Slams, H2H record, and peak performance define greatness, Alcaraz has the stronger
+case. He leads in {aco['gs_total']}–{sco['gs_total']} Grand Slams, {a['h2h_wins']}–{s['h2h_wins']} head-to-head,
+and {a['career_win_pct']}%–{s['career_win_pct']}% career win rate. Here's the full data-backed argument.
+</p>
+<h2>The Case for Alcaraz: {len(points)} Key Stats</h2>
+<div style="margin:24px 0">{''.join(f'<div class="note-box" style="border-left-color:var(--alcaraz)"><strong>{i+1}. {p}</strong></div>' for i, p in enumerate(points))}</div>
+<h2>The Counterargument</h2>
+<p style="color:var(--text-dim);font-size:14px;line-height:1.7;margin-bottom:16px">
+Sinner leads in total titles ({s['career_titles']} vs {a['career_titles']}), weeks at No. 1 ({sco['weeks_at_no1']} vs {aco['weeks_at_no1']}),
+tiebreaks ({sco['tiebreaks_won_pct']}% vs {aco['tiebreaks_won_pct']}%), and serve stats (aces, 1st serve won %, BP saved %).
+For the full countercase, see <a href="/why-is-sinner-better-than-alcaraz/">Why Is Sinner Better Than Alcaraz?</a>
+</p>
+<a class="cta" href="/who-is-better-sinner-or-alcaraz/">📊 Full Side-by-Side Comparison → Who Is Better?</a>
+{_faq_html(faqs)}
+{_internal_links("why-is-alcaraz")}"""
+    return {"slug": "why-is-alcaraz-better-than-sinner",
+            "title": f"Why Alcaraz Is Better Than Sinner: {len(points)} Stats That Prove It",
+            "description": f"{aco['gs_total']} Grand Slams, {a['h2h_wins']}–{s['h2h_wins']} H2H, {a['career_win_pct']}% win rate. The data-backed case for why Alcaraz is the better player.",
+            "body": body, "faqs": faqs}
+
+
+def _page_why_sinner_better(stats):
+    s, a = stats["sinner"], stats["alcaraz"]
+    sco, aco = s["computed"], a["computed"]
+    sv, av = s["vision_wl"], a["vision_wl"]
+    sc, ac = s["career"], a["career"]
+    derived = stats.get("h2h_derived", {})
+
+    points = [
+        f"More career titles: {s['career_titles']} vs {a['career_titles']}",
+        f"More weeks at No. 1: {sco['weeks_at_no1']} vs {aco['weeks_at_no1']}",
+        f"Better tiebreak record: {sco['tiebreaks_won_pct']}% vs {aco['tiebreaks_won_pct']}%",
+        f"Superior serve: {sc['aces']:,} aces, {sc['first_serve_won_pct']}% 1st serve won vs {ac['first_serve_won_pct']}%",
+        f"Better break point defense: {sc['bp_saved_pct']}% saved vs {ac['bp_saved_pct']}%",
+        f"Higher service games won %: {sc['service_games_won_pct']}% vs {ac['service_games_won_pct']}%",
+        f"Leads last 5 meetings: {derived.get('last5_sinner',0)}–{derived.get('last5_alcaraz',0)}",
+        f"Dominant on hard courts: {sv.get('on_hard_wl','—')} record, {sco['gs_ao']} Australian Open titles",
+    ]
+
+    faqs = [
+        ("Why is Sinner better than Alcaraz?",
+         f"Sinner leads in career titles ({s['career_titles']} vs {a['career_titles']}), weeks at No. 1 ({sco['weeks_at_no1']} vs {aco['weeks_at_no1']}), tiebreak win rate ({sco['tiebreaks_won_pct']}% vs {aco['tiebreaks_won_pct']}%), serve stats ({sc['aces']:,} aces, {sc['first_serve_won_pct']}% 1st serve won), and break point defense ({sc['bp_saved_pct']}% vs {ac['bp_saved_pct']}%). He also leads the last 5 H2H meetings."),
+        ("Is Sinner more consistent than Alcaraz?",
+         f"Yes — Sinner's {sco['weeks_at_no1']} weeks at No. 1 vs Alcaraz's {aco['weeks_at_no1']} shows superior consistency. He maintains a high level week-to-week: his {s['ytd_wl']} ({s['ytd_win_pct']}%) {_current_year()} record vs Alcaraz's {a['ytd_wl']} ({a['ytd_win_pct']}%) demonstrates sustained excellence rather than peaks and valleys."),
+    ]
+
+    body = f"""<div class="breadcrumb"><a href="/">Home</a> › <a href="/who-is-better-sinner-or-alcaraz/">Who Is Better?</a> › Case for Sinner</div>
+<h1>Why Is Sinner Better Than Alcaraz? The Stats Case</h1>
+<p style="font-size:16px;line-height:1.7;margin-bottom:24px">
+If you value consistency, serve dominance, and point-by-point clutch performance, Sinner has the edge.
+He leads in total titles ({s['career_titles']} to {a['career_titles']}), weeks at No. 1
+({sco['weeks_at_no1']} to {aco['weeks_at_no1']}), and tiebreak win rate ({sco['tiebreaks_won_pct']}% to {aco['tiebreaks_won_pct']}%).
+Here's the full argument.
+</p>
+<h2>The Case for Sinner: {len(points)} Key Stats</h2>
+<div style="margin:24px 0">{''.join(f'<div class="note-box" style="border-left-color:var(--sinner)"><strong>{i+1}. {p}</strong></div>' for i, p in enumerate(points))}</div>
+<h2>The Counterargument</h2>
+<p style="color:var(--text-dim);font-size:14px;line-height:1.7;margin-bottom:16px">
+Alcaraz leads in Grand Slams ({aco['gs_total']} vs {sco['gs_total']}), H2H record ({a['h2h_wins']}–{s['h2h_wins']}),
+career win percentage ({a['career_win_pct']}% vs {s['career_win_pct']}%), and deciding sets ({aco['deciding_sets_won_pct']}% vs {sco['deciding_sets_won_pct']}%).
+For the full countercase, see <a href="/why-is-alcaraz-better-than-sinner/">Why Is Alcaraz Better Than Sinner?</a>
+</p>
+<a class="cta" href="/who-is-better-sinner-or-alcaraz/">📊 Full Side-by-Side Comparison → Who Is Better?</a>
+{_faq_html(faqs)}
+{_internal_links("why-is-sinner")}"""
+    return {"slug": "why-is-sinner-better-than-alcaraz",
+            "title": f"Why Sinner Is Better Than Alcaraz: {len(points)} Stats That Prove It",
+            "description": f"{s['career_titles']} titles, {sco['weeks_at_no1']} weeks at #1, {sco['tiebreaks_won_pct']}% tiebreaks. The data-backed case for why Sinner is the better player.",
+            "body": body, "faqs": faqs}
+
+
+def _page_rivalry_analysis(stats):
+    s, a = stats["sinner"], stats["alcaraz"]
+    sco, aco = s["computed"], a["computed"]
+    sv, av = s["vision_wl"], a["vision_wl"]
+    sc, ac = s["career"], a["career"]
+    matches = stats.get("h2h_matches", [])
+    derived = stats.get("h2h_derived", {})
+    first = matches[-1] if matches else {}
+    latest = _latest_match(matches)
+    latest_winner = "Sinner" if latest.get("winner") == "sinner" else "Alcaraz"
+
+    # Surface breakdown
+    surf_h2h = {"clay": [0,0], "hard": [0,0], "grass": [0,0]}
+    for m in matches:
+        sf = m.get("surface","hard").lower()
+        if sf in surf_h2h:
+            if m.get("winner") == "sinner": surf_h2h[sf][0] += 1
+            else: surf_h2h[sf][1] += 1
+
+    # Count finals and 5-setters between them
+    h2h_finals = len(_filter_matches(matches, round="final"))
+    h2h_5setters = sum(1 for m in matches if len(m.get("score","").split()) >= 5 and "ret" not in m.get("score","").lower())
+
+    rows = "".join([
+        _comparison_row("H2H Record", f'{s["h2h_wins"]}', f'{a["h2h_wins"]}'),
+        _comparison_row("Total Meetings", len(matches), "—"),
+        _comparison_row("H2H Finals", h2h_finals, "—"),
+        _comparison_row("H2H 5-Setters", h2h_5setters, "—"),
+        _comparison_row("Sets Won", derived.get("sinner_sets_won","—"), derived.get("alcaraz_sets_won","—")),
+        _comparison_row("Grand Slam Titles", sco["gs_total"], aco["gs_total"]),
+        _comparison_row("Career Titles", s["career_titles"], a["career_titles"]),
+        _comparison_row("Weeks at No. 1", sco["weeks_at_no1"], aco["weeks_at_no1"]),
+        _comparison_row("Career Win %", f'{s["career_win_pct"]}%', f'{a["career_win_pct"]}%'),
+        _comparison_row("Age", sco["age"], aco["age"], False),
+    ])
+
+    faqs = [
+        ("Is Sinner vs Alcaraz the best rivalry in tennis?",
+         f"By the numbers, it's the closest rivalry in modern tennis. {len(matches)} meetings, sets won {derived.get('sinner_sets_won','—')}–{derived.get('alcaraz_sets_won','—')}, {h2h_5setters} five-set matches, and {h2h_finals} finals. Both hold Grand Slams, both have been No. 1, and they're born just 21 months apart. No rivalry since Federer-Nadal has matched this intensity."),
+        ("How does Sinner vs Alcaraz compare to Federer vs Nadal?",
+         f"Federer-Nadal had 40 meetings over 15 years. Sinner-Alcaraz already have {len(matches)} meetings and they're both under 25. While Federer-Nadal had a clear surface divide (Nadal on clay, Federer on grass), Sinner-Alcaraz compete on every surface — making it arguably more complex tactically."),
+        ("Will Sinner vs Alcaraz define tennis for the next decade?",
+         f"All signs point to yes. At ages {sco['age']} and {aco['age']}, with {sco['gs_total']+aco['gs_total']} combined Grand Slams already, they're on pace for 30+ combined Slams. If they stay healthy, this will be the defining rivalry of the 2020s and potentially the 2030s."),
+    ]
+
+    body = f"""<div class="breadcrumb"><a href="/">Home</a> › <a href="/sinner-vs-alcaraz-head-to-head/">H2H</a> › Rivalry Analysis</div>
+<h1>Sinner vs Alcaraz Rivalry Analysis: Defining Tennis's Future</h1>
+<p style="font-size:16px;line-height:1.7;margin-bottom:24px">
+Since their first meeting at the {first.get('tournament','')} in {first.get('date','')}, Sinner and Alcaraz
+have played {len(matches)} times — and it's not even close to over. The rivalry has produced {h2h_finals} finals,
+{h2h_5setters} five-setters, and a combined {sco['gs_total']+aco['gs_total']} Grand Slam titles. The sets are
+{derived.get('sinner_sets_won','—')}–{derived.get('alcaraz_sets_won','—')}, the weeks at No. 1 are
+{sco['weeks_at_no1']}–{aco['weeks_at_no1']}. This is the closest rivalry in modern tennis.
+</p>
+<h2>Rivalry by the Numbers</h2>
+{_stat_table(rows)}
+<h2>Why This Rivalry Is Historically Significant</h2>
+<div class="note-box">
+<strong>1. The closest in tennis history.</strong> Sets: {derived.get('sinner_sets_won','—')}–{derived.get('alcaraz_sets_won','—')}.
+Weeks at No. 1: {sco['weeks_at_no1']}–{aco['weeks_at_no1']}. Career titles: {s['career_titles']}–{a['career_titles']}.
+Masters: {sco['masters_titles']}–{aco['masters_titles']}. No rivalry has been this statistically even across every major metric.
+</div>
+<div class="note-box">
+<strong>2. All surfaces, all stages.</strong> Unlike Federer-Nadal (clay vs grass divide) or Sampras-Agassi
+(mostly hard courts), Sinner and Alcaraz compete at the highest level on clay ({surf_h2h['clay'][0]}–{surf_h2h['clay'][1]}),
+hard ({surf_h2h['hard'][0]}–{surf_h2h['hard'][1]}), and grass ({surf_h2h['grass'][0]}–{surf_h2h['grass'][1]}).
+</div>
+<div class="note-box">
+<strong>3. Youth guarantees longevity.</strong> At {sco['age']} and {aco['age']}, with {sco['gs_total']+aco['gs_total']}
+Grand Slams already, they could play 30+ more meetings. If they average 3-4 encounters per year, they'll
+reach 50+ career meetings — surpassing even Djokovic-Nadal's 59.
+</div>
+<div class="note-box">
+<strong>4. Complementary greatness.</strong> Sinner's serve dominance and consistency ({s['career_titles']} titles,
+{sco['tiebreaks_won_pct']}% tiebreaks) vs Alcaraz's return prowess and clutch resilience ({aco['gs_total']} Slams,
+{aco['deciding_sets_won_pct']}% deciding sets) creates the perfect sporting narrative: two different paths to excellence.
+</div>
+<a class="cta" href="/">📊 Full Live Stats & Rivalry Dashboard → sincaraz.app</a>
+{_faq_html(faqs)}
+{_internal_links("rivalry-analysis")}"""
+    return {"slug": "sinner-vs-alcaraz-rivalry-analysis",
+            "title": f"Sinner vs Alcaraz Rivalry: {len(matches)} Matches, {sco['gs_total']+aco['gs_total']} Grand Slams",
+            "description": f"{len(matches)} meetings, {h2h_finals} finals, {h2h_5setters} five-setters, sets {derived.get('sinner_sets_won','—')}–{derived.get('alcaraz_sets_won','—')}. Why Sinner-Alcaraz is the defining tennis rivalry of this era.",
+            "body": body, "faqs": faqs}
 
 
 TOPIC_GENERATORS = [
@@ -2223,7 +2967,7 @@ TOPIC_GENERATORS = [
     _page_clay_stats,
     _page_grass_record,
     _page_hard_court_stats,
-    _page_2026_stats,
+    _page_current_year_stats,
     _page_last_5_matches,
     # Deep-analysis pages (long tail)
     _page_serve_comparison,
@@ -2236,6 +2980,19 @@ TOPIC_GENERATORS = [
     _page_five_set_record,
     _page_clutch_stats,
     _page_prize_money,
+    # Ultra long-tail (layer 3)
+    _page_us_open_stats,
+    _page_wimbledon_record,
+    _page_roland_garros_stats,
+    _page_finals_record,
+    _page_semi_finals_record,
+    _page_grand_slam_finals,
+    _page_aces_double_faults,
+    _page_break_point_conversion,
+    _page_win_percentage,
+    _page_why_alcaraz_better,
+    _page_why_sinner_better,
+    _page_rivalry_analysis,
 ]
 
 
