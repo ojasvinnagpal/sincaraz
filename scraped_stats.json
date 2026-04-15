@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-04-14T07:56:01.174645+00:00",
+  "scraped_at": "2026-04-15T07:56:51.576085+00:00",
   "sinner": {
     "h2h_wins": 7,
     "h2h_losses": 10,
@@ -112,7 +112,7 @@
   },
   "alcaraz": {
     "h2h_wins": 10,
-    "h2h_losses": 7,
+    "h2h_losses": 6,
     "career_wins": 301,
     "career_losses": 68,
     "career_wl": "301\u201368",
@@ -167,7 +167,6 @@
       "tiebreak_wl": "101-63",
       "vs_top10_wl": "55-25"
     },
-    "vision_wiki": {},
     "csv": {},
     "computed": {
       "age": 22,
