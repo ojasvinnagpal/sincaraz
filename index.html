@@ -22,6 +22,11 @@
 <!-- Canonical -->
 <link rel="canonical" href="https://sincaraz.app">
 
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="alternate icon" href="/favicon.svg">
+<meta name="theme-color" content="#07080f">
+
 <!-- Schema: SportsEvent / FAQ -->
 <script type="application/ld+json">
 {
@@ -47,7 +52,7 @@
       "name": "What is the Sinner vs Alcaraz head to head record?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "As of April 2026, Carlos Alcaraz leads Jannik Sinner 10-6 in their head-to-head record across all surfaces, across 16 ATP Tour meetings."
+        "text": "As of April 2026, Carlos Alcaraz leads Jannik Sinner 10-7 in their head-to-head record across all surfaces, across 17 ATP Tour meetings."
       }
     },
     {
@@ -132,8 +137,10 @@ nav{position:sticky;top:0;z-index:100;background:rgba(7,8,15,0.95);backdrop-filt
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 /* ===== HERO / HOME ===== */
-.hero{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);border-bottom:1px solid var(--border);padding:60px 24px 40px}
+.hero{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);border-bottom:1px solid var(--border);padding:40px 24px 28px}
 .hero-inner{max-width:1200px;margin:0 auto}
+.link-pill{display:inline-block;padding:8px 14px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);color:var(--text);font-size:13px;text-decoration:none;transition:all .2s}
+.link-pill:hover{border-color:var(--sinner);color:var(--sinner)}
 .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,10vw,140px);text-align:center;line-height:.9;letter-spacing:.02em;margin-bottom:8px}
 .hero-title .s-name{color:var(--sinner)}
 .hero-title .vs{color:var(--text-dim);font-size:.55em}
@@ -742,17 +749,17 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="qs-card">
           <div class="qs-card-title">Career Earnings</div>
           <div class="qs-values">
-            <div><div class="qs-val s" style="font-size:26px" id="s-prize-card">$56.6M</div><div class="qs-winner s">Sinner ✦</div></div>
+            <div><div class="qs-val s" style="font-size:26px" id="s-prize-card">$56.6M</div><div class="qs-winner s" id="qs-s-prize-label">Sinner</div></div>
             <div class="qs-divider">/</div>
-            <div><div class="qs-val a" style="font-size:26px" id="a-prize-card">$53.9M</div><div class="qs-winner a">Alcaraz</div></div>
+            <div><div class="qs-val a" style="font-size:26px" id="a-prize-card">$53.9M</div><div class="qs-winner a" id="qs-a-prize-label">Alcaraz</div></div>
           </div>
         </div>
         <div class="qs-card">
-          <div class="qs-card-title">2026 Win %</div>
+          <div class="qs-card-title" id="qs-ytd-title">YTD Win %</div>
           <div class="qs-values">
-            <div><div class="qs-val s" style="font-size:28px" id="s-ytd-pct-card">90.6%</div><div class="qs-winner s">Sinner</div></div>
+            <div><div class="qs-val s" style="font-size:28px" id="s-ytd-pct-card">90.6%</div><div class="qs-winner s" id="qs-s-ytd-label">Sinner</div></div>
             <div class="qs-divider">/</div>
-            <div><div class="qs-val a" style="font-size:28px" id="a-ytd-pct-card">91.2%</div><div class="qs-winner a">Alcaraz ✦</div></div>
+            <div><div class="qs-val a" style="font-size:28px" id="a-ytd-pct-card">91.2%</div><div class="qs-winner a" id="qs-a-ytd-label">Alcaraz</div></div>
           </div>
         </div>
         <div class="qs-card">
@@ -913,7 +920,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="page" id="page-h2h">
   <div class="section">
     <div class="section-h2">Head-to-Head Matches</div>
-    <p style="color:var(--text-dim);margin-bottom:32px;font-size:14px">All 16 meetings between Sinner and Alcaraz · <span style="color:var(--alcaraz)">Alcaraz leads 10–6</span></p>
+    <p id="h2h-intro" style="color:var(--text-dim);margin-bottom:32px;font-size:14px">All meetings between Sinner and Alcaraz · <span style="color:var(--alcaraz)">Alcaraz leads H2H</span></p>
 
     <div class="filter-row">
       <button class="filter-btn active" onclick="filterMatches('all',this)">All (16)</button>
@@ -930,9 +937,9 @@ document.addEventListener('DOMContentLoaded', function() {
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:center">
         <div><div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">H2H Overall</div>
           <div style="display:flex;justify-content:center;align-items:center;gap:12px">
-            <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--sinner)">6</span>
+            <span id="h2h-bar-s" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--sinner)">6</span>
             <span style="color:var(--text-dim)">–</span>
-            <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--alcaraz)">10</span>
+            <span id="h2h-bar-a" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--alcaraz)">10</span>
           </div></div>
         <div><div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Points Won H2H</div>
           <div style="display:flex;justify-content:center;align-items:center;gap:12px">
@@ -943,14 +950,33 @@ document.addEventListener('DOMContentLoaded', function() {
           <div style="font-size:11px;color:var(--gold)">★ Perfectly tied (through end of 2025)!</div></div>
         <div><div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Sets Won H2H</div>
           <div style="display:flex;justify-content:center;align-items:center;gap:12px">
-            <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--sinner)">28</span>
+            <span id="h2h-sets-s" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--sinner)">28</span>
             <span style="color:var(--text-dim)">–</span>
-            <span style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--alcaraz)">30</span>
+            <span id="h2h-sets-a" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--alcaraz)">30</span>
           </div></div>
       </div>
     </div>
 
     <div class="match-list" id="matchList"></div>
+
+    <!-- Explore More Comparisons (internal linking) -->
+    <div style="margin-top:48px;padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px">
+      <div style="font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px">Explore More Comparisons</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="/sinner-vs-alcaraz-head-to-head/" class="link-pill">Full H2H Breakdown</a>
+        <a href="/sinner-vs-alcaraz-clay-stats/" class="link-pill">Clay Stats</a>
+        <a href="/sinner-vs-alcaraz-hard-court-stats/" class="link-pill">Hard Court Stats</a>
+        <a href="/sinner-vs-alcaraz-grass-record/" class="link-pill">Grass Record</a>
+        <a href="/sinner-vs-alcaraz-grand-slams/" class="link-pill">Grand Slams</a>
+        <a href="/sinner-vs-alcaraz-serve-stats/" class="link-pill">Serve Stats</a>
+        <a href="/sinner-vs-alcaraz-return-stats/" class="link-pill">Return Stats</a>
+        <a href="/sinner-vs-alcaraz-clutch-stats/" class="link-pill">Clutch & Pressure</a>
+        <a href="/sinner-vs-alcaraz-tiebreak-record/" class="link-pill">Tiebreak Record</a>
+        <a href="/sinner-vs-alcaraz-last-5-matches/" class="link-pill">Last 5 Matches</a>
+        <a href="/sinner-vs-alcaraz-rivalry-analysis/" class="link-pill">Rivalry Analysis</a>
+        <a href="/matches/" class="link-pill">All Match Pages</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -958,17 +984,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="page" id="page-serve">
   <div class="section">
     <div class="section-h2">Serve Statistics</div>
-    <p style="color:var(--text-dim);margin-bottom:32px;font-size:14px">Career serve stats from ATP Tour official data</p>
-
-    <div class="filter-row">
-      <button class="filter-btn active" onclick="filterServe('overall',this)">Overall</button>
-      <button class="filter-btn" onclick="filterServe('hard',this)">Hard</button>
-      <button class="filter-btn" onclick="filterServe('clay',this)">Clay</button>
-      <button class="filter-btn" onclick="filterServe('grass',this)">Grass</button>
-    </div>
+    <p style="color:var(--text-dim);margin-bottom:24px;font-size:14px">Career serve stats from ATP Tour official data · Scroll down for surface breakdown</p>
 
     <div class="stats-section">
-      <div class="stats-section-header">Core Serve Stats</div>
+      <div class="stats-section-header">Core Serve Stats (Career)</div>
       <div class="stats-table-wrap">
         <table class="stats-table">
           <tr><th>Stat</th><th class="s">Sinner</th><th class="a">Alcaraz</th><th>Edge</th></tr>
@@ -1619,7 +1638,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- SEO keyword paragraph (hidden visually but readable by crawlers) -->
 <section style="background:var(--bg);padding:24px;border-top:1px solid var(--border)">
   <div style="max-width:800px;margin:0 auto;color:var(--text-dim);font-size:13px;line-height:1.9;text-align:center">
-    <p><strong style="color:var(--text)">Sincaraz</strong> is the most complete <strong style="color:var(--text)">Sinner vs Alcaraz</strong> rivalry tracker on the internet. Compare <strong style="color:var(--text)">Carlos Alcaraz vs Jannik Sinner</strong> across every stat that matters — live ATP rankings, career win-loss records, Grand Slam titles, Masters 1000 results, serve ratings, return ratings, tiebreak percentage, deciding set records, and our proprietary <strong style="color:var(--text)">Clutch Score™</strong>. The <strong style="color:var(--text)">Alcaraz Sinner head to head</strong> record, surface splits, and all stats are updated daily. Whether you're searching for <strong style="color:var(--text)">Sinner vs Alcaraz head to head</strong>, career earnings, or who wins more tiebreaks — this is your source.</p>
+    <p><strong style="color:var(--text)">Sincaraz</strong> is the most complete Sinner vs Alcaraz rivalry tracker on the internet. Compare Carlos Alcaraz vs Jannik Sinner across every stat that matters — live ATP rankings, career win-loss records, Grand Slam titles, Masters 1000 results, serve ratings, return ratings, tiebreak percentage, deciding set records, and our proprietary Clutch Score™. The Alcaraz Sinner head to head record, surface splits, and all stats are updated daily. Whether you're searching for head-to-head results, career earnings, or who wins more tiebreaks — this is your source.</p>
   </div>
 </section>
 
@@ -1698,8 +1717,8 @@ const expertVerdicts = [
 
 function renderTicker(){
   const items = [
-    '🇮🇹 <span class="s">SINNER</span> vs <span class="a">ALCARAZ</span> — H2H: Alcaraz leads 10–6 (16 matches)',
-    '<span class="a">ALCARAZ</span> leads H2H 10–6 overall (16 ATP meetings)',
+    '🇮🇹 <span class="s">SINNER</span> vs <span class="a">ALCARAZ</span> — Live H2H Rivalry Tracker',
+    '<span class="a">ALCARAZ</span> leads H2H overall — see H2H Matches tab for latest',
     '<span class="s">SINNER</span> leads H2H on Grass 2–0',
     'H2H Points Won: <span class="s">1,651</span> vs <span class="a">1,651</span> — perfectly tied through 2025 ⚖️',
     '<span class="s">SINNER</span> — Sunshine Double 2026 (Indian Wells + Miami)',
@@ -2227,6 +2246,134 @@ function applyStats(data) {
     set('h2h-score-s', h2hS);
     set('h2h-score-a', h2hA);
   }
+
+  // ── Dynamic H2H count everywhere ─────────────────────────────
+  try { updateH2HCounts(data); } catch(e) { console.error('updateH2HCounts:', e); }
+
+  // ── Quick stat ✦ markers on leader + dynamic YTD title ────────
+  try {
+    var ytdTitle = document.getElementById('qs-ytd-title');
+    if (ytdTitle) ytdTitle.textContent = new Date().getFullYear() + ' Win %';
+
+    function markLeader(sLabelId, aLabelId, sName, aName, sNum, aNum) {
+      var sEl = document.getElementById(sLabelId), aEl = document.getElementById(aLabelId);
+      if (!sEl || !aEl || sNum == null || aNum == null) return;
+      sEl.textContent = sName + (sNum > aNum ? ' ✦' : '');
+      aEl.textContent = aName + (aNum > sNum ? ' ✦' : '');
+    }
+    function priz(str) { if(!str) return null; var m = String(str).replace(/,/g,'').match(/\d+/); return m ? +m[0] : null; }
+    markLeader('qs-s-prize-label','qs-a-prize-label','Sinner','Alcaraz', priz(S.prize_career), priz(A.prize_career));
+    markLeader('qs-s-ytd-label','qs-a-ytd-label','Sinner','Alcaraz', S.ytd_win_pct, A.ytd_win_pct);
+  } catch(e) { console.error('qs-markers:', e); }
+
+  // ── Dynamic Edge column across all stat tables ───────────────
+  try { computeEdges(); } catch(e) { console.error('computeEdges:', e); }
+}
+
+// Parse "345–88", "81.6%", "$64.9M", "462+", "27–9 (73%)" → a comparable number
+function parseStatValue(raw) {
+  if (raw == null) return null;
+  var s = String(raw).trim();
+  if (!s || s === '—' || s === '-') return null;
+  // Grab first numeric run (handles $, %, +, commas, ranges)
+  var m = s.replace(/,/g,'').match(/-?\d+\.?\d*/);
+  if (!m) return null;
+  var n = parseFloat(m[0]);
+  // Win/Loss record "345–88" → compute win%
+  var wl = s.replace(/,/g,'').match(/(\d+)\s*[–-]\s*(\d+)/);
+  if (wl) {
+    var w = +wl[1], l = +wl[2];
+    if (w + l > 0) return (w / (w + l)) * 100;
+  }
+  return n;
+}
+
+// Rows where lower value wins (double faults, losses, age)
+var EDGE_LOWER_IS_BETTER = ['double fault','dfs','df /','df/','losses'];
+// Rows where we show "Similar" (small delta in a noisy metric)
+var EDGE_SIMILAR_ROWS = ['career win/loss','finals record'];
+
+function computeEdges() {
+  document.querySelectorAll('table.stats-table tr').forEach(function(tr) {
+    var tds = tr.querySelectorAll('td');
+    if (tds.length < 3) return;
+    var sv = tr.querySelector('td.sv');
+    var av = tr.querySelector('td.av');
+    if (!sv || !av) return;
+    var edgeCell = tds[tds.length - 1];
+    // Skip if the edge cell isn't distinct (some rows only have sv/av)
+    if (edgeCell === sv || edgeCell === av) return;
+    var label = (tds[0].textContent || '').trim().toLowerCase();
+    var sNum = parseStatValue(sv.textContent);
+    var aNum = parseStatValue(av.textContent);
+    if (sNum == null || aNum == null) return;
+
+    var reverse = EDGE_LOWER_IS_BETTER.some(function(k){ return label.indexOf(k) !== -1; });
+    var sScore = reverse ? -sNum : sNum;
+    var aScore = reverse ? -aNum : aNum;
+
+    var diff = Math.abs(sScore - aScore);
+    var forceSimilar = EDGE_SIMILAR_ROWS.some(function(k){ return label === k || label.indexOf(k) !== -1; }) && diff < 3;
+
+    var html;
+    if (sScore === aScore) {
+      html = '<span style="color:var(--gold);font-size:11px">Tied ≈</span>';
+    } else if (forceSimilar) {
+      html = '<span style="color:var(--text-dim);font-size:11px">Similar</span>';
+    } else if (sScore > aScore) {
+      html = '<span class="leader-s">Sinner</span>';
+    } else {
+      html = '<span class="leader-a">Alcaraz</span>';
+    }
+    edgeCell.innerHTML = html;
+
+    // Also toggle "win" marker bold on leader cell
+    sv.classList.remove('win');
+    av.classList.remove('win');
+    if (sScore > aScore) sv.classList.add('win');
+    else if (aScore > sScore) av.classList.add('win');
+  });
+}
+
+// Keep "16 matches" / filter counts / hero subtitle in sync with real data
+function updateH2HCounts(data) {
+  var total = (data.h2h_matches && data.h2h_matches.length) || (matches && matches.length) || 0;
+  var hardN = matches.filter(function(m){return m.surface==='hard';}).length;
+  var clayN = matches.filter(function(m){return m.surface==='clay';}).length;
+  var grassN = matches.filter(function(m){return m.surface==='grass';}).length;
+  var slamN = matches.filter(function(m){return ['US Open','Australian Open','Roland Garros','Wimbledon'].some(function(s){return (m.event||'').indexOf(s)!==-1;});}).length;
+  var sinnerN = matches.filter(function(m){return m.winner==='sinner';}).length;
+  var alcarazN = matches.filter(function(m){return m.winner==='alcaraz';}).length;
+
+  var S = data.sinner||{}, A = data.alcaraz||{};
+  var leader = (A.h2h_wins||0) > (S.h2h_wins||0) ? 'Alcaraz' : 'Sinner';
+  var hi = Math.max(A.h2h_wins||0, S.h2h_wins||0);
+  var lo = Math.min(A.h2h_wins||0, S.h2h_wins||0);
+
+  // Filter buttons on H2H page
+  var btns = document.querySelectorAll('#page-h2h .filter-row .filter-btn');
+  if (btns.length >= 4) {
+    btns[0].textContent = 'All (' + total + ')';
+    btns[1].textContent = 'Hard (' + hardN + ')';
+    btns[2].textContent = 'Clay (' + clayN + ')';
+    btns[3].textContent = 'Grass (' + grassN + ')';
+    if (btns[4]) btns[4].textContent = 'Grand Slams (' + slamN + ')';
+    if (btns[5]) btns[5].textContent = 'Sinner Wins (' + sinnerN + ')';
+    if (btns[6]) btns[6].textContent = 'Alcaraz Wins (' + alcarazN + ')';
+  }
+
+  // H2H page intro copy
+  var intro = document.getElementById('h2h-intro');
+  if (intro) {
+    intro.innerHTML = 'All ' + total + ' meetings between Sinner and Alcaraz · ' +
+      '<span style="color:var(--' + leader.toLowerCase() + ')">' + leader + ' leads ' + hi + '–' + lo + '</span>';
+  }
+
+  // H2H stats bar scores
+  var sH2H = document.getElementById('h2h-bar-s');
+  var aH2H = document.getElementById('h2h-bar-a');
+  if (sH2H) sH2H.textContent = S.h2h_wins != null ? S.h2h_wins : sH2H.textContent;
+  if (aH2H) aH2H.textContent = A.h2h_wins != null ? A.h2h_wins : aH2H.textContent;
 }
 
 async function initApp() {

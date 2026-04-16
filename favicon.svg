@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <clipPath id="ballClip">
+      <circle cx="32" cy="32" r="30"/>
+    </clipPath>
+  </defs>
+  <!-- Sinner blue half -->
+  <rect x="0" y="0" width="32" height="64" fill="#1a6fff" clip-path="url(#ballClip)"/>
+  <!-- Alcaraz orange half -->
+  <rect x="32" y="0" width="32" height="64" fill="#ff3a1a" clip-path="url(#ballClip)"/>
+  <!-- Tennis ball seam -->
+  <path d="M 4 32 Q 16 20 32 32 Q 48 44 60 32" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 4 32 Q 16 44 32 32 Q 48 20 60 32" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Outer ring -->
+  <circle cx="32" cy="32" r="30" fill="none" stroke="#0a0a14" stroke-width="2"/>
+</svg>
