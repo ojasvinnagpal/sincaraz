@@ -46,6 +46,44 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
+# SPA tab routes → serve index.html (short cache, same as root)
+[[redirects]]
+  from = "/h2h/"
+  to = "/index.html"
+  status = 200
+[[redirects]]
+  from = "/serve-stats/"
+  to = "/index.html"
+  status = 200
+[[redirects]]
+  from = "/return-stats/"
+  to = "/index.html"
+  status = 200
+[[redirects]]
+  from = "/under-pressure/"
+  to = "/index.html"
+  status = 200
+[[redirects]]
+  from = "/grand-slams/"
+  to = "/index.html"
+  status = 200
+[[redirects]]
+  from = "/records/"
+  to = "/index.html"
+  status = 200
+[[redirects]]
+  from = "/vs-legends/"
+  to = "/index.html"
+  status = 200
+[[redirects]]
+  from = "/who-is-better/"
+  to = "/index.html"
+  status = 200
+[[redirects]]
+  from = "/insights/"
+  to = "/index.html"
+  status = 200
+
 # 301 redirects: old /stats/ URLs → keyword-rich root URLs
 [[redirects]]
   from = "/stats/serve-comparison/*"

@@ -696,11 +696,11 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
         <div class="h2h-center">
           <div style="display:flex;align-items:center;justify-content:center;gap:16px">
-            <div class="h2h-score-num s" id="h2h-score-s">6</div>
+            <div class="h2h-score-num s" id="h2h-score-s">7</div>
             <div class="vs-circle">VS</div>
             <div class="h2h-score-num a" id="h2h-score-a">10</div>
           </div>
-          <div class="h2h-total">16 matches played · Alcaraz leads H2H</div>
+          <div class="h2h-total">17 matches played · Alcaraz leads H2H</div>
         </div>
         <div class="h2h-player" style="text-align:left">
           <div class="h2h-flag">🇪🇸</div>
@@ -711,12 +711,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
       <div class="win-bar-wrap">
         <div class="win-bar-labels">
-          <span class="win-bar-label s">Sinner — 37.5%</span>
-          <span class="win-bar-label a">Alcaraz — 62.5%</span>
+          <span class="win-bar-label s">Sinner — 41.2%</span>
+          <span class="win-bar-label a">Alcaraz — 58.8%</span>
         </div>
         <div class="win-bar">
-          <div class="win-bar-s" style="width:37.5%"></div>
-          <div class="win-bar-a" style="width:62.5%"></div>
+          <div class="win-bar-s" style="width:41.2%"></div>
+          <div class="win-bar-a" style="width:58.8%"></div>
         </div>
       </div>
 
@@ -848,7 +848,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <tr><td>ATP Finals Titles</td><td class="sv">2</td><td class="av">0</td><td><span class="leader-s">Sinner</span></td></tr>
           <tr><td>Days at World #1</td><td class="sv" id="t-s-days-no1">462+</td><td class="av" id="t-a-days-no1">427+</td><td><span class="leader-s">Sinner</span></td></tr>
           <tr><td>Prize Money</td><td class="sv" id="t-s-prize">$56.6M</td><td class="av" id="t-a-prize">$53.9M</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>H2H Record</td><td class="sv" id="t-s-h2h">6</td><td class="av" id="t-a-h2h">11</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>H2H Record</td><td class="sv" id="t-s-h2h">7</td><td class="av" id="t-a-h2h">10</td><td><span class="leader-a">Alcaraz</span></td></tr>
           <tr><td>2025 Win %</td><td class="sv" id="t-s-ytd-pct">90.6%</td><td class="av" id="t-a-ytd-pct">91.2%</td><td><span class="leader-a">Alcaraz</span></td></tr>
           <tr><td>Finals Record</td><td class="sv" id="t-s-finals">24–9</td><td class="av" id="t-a-finals">26–9</td><td style="color:var(--text-dim);font-size:11px">Similar</td></tr>
           <tr><td>vs Top 10</td><td class="sv" id="t-s-vs-top10">60–37</td><td class="av" id="t-a-vs-top10">55–24</td><td><span class="leader-s">Sinner</span></td></tr>
@@ -869,8 +869,8 @@ document.addEventListener('DOMContentLoaded', function() {
         <tr><th>Surface</th><th class="s">Sinner W/L</th><th class="a">Alcaraz W/L</th><th class="s">Sinner %</th><th class="a">Alcaraz %</th><th>Edge</th></tr>
         <tr><td>Hard</td><td class="sv" id="t-s-hard-wl">234–54</td><td class="av" id="t-a-hard-wl">154–42</td><td class="sv" id="t-s-hard-pct">81.3%</td><td class="av" id="t-a-hard-pct">78.6%</td><td><span class="leader-s">Sinner</span></td></tr>
         <tr><td>Clay</td><td class="sv" id="t-s-clay-wl">46–19</td><td class="av" id="t-a-clay-wl">76–22</td><td class="sv" id="t-s-clay-pct">70.8%</td><td class="av" id="t-a-clay-pct">77.6%</td><td><span class="leader-a">Alcaraz</span></td></tr>
-        <tr><td>Grass</td><td class="sv" id="t-s-grass-wl">32–9</td><td class="av" id="t-a-grass-wl">38–11</td><td class="sv">80.1%</td><td class="av">77.6%</td><td style="color:var(--text-dim);font-size:11px">Tied ≈</td></tr>
-        <tr><td>Indoor Hard</td><td class="sv" id="t-s-indoor-wl">87–20</td><td class="av" id="t-a-indoor-wl">44–12</td><td class="sv">81.3%</td><td class="av">78.6%</td><td><span class="leader-s">Sinner</span></td></tr>
+        <tr><td>Grass</td><td class="sv" id="t-s-grass-wl">29–10</td><td class="av" id="t-a-grass-wl">35–4</td><td class="sv" id="t-s-grass-pct-ov">74.4%</td><td class="av" id="t-a-grass-pct-ov">89.7%</td><td><span class="leader-a">Alcaraz</span></td></tr>
+        <tr><td>Indoor Hard</td><td class="sv" id="t-s-indoor-wl">91–21</td><td class="av" id="t-a-indoor-wl">35–15</td><td class="sv" id="t-s-indoor-pct-ov">81.3%</td><td class="av" id="t-a-indoor-pct-ov">70.0%</td><td><span class="leader-s">Sinner</span></td></tr>
       </table>
     </div>
     <div class="surface-content" id="surf-hard">
@@ -913,6 +913,21 @@ document.addEventListener('DOMContentLoaded', function() {
         <p style="font-size:11px;color:var(--text-dim);margin-top:12px">Sinner beat Alcaraz in the 2025 Wimbledon final and 2022 R16.</p>
       </div>
     </div>
+
+    <!-- Explore More Comparisons -->
+    <div style="margin-top:48px;padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px">
+      <div style="font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px">Explore More Comparisons</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="/sinner-vs-alcaraz-head-to-head/" class="link-pill">Full H2H Record</a>
+        <a href="/sinner-vs-alcaraz-serve-stats/" class="link-pill">Serve Stats</a>
+        <a href="/sinner-vs-alcaraz-return-stats/" class="link-pill">Return Stats</a>
+        <a href="/sinner-vs-alcaraz-clutch-stats/" class="link-pill">Under Pressure</a>
+        <a href="/sinner-vs-alcaraz-grand-slams/" class="link-pill">Grand Slams</a>
+        <a href="/sinner-vs-alcaraz-win-percentage/" class="link-pill">Win Percentage</a>
+        <a href="/who-is-better-sinner-or-alcaraz/" class="link-pill">Who Is Better?</a>
+        <a href="/sinner-vs-alcaraz-rivalry-analysis/" class="link-pill">Rivalry Analysis</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -923,7 +938,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <p id="h2h-intro" style="color:var(--text-dim);margin-bottom:32px;font-size:14px">All meetings between Sinner and Alcaraz · <span style="color:var(--alcaraz)">Alcaraz leads H2H</span></p>
 
     <div class="filter-row">
-      <button class="filter-btn active" onclick="filterMatches('all',this)">All (16)</button>
+      <button class="filter-btn active" onclick="filterMatches('all',this)">All (17)</button>
       <button class="filter-btn" onclick="filterMatches('hard',this)">Hard (10)</button>
       <button class="filter-btn" onclick="filterMatches('clay',this)">Clay (4)</button>
       <button class="filter-btn" onclick="filterMatches('grass',this)">Grass (2)</button>
@@ -937,7 +952,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:center">
         <div><div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">H2H Overall</div>
           <div style="display:flex;justify-content:center;align-items:center;gap:12px">
-            <span id="h2h-bar-s" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--sinner)">6</span>
+            <span id="h2h-bar-s" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--sinner)">7</span>
             <span style="color:var(--text-dim)">–</span>
             <span id="h2h-bar-a" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--alcaraz)">10</span>
           </div></div>
@@ -950,9 +965,9 @@ document.addEventListener('DOMContentLoaded', function() {
           <div style="font-size:11px;color:var(--gold)">★ Perfectly tied (through end of 2025)!</div></div>
         <div><div style="font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Sets Won H2H</div>
           <div style="display:flex;justify-content:center;align-items:center;gap:12px">
-            <span id="h2h-sets-s" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--sinner)">28</span>
+            <span id="h2h-sets-s" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--sinner)">26</span>
             <span style="color:var(--text-dim)">–</span>
-            <span id="h2h-sets-a" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--alcaraz)">30</span>
+            <span id="h2h-sets-a" style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--alcaraz)">25</span>
           </div></div>
       </div>
     </div>
@@ -995,7 +1010,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <tr><td>% 1st Serve Pts Won</td><td class="sv" id="sv-s-1st-won" win>77%</td><td class="av" id="sv-a-1st-won">76%</td><td><span class="leader-s">Sinner</span></td></tr>
           <tr><td>% 2nd Serve Pts Won</td><td class="sv" id="sv-s-2nd-won" win>58%</td><td class="av" id="sv-a-2nd-won">55%</td><td><span class="leader-s">Sinner</span></td></tr>
           <tr><td>% Service Games Won</td><td class="sv" id="sv-s-games-won" win>84%</td><td class="av" id="sv-a-games-won">82%</td><td><span class="leader-s">Sinner</span></td></tr>
-          <tr><td>Avg. Aces / Match</td><td class="sv">4.2</td><td class="av" win>5.8</td><td><span class="leader-a">Alcaraz</span></td></tr>
+          <tr><td>Avg. Aces / Match</td><td class="sv" id="sv-s-aces" win>5.9</td><td class="av" id="sv-a-aces">4.3</td><td><span class="leader-s">Sinner</span></td></tr>
           <tr><td>Avg. Double Faults / Match</td><td class="sv" id="sv-s-df" win>1.8</td><td class="av" id="sv-a-df">3.1</td><td><span class="leader-s">Sinner</span></td></tr>
           <tr><td>% Break Points Saved</td><td class="sv" id="pr-s-bp-saved" win>65%</td><td class="av" id="pr-a-bp-saved">62%</td><td><span class="leader-s">Sinner</span></td></tr>
           <tr><td>Serve Rating (ATP)</td><td class="sv" id="sv-s-rating" win>260</td><td class="av" id="sv-a-rating">253</td><td><span class="leader-s">Sinner</span></td></tr>
@@ -1019,9 +1034,23 @@ document.addEventListener('DOMContentLoaded', function() {
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px;margin-top:32px">
       <div class="section-title">Serve Verdict</div>
       <p style="color:var(--text-dim);font-size:14px;line-height:1.8">
-        <strong style="color:var(--sinner)">Sinner edges the serve battle</strong> in efficiency and consistency — higher % 1st serve in, fewer double faults, and better break point saving. 
-        <strong style="color:var(--alcaraz)">Alcaraz</strong> has the bigger, more explosive serve with more aces per match, but a higher double fault rate. Two very different serve profiles.
+        <strong style="color:var(--sinner)">Sinner edges the serve battle</strong> in efficiency and consistency — fewer double faults, better break point saving, and higher service points won.
+        <strong style="color:var(--alcaraz)">Alcaraz</strong> hits a higher first serve % in and has an explosive serve with more winner potential. Two very different serve profiles.
       </p>
+    </div>
+
+    <!-- Explore More Comparisons -->
+    <div style="margin-top:32px;padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px">
+      <div style="font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px">Explore More Comparisons</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="/sinner-vs-alcaraz-return-stats/" class="link-pill">Return Stats</a>
+        <a href="/sinner-vs-alcaraz-clutch-stats/" class="link-pill">Under Pressure</a>
+        <a href="/sinner-vs-alcaraz-break-point-conversion/" class="link-pill">Break Points</a>
+        <a href="/sinner-vs-alcaraz-aces-double-faults/" class="link-pill">Aces & Double Faults</a>
+        <a href="/sinner-vs-alcaraz-head-to-head/" class="link-pill">H2H Matches</a>
+        <a href="/sinner-vs-alcaraz-win-percentage/" class="link-pill">Win Percentage</a>
+        <a href="/who-is-better-sinner-or-alcaraz/" class="link-pill">Who Is Better?</a>
+      </div>
     </div>
   </div>
 </div>
@@ -1049,8 +1078,22 @@ document.addEventListener('DOMContentLoaded', function() {
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px;margin-top:32px">
       <div class="section-title">Return Verdict</div>
       <p style="color:var(--text-dim);font-size:14px;line-height:1.8">
-        <strong style="color:var(--sinner)">Sinner is an elite returner</strong> — he leads Alcaraz in return games won %, 1st and 2nd serve return points won, and total points won overall. Alcaraz's athleticism and spin neutralization make him dangerous on clay returns. This return edge is one of Sinner's most decisive advantages in the rivalry.
+        <strong style="color:var(--sinner)">Sinner</strong> and <strong style="color:var(--alcaraz)">Alcaraz</strong> are closely matched on return. Sinner edges 2nd serve return points won and break points converted; Alcaraz leads in 1st serve return points won and return games won %. Both are elite returners — one of the defining features of this rivalry.
       </p>
+    </div>
+
+    <!-- Explore More Comparisons -->
+    <div style="margin-top:32px;padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px">
+      <div style="font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px">Explore More Comparisons</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="/sinner-vs-alcaraz-serve-stats/" class="link-pill">Serve Stats</a>
+        <a href="/sinner-vs-alcaraz-clutch-stats/" class="link-pill">Under Pressure</a>
+        <a href="/sinner-vs-alcaraz-break-point-conversion/" class="link-pill">Break Points</a>
+        <a href="/sinner-vs-alcaraz-head-to-head/" class="link-pill">H2H Matches</a>
+        <a href="/sinner-vs-alcaraz-hard-court-stats/" class="link-pill">Hard Court Stats</a>
+        <a href="/sinner-vs-alcaraz-clay-stats/" class="link-pill">Clay Stats</a>
+        <a href="/who-is-better-sinner-or-alcaraz/" class="link-pill">Who Is Better?</a>
+      </div>
     </div>
   </div>
 </div>
@@ -1093,6 +1136,21 @@ document.addEventListener('DOMContentLoaded', function() {
           <tr><td>Left-Handed Opponents</td><td class="sv" id="t-s-lefthanded">62%</td><td class="av" id="t-a-lefthanded" win>68%</td><td><span class="leader-a">Alcaraz</span></td></tr>
           <tr><td>Tiebreak Sets</td><td class="sv win">65%</td><td class="av">57%</td><td><span class="leader-s">Sinner</span></td></tr>
         </table>
+      </div>
+    </div>
+
+    <!-- Explore More Comparisons -->
+    <div style="margin-top:32px;padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px">
+      <div style="font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px">Explore More Comparisons</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="/sinner-vs-alcaraz-clutch-stats/" class="link-pill">Clutch Stats Deep Dive</a>
+        <a href="/sinner-vs-alcaraz-tiebreak-record/" class="link-pill">Tiebreak Record</a>
+        <a href="/sinner-vs-alcaraz-five-set-record/" class="link-pill">5-Set Record</a>
+        <a href="/sinner-vs-alcaraz-break-points/" class="link-pill">Break Points</a>
+        <a href="/sinner-vs-alcaraz-serve-stats/" class="link-pill">Serve Stats</a>
+        <a href="/sinner-vs-alcaraz-return-stats/" class="link-pill">Return Stats</a>
+        <a href="/sinner-vs-alcaraz-finals-record/" class="link-pill">Finals Record</a>
+        <a href="/who-is-better-sinner-or-alcaraz/" class="link-pill">Who Is Better?</a>
       </div>
     </div>
   </div>
@@ -1210,6 +1268,20 @@ document.addEventListener('DOMContentLoaded', function() {
         </table>
       </div>
     </div>
+
+    <!-- Explore More Comparisons -->
+    <div style="margin-top:32px;padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px">
+      <div style="font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px">Explore More Comparisons</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="/sinner-vs-alcaraz-grand-slam-finals/" class="link-pill">Grand Slam Finals</a>
+        <a href="/sinner-vs-alcaraz-roland-garros-stats/" class="link-pill">Roland Garros Stats</a>
+        <a href="/sinner-vs-alcaraz-wimbledon-record/" class="link-pill">Wimbledon Record</a>
+        <a href="/sinner-vs-alcaraz-us-open-stats/" class="link-pill">US Open Stats</a>
+        <a href="/sinner-vs-alcaraz-head-to-head/" class="link-pill">H2H Matches</a>
+        <a href="/sinner-vs-alcaraz-career-titles/" class="link-pill">Career Titles</a>
+        <a href="/who-is-better-sinner-or-alcaraz/" class="link-pill">Who Is Better?</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1224,6 +1296,20 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="section-title" style="margin-top:48px">Trivia & Fun Facts</div>
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:16px;overflow:hidden">
       <div id="triviaList"></div>
+    </div>
+
+    <!-- Explore More Comparisons -->
+    <div style="margin-top:32px;padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px">
+      <div style="font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px">Explore More Comparisons</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="/sinner-vs-alcaraz-grand-slams/" class="link-pill">Grand Slams</a>
+        <a href="/sinner-vs-alcaraz-career-titles/" class="link-pill">Career Titles</a>
+        <a href="/sinner-vs-alcaraz-finals-record/" class="link-pill">Finals Record</a>
+        <a href="/sinner-vs-alcaraz-prize-money/" class="link-pill">Prize Money</a>
+        <a href="/sinner-vs-alcaraz-ranking-history/" class="link-pill">Ranking History</a>
+        <a href="/sinner-vs-alcaraz-head-to-head/" class="link-pill">H2H Matches</a>
+        <a href="/who-is-better-sinner-or-alcaraz/" class="link-pill">Who Is Better?</a>
+      </div>
     </div>
   </div>
 </div>
@@ -1289,6 +1375,20 @@ document.addEventListener('DOMContentLoaded', function() {
         <tr><td>Hubert Hurkacz</td><td class="highlight-s">6–1 (86%)</td><td>3–1 (75%)</td></tr>
       </table>
     </div>
+    </div>
+
+    <!-- Explore More Comparisons -->
+    <div style="margin-top:32px;padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px">
+      <div style="font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px">Explore More Comparisons</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="/sinner-vs-alcaraz-grand-slams/" class="link-pill">Grand Slams Comparison</a>
+        <a href="/sinner-vs-alcaraz-career-titles/" class="link-pill">Career Titles</a>
+        <a href="/sinner-vs-alcaraz-ranking-history/" class="link-pill">Ranking History</a>
+        <a href="/sinner-vs-alcaraz-prize-money/" class="link-pill">Prize Money</a>
+        <a href="/sinner-vs-alcaraz-head-to-head/" class="link-pill">H2H Matches</a>
+        <a href="/sinner-vs-alcaraz-2026-stats/" class="link-pill">2026 Season Stats</a>
+        <a href="/who-is-better-sinner-or-alcaraz/" class="link-pill">Who Is Better?</a>
+      </div>
     </div>
   </div>
 </div>
@@ -1431,6 +1531,20 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </div>
 
+    <!-- Explore More Comparisons -->
+    <div style="margin-top:32px;padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px">
+      <div style="font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px">Explore More Comparisons</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="/sinner-vs-alcaraz-head-to-head/" class="link-pill">Full H2H Breakdown</a>
+        <a href="/sinner-vs-alcaraz-grand-slams/" class="link-pill">Grand Slams</a>
+        <a href="/sinner-vs-alcaraz-serve-stats/" class="link-pill">Serve Stats</a>
+        <a href="/sinner-vs-alcaraz-return-stats/" class="link-pill">Return Stats</a>
+        <a href="/sinner-vs-alcaraz-clutch-stats/" class="link-pill">Clutch Stats</a>
+        <a href="/sinner-vs-alcaraz-rivalry-analysis/" class="link-pill">Rivalry Analysis</a>
+        <a href="/why-is-sinner-better-than-alcaraz/" class="link-pill">Why Sinner Is Better</a>
+        <a href="/why-is-alcaraz-better-than-sinner/" class="link-pill">Why Alcaraz Is Better</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1603,6 +1717,20 @@ document.addEventListener('DOMContentLoaded', function() {
       <p style="font-size:13px;color:var(--text-dim);margin-top:16px;line-height:1.8">Sinner holds a slim lead in total weeks at World No. 1, but Alcaraz is set to match Sinner's 66-week milestone in April 2026. Alcaraz has held the #1 ranking more recently (since September 2025) while Sinner held it from June 2024 to September 2025.</p>
     </div>
 
+    <!-- Explore More Comparisons -->
+    <div style="margin-top:32px;padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:12px">
+      <div style="font-size:11px;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px">Explore More Comparisons</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="/sinner-vs-alcaraz-clutch-stats/" class="link-pill">Clutch Stats Deep Dive</a>
+        <a href="/sinner-vs-alcaraz-tiebreak-record/" class="link-pill">Tiebreak Record</a>
+        <a href="/sinner-vs-alcaraz-career-titles/" class="link-pill">Career Titles</a>
+        <a href="/sinner-vs-alcaraz-ranking-history/" class="link-pill">Ranking History</a>
+        <a href="/sinner-vs-alcaraz-grand-slams/" class="link-pill">Grand Slams</a>
+        <a href="/sinner-vs-alcaraz-head-to-head/" class="link-pill">H2H Matches</a>
+        <a href="/who-is-better-sinner-or-alcaraz/" class="link-pill">Who Is Better?</a>
+        <a href="/sinner-vs-alcaraz-2026-stats/" class="link-pill">2026 Season</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1818,14 +1946,63 @@ function renderExpert(){
 // NAV & PAGE SWITCHING
 // ============================================================
 
+const PAGE_SLUGS = {
+  'home': '/',
+  'h2h': '/h2h/',
+  'serve': '/serve-stats/',
+  'return': '/return-stats/',
+  'pressure': '/under-pressure/',
+  'slams': '/grand-slams/',
+  'records': '/records/',
+  'legends': '/vs-legends/',
+  'expert': '/who-is-better/',
+  'insights': '/insights/'
+};
+const SLUG_TO_PAGE = Object.fromEntries(Object.entries(PAGE_SLUGS).map(([k,v])=>[v,k]));
+
 function showPage(id, el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
   const page = document.getElementById('page-'+id);
   if(page) page.classList.add('active');
   if(el) el.classList.add('active');
+  else {
+    // Activate matching nav tab when called programmatically (e.g. from URL)
+    document.querySelectorAll('.nav-tab').forEach(function(t){
+      if((t.getAttribute('onclick')||'').indexOf("'"+id+"'")!==-1) t.classList.add('active');
+    });
+  }
+  // Update URL without reload
+  const slug = PAGE_SLUGS[id] || '/';
+  if(window.history && window.history.pushState) {
+    if(id === 'home') {
+      window.history.pushState({page:id}, '', '/');
+    } else {
+      window.history.pushState({page:id}, '', slug);
+    }
+  }
+  // Update canonical link
+  var canonical = document.querySelector('link[rel="canonical"]');
+  if(canonical) canonical.href = 'https://sincaraz.app' + (id === 'home' ? '' : slug);
   window.scrollTo(0,0);
 }
+
+// Restore page from URL on load
+(function(){
+  function pageFromPath() {
+    var path = window.location.pathname.replace(/\/+$/,'') + '/';
+    if(path === '//') path = '/';
+    return SLUG_TO_PAGE[path] || SLUG_TO_PAGE[window.location.pathname] || 'home';
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    var pg = pageFromPath();
+    if(pg !== 'home') showPage(pg);
+  });
+  window.addEventListener('popstate', function(e){
+    var pg = (e.state && e.state.page) || pageFromPath();
+    showPage(pg);
+  });
+})();
 
 function showSurface(s, el){
   document.querySelectorAll('.surface-content').forEach(c=>c.classList.remove('active'));
@@ -2006,6 +2183,11 @@ function applyStats(data) {
   set('t-a-clay-pct', wlPct(AV.on_clay_wl));
   set('t-s-grass-pct2', wlPct(SV.on_grass_wl));
   set('t-a-grass-pct2', wlPct(AV.on_grass_wl));
+  // Overview surface table pct cells (separate IDs from surf-grass table)
+  set('t-s-grass-pct-ov', wlPct(SV.on_grass_wl));
+  set('t-a-grass-pct-ov', wlPct(AV.on_grass_wl));
+  set('t-s-indoor-pct-ov', wlPct(SV.indoor_wl));
+  set('t-a-indoor-pct-ov', wlPct(AV.indoor_wl));
 
   // Per-slam wins
   set('t-s-ao', SX.gs_ao);       set('t-a-ao', AX.gs_ao);
@@ -2275,35 +2457,44 @@ function parseStatValue(raw) {
   if (raw == null) return null;
   var s = String(raw).trim();
   if (!s || s === '—' || s === '-') return null;
-  // Grab first numeric run (handles $, %, +, commas, ranges)
-  var m = s.replace(/,/g,'').match(/-?\d+\.?\d*/);
-  if (!m) return null;
-  var n = parseFloat(m[0]);
-  // Win/Loss record "345–88" → compute win%
-  var wl = s.replace(/,/g,'').match(/(\d+)\s*[–-]\s*(\d+)/);
+  // Win/Loss record "345–88" or "345-88" → compute win% (check this FIRST)
+  var wl = s.replace(/,/g,'').match(/(\d+)\s*[–\-]\s*(\d+)/);
   if (wl) {
     var w = +wl[1], l = +wl[2];
-    if (w + l > 0) return (w / (w + l)) * 100;
+    // Only treat as W/L if both parts look like match counts (< 4 digits each)
+    if (w + l > 0 && wl[1].length <= 4 && wl[2].length <= 4) return (w / (w + l)) * 100;
   }
-  return n;
+  // Grab first numeric run (handles $, %, +, commas)
+  var m = s.replace(/,/g,'').match(/-?\d+\.?\d*/);
+  if (!m) return null;
+  return parseFloat(m[0]);
 }
 
-// Rows where lower value wins (double faults, losses, age)
-var EDGE_LOWER_IS_BETTER = ['double fault','dfs','df /','df/','losses'];
-// Rows where we show "Similar" (small delta in a noisy metric)
-var EDGE_SIMILAR_ROWS = ['career win/loss','finals record'];
+// Rows where lower value wins (double faults)
+var EDGE_LOWER_IS_BETTER = ['double fault','dfs','df /','df/','avg. double'];
+// Rows to skip edge computation (no meaningful comparison)
+var EDGE_SKIP_ROWS = ['born','height','weight','plays','backhand','turned pro','coach','notable','duration'];
 
 function computeEdges() {
   document.querySelectorAll('table.stats-table tr').forEach(function(tr) {
     var tds = tr.querySelectorAll('td');
     if (tds.length < 3) return;
+    // Edge cell must be last and NOT have class sv/av (it's a dedicated edge column)
+    var edgeCell = tds[tds.length - 1];
+    if (edgeCell.classList.contains('sv') || edgeCell.classList.contains('av')) return;
+    // Require a dedicated edge column header in the table
+    var table = tr.closest('table');
+    var hasEdgeHeader = table && table.querySelector('th:last-child') &&
+      /edge|advantage/i.test(table.querySelector('th:last-child').textContent);
+    if (!hasEdgeHeader) return;
+
     var sv = tr.querySelector('td.sv');
     var av = tr.querySelector('td.av');
     if (!sv || !av) return;
-    var edgeCell = tds[tds.length - 1];
-    // Skip if the edge cell isn't distinct (some rows only have sv/av)
-    if (edgeCell === sv || edgeCell === av) return;
     var label = (tds[0].textContent || '').trim().toLowerCase();
+    // Skip non-comparable rows
+    if (EDGE_SKIP_ROWS.some(function(k){ return label.indexOf(k) !== -1; })) return;
+
     var sNum = parseStatValue(sv.textContent);
     var aNum = parseStatValue(av.textContent);
     if (sNum == null || aNum == null) return;
@@ -2312,14 +2503,9 @@ function computeEdges() {
     var sScore = reverse ? -sNum : sNum;
     var aScore = reverse ? -aNum : aNum;
 
-    var diff = Math.abs(sScore - aScore);
-    var forceSimilar = EDGE_SIMILAR_ROWS.some(function(k){ return label === k || label.indexOf(k) !== -1; }) && diff < 3;
-
     var html;
-    if (sScore === aScore) {
+    if (Math.abs(sScore - aScore) < 0.001) {
       html = '<span style="color:var(--gold);font-size:11px">Tied ≈</span>';
-    } else if (forceSimilar) {
-      html = '<span style="color:var(--text-dim);font-size:11px">Similar</span>';
     } else if (sScore > aScore) {
       html = '<span class="leader-s">Sinner</span>';
     } else {
@@ -2327,7 +2513,7 @@ function computeEdges() {
     }
     edgeCell.innerHTML = html;
 
-    // Also toggle "win" marker bold on leader cell
+    // Toggle "win" class on the leading value cell
     sv.classList.remove('win');
     av.classList.remove('win');
     if (sScore > aScore) sv.classList.add('win');
