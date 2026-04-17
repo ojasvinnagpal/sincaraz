@@ -28,6 +28,11 @@
   [headers.values]
     Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
 
+[[headers]]
+  for = "/all-stats/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
 # Main page: short cache (updates daily)
 [[headers]]
   for = "/"

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tab Test</title>
+<style>
+.page{display:none;min-height:100px;padding:20px;background:#111;color:#fff;margin:10px}
+.page.active{display:block}
+.nav-tab{padding:10px 20px;cursor:pointer;background:#333;color:#aaa;border:none;margin:2px}
+.nav-tab.active{background:#fff;color:#000}
+</style>
+</head>
+<body style="background:#000;font-family:sans-serif">
+<nav style="padding:10px">
+  <button class="nav-tab active" onclick="showPage('home',this)">Home</button>
+  <button class="nav-tab" onclick="showPage('h2h',this)">H2H</button>
+  <button class="nav-tab" onclick="showPage('serve',this)">Serve</button>
+  <button class="nav-tab" onclick="showPage('return',this)">Return</button>
+  <button class="nav-tab" onclick="showPage('pressure',this)">Pressure</button>
+</nav>
+
+<div class="page active" id="page-home"><h2>HOME - Working!</h2></div>
+<div class="page" id="page-h2h"><h2>H2H - Working!</h2></div>
+<div class="page" id="page-serve"><h2>SERVE - Working!</h2></div>
+<div class="page" id="page-return"><h2>RETURN - Working!</h2></div>
+<div class="page" id="page-pressure"><h2>PRESSURE - Working!</h2></div>
+
+<script>
+function showPage(id, el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  var page = document.getElementById('page-'+id);
+  if(page) page.classList.add('active');
+  if(el) el.classList.add('active');
+}
+</script>
+</body>
+</html>

@@ -287,23 +287,33 @@ PAGE_CSS = """
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
        background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
-  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
   .bebas{font-family:'Bebas Neue',Impact,sans-serif;letter-spacing:.04em}
   a{color:var(--sinner);text-decoration:none}
   a:hover{text-decoration:underline}
   .wrap{max-width:860px;margin:0 auto;padding:0 20px}
-  header{border-bottom:1px solid var(--border);padding:16px 0;background:rgba(7,8,15,0.97)}
-  .header-inner{max-width:860px;margin:0 auto;padding:0 20px}
-  header .logo{font-size:22px;font-weight:700;color:var(--text)}
-  header .logo span.s{color:var(--sinner)}
-  header .logo span.a{color:var(--alcaraz)}
-  header nav{display:flex;gap:20px;margin-top:8px;font-size:13px;color:var(--text-dim)}
-  header nav a{color:var(--text-dim)}
-  header nav a:hover{color:var(--text);text-decoration:none}
-  .breadcrumb{font-size:12px;color:var(--text-dim);margin-bottom:24px;padding:10px 0}
-  .breadcrumb a{color:var(--text-dim)}
+  /* UNIFIED HEADER — matches main SPA nav */
+  header{position:sticky;top:0;z-index:100;background:rgba(7,8,15,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+  .nav-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;padding:0 24px;overflow-x:auto;gap:0}
+  .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.1em;padding:14px 24px 14px 0;color:#fff;white-space:nowrap;border-right:1px solid var(--border);margin-right:8px;text-decoration:none}
+  .nav-logo:hover{text-decoration:none}
+  .nav-logo .s{color:var(--sinner);font-size:22px}
+  .nav-logo .a{color:var(--alcaraz);font-size:22px}
+  .nav-tabs{display:flex;gap:0}
+  .nav-tab{padding:14px 18px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;color:var(--text-dim);border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;text-decoration:none;font-family:inherit}
+  .nav-tab:hover{color:var(--text);text-decoration:none}
+  .nav-tab.active{color:#fff;border-bottom-color:#fff}
+  /* UNIFIED BREADCRUMB */
+  .breadcrumb-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:8px 24px}
+  .breadcrumb-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-dim);flex-wrap:wrap}
+  .breadcrumb-inner a{color:var(--text-dim);text-decoration:none}
+  .breadcrumb-inner a:hover{color:var(--text);text-decoration:none}
+  .breadcrumb-sep{color:var(--text-dim);opacity:.4}
+  main.wrap{padding-top:32px;padding-bottom:40px}
+  /* Legacy inline breadcrumb (in-body) — same visual as bar */
+  .breadcrumb{font-size:12px;color:var(--text-dim);margin-bottom:20px}
+  .breadcrumb a{color:var(--text-dim);text-decoration:none}
   .breadcrumb a:hover{color:var(--text);text-decoration:none}
-  main.wrap{padding-top:32px}
   h1{font-size:clamp(26px,5vw,42px);line-height:1.2;margin-bottom:16px;font-weight:800}
   h2{font-size:20px;font-weight:700;margin:32px 0 16px;color:var(--text)}
   .badge{display:inline-block;padding:4px 12px;border-radius:20px;
@@ -352,36 +362,93 @@ PAGE_CSS = """
 
 # ─── Template helpers ─────────────────────────────────────────────────────────
 
-def page_header():
-    return """<header>
-  <div class="header-inner">
-    <div class="logo"><a href="/" style="color:inherit;text-decoration:none">
-      <span class="s">SIN</span><span class="a">CAR</span>AZ
-    </a></div>
-    <nav>
-      <a href="/">Overview</a>
-      <a href="/matches/">H2H Matches</a>
-      <a href="/surface/clay/">Clay</a>
-      <a href="/surface/hard/">Hard</a>
-      <a href="/surface/grass/">Grass</a>
-      <a href="/sinner-vs-alcaraz-head-to-head/">H2H Stats</a>
-    </nav>
+# ─── Unified nav config — single source of truth across the site ──────────────
+NAV_ITEMS = [
+    ("/",                 "Overview"),
+    ("/h2h/",              "H2H Matches"),
+    ("/serve-stats/",      "Serve Stats"),
+    ("/return-stats/",     "Return Stats"),
+    ("/under-pressure/",   "Under Pressure"),
+    ("/grand-slams/",      "Grand Slams"),
+    ("/records/",          "Records"),
+    ("/vs-legends/",       "vs Legends"),
+    ("/who-is-better/",    "Who's Better?"),
+    ("/all-stats/",        "All Stats"),
+]
+
+
+def page_header(active_path=None):
+    """Unified sticky nav — identical markup on every non-SPA page.
+    active_path: highlight the tab whose href matches (e.g. '/h2h/')."""
+    tabs = ""
+    for href, label in NAV_ITEMS:
+        cls = "nav-tab active" if active_path == href else "nav-tab"
+        tabs += f'<a class="{cls}" href="{href}">{label}</a>'
+    return f"""<header>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/"><span class="s">SIN</span>CARAZ<span class="a"> ✦</span></a>
+    <div class="nav-tabs">{tabs}</div>
   </div>
 </header>"""
 
 
+def breadcrumb(trail):
+    """trail: list of (href_or_None, label). Emits HTML + JSON-LD BreadcrumbList.
+    None href means current page (no link)."""
+    items_html = []
+    for i, (href, label) in enumerate(trail):
+        if i > 0:
+            items_html.append('<span class="breadcrumb-sep">›</span>')
+        if href:
+            items_html.append(f'<a href="{href}">{label}</a>')
+        else:
+            items_html.append(f'<span>{label}</span>')
+    bar = f"""<nav class="breadcrumb-bar" aria-label="Breadcrumb">
+  <div class="breadcrumb-inner">{''.join(items_html)}</div>
+</nav>"""
+    jsonld = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": i + 1, "name": label,
+             "item": f"{BASE_URL}{href}" if href else f"{BASE_URL}{trail[-1][0] or '/'}"}
+            for i, (href, label) in enumerate(trail)
+        ],
+    }
+    return bar, jsonld
+
+
 def page_footer():
     return """<footer>
-  <div class="header-inner" style="text-align:center">
-    <p><strong>SINCARAZ</strong> — The Definitive Sinner vs Alcaraz Rivalry Tracker</p>
-    <p style="margin-top:8px">Stats updated daily · Not affiliated with ATP Tour or any player</p>
-    <p style="margin-top:8px"><a href="/">sincaraz.app</a></p>
+  <div class="nav-inner" style="flex-direction:column;text-align:center;padding:32px 24px;gap:16px">
+    <div><strong>SINCARAZ</strong> — The Definitive Sinner vs Alcaraz Rivalry Tracker</div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center;font-size:12px">
+      <a href="/">Overview</a>
+      <a href="/h2h/">H2H</a>
+      <a href="/all-stats/">All Stats</a>
+      <a href="/matches/">Match Archive</a>
+      <a href="/surface/clay/">Clay</a>
+      <a href="/surface/hard/">Hard</a>
+      <a href="/surface/grass/">Grass</a>
+    </div>
+    <div style="font-size:11px">Stats updated daily · Not affiliated with ATP Tour or any player</div>
   </div>
 </footer>"""
 
 
-def html_page(title, description, canonical, body, schema=None):
-    schema_block = f'<script type="application/ld+json">{json.dumps(schema, indent=2)}</script>' if schema else ""
+def html_page(title, description, canonical, body, schema=None, active_path=None, crumbs=None):
+    """Render a full HTML page with the unified header, breadcrumb, and footer.
+    crumbs: optional list of (href, label) tuples for breadcrumb trail."""
+    schemas = []
+    if schema:
+        schemas.append(schema if isinstance(schema, dict) else schema)
+    crumb_html = ""
+    if crumbs:
+        crumb_html, crumb_schema = breadcrumb(crumbs)
+        schemas.append(crumb_schema)
+    schema_blocks = "\n".join(
+        f'<script type="application/ld+json">{json.dumps(s, indent=2)}</script>' for s in schemas
+    )
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -400,11 +467,12 @@ def html_page(title, description, canonical, body, schema=None):
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{title}">
 <meta name="twitter:description" content="{description}">
-{schema_block}
+{schema_blocks}
 <style>{PAGE_CSS}</style>
 </head>
 <body>
-{page_header()}
+{page_header(active_path)}
+{crumb_html}
 <main class="wrap">
 {body}
 </main>
@@ -3027,12 +3095,119 @@ def generate_topic_pages():
     return slugs
 
 
+# ─── All Stats hub page — SEO sitemap / site index ────────────────────────────
+
+def generate_all_stats_page(topic_slugs, all_matches):
+    """Central index page linking to every stat, comparison, match and surface page.
+    Ensures every page is reachable within 2 clicks from home (home → /all-stats/ → page)."""
+
+    def _link(href, label, sub=None):
+        extra = f'<div style="font-size:11px;color:var(--text-dim);margin-top:2px">{sub}</div>' if sub else ""
+        return f'<a href="{href}" style="display:block;padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;color:var(--text);text-decoration:none;transition:border-color .2s,background .2s"><div style="font-weight:600;font-size:14px">{label}</div>{extra}</a>'
+
+    # Human-readable labels for topic slugs
+    TOPIC_LABELS = {
+        "sinner-vs-alcaraz-head-to-head":       ("Head-to-Head Record",       "Full H2H breakdown, all 17 matches"),
+        "sinner-vs-alcaraz-serve-stats":        ("Serve Stats",               "Aces, 1st-serve %, hold rates"),
+        "sinner-vs-alcaraz-return-stats":       ("Return Stats",              "Break points, return games won"),
+        "sinner-vs-alcaraz-clutch-stats":       ("Clutch Stats",              "Deciding sets, tiebreaks, comebacks"),
+        "sinner-vs-alcaraz-tiebreak-record":    ("Tiebreak Record",           "Career tiebreak win %"),
+        "sinner-vs-alcaraz-grand-slams":        ("Grand Slams",               "Major titles by event"),
+        "sinner-vs-alcaraz-grand-slam-finals":  ("Grand Slam Finals",         "Major finals head-to-head"),
+        "sinner-vs-alcaraz-roland-garros-stats":("Roland Garros Stats",       "Clay Slam record"),
+        "sinner-vs-alcaraz-wimbledon-record":   ("Wimbledon Record",          "Grass Slam record"),
+        "sinner-vs-alcaraz-us-open-stats":      ("US Open Stats",             "US hard-court Slam"),
+        "sinner-vs-alcaraz-clay-stats":         ("Clay Stats",                "Full clay-court comparison"),
+        "sinner-vs-alcaraz-hard-court-stats":   ("Hard Court Stats",          "Full hard-court comparison"),
+        "sinner-vs-alcaraz-grass-record":       ("Grass Record",              "Full grass-court comparison"),
+        "sinner-vs-alcaraz-career-titles":      ("Career Titles",             "ATP titles by category"),
+        "sinner-vs-alcaraz-prize-money":        ("Prize Money",               "Career earnings"),
+        "sinner-vs-alcaraz-ranking-history":    ("Ranking History",           "World No. 1 timeline"),
+        "sinner-vs-alcaraz-break-points":       ("Break Points",              "BP saved & converted"),
+        "sinner-vs-alcaraz-break-point-conversion":("Break Point Conversion", "BP conversion rate deep-dive"),
+        "sinner-vs-alcaraz-aces-double-faults": ("Aces & Double Faults",      "Serving accuracy"),
+        "sinner-vs-alcaraz-five-set-record":    ("Five-Set Record",           "Long-match endurance"),
+        "sinner-vs-alcaraz-finals-record":      ("Finals Record",             "All ATP finals"),
+        "sinner-vs-alcaraz-semi-finals-record": ("Semi-Finals Record",        "SF performance"),
+        "sinner-vs-alcaraz-last-5-matches":     ("Last 5 Matches",            "Recent form"),
+        "sinner-vs-alcaraz-2026-stats":         ("2026 Season",               "Current-year stats"),
+        "sinner-vs-alcaraz-win-percentage":     ("Win Percentage",            "Career W% comparison"),
+        "sinner-vs-alcaraz-rivalry-analysis":   ("Rivalry Analysis",          "Long-form narrative"),
+        "who-is-better-sinner-or-alcaraz":      ("Who Is Better?",            "The verdict"),
+        "why-is-sinner-better-than-alcaraz":    ("Why Sinner Is Better",      "The Sinner case"),
+        "why-is-alcaraz-better-than-sinner":    ("Why Alcaraz Is Better",     "The Alcaraz case"),
+    }
+
+    def _section(heading, links):
+        link_html = "\n".join(links)
+        return f"""<h2 style="margin-top:40px">{heading}</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px">
+{link_html}
+</div>"""
+
+    # Category groupings
+    spa_links = [
+        _link("/",                "Overview",        "Homepage — live H2H, quick stats"),
+        _link("/h2h/",            "H2H Matches",     "Interactive match list"),
+        _link("/serve-stats/",    "Serve Stats",     "Serve-side comparison"),
+        _link("/return-stats/",   "Return Stats",    "Return-side comparison"),
+        _link("/under-pressure/", "Under Pressure",  "Clutch Score™"),
+        _link("/grand-slams/",    "Grand Slams",     "Slams overview"),
+        _link("/records/",        "Records",         "Records & trivia"),
+        _link("/vs-legends/",     "vs Legends",      "Compared to greats of the game"),
+        _link("/who-is-better/",  "Who's Better?",   "The expert verdict"),
+    ]
+
+    stat_links = []
+    for slug in topic_slugs:
+        label, sub = TOPIC_LABELS.get(slug, (slug.replace("-", " ").title(), None))
+        stat_links.append(_link(f"/{slug}/", label, sub))
+
+    surface_links = [
+        _link(f"/surface/{s}/", f"{info['label']} H2H",
+              f"{len([m for m in all_matches if m['surface']==s])} matches on {info['label'].lower()}")
+        for s, info in SURFACE_INFO.items()
+    ]
+    surface_links.append(_link("/matches/", "Full Match Archive",
+                               f"All {len(all_matches)} H2H matches"))
+
+    match_links = [
+        _link(f"/matches/{m['slug']}/",
+              f"{m['event']} {m['year']} {m['round']}",
+              f"{m['date']} · {'Sinner' if m['winner']=='sinner' else 'Alcaraz'} {m['score']}")
+        for m in all_matches
+    ]
+
+    body = f"""<h1>All Stats &amp; Pages</h1>
+<p style="color:var(--text-dim);margin-bottom:12px;font-size:15px">
+  Central index for every Sinner vs Alcaraz comparison on sincaraz.app. Updated daily from official ATP data.
+</p>
+<p style="color:var(--text-dim);font-size:13px;margin-bottom:8px">
+  {len(spa_links)} overview sections · {len(stat_links)} stat comparisons · {len(surface_links)} surface hubs · {len(match_links)} match reports
+</p>
+
+{_section("Overview & Interactive Sections", spa_links)}
+{_section("Stat Comparisons (Deep Dives)", stat_links)}
+{_section("Surface H2H & Match Archive", surface_links)}
+{_section("Individual Match Reports", match_links)}
+"""
+
+    title = "All Sinner vs Alcaraz Stats &amp; Pages | Sincaraz"
+    desc  = (f"Complete index of every Sinner vs Alcaraz comparison: {len(stat_links)} stat deep-dives, "
+             f"{len(match_links)} match reports, surface splits and more. Updated daily.")
+    canonical = f"{BASE_URL}/all-stats/"
+
+    crumbs = [("/", "Sincaraz"), (None, "All Stats")]
+    return html_page(title, desc, canonical, body, active_path="/all-stats/", crumbs=crumbs)
+
+
 # ─── Sitemap ──────────────────────────────────────────────────────────────────
 
 def generate_sitemap(all_matches, topic_slugs=None):
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     urls = [
         f"  <url><loc>{BASE_URL}/</loc><changefreq>daily</changefreq><priority>1.0</priority><lastmod>{today}</lastmod></url>",
+        f"  <url><loc>{BASE_URL}/all-stats/</loc><changefreq>weekly</changefreq><priority>0.9</priority><lastmod>{today}</lastmod></url>",
         f"  <url><loc>{BASE_URL}/matches/</loc><changefreq>weekly</changefreq><priority>0.9</priority><lastmod>{today}</lastmod></url>",
     ]
     for surf in SURFACE_INFO:
@@ -3156,15 +3331,19 @@ def main():
         write(f"surface/{surf}/index.html", generate_surface_page(surf, all_matches))
 
     # Topic / comparison pages (long-tail SEO)
-    print("\n[4/5] Topic pages (long-tail SEO)")
+    print("\n[4/6] Topic pages (long-tail SEO)")
     topic_slugs = generate_topic_pages()
 
+    # All-stats hub (central site index)
+    print("\n[5/6] All-Stats hub page")
+    write("all-stats/index.html", generate_all_stats_page(topic_slugs, all_matches))
+
     # Sitemap
-    print("\n[5/5] Sitemap")
+    print("\n[6/6] Sitemap")
     write("sitemap.xml", generate_sitemap(all_matches, topic_slugs))
 
-    total = len(all_matches) + 1 + len(SURFACE_INFO) + len(topic_slugs) + 1
-    print(f"\n✅ {total} files generated ({len(all_matches)} match pages, {len(SURFACE_INFO)} surface pages, {len(topic_slugs)} topic pages, 1 index, sitemap)")
+    total = len(all_matches) + 1 + len(SURFACE_INFO) + len(topic_slugs) + 2
+    print(f"\n✅ {total} files generated ({len(all_matches)} match pages, {len(SURFACE_INFO)} surface pages, {len(topic_slugs)} topic pages, all-stats hub, index, sitemap)")
 
 
 if __name__ == "__main__":

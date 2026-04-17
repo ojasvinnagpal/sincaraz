@@ -696,7 +696,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <button class="nav-tab" onclick="showPage('records',this)">Records</button>
       <button class="nav-tab" onclick="showPage('legends',this)">vs Legends</button>
       <button class="nav-tab" onclick="showPage('expert',this)">Who's Better?</button>
-      <button class="nav-tab" onclick="showPage('insights',this)">⚡ Insights</button>
+      <a class="nav-tab" href="/all-stats/">All Stats</a>
     </div>
   </div>
 </nav>
@@ -1804,8 +1804,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <footer>
   <div class="footer-inner">
-    <p style="margin-bottom:8px"><strong>SINCARAZ</strong> — The Definitive Sinner vs Alcaraz Rivalry Tracker</p>
-    <p style="margin-top:8px"><span id="last-updated">Last updated: 17 April 2026</span> · Stats updated daily · Not affiliated with ATP Tour or any player</p>
+    <p style="margin-bottom:12px"><strong>SINCARAZ</strong> — The Definitive Sinner vs Alcaraz Rivalry Tracker</p>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center;font-size:12px;margin-bottom:12px">
+      <a href="/">Overview</a>
+      <a href="/h2h/">H2H</a>
+      <a href="/all-stats/">All Stats</a>
+      <a href="/matches/">Match Archive</a>
+      <a href="/surface/clay/">Clay</a>
+      <a href="/surface/hard/">Hard</a>
+      <a href="/surface/grass/">Grass</a>
+      <a href="/insights/">Insights</a>
+    </div>
+    <p><span id="last-updated">Last updated: 17 April 2026</span> · Stats updated daily · Not affiliated with ATP Tour or any player</p>
   </div>
 </footer>
 
