@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sinner vs Alcaraz: Live H2H Stats, Career Comparison & Rivalry Tracker | Sincaraz</title>
+<title>Sinner vs Alcaraz H2H Record (7–10) | Live Stats | Sincaraz</title>
 <meta name="description" content="The most complete Sinner vs Alcaraz comparison on the internet. Live H2H record, career stats, Grand Slam wins, serve & return ratings, Clutch Score™, surface splits and more. Updated daily from official ATP data.">
 <meta name="keywords" content="Sinner vs Alcaraz, Alcaraz vs Sinner, Jannik Sinner Carlos Alcaraz head to head, Sincaraz, Sinner Alcaraz H2H record, tennis rivalry stats, ATP comparison, Sinner career stats, Alcaraz career stats, tennis head to head 2024 2025 2026">
 
 <!-- Open Graph -->
-<meta property="og:title" content="Sinner vs Alcaraz: Live H2H Stats & Career Comparison">
+<meta property="og:title" content="Sinner vs Alcaraz H2H Record (7–10) | Live Stats | Sincaraz">
 <meta property="og:description" content="The most complete Sinner vs Alcaraz rivalry tracker. Live H2H, career stats, Grand Slams, Clutch Score™ and more. Updated daily.">
 <meta property="og:url" content="https://sincaraz.app">
 <meta property="og:type" content="website">
@@ -16,7 +16,7 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Sinner vs Alcaraz: Live H2H Stats & Career Comparison">
+<meta name="twitter:title" content="Sinner vs Alcaraz H2H Record (7–10) | Live Stats | Sincaraz">
 <meta name="twitter:description" content="The most complete Sinner vs Alcaraz rivalry tracker. Live H2H, career stats, Grand Slams, Clutch Score™ and more. Updated daily.">
 
 <!-- Canonical -->
@@ -251,7 +251,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(7,8,15,0.95);backdrop-filt
 
 /* MATCH LIST */
 .match-list{display:flex;flex-direction:column;gap:12px}
-.match-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;transition:border-color .2s}
+.match-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(240px,1fr) minmax(90px,0.5fr);gap:20px;align-items:center;transition:border-color .2s}
 .match-card:hover{border-color:rgba(255,255,255,0.15)}
 a.match-card-link{color:inherit;text-decoration:none;display:grid;cursor:pointer}
 a.match-card-link:hover{border-color:rgba(255,255,255,0.25);transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,0.3)}
@@ -265,8 +265,7 @@ a.match-card-link:hover{border-color:rgba(255,255,255,0.25);transform:translateY
 .match-surface-badge.hard{background:rgba(100,149,237,.2);color:#6495ed}
 .match-surface-badge.clay{background:rgba(205,133,63,.2);color:#cd853f}
 .match-surface-badge.grass{background:rgba(46,139,87,.2);color:#2e8b57}
-.match-score-wrap{text-align:center}
-.match-score{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;letter-spacing:.05em}
+.match-score-wrap{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;text-align:right}
 .match-winner-name{font-size:11px;color:var(--text-dim);margin-top:2px}
 .match-winner-name.s{color:var(--sinner)}
 .match-winner-name.a{color:var(--alcaraz)}
@@ -397,6 +396,29 @@ a.match-card-link:hover{border-color:rgba(255,255,255,0.25);transform:translateY
 footer{background:var(--bg2);border-top:1px solid var(--border);padding:32px 24px;text-align:center;color:var(--text-dim);font-size:12px;line-height:1.8}
 footer a{color:var(--text-dim);text-decoration:none}
 footer a:hover{color:var(--text)}
+
+/* BREADCRUMBS */
+.breadcrumb-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:8px 24px}
+.breadcrumb-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-dim)}
+.breadcrumb-inner a{color:var(--text-dim);text-decoration:none}
+.breadcrumb-inner a:hover{color:var(--text)}
+.breadcrumb-sep{color:var(--text-dim);opacity:.4}
+
+/* MATCH SCORE ALIGNMENT */
+.match-score{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,'Liberation Mono','Courier New',monospace;font-size:15px;font-weight:600;letter-spacing:.02em;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+@media(max-width:640px){
+  .match-card{grid-template-columns:1fr !important;gap:12px !important;padding:16px !important}
+  .match-score-wrap{align-items:flex-start}
+  .match-duration{text-align:left !important}
+  .match-note{text-align:left !important}
+  .match-score{font-size:14px}
+}
+
+/* SEMANTIC HEADINGS */
+h1.hero-h1{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+h2.section-h2{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:.05em;margin-bottom:8px}
+h2.section-label{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+h2.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
 .footer-inner{max-width:1200px;margin:0 auto}
 
 @media(max-width:1024px){
@@ -679,14 +701,24 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </nav>
 
+<!-- BREADCRUMB -->
+<nav class="breadcrumb-bar" id="breadcrumbBar" aria-label="Breadcrumb">
+  <div class="breadcrumb-inner" id="breadcrumbInner">
+    <a href="/">Sincaraz</a>
+    <span class="breadcrumb-sep">›</span>
+    <span id="breadcrumbCurrent">Overview</span>
+  </div>
+</nav>
+
 <!-- ============================================================ HOME PAGE -->
 <div class="page active" id="page-home">
   <div class="hero">
     <div class="hero-inner">
-      <div class="hero-title">
+      <h1 class="hero-h1">Sinner vs Alcaraz: H2H Record, Career Stats &amp; Rivalry Tracker</h1>
+      <div class="hero-title" aria-hidden="true">
         <span class="s-name">SINNER</span>&nbsp;<span class="vs">VS</span>&nbsp;<span class="a-name">ALCARAZ</span>
       </div>
-      
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);text-align:center;margin-bottom:24px">Sinner vs Alcaraz Head-to-Head (H2H)</h2>
 
       <div class="h2h-score-bar">
         <div class="h2h-player" style="text-align:right">
@@ -834,7 +866,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 
     <!-- CAREER COMPARISON TABLE -->
-    <div class="section-title" style="margin-top:48px">Career Comparison</div>
+    <h2 class="section-label" style="margin-top:48px">Sinner vs Alcaraz Stats Comparison</h2>
     <div class="stats-section">
       <div class="stats-section-header">Overall Career Stats</div>
       <div class="stats-table-wrap">
@@ -934,7 +966,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ============================================================ H2H MATCHES PAGE -->
 <div class="page" id="page-h2h">
   <div class="section">
-    <div class="section-h2">Head-to-Head Matches</div>
+    <h2 class="section-h2">Sinner vs Alcaraz Head-to-Head (H2H)</h2>
     <p id="h2h-intro" style="color:var(--text-dim);margin-bottom:32px;font-size:14px">All meetings between Sinner and Alcaraz · <span style="color:var(--alcaraz)">Alcaraz leads H2H</span></p>
 
     <div class="filter-row">
@@ -1741,7 +1773,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div style="display:flex;flex-direction:column;gap:16px">
       <details style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px 20px">
         <summary style="font-weight:600;cursor:pointer;font-size:15px">What is the Sinner vs Alcaraz head-to-head record?</summary>
-        <p style="margin-top:12px;color:var(--text-dim);font-size:14px;line-height:1.7">Carlos Alcaraz leads Jannik Sinner 10–6 in their all-time head-to-head record, across 16 ATP Tour meetings. They have met across all surfaces — hard courts, clay, and grass — in Grand Slams, Masters events, and the ATP Finals. The rivalry is widely considered the defining tennis matchup of their generation.</p>
+        <p style="margin-top:12px;color:var(--text-dim);font-size:14px;line-height:1.7">Carlos Alcaraz leads Jannik Sinner 10–7 in their all-time head-to-head record, across 17 ATP Tour meetings. They have met across all surfaces — hard courts, clay, and grass — in Grand Slams, Masters events, and the ATP Finals. The rivalry is widely considered the defining tennis matchup of their generation.</p>
       </details>
       <details style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px 20px">
         <summary style="font-weight:600;cursor:pointer;font-size:15px">How many Grand Slams has Jannik Sinner won?</summary>
@@ -1825,7 +1857,7 @@ const trivia = [
   {icon:'🌍',text:'Their combined nationality — Italian and Spanish — represents the two nations that have produced 5 of the last 7 men\'s slam champions.'},
   {icon:'💬',text:'Both players speak multiple languages: Sinner speaks Italian, German, English and French; Alcaraz speaks Spanish and English.'},
   {icon:'📊',text:'In 2025, they played each other 5 times — the most meetings between any two players in a single year on the ATP Tour that season.'},
-  {icon:'🔢',text:'Alcaraz leads in Grand Slam titles (7–4) and H2H record (10–6). Sinner leads in ATP Finals titles (2–0) and total weeks at World #1 (66 vs 65). Alcaraz is closing fast — set to match Sinner\'s 66-week milestone in April 2026.'},
+  {icon:'🔢',text:'Alcaraz leads in Grand Slam titles (7–4) and H2H record (10–7). Sinner leads in ATP Finals titles (2–0) and total weeks at World #1 (66 vs 65). Alcaraz is closing fast — set to match Sinner\'s 66-week milestone in April 2026.'},
   {icon:'⏰',text:'The 2025 Roland Garros final is the longest Grand Slam final ever played — 5 hours and 29 minutes. Sinner held 3 championship points in the fourth set.'},
   {icon:'🏆',text:'In 2025, both players had a win percentage above 90% for the full season — only the second time in ATP history two players achieved this in the same year.'},
 ];
@@ -1960,6 +1992,37 @@ const PAGE_SLUGS = {
 };
 const SLUG_TO_PAGE = Object.fromEntries(Object.entries(PAGE_SLUGS).map(([k,v])=>[v,k]));
 
+const PAGE_LABELS = {
+  home: 'Overview',
+  h2h: 'H2H Matches',
+  serve: 'Serve Stats',
+  return: 'Return Stats',
+  pressure: 'Under Pressure',
+  slams: 'Grand Slams',
+  records: 'Records',
+  legends: 'vs Legends',
+  expert: "Who's Better?",
+  insights: 'Insights'
+};
+
+function updateBreadcrumb(id) {
+  var label = PAGE_LABELS[id] || 'Overview';
+  var el = document.getElementById('breadcrumbCurrent');
+  if (el) el.textContent = label;
+  // Update JSON-LD breadcrumb schema
+  var existing = document.getElementById('breadcrumb-jsonld');
+  if (existing) existing.remove();
+  var items = [{"@type":"ListItem","position":1,"name":"Sincaraz","item":"https://sincaraz.app"}];
+  if (id !== 'home') {
+    items.push({"@type":"ListItem","position":2,"name":label,"item":"https://sincaraz.app"+(PAGE_SLUGS[id]||'/')});
+  }
+  var s = document.createElement('script');
+  s.type = 'application/ld+json';
+  s.id = 'breadcrumb-jsonld';
+  s.textContent = JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":items});
+  document.head.appendChild(s);
+}
+
 function showPage(id, el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
@@ -1967,7 +2030,6 @@ function showPage(id, el){
   if(page) page.classList.add('active');
   if(el) el.classList.add('active');
   else {
-    // Activate matching nav tab when called programmatically (e.g. from URL)
     document.querySelectorAll('.nav-tab').forEach(function(t){
       if((t.getAttribute('onclick')||'').indexOf("'"+id+"'")!==-1) t.classList.add('active');
     });
@@ -1984,6 +2046,7 @@ function showPage(id, el){
   // Update canonical link
   var canonical = document.querySelector('link[rel="canonical"]');
   if(canonical) canonical.href = 'https://sincaraz.app' + (id === 'home' ? '' : slug);
+  updateBreadcrumb(id);
   window.scrollTo(0,0);
 }
 
@@ -1997,6 +2060,7 @@ function showPage(id, el){
   document.addEventListener('DOMContentLoaded', function(){
     var pg = pageFromPath();
     if(pg !== 'home') showPage(pg);
+    else updateBreadcrumb('home');
   });
   window.addEventListener('popstate', function(e){
     var pg = (e.state && e.state.page) || pageFromPath();

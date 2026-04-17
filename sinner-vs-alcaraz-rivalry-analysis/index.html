@@ -7,7 +7,7 @@
 <meta name="description" content="17 meetings, 15 finals, 3 five-setters, sets 26–25. Why Sinner-Alcaraz is the defining tennis rivalry of this era.">
 <link rel="canonical" href="https://sincaraz.app/sinner-vs-alcaraz-rivalry-analysis/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<meta name="theme-color" content="#0a0a0f">
+<meta name="theme-color" content="#07080f">
 <meta property="og:title" content="Sinner vs Alcaraz Rivalry: 17 Matches, 11 Grand Slams">
 <meta property="og:description" content="17 meetings, 15 finals, 3 five-setters, sets 26–25. Why Sinner-Alcaraz is the defining tennis rivalry of this era.">
 <meta property="og:url" content="https://sincaraz.app/sinner-vs-alcaraz-rivalry-analysis/">
@@ -47,34 +47,41 @@
   ]
 }</script>
 <style>
-  :root{--bg:#0a0a0f;--bg2:#111118;--bg3:#1a1a24;--border:#2a2a3a;
-        --sinner:#4a9eff;--alcaraz:#ff6b35;--gold:#f5c842;--text:#e8e8f0;--text-dim:#888}
+  :root{--bg:#07080f;--bg2:#0d0f1a;--bg3:#13162a;--border:rgba(255,255,255,0.07);
+        --sinner:#1a6fff;--alcaraz:#ff3a1a;--gold:#f5c842;--text:#e8eaf2;--text-dim:#6b7094;
+        --sinner-dim:rgba(26,111,255,0.15);--alcaraz-dim:rgba(255,58,26,0.15)}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
        background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
-  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap');
   .bebas{font-family:'Bebas Neue',Impact,sans-serif;letter-spacing:.04em}
   a{color:var(--sinner);text-decoration:none}
   a:hover{text-decoration:underline}
   .wrap{max-width:860px;margin:0 auto;padding:0 20px}
-  header{border-bottom:1px solid var(--border);padding:16px 0;margin-bottom:40px}
+  header{border-bottom:1px solid var(--border);padding:16px 0;background:rgba(7,8,15,0.97)}
+  .header-inner{max-width:860px;margin:0 auto;padding:0 20px}
   header .logo{font-size:22px;font-weight:700;color:var(--text)}
   header .logo span.s{color:var(--sinner)}
   header .logo span.a{color:var(--alcaraz)}
   header nav{display:flex;gap:20px;margin-top:8px;font-size:13px;color:var(--text-dim)}
-  .breadcrumb{font-size:13px;color:var(--text-dim);margin-bottom:24px}
+  header nav a{color:var(--text-dim)}
+  header nav a:hover{color:var(--text);text-decoration:none}
+  .breadcrumb{font-size:12px;color:var(--text-dim);margin-bottom:24px;padding:10px 0}
   .breadcrumb a{color:var(--text-dim)}
+  .breadcrumb a:hover{color:var(--text);text-decoration:none}
+  main.wrap{padding-top:32px}
   h1{font-size:clamp(26px,5vw,42px);line-height:1.2;margin-bottom:16px;font-weight:800}
   h2{font-size:20px;font-weight:700;margin:32px 0 16px;color:var(--text)}
   .badge{display:inline-block;padding:4px 12px;border-radius:20px;
          font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
-  .badge.s{background:rgba(74,158,255,.15);color:var(--sinner)}
-  .badge.a{background:rgba(255,107,53,.15);color:var(--alcaraz)}
+  .badge.s{background:var(--sinner-dim);color:var(--sinner)}
+  .badge.a{background:var(--alcaraz-dim);color:var(--alcaraz)}
   .badge.surf{background:var(--bg3);color:var(--text-dim)}
   .result-card{background:var(--bg2);border:1px solid var(--border);
                border-radius:16px;padding:32px;margin:24px 0;text-align:center}
   .score-display{font-family:'Bebas Neue',Impact,sans-serif;
-                 font-size:clamp(36px,8vw,64px);letter-spacing:.04em;margin:12px 0}
+                 font-size:clamp(36px,8vw,64px);letter-spacing:.04em;margin:12px 0;
+                 font-variant-numeric:tabular-nums}
   .score-display .s{color:var(--sinner)} .score-display .a{color:var(--alcaraz)}
   .match-meta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
                   margin:16px 0;font-size:13px;color:var(--text-dim)}
@@ -102,22 +109,24 @@
   .stat-box .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;
                  color:var(--text-dim)}
   footer{border-top:1px solid var(--border);padding:32px 0;margin-top:60px;
-         font-size:13px;color:var(--text-dim);text-align:center}
+         font-size:13px;color:var(--text-dim);text-align:center;background:var(--bg2)}
+  footer a{color:var(--text-dim)}
+  footer a:hover{color:var(--text)}
   @media(max-width:600px){.stat-grid{grid-template-columns:1fr 1fr}.score-display{font-size:40px}}
 </style>
 </head>
 <body>
 <header>
-  <div class="wrap">
+  <div class="header-inner">
     <div class="logo"><a href="/" style="color:inherit;text-decoration:none">
       <span class="s">SIN</span><span class="a">CAR</span>AZ
     </a></div>
     <nav>
-      <a href="/">Home</a>
-      <a href="/matches/">All Matches</a>
-      <a href="/surface/clay/">Clay H2H</a>
-      <a href="/surface/hard/">Hard H2H</a>
-      <a href="/surface/grass/">Grass H2H</a>
+      <a href="/">Overview</a>
+      <a href="/matches/">H2H Matches</a>
+      <a href="/surface/clay/">Clay</a>
+      <a href="/surface/hard/">Hard</a>
+      <a href="/surface/grass/">Grass</a>
       <a href="/sinner-vs-alcaraz-head-to-head/">H2H Stats</a>
     </nav>
   </div>
@@ -212,9 +221,10 @@ reach 50+ career meetings — surpassing even Djokovic-Nadal's 59.
 <h2>Explore More Stats</h2><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px"><a href="/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">Full H2H Stats Dashboard</a><a href="/matches/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">All H2H Match Results</a><a href="/sinner-vs-alcaraz-head-to-head/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">Head to Head Record</a><a href="/who-is-better-sinner-or-alcaraz/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">Who Is Better?</a><a href="/sinner-vs-alcaraz-clay-stats/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">Clay Stats</a><a href="/sinner-vs-alcaraz-hard-court-stats/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">Hard Court Stats</a><a href="/sinner-vs-alcaraz-grass-record/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">Grass Record</a><a href="/sinner-vs-alcaraz-2026-stats/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">2026 Season</a><a href="/sinner-vs-alcaraz-last-5-matches/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">Last 5 Matches</a><a href="/sinner-vs-alcaraz-serve-stats/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">Serve Stats</a><a href="/sinner-vs-alcaraz-return-stats/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">Return Stats</a><a href="/sinner-vs-alcaraz-grand-slams/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">Grand Slam Record</a><a href="/sinner-vs-alcaraz-grand-slam-finals/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">GS Finals</a><a href="/sinner-vs-alcaraz-finals-record/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">Finals Record</a><a href="/sinner-vs-alcaraz-break-points/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">Break Points</a><a href="/sinner-vs-alcaraz-tiebreak-record/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">Tiebreak Record</a><a href="/sinner-vs-alcaraz-ranking-history/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">Ranking History</a><a href="/sinner-vs-alcaraz-win-percentage/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">Win Percentage</a><a href="/sinner-vs-alcaraz-prize-money/" style="padding:8px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;display:inline-block">Prize Money</a></div>
 </main>
 <footer>
-  <div class="wrap">
-    <p>© 2026 <a href="/">sincaraz.app</a> — Sinner vs Alcaraz rivalry stats tracker</p>
-    <p style="margin-top:8px">Data sourced from official ATP Tour records. Updated daily.</p>
+  <div class="header-inner" style="text-align:center">
+    <p><strong>SINCARAZ</strong> — The Definitive Sinner vs Alcaraz Rivalry Tracker</p>
+    <p style="margin-top:8px">Stats updated daily · Not affiliated with ATP Tour or any player</p>
+    <p style="margin-top:8px"><a href="/">sincaraz.app</a></p>
   </div>
 </footer>
 </body>
