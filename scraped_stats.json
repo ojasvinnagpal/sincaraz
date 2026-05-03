@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-05-02T07:51:21.699612+00:00",
+  "scraped_at": "2026-05-03T08:07:01.709034+00:00",
   "sinner": {
     "h2h_wins": 7,
     "h2h_losses": 10,
@@ -111,6 +111,20 @@
   "alcaraz": {
     "h2h_wins": 10,
     "h2h_losses": 6,
+    "career_wins": 302,
+    "career_losses": 68,
+    "career_wl": "302\u201368",
+    "career_win_pct": 81.6,
+    "career_titles": 26,
+    "ranking": 2,
+    "atp_points": null,
+    "ytd_wins": 22,
+    "ytd_losses": 3,
+    "ytd_wl": "22\u20133",
+    "ytd_win_pct": 88.0,
+    "ytd_titles": 2,
+    "prize_career": "$64,997,598",
+    "coach": "Samuel Lopez",
     "career": {
       "aces": 1584,
       "double_faults": 852,
@@ -131,20 +145,6 @@
       "return_points_won_pct": 42,
       "total_points_won_pct": 54
     },
-    "career_wins": 302,
-    "career_losses": 68,
-    "career_wl": "302\u201368",
-    "career_win_pct": 81.6,
-    "career_titles": 26,
-    "ranking": 2,
-    "atp_points": null,
-    "ytd_wins": 22,
-    "ytd_losses": 3,
-    "ytd_wl": "22\u20133",
-    "ytd_win_pct": 88.0,
-    "ytd_titles": 2,
-    "prize_career": "$64,997,598",
-    "coach": "Samuel Lopez",
     "vision_wl": {
       "overall_wl": "302-68",
       "grand_slams_wl": "91-13",
@@ -184,7 +184,7 @@
     },
     "csv": {},
     "computed": {
-      "age": 22,
+      "age": 23,
       "avg_aces_match": 4.28,
       "avg_df_match": 2.3,
       "gs_ao": 1,
