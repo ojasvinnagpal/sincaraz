@@ -1,5 +1,5 @@
 {
-  "scraped_at": "2026-05-12T08:47:38.070411+00:00",
+  "scraped_at": "2026-05-13T08:56:47.462394+00:00",
   "sinner": {
     "h2h_wins": 7,
     "h2h_losses": 10,
@@ -125,6 +125,26 @@
     "ytd_titles": 2,
     "prize_career": "$64,997,598",
     "coach": "Samuel Lopez",
+    "career": {
+      "aces": 1584,
+      "double_faults": 852,
+      "first_serve_pct": 65,
+      "first_serve_won_pct": 72,
+      "second_serve_won_pct": 56,
+      "bp_saved_pct": 64,
+      "bp_faced": 1930,
+      "service_games_played": 4511,
+      "service_games_won_pct": 85,
+      "service_points_won_pct": 67,
+      "first_return_won_pct": 34,
+      "second_return_won_pct": 54,
+      "bp_converted_pct": 42,
+      "bp_opportunities": 3343,
+      "return_games_played": 4510,
+      "return_games_won_pct": 31,
+      "return_points_won_pct": 42,
+      "total_points_won_pct": 54
+    },
     "vision_wl": {
       "overall_wl": "302-68",
       "grand_slams_wl": "91-13",
@@ -164,8 +184,8 @@
     "csv": {},
     "computed": {
       "age": 23,
-      "avg_aces_match": 0.0,
-      "avg_df_match": 0.0,
+      "avg_aces_match": 4.28,
+      "avg_df_match": 2.3,
       "gs_ao": 1,
       "gs_rg": 2,
       "gs_wimbledon": 2,
