@@ -1,73 +1,73 @@
 {
-  "scraped_at": "2026-05-17T08:27:01.529037+00:00",
+  "scraped_at": "2026-05-18T10:14:35.140450+00:00",
   "sinner": {
     "h2h_wins": 7,
     "h2h_losses": 10,
-    "career_wins": 351,
+    "career_wins": 357,
     "career_losses": 88,
-    "career_wl": "351\u201388",
-    "career_win_pct": 80.0,
-    "career_titles": 28,
+    "career_wl": "357\u201388",
+    "career_win_pct": 80.2,
+    "career_titles": 29,
     "ranking": 1,
     "atp_points": null,
-    "ytd_wins": 30,
+    "ytd_wins": 36,
     "ytd_losses": 2,
-    "ytd_wl": "30\u20132",
-    "ytd_win_pct": 93.8,
-    "ytd_titles": 4,
-    "prize_career": "$63,506,324",
+    "ytd_wl": "36\u20132",
+    "ytd_win_pct": 94.7,
+    "ytd_titles": 5,
+    "prize_career": "$64,686,923",
     "coach": "Simone Vagnozzi, Darren Cahill",
     "career": {
-      "aces": 2598,
-      "double_faults": 825,
-      "first_serve_pct": 61,
+      "aces": 2622,
+      "double_faults": 831,
+      "first_serve_pct": 60,
       "first_serve_won_pct": 76,
       "second_serve_won_pct": 56,
       "bp_saved_pct": 68,
-      "bp_faced": 2176,
-      "service_games_played": 5273,
+      "bp_faced": 2190,
+      "service_games_played": 5332,
       "service_games_won_pct": 87,
       "service_points_won_pct": 68,
       "first_return_won_pct": 32,
       "second_return_won_pct": 54,
       "bp_converted_pct": 43,
-      "bp_opportunities": 3456,
-      "return_games_played": 5193,
+      "bp_opportunities": 3499,
+      "return_games_played": 5252,
       "return_games_won_pct": 28,
       "return_points_won_pct": 41,
       "total_points_won_pct": 54
     },
     "vision_wl": {
-      "overall_wl": "351-88",
+      "overall_wl": "357-88",
       "grand_slams_wl": "92-21",
-      "masters_wl": "117-29",
-      "finals_wl": "28-9",
-      "deciding_set_wl": "72-35",
-      "fifth_set_wl": "6-11",
+      "masters_wl": "123-29",
       "tiebreak_wl": "113-62",
-      "vs_top10_wl": "66-37",
-      "on_clay_wl": "76-24",
+      "vs_top10_wl": "67-37",
+      "finals_wl": "29-9",
+      "deciding_set_wl": "73-35",
+      "fifth_set_wl": "6-11",
+      "on_clay_wl": "82-24",
       "on_grass_wl": "29-10",
       "on_hard_wl": "246-54",
       "carpet_wl": "0-0",
       "indoor_wl": "91-21",
-      "outdoor_wl": "260-67",
-      "after_winning_first_set_wl": "307-31",
+      "outdoor_wl": "266-67",
+      "after_winning_first_set_wl": "313-31",
       "after_losing_first_set_wl": "44-57",
-      "vs_righthanded_wl": "315-80",
+      "vs_righthanded_wl": "321-80",
       "vs_lefthanded_wl": "36-8",
-      "serve_rating": 300.4,
-      "return_rating": 298.8,
-      "under_pressure_rating": 298.5
+      "serve_rating": 301.8,
+      "return_rating": 299.7,
+      "under_pressure_rating": 299.0
     },
     "vision_wiki": {
       "ao_wins": 2,
       "rg_wins": 0,
-      "wimbledon_wins": 0,
-      "uso_wins": 0,
+      "wimbledon_wins": 1,
+      "uso_wins": 1,
       "weeks_at_no1": null,
       "days_at_no1": null,
-      "masters_titles": 8,
+      "masters_titles": 10,
       "longest_win_streak": null,
       "year_end_rankings": {
         "2019": 78,
@@ -82,15 +82,15 @@
     "csv": {},
     "computed": {
       "age": 24,
-      "avg_aces_match": 5.92,
-      "avg_df_match": 1.88,
+      "avg_aces_match": 5.89,
+      "avg_df_match": 1.87,
       "gs_ao": 2,
       "gs_rg": 0,
       "gs_wimbledon": 1,
       "gs_uso": 1,
       "gs_total": 4,
-      "masters_titles": 8,
-      "big_titles": 12,
+      "masters_titles": 10,
+      "big_titles": 14,
       "weeks_at_no1": 66,
       "days_at_no1": 462,
       "year_end_rankings": {
@@ -102,15 +102,15 @@
         "2024": 1,
         "2025": 2
       },
-      "after_winning_first_set_pct": 90.8,
+      "after_winning_first_set_pct": 91.0,
       "after_losing_first_set_pct": 43.6,
       "tiebreaks_won_pct": 64.6,
-      "deciding_sets_won_pct": 67.3
+      "deciding_sets_won_pct": 67.6
     }
   },
   "alcaraz": {
     "h2h_wins": 10,
-    "h2h_losses": 6,
+    "h2h_losses": 7,
     "career_wins": 302,
     "career_losses": 68,
     "career_wl": "302\u201368",
@@ -162,8 +162,7 @@
       "after_losing_first_set_wl": "41-51",
       "vs_righthanded_wl": "263-57",
       "vs_lefthanded_wl": "39-11",
-      "tiebreak_wl": "101-63",
-      "vs_top10_wl": "55-25"
+      "tiebreak_wl": "101-63"
     },
     "vision_wiki": {
       "ao_wins": 1,
@@ -175,6 +174,7 @@
       "masters_titles": 15,
       "longest_win_streak": null,
       "year_end_rankings": {
+        "2021": 32,
         "2022": 1,
         "2023": 2,
         "2024": 3,
@@ -196,6 +196,7 @@
       "weeks_at_no1": 65,
       "days_at_no1": 455,
       "year_end_rankings": {
+        "2021": 32,
         "2022": 1,
         "2023": 2,
         "2024": 3,
@@ -209,19 +210,19 @@
   },
   "h2h_matches": [
     {
-      "date": "Nov 2026",
-      "tournament": "ATP Masters 1000 Monte-Carlo",
-      "surface": "clay",
-      "round": "Final",
-      "score": "7-6(5) 6-3",
-      "winner": "sinner"
-    },
-    {
       "date": "Nov 2025",
       "tournament": "Nitto ATP Finals",
       "surface": "hard",
       "round": "Final",
       "score": "7-6(4) 7-5",
+      "winner": "sinner"
+    },
+    {
+      "date": "Oct 2025",
+      "tournament": "ATP Masters 1000 Monte-Carlo",
+      "surface": "clay",
+      "round": "Final",
+      "score": "7-6(5) 6-3",
       "winner": "sinner"
     },
     {
@@ -233,7 +234,7 @@
       "winner": "alcaraz"
     },
     {
-      "date": "Jul 2025",
+      "date": "Aug 2025",
       "tournament": "ATP Masters 1000 Cincinnati",
       "surface": "hard",
       "round": "Final",
@@ -265,7 +266,7 @@
       "winner": "alcaraz"
     },
     {
-      "date": "Oct 2024",
+      "date": "Feb 2024",
       "tournament": "Beijing",
       "surface": "hard",
       "round": "Final",
@@ -289,7 +290,7 @@
       "winner": "alcaraz"
     },
     {
-      "date": "Oct 2023",
+      "date": "Nov 2023",
       "tournament": "Beijing",
       "surface": "hard",
       "round": "Semifinal",
@@ -313,7 +314,7 @@
       "winner": "alcaraz"
     },
     {
-      "date": "Sep 2022",
+      "date": "Aug 2022",
       "tournament": "US Open",
       "surface": "hard",
       "round": "Quarterfinal",
