@@ -1,84 +1,25 @@
 {
-  "scraped_at": "2026-06-07T09:22:22.127190+00:00",
+  "scraped_at": "2026-06-08T11:06:30.218925+00:00",
   "sinner": {
-    "h2h_wins": 7,
+    "h2h_wins": 6,
     "h2h_losses": 10,
-    "career": {
-      "aces": 2622,
-      "double_faults": 831,
-      "first_serve_pct": 60,
-      "first_serve_won_pct": 76,
-      "second_serve_won_pct": 56,
-      "bp_saved_pct": 68,
-      "bp_faced": 2190,
-      "service_games_played": 5332,
-      "service_games_won_pct": 87,
-      "service_points_won_pct": 68,
-      "first_return_won_pct": 32,
-      "second_return_won_pct": 54,
-      "bp_converted_pct": 43,
-      "bp_opportunities": 3499,
-      "return_games_played": 5252,
-      "return_games_won_pct": 28,
-      "return_points_won_pct": 41,
-      "total_points_won_pct": 54
-    },
-    "career_wins": 357,
-    "career_losses": 88,
-    "career_wl": "357\u201388",
-    "career_win_pct": 80.2,
-    "career_titles": 29,
-    "ranking": 1,
-    "atp_points": null,
-    "ytd_wins": 36,
-    "ytd_losses": 2,
-    "ytd_wl": "36\u20132",
-    "ytd_win_pct": 94.7,
-    "ytd_titles": 5,
-    "prize_career": "$64,686,923",
-    "coach": "Simone Vagnozzi, Darren Cahill",
-    "vision_wiki": {
-      "ao_wins": 2,
-      "rg_wins": 0,
-      "wimbledon_wins": 1,
-      "uso_wins": 1,
-      "weeks_at_no1": null,
-      "days_at_no1": null,
-      "masters_titles": 10,
-      "longest_win_streak": null,
-      "year_end_rankings": {
-        "2019": 78,
-        "2020": 37,
-        "2021": 10,
-        "2022": 15,
-        "2023": 4,
-        "2024": 1,
-        "2025": 2
-      }
-    },
+    "vision_wl": {},
+    "vision_wiki": {},
     "csv": {},
     "computed": {
       "age": 24,
-      "avg_aces_match": 5.89,
-      "avg_df_match": 1.87,
+      "avg_aces_match": null,
+      "avg_df_match": null,
       "gs_ao": 2,
       "gs_rg": 0,
       "gs_wimbledon": 1,
       "gs_uso": 1,
       "gs_total": 4,
-      "masters_titles": 10,
-      "big_titles": 14,
+      "masters_titles": 7,
+      "big_titles": 11,
       "weeks_at_no1": 66,
       "days_at_no1": 462,
-      "year_end_rankings": {
-        "2019": 78,
-        "2020": 37,
-        "2021": 10,
-        "2022": 15,
-        "2023": 4,
-        "2024": 1,
-        "2025": 2
-      },
+      "year_end_rankings": null,
       "after_winning_first_set_pct": null,
       "after_losing_first_set_pct": null,
       "tiebreaks_won_pct": null,
@@ -88,51 +29,17 @@
   "alcaraz": {
     "h2h_wins": 10,
     "h2h_losses": 6,
-    "career_wins": 302,
-    "career_losses": 68,
-    "career_wl": "302\u201368",
-    "career_win_pct": 81.6,
-    "career_titles": 26,
-    "ranking": 2,
-    "atp_points": null,
-    "ytd_wins": 22,
-    "ytd_losses": 3,
-    "ytd_wl": "22\u20133",
-    "ytd_win_pct": 88.0,
-    "ytd_titles": 2,
-    "prize_career": "$64,997,598",
-    "coach": "Samuel Lopez",
-    "career": {
-      "aces": 1584,
-      "double_faults": 852,
-      "first_serve_pct": 65,
-      "first_serve_won_pct": 72,
-      "second_serve_won_pct": 56,
-      "bp_saved_pct": 64,
-      "bp_faced": 1930,
-      "service_games_played": 4511,
-      "service_games_won_pct": 85,
-      "service_points_won_pct": 67,
-      "first_return_won_pct": 34,
-      "second_return_won_pct": 54,
-      "bp_converted_pct": 42,
-      "bp_opportunities": 3343,
-      "return_games_played": 4510,
-      "return_games_won_pct": 31,
-      "return_points_won_pct": 42,
-      "total_points_won_pct": 54
-    },
+    "vision_wl": {},
     "vision_wiki": {
       "ao_wins": 1,
       "rg_wins": 2,
       "wimbledon_wins": 2,
-      "uso_wins": 1,
+      "uso_wins": 2,
       "weeks_at_no1": null,
       "days_at_no1": null,
-      "masters_titles": 15,
+      "masters_titles": null,
       "longest_win_streak": null,
       "year_end_rankings": {
-        "2021": 32,
         "2022": 1,
         "2023": 2,
         "2024": 3,
@@ -142,8 +49,8 @@
     "csv": {},
     "computed": {
       "age": 23,
-      "avg_aces_match": 4.28,
-      "avg_df_match": 2.3,
+      "avg_aces_match": null,
+      "avg_df_match": null,
       "gs_ao": 1,
       "gs_rg": 2,
       "gs_wimbledon": 2,
@@ -154,7 +61,6 @@
       "weeks_at_no1": 65,
       "days_at_no1": 455,
       "year_end_rankings": {
-        "2021": 32,
         "2022": 1,
         "2023": 2,
         "2024": 3,
@@ -165,151 +71,5 @@
       "tiebreaks_won_pct": null,
       "deciding_sets_won_pct": null
     }
-  },
-  "h2h_matches": [
-    {
-      "date": "Nov 2026",
-      "tournament": "ATP Masters 1000 Monte-Carlo",
-      "surface": "clay",
-      "round": "Final",
-      "score": "7-6(5) 6-3",
-      "winner": "sinner"
-    },
-    {
-      "date": "Nov 2025",
-      "tournament": "Nitto ATP Finals",
-      "surface": "hard",
-      "round": "Final",
-      "score": "7-6(4) 7-5",
-      "winner": "sinner"
-    },
-    {
-      "date": "Sep 2025",
-      "tournament": "US Open",
-      "surface": "hard",
-      "round": "Final",
-      "score": "6-2 3-6 6-1 6-4",
-      "winner": "alcaraz"
-    },
-    {
-      "date": "Aug 2025",
-      "tournament": "ATP Masters 1000 Cincinnati",
-      "surface": "hard",
-      "round": "Final",
-      "score": "5-0 RET",
-      "winner": "alcaraz"
-    },
-    {
-      "date": "Jul 2025",
-      "tournament": "Wimbledon",
-      "surface": "grass",
-      "round": "Final",
-      "score": "4-6 6-4 6-4 6-4",
-      "winner": "sinner"
-    },
-    {
-      "date": "Jun 2025",
-      "tournament": "Roland Garros",
-      "surface": "clay",
-      "round": "Final",
-      "score": "4-6 6-7(4) 6-4 7-6(3) 7-6(2)",
-      "winner": "alcaraz"
-    },
-    {
-      "date": "May 2025",
-      "tournament": "ATP Masters 1000 Rome",
-      "surface": "clay",
-      "round": "Final",
-      "score": "7-6(5) 6-1",
-      "winner": "alcaraz"
-    },
-    {
-      "date": "Jan 2024",
-      "tournament": "Beijing",
-      "surface": "hard",
-      "round": "Final",
-      "score": "6-7(6) 6-4 7-6(3)",
-      "winner": "alcaraz"
-    },
-    {
-      "date": "Jun 2024",
-      "tournament": "Roland Garros",
-      "surface": "clay",
-      "round": "Semifinal",
-      "score": "2-6 6-3 3-6 6-4 6-3",
-      "winner": "alcaraz"
-    },
-    {
-      "date": "Mar 2024",
-      "tournament": "ATP Masters 1000 Indian Wells",
-      "surface": "hard",
-      "round": "Semifinal",
-      "score": "1-6 6-3 6-2",
-      "winner": "alcaraz"
-    },
-    {
-      "date": "Nov 2023",
-      "tournament": "Beijing",
-      "surface": "hard",
-      "round": "Semifinal",
-      "score": "7-6(4) 6-1",
-      "winner": "sinner"
-    },
-    {
-      "date": "Apr 2023",
-      "tournament": "ATP Masters 1000 Miami",
-      "surface": "hard",
-      "round": "Semifinal",
-      "score": "6-7(4) 6-4 6-2",
-      "winner": "sinner"
-    },
-    {
-      "date": "Mar 2023",
-      "tournament": "ATP Masters 1000 Indian Wells",
-      "surface": "hard",
-      "round": "Semifinal",
-      "score": "7-6(4) 6-3",
-      "winner": "alcaraz"
-    },
-    {
-      "date": "Sep 2022",
-      "tournament": "US Open",
-      "surface": "hard",
-      "round": "Quarterfinal",
-      "score": "6-3 6-7(7) 6-7(0) 7-5 6-3",
-      "winner": "alcaraz"
-    },
-    {
-      "date": "Jul 2022",
-      "tournament": "Umag",
-      "surface": "clay",
-      "round": "Final",
-      "score": "6-7(5) 6-1 6-1",
-      "winner": "sinner"
-    },
-    {
-      "date": "Jul 2022",
-      "tournament": "Wimbledon",
-      "surface": "grass",
-      "round": "Round of 16",
-      "score": "6-1 6-4 6-7(8) 6-3",
-      "winner": "sinner"
-    },
-    {
-      "date": "Nov 2021",
-      "tournament": "ATP Masters 1000 Paris",
-      "surface": "hard",
-      "round": "Round of 32",
-      "score": "7-6(1) 7-5",
-      "winner": "alcaraz"
-    }
-  ],
-  "h2h_derived": {
-    "sinner_sets_won": 25,
-    "alcaraz_sets_won": 26,
-    "last5_sinner": 3,
-    "last5_alcaraz": 2,
-    "last10_sinner": 3,
-    "last10_alcaraz": 7
   }
 }
