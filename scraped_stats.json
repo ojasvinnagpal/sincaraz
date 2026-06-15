@@ -1,42 +1,9 @@
 {
-  "scraped_at": "2026-06-14T09:43:30.553712+00:00",
+  "scraped_at": "2026-06-15T12:26:23.124543+00:00",
   "sinner": {
     "h2h_wins": 6,
     "h2h_losses": 10,
-    "career_wins": 358,
-    "career_losses": 89,
-    "career_wl": "358\u201389",
-    "career_win_pct": 80.1,
-    "career_titles": 29,
-    "ranking": 1,
-    "atp_points": null,
-    "ytd_wins": 37,
-    "ytd_losses": 3,
-    "ytd_wl": "37\u20133",
-    "ytd_win_pct": 92.5,
-    "ytd_titles": 5,
-    "prize_career": "$64,837,801",
-    "coach": "Simone Vagnozzi, Darren Cahill",
-    "career": {
-      "aces": 2635,
-      "double_faults": 839,
-      "first_serve_pct": 61,
-      "first_serve_won_pct": 76,
-      "second_serve_won_pct": 56,
-      "bp_saved_pct": 67,
-      "bp_faced": 2204,
-      "service_games_played": 5367,
-      "service_games_won_pct": 87,
-      "service_points_won_pct": 68,
-      "first_return_won_pct": 32,
-      "second_return_won_pct": 54,
-      "bp_converted_pct": 43,
-      "bp_opportunities": 3528,
-      "return_games_played": 5286,
-      "return_games_won_pct": 28,
-      "return_points_won_pct": 41,
-      "total_points_won_pct": 54
-    },
+    "vision_wl": {},
     "vision_wiki": {
       "ao_wins": 2,
       "rg_wins": 0,
@@ -47,9 +14,6 @@
       "masters_titles": 10,
       "longest_win_streak": null,
       "year_end_rankings": {
-        "2019": 78,
-        "2020": 37,
-        "2021": 10,
         "2022": 15,
         "2023": 4,
         "2024": 1,
@@ -59,8 +23,8 @@
     "csv": {},
     "computed": {
       "age": 24,
-      "avg_aces_match": 5.89,
-      "avg_df_match": 1.88,
+      "avg_aces_match": null,
+      "avg_df_match": null,
       "gs_ao": 2,
       "gs_rg": 0,
       "gs_wimbledon": 1,
@@ -71,9 +35,6 @@
       "weeks_at_no1": 66,
       "days_at_no1": 462,
       "year_end_rankings": {
-        "2019": 78,
-        "2020": 37,
-        "2021": 10,
         "2022": 15,
         "2023": 4,
         "2024": 1,
@@ -88,14 +49,34 @@
   "alcaraz": {
     "h2h_wins": 10,
     "h2h_losses": 6,
+    "vision_wl": {
+      "overall_wl": "302-68",
+      "grand_slams_wl": "91-13",
+      "masters_wl": "93-27",
+      "tiebreak_wl": "101-63",
+      "vs_top10_wl": "55-25",
+      "finals_wl": "26-9",
+      "deciding_set_wl": "67-27",
+      "fifth_set_wl": "15-1",
+      "on_clay_wl": "108-20",
+      "on_grass_wl": "35-4",
+      "on_hard_wl": "159-44",
+      "carpet_wl": "0-0",
+      "indoor_wl": "35-15",
+      "outdoor_wl": "267-53",
+      "after_winning_first_set_pct": 93.9,
+      "after_losing_first_set_pct": 44.6,
+      "vs_righthanded_wl": "263-57",
+      "vs_lefthanded_wl": "39-11"
+    },
     "vision_wiki": {
       "ao_wins": 1,
       "rg_wins": 2,
       "wimbledon_wins": 2,
-      "uso_wins": 2,
+      "uso_wins": 1,
       "weeks_at_no1": null,
       "days_at_no1": null,
-      "masters_titles": 8,
+      "masters_titles": 15,
       "longest_win_streak": null,
       "year_end_rankings": {
         "2021": 32,
@@ -126,10 +107,10 @@
         "2024": 3,
         "2025": 1
       },
-      "after_winning_first_set_pct": null,
-      "after_losing_first_set_pct": null,
-      "tiebreaks_won_pct": null,
-      "deciding_sets_won_pct": null
+      "after_winning_first_set_pct": 93.9,
+      "after_losing_first_set_pct": 44.6,
+      "tiebreaks_won_pct": 61.6,
+      "deciding_sets_won_pct": 71.3
     }
   }
 }
